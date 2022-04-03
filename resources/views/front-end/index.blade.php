@@ -1,46 +1,76 @@
 @extends('front-end.layout.master')
-@section('title', 'Home Page')
+@section('title', 'Login')
 @section('body')
-<div class="intro-section" id="home-section">
+<div class="container mx-auto px-4 h-full">
+    <div class="flex content-center items-center justify-center h-full">
+        <div class="w-full lg:w-2/5 px-4">
+            <div
+                class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+                <div class="rounded-t mb-0 px-6 py-6">
 
-    <div class="slide-1" style="background-image: url('front-end/images/hero_1.jpg');"
-        data-stellar-background-ratio="0.5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 mb-4">
-                            <h1 data-aos="fade-up" data-aos-delay="100">Learn From The Expert</h1>
-                            <p class="mb-4" data-aos="fade-up" data-aos-delay="200">Lorem ipsum dolor
-                                sit amet consectetur adipisicing elit. Maxime ipsa nulla sed quis rerum amet
-                                natus quas necessitatibus.</p>
-                            <p data-aos="fade-up" data-aos-delay="300"><a href="#"
-                                    class="btn btn-primary py-3 px-5 btn-pill">Admission Now</a></p>
-
-                        </div>
-
-                        <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
-                            <form action="login_process" method="post" class="form-box">
-                                <h3 class="h4 text-black mb-4">Sign In</h3>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Email Addresss">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-pill" value="Sign In">
-                                </div>
-                            </form>
-
-                        </div>
+                    <div class="text-center mb-3">
+                        <h6 class="text-blueGray-500 text-sm font-bold">
+                            Sign in
+                        </h6>
                     </div>
-                </div>
 
+                    <hr class="mt-6 border-b-1 border-blueGray-300" />
+                </div>
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+
+                    <form action="login_process" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="relative w-full mb-3">
+                            <label class="block text-blueGray-600 text-xs font-bold mb-2"
+                                for="grid-password">
+                                Email or ID
+                            </label>
+                            <input type="email"
+                                name="email"
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                placeholder="Email" />
+                        </div>
+
+                        <div class="relative w-full mb-3">
+                            <label class="block text-blueGray-600 text-xs font-bold mb-2"
+                                for="grid-password">
+                                Password
+                            </label>
+                            <input type="password"
+                                name="password"
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                placeholder="Password" />
+                        </div>
+
+                        <div>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input id="customCheckLogin" type="checkbox"
+                                class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
+                                <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                                    Remember me
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="text-center mt-6">
+                            <button
+                                class="bg-blue-500 text-white active:bg-blue-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                type="submit">
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <div class="flex flex-wrap mt-6 relative z-10">
+                <div class="w-1/2">
+                    <a href="#pablo" class="text-blueGray-200"><small>Forgot password?</small></a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+
 @endsection

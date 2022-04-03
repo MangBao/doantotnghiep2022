@@ -14,12 +14,15 @@ use App\Http\Controllers\AccountController;
 |
 */
 
+// Load view đăng nhập
 Route::get('/', function () {
     return view('front-end.index');
 });
 
+// Xử lý form đăng nhập
 Route::post('/login_process', [AccountController::class, 'Login_Process']);
 
+// Chuyển qua giao diện admin
 Route::get('/admin/index', function () {
     return view('admin.index');
 });
