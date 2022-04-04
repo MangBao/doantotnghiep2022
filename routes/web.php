@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\GiangVien;
+use App\Http\Controllers\PhongThi;
+use App\Http\Controllers\MonThi;
+use App\Http\Controllers\CaThi;
+use App\Http\Controllers\LichCoiThi;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +22,24 @@ use App\Http\Controllers\AccountController;
 
 // Load view đăng nhập
 Route::get('/', function () {
-    return view('front-end.index');
+    return view('front-end.login_form');
 });
 
 // Xử lý form đăng nhập
 Route::post('/login_process', [AccountController::class, 'Login_Process']);
-
+Route::get('/giangvien', [GiangVien::class, 'index']);
+Route::get('/cathi', [CaThi::class, 'index']);
+Route::get('/phongthi', [PhongThi::class, 'index']);
+Route::get('/lichcoithi', [LichCoiThi::class, 'index']);
+Route::get('/monthi', [MonThi::class, 'index']);
+// Đăng xuất
+Route::get('/logout', [AccountController::class, 'Logout']);
 // Chuyển qua giao diện admin
-Route::get('/admin/index', function () {
-    return view('admin.index');
+Route::get('/index', function () {
+    if(\Session::has('user')) {
+        return view('front-end.admin');
+    }
+    else {
+        return redirect('/');
+    }
 });

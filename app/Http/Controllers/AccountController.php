@@ -16,24 +16,29 @@ class AccountController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function Login_Process(Request $request)
-    {
+    public function Login_Process(Request $request) {
+
         $email = $request->email;
         $password = $request->password;
 
         // Tìm giảng viên theo mã giảng viên
         $giangvien = GiangVien::findUserByEmail($email);
 
-        if($giangvien != null){
-            if($password == $giangvien[0]->password){
-                // Đăng nhập thành công
-                \Session::put('idgiangvien', $giangvien[0]->idgiangvien);
-                \Session::put('tengiangvien', $giangvien[0]->tengiangvien);
-                \Session::put('email', $giangvien[0]->email);
+        if($giangvien != null) {
+            if($password == $giangvien[0]->password) {
 
-                return redirect('/admin/index');
+                // Đăng nhập thành công
+                \Session::put('user', [
+                    'idgiangvien' => $giangvien[0]->idgiangvien,
+                    'tengiangvien' => $giangvien[0]->tengiangvien,
+                    'email' => $giangvien[0]->email,
+                    'idquyen' => $giangvien[0]->idquyen,
+                    'hinhanh' => $giangvien[0]->avatar
+                ]);
+
+                return redirect('/index');
             }
-            else{
+            else {
                 // Đăng nhập thất bại
                 $errors = new MessageBag(['password' => ['Mật khẩu không đúng']]);
                 return redirect('/login')->withErrors($errors);
@@ -41,4 +46,14 @@ class AccountController extends Controller
             // dd($giangvien[0]->password);
         }
     }
+
+    public function Logout()
+    {
+        // Xóa phiên làm việc của người đang đăng nhập.
+        \Session::forget('user');
+
+        // Load trang chủ.
+        return redirect('/');
+    }
+
 }

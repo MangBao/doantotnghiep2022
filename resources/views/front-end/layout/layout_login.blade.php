@@ -5,13 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="shortcut icon" href="../../assets/img/favicon.ico" />
+    <link rel="shortcut icon" href="{{ @asset('images/logo-ntu.png') }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    {{-- <link rel="stylesheet" href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="../../assets/styles/tailwind.css" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <title>@yield('title')</title>
+    <title>@yield('titleLogin')</title>
 </head>
 
 <body class="text-[rgb(30,41,59)] antialiased">
