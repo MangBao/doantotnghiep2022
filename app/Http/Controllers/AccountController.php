@@ -36,6 +36,10 @@ class AccountController extends Controller
                     'hinhanh' => $giangvien[0]->avatar
                 ]);
 
+                if(!\Session::has('user')) {
+                    $this->redirectTo('/', 'login');
+                }
+
                 return redirect('/index');
             }
             else {

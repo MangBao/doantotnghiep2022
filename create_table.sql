@@ -22,15 +22,6 @@ CREATE TABLE IF NOT EXISTS `phongthi` (
    FOREIGN KEY (`idgiangduong`) REFERENCES `giangduong` (`idgiangduong`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `phongthi_ca` (
-  `idphongthi` varchar(10) NOT NULL,
-  `idca` varchar(10) NOT NULL,
-  `ngaythi` date NOT NULL,
-   PRIMARY KEY ( `idphongthi`, `idca`, `ngaythi`),
-   FOREIGN KEY (`idphongthi`) REFERENCES `phongthi` (`idphongthi`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (`idca`) REFERENCES `cathi` (`idca`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE IF NOT EXISTS `khoa` (
   `idkhoa` varchar(10) PRIMARY KEY NOT NULL,
   `tenkhoa` varchar(50) NOT NULL
@@ -48,6 +39,17 @@ CREATE TABLE IF NOT EXISTS `monthi` (
   `tenmonthi` varchar(50) NOT NULL,
   `idbomon` varchar(10) NOT NULL,
    FOREIGN KEY (`idbomon`) REFERENCES `bomon` (`idbomon`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `phongthi_ca` (
+  `idphongthi` varchar(10) NOT NULL,
+  `idca` varchar(10) NOT NULL,
+  `ngaythi` date NOT NULL,
+  `idmonthi` varchar(10) NOT NULL,
+   PRIMARY KEY ( `idphongthi`, `idca`, `ngaythi`, `idmonthi`),
+   FOREIGN KEY (`idphongthi`) REFERENCES `phongthi` (`idphongthi`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (`idmonthi`) REFERENCES `monthi` (`idmonthi`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (`idca`) REFERENCES `cathi` (`idca`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `giangvien` (
@@ -68,7 +70,8 @@ CREATE TABLE IF NOT EXISTS `quyen_giangvien` (
   `idquyen` varchar(20) NOT NULL,
   `idgiangvien` varchar(10) NOT NULL,
    PRIMARY KEY ( `idquyen`, `idgiangvien`),
-   FOREIGN KEY (`idgiangvien`) REFERENCES `giangvien` (`idgiangvien`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (`idgiangvien`) REFERENCES `giangvien` (`idgiangvien`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (`idquyen`) REFERENCES `quyen` (`idquyen`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `xeplichcoithi` (

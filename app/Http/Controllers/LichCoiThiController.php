@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LichCoiThi;
 
-class LichCoiThi extends Controller
+class LichCoiThiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,9 @@ class LichCoiThi extends Controller
      */
     public function index()
     {
+        $lichthi = LichCoiThi::getLichThi();
+        dd($lichthi);
         return view('front-end.lichcoithi');
-        //
     }
 
     /**

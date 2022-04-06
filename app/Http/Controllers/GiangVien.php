@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
-
 class GiangVien extends Controller
 {
     /**
@@ -15,7 +14,11 @@ class GiangVien extends Controller
      */
     public function index()
     {
-        return view('front-end.giangvien');
+        if(! \Session::has('user')) {
+            return redirect('/');
+        }
+
+        return view('front-end.giangvien'); //
     }
 
     /**
