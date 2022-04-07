@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
+// use Illuminate\Support\MessageBag;
 use App\Models\GiangVien;
-use Hash;
-use File;
+// use Hash;
+// use File;
 
 class AccountController extends Controller
 {

@@ -30,4 +30,13 @@ class GiangVien extends Model
         else
             return null;
     }
+
+    public function getGiangVien()
+    {
+        $giangvien = \DB::select('select idgiangvien, tengiangvien, idbomon from giangvien');
+        if($giangvien)
+            return $giangvien;
+        else
+            return null;
+    }
 }

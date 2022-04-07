@@ -18,7 +18,7 @@ class GiangVien extends Controller
             return redirect('/');
         }
 
-        return view('front-end.giangvien'); //
+        return view('front-end.giangvien');
     }
 
     /**
