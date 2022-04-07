@@ -58,31 +58,39 @@ class LichCoiThiController extends Controller
         for ($i=0; $i < count($lichthis); $i++) {
             for ($j=0; $j < count($giangviens); $j++) {
                 // $giangviens[$j]->lichcoithi = [];
-                echo '<pre>';
-                print_r($giangviens[$j]);
-                var_dump($i);
-                echo '</pre>';
+                // echo '<pre>';
+                // print_r($giangviens[$j]);
+                // var_dump($i);
+                // echo '</pre>';
                 if($lichthis[$i]->idgiangvien1 != $giangviens[$j]->idgiangvien && $giangviens[$j]->flag == 0) {
                     foreach ($giangviens[$j]->lichcoithi as $lich) {
                         if($lich->ngaythi == $lichthis[$i]->ngaythi && $lich->cathi == $lichthis[$i]->idca) {
-                            $flag = 0;
+                            // $flag = 0;
                             break;
                             // break;
                         }
                     }
-                    if($flag != 0){
+                    // if($flag != 0){
                         $lichthis[$i]->idgiangvien2 = $giangviens[$j]->idgiangvien;
                         $lichthis[$i]->tengiangvien2 = $giangviens[$j]->tengiangvien;
-                        $giangviens[$j]->flag = true;
                         array_push($giangviens[$j]->lichcoithi, (object)[
                             'ngaythi' => $lichthis[$i]->ngaythi,
                             'cathi' => $lichthis[$i]->idca,
                         ]);
-                        $flag = 1;
-                        // $j = 0;
+                        // if(count($giangviens[$j]->lichcoithi) < 2) {
+                        //     $giangviens[$j]->flag = 0;
+                        // } else{
+                            $giangviens[$j]->flag = 1;
+                        // }
 
+                        // $flag = 1;
+                        // $j = 0;
+                        echo '<pre>';
+                        print_r($giangviens[$j]);
+                        echo count($giangviens[$j]->lichcoithi);
+                        echo '</pre>';
                         break;
-                    }
+                    // }
                 }
             }
             $count++;
