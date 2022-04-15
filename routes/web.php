@@ -21,24 +21,29 @@ use App\Http\Controllers\LichCoiThiController;
 */
 
 // Load view đăng nhập
-Route::get('/', function () {
-    return view('front-end.login_form');
-});
+// Route::get('/', function () {
+//     return view('front-end.login_form');
+// });
 
-// Xử lý form đăng nhập
-Route::post('/login_process', [AccountController::class, 'Login_Process']);
+// // Xử lý form đăng nhập
+// Route::post('/login_process', [AccountController::class, 'Login_Process']);
 
-Route::get('/giangvien', [GiangVien::class, 'index']);
-Route::get('/cathi', [CaThi::class, 'index']);
-Route::get('/phongthi', [PhongThi::class, 'index']);
-Route::get('/lichcoithi', [LichCoiThiController::class, 'index']);
-Route::get('/monthi', [MonThi::class, 'index']);
-// Đăng xuất
-Route::get('/logout', [AccountController::class, 'Logout']);
-// Chuyển qua giao diện admin
-Route::get('/index', function () {
-    if(! \Session::has('user')) {
-        return redirect('/');
-    }
-    return view('front-end.admin');
-});
+// Route::get('/giangvien', [GiangVien::class, 'index']);
+// Route::get('/cathi', [CaThi::class, 'index']);
+// Route::get('/phongthi', [PhongThi::class, 'index']);
+// Route::get('/lichcoithi', [LichCoiThiController::class, 'index']);
+// Route::get('/monthi', [MonThi::class, 'index']);
+// // Đăng xuất
+// Route::get('/logout', [AccountController::class, 'Logout']);
+// // Chuyển qua giao diện admin
+// Route::get('/index', function () {
+//     if(! \Session::has('user')) {
+//         return redirect('/');
+//     }
+//     return view('front-end.admin');
+// });
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::middleware('password.confirm')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

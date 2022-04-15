@@ -1,9 +1,9 @@
-INSERT INTO `quyen` (`idquyen`, `tenquyen`) VALUES
+INSERT INTO `quyen` (`quyen_id`, `tenquyen`) VALUES
 ('ADMIN', 'Quản trị hệ thống'),
 ('THUKYKHOA', 'Thư ký khoa'),
 ('GIANGVIEN', 'Giảng viên');
 
-INSERT INTO `cathi` (`idca`, `giobatdau` , `gioketthuc`) VALUES
+INSERT INTO `cathi` (`cathi_id`, `giobatdau` , `gioketthuc`) VALUES
 ('CA01', '07:30:00', '08:30:00'),
 ('CA02', '08:40:00', '09:40:00'),
 ('CA03', '09:50:00', '10:50:00'),
@@ -11,12 +11,12 @@ INSERT INTO `cathi` (`idca`, `giobatdau` , `gioketthuc`) VALUES
 ('CA05', '14:40:00', '15:40:00'),
 ('CA06', '15:50:00', '16:40:00');
 
-INSERT INTO `giangduong` (`idgiangduong`, `tengiangduong`) VALUES
+INSERT INTO `giangduong` (`giangduong_id`, `tengiangduong`) VALUES
 ('G1', 'Giảng đường G1'),
 ('G2', 'Giảng đường G2'),
 ('G3', 'Giảng đường G3');
 
-INSERT INTO `phongthi` (`idphongthi`, `tenphongthi`, `idgiangduong`) VALUES
+INSERT INTO `phongthi` (`phongthi_id`, `tenphongthi`, `giangduong_id`) VALUES
 ('G1-101', 'Phòng 101', 'G1'),
 ('G1-102', 'Phòng 102', 'G1'),
 ('G1-103', 'Phòng 103', 'G1'),
@@ -33,12 +33,12 @@ INSERT INTO `phongthi` (`idphongthi`, `tenphongthi`, `idgiangduong`) VALUES
 ('G3-104', 'Phòng 104', 'G3'),
 ('G3-105', 'Phòng 105', 'G3');
 
-INSERT INTO `khoa` (`idkhoa`, `tenkhoa`) VALUES
+INSERT INTO `khoa` (`khoa_id`, `tenkhoa`) VALUES
 ('CNTT', 'Công nghệ thông tin'),
 ('XD', 'Xây dựng'),
 ('CK', 'Cơ khí');
 
-INSERT INTO `bomon` (`idbomon`, `tenbomon`, `idkhoa`) VALUES
+INSERT INTO `bomon` (`bomon_id`, `tenbomon`, `khoa_id`) VALUES
 ('TOAN', 'Toán', 'CNTT'),
 ('KTPM', 'Kỹ thuật phần mềm', 'CNTT'),
 ('MTT', 'Mạng truyền thông', 'CNTT'),
@@ -49,7 +49,7 @@ INSERT INTO `bomon` (`idbomon`, `tenbomon`, `idkhoa`) VALUES
 ('CTM', 'Chế tạo máy', 'CK'),
 ('CDT', 'Cơ điện tử', 'CK');
 
-INSERT INTO `monthi` (`idmonthi`, `tenmonthi`, `idbomon`) VALUES
+INSERT INTO `monthi` (`monthi_id`, `tenmonthi`, `bomon_id`) VALUES
 ('VLKT', 'Vật liệu kỹ thuật', 'CTM'),
 ('KTTK', 'Kỹ thuật thủy khí', 'CTM'),
 ('DLHCH', 'Động lực học cơ hệ', 'CTM'),
@@ -82,7 +82,7 @@ INSERT INTO `monthi` (`idmonthi`, `tenmonthi`, `idbomon`) VALUES
 ('XSTK', 'Lý thuyết xác suất và thống kê toán', 'TOAN');
 
 
-INSERT INTO `phongthi_ca` (`idphongthi`, `idca`, `ngaythi`, `idmonthi`) VALUES
+INSERT INTO `phongthi_ca` (`phongthi_id`, `cathi_id`, `ngaythi`, `monthi_id`) VALUES
 ('G1-101', 'CA02', '2022-04-04', 'VLKT'),
 ('G2-101', 'CA02', '2022-04-04', 'LTM'),
 ('G1-103', 'CA03', '2022-04-04', 'TLTV'),
@@ -113,45 +113,45 @@ INSERT INTO `phongthi_ca` (`idphongthi`, `idca`, `ngaythi`, `idmonthi`) VALUES
 ('G2-101', 'CA04', '2022-04-08', 'CTHTK'),
 ('G1-101', 'CA05', '2022-04-08', 'DCCT');
 
-INSERT INTO `giangvien` (`idgiangvien`, `email`, `password`, `tengiangvien`, `connho`, `ngaysinh`, `diachi`, `sdt`, `avatar`, `idbomon`) VALUES
-('2004017', 'nguyenkhaccuong@gmail.com', '12345678', 'Nguyễn Khắc Cường', NULL, NULL, NULL, NULL, NULL, 'MTT'),
-('2019025', 'nguyenhuynhhuy@gmail.com', '12345678', 'Nguyễn Huỳnh Huy', NULL, NULL, NULL, NULL, NULL, 'MTT'),
-('2005016', 'tranmanhkhang@gmail.com', '12345678', 'Trần Mạnh Khang', NULL, NULL, NULL, NULL, NULL, 'MTT'),
-('2008005', 'huynhtuananh@gmail.com', '12345678', 'Huỳnh Tuấn Anh', NULL, NULL, NULL, NULL, NULL, 'MTT'),
-('1998003', 'nguyenthanhquynhchau@gmail.com', '12345678', 'Nguyễn Thanh Quỳnh Châu', NULL, NULL, NULL, NULL, NULL, 'KTPM'),
-('2004006', 'nguyendinhcuong@gmail.com', '12345678', 'Nguyễn Đình Cường', NULL, NULL, NULL, NULL, NULL, 'KTPM'),
-('2002006', 'lethibichhang@gmail.com', '12345678', 'Lê Thị Bích Hằng', NULL, NULL, NULL, NULL, NULL, 'KTPM'),
-('2001011', 'nguyendinhhung@gmail.com', '12345678', 'Nguyễn Đình Hưng', NULL, NULL, NULL, NULL, NULL, 'KTPM'),
-('1986006', 'nguyendinhai@gmail.com', '12345678', 'Nguyễn Đình Ái', NULL, NULL, NULL, NULL, NULL, 'TOAN'),
-('2004008', 'nguyenthiha@gmail.com', '12345678', 'Nguyễn Thị Hà', NULL, NULL, NULL, NULL, NULL, 'TOAN'),
-('2007019', 'nguyencanhhung@gmail.com', '12345678', 'Nguyễn Cảnh Hùng', NULL, NULL, NULL, NULL, NULL, 'TOAN'),
-('1987002', 'phamgiahung@gmail.com', '12345678', 'Phạm Gia Hưng', NULL, NULL, NULL, NULL, NULL, 'TOAN'),
-('2005002', 'nguyenthuydoantrang@gmail.com', '12345678', 'Nguyễn Thủy Đoan Trang', NULL, NULL, NULL, NULL, NULL, 'HTTQL'),
-('2007031', 'nguyendinhhoangson@gmail.com', '12345678', 'Nguyễn Đình Hoàng Sơn', NULL, NULL, NULL, NULL, NULL, 'HTTQL'),
-('2001025', 'phamthithuthuy@gmail.com', '12345678', 'Phạm Thị Thu Thúy', NULL, NULL, NULL, NULL, NULL, 'HTTQL'),
-('2004009', 'hathithanhnga@gmail.com', '12345678', 'Hà Thị Thanh Ngà', NULL, NULL, NULL, NULL, NULL, 'HTTQL'),
-('2009026', 'lethanhcao@gmail.com', '12345678', 'Lê Thanh Cao', NULL, NULL, NULL, NULL, NULL, 'KTXD'),
-('2009005', 'bachvansy@gmail.com', '12345678', 'Bạch Văn Sỹ', NULL, NULL, NULL, NULL, NULL, 'KTXD'),
-('2015021', 'tranquanghuy@gmail.com', '12345678', 'Trần Quang Huy', NULL, NULL, NULL, NULL, NULL, 'KTXD'),
-('2012007', 'hochihan@gmail.com', '12345678', 'Hồ Chí Hân', NULL, NULL, NULL, NULL, NULL, 'KTXD'),
-('2020003', 'truongthanhchung@gmail.com', '12345678', 'Trương Thành Chung', NULL, NULL, NULL, NULL, NULL, 'CKT'),
-('2009008', 'truongdacdung@gmail.com', '12345678', 'Trương Đắc Dũng', NULL, NULL, NULL, NULL, NULL, 'CKT'),
-('2009009', 'duongdinhhao@gmail.com', '12345678', 'Dương Đình Hảo', NULL, NULL, NULL, NULL, NULL, 'CKT'),
-('1997012', 'quachhoainam@gmail.com', '12345678', 'Quách Hoài Nam', NULL, NULL, NULL, NULL, NULL, 'CKT'),
-('2007048', 'phamtuananh@gmail.com', '12345678', 'Phạm Tuấn Anh', NULL, NULL, NULL, NULL, NULL, 'CSXD'),
-('1991003', 'truongtronganh@gmail.com', '12345678', 'Trương Trọng Ánh', NULL, NULL, NULL, NULL, NULL, 'CSXD'),
-('1981003', 'levanbinh@gmail.com', '12345678', 'Lê Văn Bình', NULL, NULL, NULL, NULL, NULL, 'CSXD'),
-('1987009', 'tranngocnhuan@gmail.com', '12345678', 'Trần Ngọc Nhuần', NULL, NULL, NULL, NULL, NULL, 'CSXD'),
-('2007011', 'nguyenthienchuong@gmail.com', '12345678', 'Nguyễn Thiên Chương', NULL, NULL, NULL, NULL, NULL, 'CDT'),
-('2007040', 'tranvanhung@gmail.com', '12345678', 'Trần Văn Hùng', NULL, NULL, NULL, NULL, NULL, 'CDT'),
-('2014006', 'vuthinhai@gmail.com', '12345678', 'Vũ Thị Nhài', NULL, NULL, NULL, NULL, NULL, 'CDT'),
-('2007014', 'nguyenvandinh@gmail.com', '12345678', 'Nguyễn Văn Định', NULL, NULL, NULL, NULL, NULL, 'CDT'),
-('2010015', 'vungocchien@gmail.com', '12345678', 'Vũ Ngọc Chiên', NULL, NULL, NULL, NULL, NULL, 'CTM'),
-('2007018', 'nguyenvanhan@gmail.com', '12345678', 'Nguyễn Văn Hân', NULL, NULL, NULL, NULL, NULL, 'CTM'),
-('1999004', 'trandoanhung@gmail.com', '12345678', 'Trần Doãn Hùng', NULL, NULL, NULL, NULL, NULL, 'CTM'),
-('2010001', 'nguyenminhquan@gmail.com', '12345678', 'Nguyễn Minh Quân', NULL, NULL, NULL, NULL, NULL, 'CTM');
+INSERT INTO `users` (`id`, `giangvien_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+('', '2004017', 'nguyenkhaccuong@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Khắc Cường', NULL, NULL, NULL, NULL, NULL, 'MTT', NULL, NULL, NULL, NULL),
+('', '2019025', 'nguyenhuynhhuy@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Huỳnh Huy', NULL, NULL, NULL, NULL, NULL, 'MTT', NULL, NULL, NULL, NULL),
+('', '2005016', 'tranmanhkhang@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trần Mạnh Khang', NULL, NULL, NULL, NULL, NULL, 'MTT', NULL, NULL, NULL, NULL),
+('', '2008005', 'huynhtuananh@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Huỳnh Tuấn Anh', NULL, NULL, NULL, NULL, NULL, 'MTT', NULL, NULL, NULL, NULL),
+('', '1998003', 'nguyenthanhquynhchau@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Thanh Quỳnh Châu', NULL, NULL, NULL, NULL, NULL, 'KTPM', NULL, NULL, NULL, NULL),
+('', '2004006', 'nguyendinhcuong@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Đình Cường', NULL, NULL, NULL, NULL, NULL, 'KTPM', NULL, NULL, NULL, NULL),
+('', '2002006', 'lethibichhang@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Lê Thị Bích Hằng', NULL, NULL, NULL, NULL, NULL, 'KTPM', NULL, NULL, NULL, NULL),
+('', '2001011', 'nguyendinhhung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Đình Hưng', NULL, NULL, NULL, NULL, NULL, 'KTPM', NULL, NULL, NULL, NULL),
+('', '1986006', 'nguyendinhai@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Đình Ái', NULL, NULL, NULL, NULL, NULL, 'TOAN', NULL, NULL, NULL, NULL),
+('', '2004008', 'nguyenthiha@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Thị Hà', NULL, NULL, NULL, NULL, NULL, 'TOAN', NULL, NULL, NULL, NULL),
+('', '2007019', 'nguyencanhhung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Cảnh Hùng', NULL, NULL, NULL, NULL, NULL, 'TOAN', NULL, NULL, NULL, NULL),
+('', '1987002', 'phamgiahung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Phạm Gia Hưng', NULL, NULL, NULL, NULL, NULL, 'TOAN', NULL, NULL, NULL, NULL),
+('', '2005002', 'nguyenthuydoantrang@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Thủy Đoan Trang', NULL, NULL, NULL, NULL, NULL, 'HTTQL', NULL, NULL, NULL, NULL),
+('', '2007031', 'nguyendinhhoangson@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Đình Hoàng Sơn', NULL, NULL, NULL, NULL, NULL, 'HTTQL', NULL, NULL, NULL, NULL),
+('', '2001025', 'phamthithuthuy@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Phạm Thị Thu Thúy', NULL, NULL, NULL, NULL, NULL, 'HTTQL', NULL, NULL, NULL, NULL),
+('', '2004009', 'hathithanhnga@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Hà Thị Thanh Ngà', NULL, NULL, NULL, NULL, NULL, 'HTTQL', NULL, NULL, NULL, NULL),
+('', '2009026', 'lethanhcao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Lê Thanh Cao', NULL, NULL, NULL, NULL, NULL, 'KTXD', NULL, NULL, NULL, NULL),
+('', '2009005', 'bachvansy@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Bạch Văn Sỹ', NULL, NULL, NULL, NULL, NULL, 'KTXD', NULL, NULL, NULL, NULL),
+('', '2015021', 'tranquanghuy@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trần Quang Huy', NULL, NULL, NULL, NULL, NULL, 'KTXD', NULL, NULL, NULL, NULL),
+('', '2012007', 'hochihan@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Hồ Chí Hân', NULL, NULL, NULL, NULL, NULL, 'KTXD', NULL, NULL, NULL, NULL),
+('', '2020003', 'truongthanhchung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trương Thành Chung', NULL, NULL, NULL, NULL, NULL, 'CKT', NULL, NULL, NULL, NULL),
+('', '2009008', 'truongdacdung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trương Đắc Dũng', NULL, NULL, NULL, NULL, NULL, 'CKT', NULL, NULL, NULL, NULL),
+('', '2009009', 'duongdinhhao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Dương Đình Hảo', NULL, NULL, NULL, NULL, NULL, 'CKT', NULL, NULL, NULL, NULL),
+('', '1997012', 'quachhoainam@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Quách Hoài Nam', NULL, NULL, NULL, NULL, NULL, 'CKT', NULL, NULL, NULL, NULL),
+('', '2007048', 'phamtuananh@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Phạm Tuấn Anh', NULL, NULL, NULL, NULL, NULL, 'CSXD', NULL, NULL, NULL, NULL),
+('', '1991003', 'truongtronganh@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trương Trọng Ánh', NULL, NULL, NULL, NULL, NULL, 'CSXD', NULL, NULL, NULL, NULL),
+('', '1981003', 'levanbinh@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Lê Văn Bình', NULL, NULL, NULL, NULL, NULL, 'CSXD', NULL, NULL, NULL, NULL),
+('', '1987009', 'tranngocnhuan@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trần Ngọc Nhuần', NULL, NULL, NULL, NULL, NULL, 'CSXD', NULL, NULL, NULL, NULL),
+('', '2007011', 'nguyenthienchuong@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Thiên Chương', NULL, NULL, NULL, NULL, NULL, 'CDT', NULL, NULL, NULL, NULL),
+('', '2007040', 'tranvanhung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trần Văn Hùng', NULL, NULL, NULL, NULL, NULL, 'CDT', NULL, NULL, NULL, NULL),
+('', '2014006', 'vuthinhai@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Vũ Thị Nhài', NULL, NULL, NULL, NULL, NULL, 'CDT', NULL, NULL, NULL, NULL),
+('', '2007014', 'nguyenvandinh@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Văn Định', NULL, NULL, NULL, NULL, NULL, 'CDT', NULL, NULL, NULL, NULL),
+('', '2010015', 'vungocchien@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Vũ Ngọc Chiên', NULL, NULL, NULL, NULL, NULL, 'CTM', NULL, NULL, NULL, NULL),
+('', '2007018', 'nguyenvanhan@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Văn Hân', NULL, NULL, NULL, NULL, NULL, 'CTM', NULL, NULL, NULL, NULL),
+('', '1999004', 'trandoanhung@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Trần Doãn Hùng', NULL, NULL, NULL, NULL, NULL, 'CTM', NULL, NULL, NULL, NULL),
+('', '2010001', 'nguyenminhquan@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Minh Quân', NULL, NULL, NULL, NULL, NULL, 'CTM', NULL, NULL, NULL, NULL);
 
-INSERT INTO `quyen_giangvien` (`idquyen`, `idgiangvien`) VALUES
+INSERT INTO `quyen_giangvien` (`quyen_id`, `giangvien_id`) VALUES
 ('ADMIN','2001025'),
 ('THUKYKHOA','2008005'),
 ('GIANGVIEN','2004017'),

@@ -16,7 +16,8 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
         {{-- Nav mobile --}}
-        <nav class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+        <nav
+            class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
             <div
                 class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
                 <button
@@ -59,18 +60,24 @@
                         </a>
                         <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                             id="user-responsive-dropdown">
-                            <h4 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-                                {{ \Session::get('user.tengiangvien') }}
+                            <h4
+                                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
+                                {{ Auth::user()->name }}
                             </h4>
                             <a href="#pablo"
                                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
                                 Trang cá nhân
                             </a>
                             <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-                            <a href="/logout"
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
                                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-                                Log out
+                                {{ __('Logout') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                class="hidden">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -81,7 +88,7 @@
                             <div class="w-6/12">
                                 <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                                     href="../../index.html">
-                                    Notus JS
+                                    Nha Trang University
                                 </a>
                             </div>
                             <div class="w-6/12 flex justify-end">
@@ -178,10 +185,12 @@
                         href="./index.html">Dashboard</a>
 
                     <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
-                        <a class="text-blueGray-500 block text-white" href="#`" onclick="openDropdown(event,'user-dropdown')">
+                        <a class="text-blueGray-500 block text-white" href="#`"
+                            onclick="openDropdown(event,'user-dropdown')">
                             <div class="items-center flex">
-                                <h4 class="px-4">{{ \Session::get('user.tengiangvien') }}</h4>
-                                <span class="w-12 h-12 text-sm bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+                                <h4 class="px-4">{{ Auth::user()->name }}</h4>
+                                <span
+                                    class="w-12 h-12 text-sm bg-blueGray-200 inline-flex items-center justify-center rounded-full">
 
                                     <img alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
                                         src="{{ @asset('images/logo-ntu.png') }}" />
@@ -196,10 +205,15 @@
                             </a>
 
                             <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-                            <a href="/logout"
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"
                                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-                                Log out
+                                {{ __('Logout') }}
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                class="hidden">
+                                @csrf
+                            </form>
                         </div>
                     </ul>
                 </div>
