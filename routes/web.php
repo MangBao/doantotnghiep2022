@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\GiangVien;
-use App\Http\Controllers\PhongThi;
-use App\Http\Controllers\MonThi;
-use App\Http\Controllers\CaThi;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GiangVienController;
+use App\Http\Controllers\PhongThiController;
+use App\Http\Controllers\MonThiController;
+use App\Http\Controllers\CaThiController;
 use App\Http\Controllers\LichCoiThiController;
 
 
@@ -20,30 +20,81 @@ use App\Http\Controllers\LichCoiThiController;
 |
 */
 
-// Load view đăng nhập
-// Route::get('/', function () {
-//     return view('front-end.login_form');
-// });
-
 // // Xử lý form đăng nhập
 // Route::post('/login_process', [AccountController::class, 'Login_Process']);
 
-// Route::get('/giangvien', [GiangVien::class, 'index']);
-// Route::get('/cathi', [CaThi::class, 'index']);
-// Route::get('/phongthi', [PhongThi::class, 'index']);
-// Route::get('/lichcoithi', [LichCoiThiController::class, 'index']);
-// Route::get('/monthi', [MonThi::class, 'index']);
-// // Đăng xuất
-// Route::get('/logout', [AccountController::class, 'Logout']);
-// // Chuyển qua giao diện admin
-// Route::get('/index', function () {
-//     if(! \Session::has('user')) {
-//         return redirect('/');
-//     }
-//     return view('front-end.admin');
-// });
-
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-Route::middleware('password.confirm')->get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
+Route::middleware('password.confirm')->get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('giangvien')->group(function () {
+    Route::get('/', [
+        'as' => 'giangvien.index',
+        'uses' => GiangVienController::class . '@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'giangvien.create',
+        'uses' => GiangVienController::class . '@create'
+    ]);
+    Route::post('/store', [
+        'as' => 'giangvien.store',
+        'uses' => GiangVienController::class . '@store'
+    ]);
+    Route::post('/show/{id}', [
+        'as' => 'giangvien.show',
+        'uses' => GiangVienController::class . '@show'
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'giangvien.update',
+        'uses' => GiangVienController::class . '@update'
+    ]);
+    Route::post('/delete/{id}', [
+        'as' => 'giangvien.delete',
+        'uses' => GiangVienController::class . '@delete'
+    ]);
+});
+
+Route::prefix('cathi')->group(function () {
+    Route::get('/', [
+        'as' => 'cathi.index',
+        'uses' => CaThiController::class . '@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'cathi.create',
+        'uses' => CaThiController::class . '@create'
+    ]);
+});
+
+Route::prefix('phongthi')->group(function () {
+    Route::get('/', [
+        'as' => 'phongthi.index',
+        'uses' => PhongThiController::class . '@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'phongthi.create',
+        'uses' => PhongThiController::class . '@create'
+    ]);
+});
+
+Route::prefix('monthi')->group(function () {
+    Route::get('/', [
+        'as' => 'monthi.index',
+        'uses' => MonThiController::class . '@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'monthi.create',
+        'uses' => MonThiController::class . '@create'
+    ]);
+});
+
+Route::prefix('lichcoithi')->group(function () {
+    Route::get('/', [
+        'as' => 'lichcoithi.index',
+        'uses' => LichCoiThiController::class . '@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'lichcoithi.create',
+        'uses' => LichCoiThiController::class . '@create'
+    ]);
+});

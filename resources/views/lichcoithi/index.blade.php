@@ -1,4 +1,4 @@
-@extends('front-end.layout.layout_admin')
+@extends('layout.layout_admin')
 @section('titleAdmin', 'Lịch coi thi')
 @section('content-admin')
 {{--  Phần minh họa thời khóa biểu khi thêm lớp học phần  --}}

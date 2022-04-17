@@ -1,4 +1,4 @@
-@extends('front-end.layout.layout_login')
+@extends('layout.layout_login')
 @section('titleLogin', 'Verify')
 @section('body')
 <div class="container">

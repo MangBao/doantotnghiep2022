@@ -26,7 +26,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    href="../../index.html">
+                    href="/">
                     Nha Trang University
                 </a>
                 <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -36,10 +36,6 @@
                         <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                             id="notification-dropdown">
                             <a href="#pablo"
-                                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
-                                href="#pablo"
-                                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
-                                action</a><a href="#pablo"
                                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
                                 else here</a>
                             <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
@@ -87,7 +83,7 @@
                         <div class="flex flex-wrap">
                             <div class="w-6/12">
                                 <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                                    href="../../index.html">
+                                    href="/">
                                     Nha Trang University
                                 </a>
                             </div>
@@ -111,7 +107,6 @@
                     <!-- Navigation -->
 
                     <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-                        @if (\Session::get('user.idquyen') == 'ADMIN')
                             <li class="items-center">
                                 <a href="/giangvien"
                                     class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
@@ -151,24 +146,7 @@
                                     Lịch coi thi
                                 </a>
                             </li>
-                        @endif
-                        @if (\Session::get('user.idquyen') == 'THUKYKHOA')
-                            <li class="items-center">
-                                <a href="/cathi"
-                                    class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                                    <i class="fas fa-map-marked mr-2 text-sm text-blueGray-300"></i>
-                                    Ca thi
-                                </a>
-                            </li>
 
-                            <li class="items-center">
-                                <a href="/lichcoithi"
-                                    class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                                    <i class="fas fa-map-marked mr-2 text-sm text-blueGray-300"></i>
-                                    Lịch coi thi
-                                </a>
-                            </li>
-                        @endif
                     </ul>
 
                 </div>
@@ -220,12 +198,13 @@
             </nav>
             {{-- End nav desktop --}}
 
-            <div class="relative bg-blue-300 md:pt-32 pb-32 pt-12"></div>
+            <div class="relative bg-blue-300 md:pt-32 pb-20 pt-12"></div>
 
-            <div class="px-4 md:px-10 mx-auto w-full -m-24">
+            <div class="px-4 md:px-10 mx-auto w-full -m-12">
 
                 @yield('content-admin')
 
+                <div class="h-10"></div>
                 <footer class="block py-4">
                     <div class="container mx-auto px-4">
                         <hr class="mb-4 border-b-1 border-blueGray-200" />

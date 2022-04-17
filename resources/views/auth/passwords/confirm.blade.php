@@ -1,4 +1,4 @@
-@extends('front-end.layout.layout_login')
+@extends('layout.layout_login')
 @section('titleLogin', 'Comfirm Password')
 @section('body')
 <div class="container mx-auto px-4 h-full">

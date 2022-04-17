@@ -1,4 +1,4 @@
-@extends('front-end.layout.layout_login')
+@extends('layout.layout_login')
 @section('titleLogin', 'Login')
 @section('body')
 <div class="container mx-auto px-4 h-full">
@@ -10,7 +10,7 @@
 
                     <div class="text-center mb-3">
                         <h6 class="text-blueGray-500 text-sm font-bold">
-                            Sign in
+                            {{ __('Sign in') }}
                         </h6>
                     </div>
 
@@ -88,5 +88,4 @@
         </div>
     </div>
 </div>
-
 @endsection
