@@ -1,7 +1,7 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Thêm giảng viên')
+@section('titleAdmin', 'Edit giảng viên')
 @section('content-admin')
-@include('partials.breadcumb', ['page' => 'Giảng viên', 'key' => 'Add', 'link' => route('giangvien.index')])
+@include('partials.breadcumb', ['page' => 'Giảng viên', 'key' => 'Edit'])
 <div class="h-12"></div>
 
     <div class="container mx-auto px-4 h-full ">
@@ -12,7 +12,7 @@
 
                         <div class="text-center mb-3">
                             <h6 class="text-blueGray-500 text-sm font-bold">
-                                {{ __('THÊM GIẢNG VIÊN MỚI') }}
+                                {{ __('EDIT GIẢNG VIÊN') }}
                             </h6>
                         </div>
 
@@ -20,23 +20,16 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('giangvien.store') }} --}}
-                        <form method="POST" action="{{ route('giangvien.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('giangvien.update', ['id' => $gv->id]) }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="giangvien_id">
-                                    {{ __('Mã giảng viên') }}
-                                </label>
-                                <input type="text" name="giangvien_id"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $giangvien_id }}" required readonly autocomplete="giangvien_id" />
-                            </div>
+
                             <div class="relative w-full mb-3">
                                 <label class="block text-blueGray-600 font-bold mb-2" for="tengiangvien">
                                     {{ __('Tên giảng viên') }}
                                 </label>
                                 <input type="text" name="tengiangvien"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="name" autofocus
+                                    value="{{ $gv->name }}" required autocomplete="name" autofocus
                                     placeholder="{{ __('Nhập tên') }}" />
                             </div>
 
@@ -46,7 +39,7 @@
                                 </label>
                                 <input type="email" name="email"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="email"
+                                    value="{{ $gv->email }}" required autocomplete="email"
                                     placeholder="{{ __('Nhập email') }}" />
                             </div>
 
@@ -56,7 +49,7 @@
                                 </label>
                                 <input type="tel" name="sdt"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="sdt"
+                                    value="{{ $gv->sodienthoai }}" required autocomplete="sdt"
                                     placeholder="{{ __('Nhập số điện thoại') }}" />
                             </div>
 
@@ -66,7 +59,7 @@
                                 </label>
                                 <input type="text" name="diachi"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="diachi"
+                                    value="{{ $gv->diachi }}" required autocomplete="diachi"
                                     placeholder="{{ __('Nhập địa chỉ') }}" />
                             </div>
 
@@ -76,7 +69,7 @@
                                 </label>
                                 <input type="date" name="ngaysinh"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="ngaysinh"/>
+                                    value="{{ $gv->ngaysinh }}" required autocomplete="ngaysinh"/>
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -97,7 +90,7 @@
                                 </label>
                                 <input type="file" name="avatar"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="avatar"/>
+                                    value="{{ $gv->avatar }}" required autocomplete="avatar"/>
                             </div>
 
                             <div class="relative w-full mb-3 ">
@@ -106,15 +99,15 @@
                                 </label>
                                 <div class="flex justify-around">
                                     <div>
-                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="connho" id="connho1" value="1">
+                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="connho" id="connho1" value="1" @if ($gv->connho == 1) {{__('checked')}} @endif>
                                         <label class="form-check-label inline-block text-gray-800" for="flexRadioDefault1">
-                                            {{ __('Có con nhỏ') }}
+                                            {{ __('Có') }}
                                         </label>
                                     </div>
                                     <div>
-                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="connho" id="connho2" value="0" checked>
+                                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="connho" id="connho2" value="0" @if ($gv->connho == 0) {{__('checked')}} @endif>
                                         <label class="form-check-label inline-block text-gray-800" for="flexRadioDefault2">
-                                            {{ __('Không có con nhỏ') }}
+                                            {{ __('Không có') }}
                                         </label>
                                     </div>
                                 </div>
@@ -137,8 +130,7 @@
                                 </a>
                                 <input
                                     class="cursor-pointer bg-blue-500 text-white hover:bg-white hover:text-blue-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none w-24"
-                                    type="submit" value="{{ __('Thêm') }}">
-
+                                    type="submit" value="{{ __('Sửa') }}">
                             </div>
                         </form>
                     </div>

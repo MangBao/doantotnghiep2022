@@ -1,7 +1,7 @@
 @extends(' layout.layout_admin')
 @section('titleAdmin', 'Dashboard')
 @section('content-admin')
-@include('partials.breadcumb', ['page' => 'Home', 'key' => ''])
+@include('partials.breadcumb', ['page' => 'Home', 'key' => '', 'link' => route('home')])
 <div class="h-12"></div>
 <div class="container flex flex-wrap mt-4">
     <div class="w-full mb-12 xl:mb-0 px-4">

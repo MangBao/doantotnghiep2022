@@ -9,13 +9,8 @@ class CaThi extends Model
 {
     use HasFactory;
 
-    public function getCaThi()
-    {
-        // $cathi = \DB::select('select * from cathi ct, quyen_giangvien qgv
-        //                             where gv.idgiangvien = qgv.idgiangvien and gv.idgiangvien = ?', [$idgiangvien]);
-        // if($cathi)
-        //     return $cathi;
-        // else
-        //     return null;
-    }
+    protected $table = 'cathi';
+    protected $fillable = [
+        'cathi_id', 'giobatdau', 'gioketthuc', 'created_at', 'updated_at',
+    ];
 }

@@ -106,7 +106,7 @@
                     </h6>
                     <!-- Navigation -->
 
-                    <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+                    <ul id="list-nav" class="md:flex-col md:min-w-full flex flex-col list-none">
                             <li class="items-center">
                                 <a href="/giangvien"
                                     class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
@@ -124,18 +124,18 @@
                             </li>
 
                             <li class="items-center">
-                                <a href="/monthi"
+                                <a href="/monhoc"
                                     class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
                                     <i class="fas fa-table mr-2 text-sm text-blueGray-300"></i>
-                                    Môn thi
+                                    Môn học
                                 </a>
                             </li>
 
                             <li class="items-center">
-                                <a href="/cathi"
+                                <a href="/buoithi"
                                     class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
                                     <i class="fas fa-map-marked mr-2 text-sm text-blueGray-300"></i>
-                                    Ca thi
+                                    Buổi thi
                                 </a>
                             </li>
 
@@ -241,36 +241,19 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }} "></script>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="{{ asset('js/main.js') }} "></script>
+
     <script type="text/javascript">
         /* Make dynamic date appear */
-        (function() {
-            if (document.getElementById("get-current-year")) {
-                document.getElementById(
-                    "get-current-year"
-                ).innerHTML = new Date().getFullYear();
-            }
-        })();
-        /* Sidebar - Side navigation menu on mobile/responsive mode */
-        function toggleNavbar(collapseID) {
-            document.getElementById(collapseID).classList.toggle("hidden");
-            document.getElementById(collapseID).classList.toggle("bg-white");
-            document.getElementById(collapseID).classList.toggle("m-2");
-            document.getElementById(collapseID).classList.toggle("py-3");
-            document.getElementById(collapseID).classList.toggle("px-6");
-        }
-        /* Function for dropdowns */
-        function openDropdown(event, dropdownID) {
-            let element = event.target;
-            while (element.nodeName !== "A") {
-                element = element.parentNode;
-            }
-            Popper.createPopper(element, document.getElementById(dropdownID), {
-                placement: "bottom-start",
-            });
-            document.getElementById(dropdownID).classList.toggle("hidden");
-            document.getElementById(dropdownID).classList.toggle("block");
-        }
+        // (function() {
+        //     if (document.getElementById("get-current-year")) {
+        //         document.getElementById(
+        //             "get-current-year"
+        //         ).innerHTML = new Date().getFullYear();
+        //     }
+        // })();
     </script>
 </body>
 

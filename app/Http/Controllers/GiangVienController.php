@@ -29,10 +29,11 @@ class GiangVienController extends Controller
      */
     public function index()
     {
-        $gvs = $this->giangvien::all();
-
+        $gvs = $this->giangvien::latest()->paginate(10);
+        $i = 1;
         return view('giangvien.index',[
-            'gvs' => $gvs
+            'gvs' => $gvs,
+            'i' => $i
         ]);
     }
 
@@ -43,9 +44,8 @@ class GiangVienController extends Controller
      */
     public function create()
     {
+        $gvs = $this->giangvien::all();
         $dsq = $this->dsquyen::all();
-        $gvs = $this->giangvien::all();
-        $gvs = $this->giangvien::all();
         $bm = $this->bomon::all();
         $giangvien_id = '2022' . rand(100, 999);
 
@@ -92,6 +92,11 @@ class GiangVienController extends Controller
             'bomon_id' => $request->bomon
         ]);
 
+        $this->quyen_giangvien->create([
+            'giangvien_id' => $request->giangvien_id,
+            'quyen_id' => $request->quyen
+        ]);
+
         return redirect()->route('giangvien.index');
     }
 
@@ -114,7 +119,34 @@ class GiangVienController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gv = $this->giangvien::find($id);
+        $dsq = $this->dsquyen::all();
+        $bm = $this->bomon::all();
+        $qgv = $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->first();
+
+        foreach($dsq as $d){
+            if($d->quyen_id == $qgv->quyen_id){
+                $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'" selected>'.$d->tenquyen.'</option>';
+            } else {
+                $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
+            }
+            // $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
+        }
+        // Option bo mon
+        foreach($bm as $b){
+            if($b->bomon_id == $gv->bomon_id){
+                $this->htmlOptionBoMon .= '<option value="'.$b->bomon_id.'" selected>'.$b->tenbomon.'</option>';
+            } else {
+                $this->htmlOptionBoMon .= '<option value="'.$b->bomon_id.'">'.$b->tenbomon.'</option>';
+            }
+            // $this->htmlOptionBoMon .= '<option value="'.$b->bomon_id.'">'.$b->tenbomon.'</option>';
+        }
+
+        return view('giangvien.edit', [
+            'gv' => $gv,
+            'htmlOptionQuyen' => $this->htmlOptionQuyen,
+            'htmlOptionBoMon' => $this->htmlOptionBoMon
+        ]);
     }
 
     /**
@@ -126,7 +158,24 @@ class GiangVienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $gv = $this->giangvien::find($id);
+
+        $this->giangvien::find($id)->update([
+            'name' => $request->tengiangvien,
+            'email' => $request->email,
+            'connho' => $request->connho,
+            'ngaysinh' => $request->ngaysinh,
+            'diachi' => $request->diachi,
+            'sodienthoai' => $request->sdt,
+            'avatar' => $request->avatar,
+            'bomon_id' => $request->bomon
+        ]);
+
+        $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->update([
+            'quyen_id' => $request->quyen
+        ]);
+
+        return redirect()->route('giangvien.index');
     }
 
     /**
@@ -135,8 +184,12 @@ class GiangVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $gv = $this->giangvien::find($id);
+        $this->giangvien::find($id)->delete();
+        $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->delete();
+
+        return redirect()->route('giangvien.index');
     }
 }

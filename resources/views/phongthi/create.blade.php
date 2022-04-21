@@ -1,7 +1,7 @@
 @extends('layout.layout_admin')
 @section('titleAdmin', 'Thêm giảng viên')
 @section('content-admin')
-@include('partials.breadcumb', ['page' => 'Giảng viên', 'key' => 'Add', 'link' => route('giangvien.index')])
+@include('partials.breadcumb', ['page' => 'Giảng viên', 'key' => 'Add'])
 <div class="h-12"></div>
 
     <div class="container mx-auto px-4 h-full ">

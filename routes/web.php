@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GiangVienController;
 use App\Http\Controllers\PhongThiController;
 use App\Http\Controllers\MonThiController;
-use App\Http\Controllers\CaThiController;
+use App\Http\Controllers\BuoiThiController;
 use App\Http\Controllers\LichCoiThiController;
 
 
@@ -41,28 +41,52 @@ Route::prefix('giangvien')->group(function () {
         'as' => 'giangvien.store',
         'uses' => GiangVienController::class . '@store'
     ]);
-    Route::post('/show/{id}', [
+    Route::get('/show/{id}', [
         'as' => 'giangvien.show',
         'uses' => GiangVienController::class . '@show'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'giangvien.edit',
+        'uses' => GiangVienController::class . '@edit'
     ]);
     Route::post('/update/{id}', [
         'as' => 'giangvien.update',
         'uses' => GiangVienController::class . '@update'
     ]);
-    Route::post('/delete/{id}', [
+    Route::get('/delete/{id}', [
         'as' => 'giangvien.delete',
         'uses' => GiangVienController::class . '@delete'
     ]);
 });
 
-Route::prefix('cathi')->group(function () {
+Route::prefix('buoithi')->group(function () {
     Route::get('/', [
-        'as' => 'cathi.index',
-        'uses' => CaThiController::class . '@index'
+        'as' => 'buoithi.index',
+        'uses' => BuoiThiController::class . '@index'
     ]);
     Route::get('/create', [
-        'as' => 'cathi.create',
-        'uses' => CaThiController::class . '@create'
+        'as' => 'buoithi.create',
+        'uses' => BuoiThiController::class . '@create'
+    ]);
+    Route::post('/store', [
+        'as' => 'buoithi.store',
+        'uses' => BuoiThiController::class . '@store'
+    ]);
+    Route::get('/show/{id}', [
+        'as' => 'buoithi.show',
+        'uses' => BuoiThiController::class . '@show'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'buoithi.edit',
+        'uses' => BuoiThiController::class . '@edit'
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'buoithi.update',
+        'uses' => BuoiThiController::class . '@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'buoithi.delete',
+        'uses' => BuoiThiController::class . '@delete'
     ]);
 });
 
