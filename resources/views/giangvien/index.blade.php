@@ -7,7 +7,7 @@
     <div class="flex">
         <div class="mr-8 pt-3">
             <a href="{{ route('giangvien.create') }}" class="btn-primary">
-                Thêm Buổi thi
+                Thêm Giảng viên
             </a>
         </div>
         @if (session('success'))
@@ -20,8 +20,7 @@
                         clip-rule="evenodd"></path>
                 </svg>
                 <div>
-                    <span class="font-medium">{{ session('success') }}</span> Change a few things up and try submitting
-                    again.
+                    <span class="font-medium">{{ session('success') }}</span>
                 </div>
             </div>
         @elseif (session('error'))
@@ -34,8 +33,7 @@
                         clip-rule="evenodd"></path>
                 </svg>
                 <div>
-                    <span class="font-medium">{{ session('error') }}</span> Change a few things up and try submitting
-                    again.
+                    <span class="font-medium">{{ session('error') }}</span>
                 </div>
             </div>
         @endif

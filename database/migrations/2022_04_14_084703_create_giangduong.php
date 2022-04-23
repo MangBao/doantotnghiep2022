@@ -14,7 +14,8 @@ class CreateGiangduong extends Migration
     public function up()
     {
         Schema::create('giangduong', function (Blueprint $table) {
-            $table->string('giangduong_id')->varChar(10)->primary();
+            $table->id();
+            $table->string('giangduong_id')->varChar(10);
             $table->string('tengiangduong')->varChar(50);
             $table->timestamps();
         });

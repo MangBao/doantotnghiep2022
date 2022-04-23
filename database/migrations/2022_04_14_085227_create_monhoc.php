@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonthi extends Migration
+class CreateMonhoc extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateMonthi extends Migration
      */
     public function up()
     {
-        Schema::create('monthi', function (Blueprint $table) {
-            $table->string('monthi_id')->varChar(10)->primary();
-            $table->string('tenmonthi')->varChar(50);
+        Schema::create('monhoc', function (Blueprint $table) {
+            $table->id();
+            $table->string('monhoc_id')->varChar(10);
+            $table->string('tenmonhoc')->varChar(50);
             $table->string('bomon_id')->varChar(10);
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ class CreateMonthi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monthi');
+        Schema::dropIfExists('monhoc');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GiangVienController;
 use App\Http\Controllers\PhongThiController;
-use App\Http\Controllers\MonThiController;
+use App\Http\Controllers\MonHocController;
 use App\Http\Controllers\BuoiThiController;
 use App\Http\Controllers\LichCoiThiController;
 
@@ -99,16 +99,56 @@ Route::prefix('phongthi')->group(function () {
         'as' => 'phongthi.create',
         'uses' => PhongThiController::class . '@create'
     ]);
+    Route::post('/store', [
+        'as' => 'phongthi.store',
+        'uses' => PhongThiController::class . '@store'
+    ]);
+    Route::get('/show/{id}', [
+        'as' => 'phongthi.show',
+        'uses' => PhongThiController::class . '@show'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'phongthi.edit',
+        'uses' => PhongThiController::class . '@edit'
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'phongthi.update',
+        'uses' => PhongThiController::class . '@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'phongthi.delete',
+        'uses' => PhongThiController::class . '@delete'
+    ]);
 });
 
-Route::prefix('monthi')->group(function () {
+Route::prefix('monhoc')->group(function () {
     Route::get('/', [
-        'as' => 'monthi.index',
-        'uses' => MonThiController::class . '@index'
+        'as' => 'monhoc.index',
+        'uses' => MonHocController::class . '@index'
     ]);
     Route::get('/create', [
-        'as' => 'monthi.create',
-        'uses' => MonThiController::class . '@create'
+        'as' => 'monhoc.create',
+        'uses' => MonHocController::class . '@create'
+    ]);
+    Route::post('/store', [
+        'as' => 'monhoc.store',
+        'uses' => MonHocController::class . '@store'
+    ]);
+    Route::get('/show/{id}', [
+        'as' => 'monhoc.show',
+        'uses' => MonHocController::class . '@show'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'monhoc.edit',
+        'uses' => MonHocController::class . '@edit'
+    ]);
+    Route::post('/update/{id}', [
+        'as' => 'monhoc.update',
+        'uses' => MonHocController::class . '@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'monhoc.delete',
+        'uses' => MonHocController::class . '@delete'
     ]);
 });
 

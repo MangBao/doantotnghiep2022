@@ -11,27 +11,27 @@ INSERT INTO `cathi` (`cathi_id`, `giobatdau` , `gioketthuc`) VALUES
 ('CA05', '14:40:00', '15:40:00'),
 ('CA06', '15:50:00', '16:40:00');
 
-INSERT INTO `giangduong` (`giangduong_id`, `tengiangduong`) VALUES
-('G1', 'Giảng đường G1'),
-('G2', 'Giảng đường G2'),
-('G3', 'Giảng đường G3');
+INSERT INTO `giangduong` (`id`, `giangduong_id`, `tengiangduong`) VALUES
+('', 'G1', 'Giảng đường G1'),
+('', 'G2', 'Giảng đường G2'),
+('', 'G3', 'Giảng đường G3');
 
-INSERT INTO `phongthi` (`phongthi_id`, `tenphongthi`, `giangduong_id`) VALUES
-('G1-101', 'Phòng 101', 'G1'),
-('G1-102', 'Phòng 102', 'G1'),
-('G1-103', 'Phòng 103', 'G1'),
-('G1-104', 'Phòng 104', 'G1'),
-('G1-105', 'Phòng 105', 'G1'),
-('G2-101', 'Phòng 101', 'G2'),
-('G2-102', 'Phòng 102', 'G2'),
-('G2-103', 'Phòng 103', 'G2'),
-('G2-104', 'Phòng 104', 'G2'),
-('G2-105', 'Phòng 105', 'G2'),
-('G3-101', 'Phòng 101', 'G3'),
-('G3-102', 'Phòng 102', 'G3'),
-('G3-103', 'Phòng 103', 'G3'),
-('G3-104', 'Phòng 104', 'G3'),
-('G3-105', 'Phòng 105', 'G3');
+INSERT INTO `phongthi` (`id`, `phongthi_id`, `tenphongthi`, `giangduong_id`) VALUES
+('', 'G1-101', 'Phòng 101', 'G1'),
+('', 'G1-102', 'Phòng 102', 'G1'),
+('', 'G1-103', 'Phòng 103', 'G1'),
+('', 'G1-104', 'Phòng 104', 'G1'),
+('', 'G1-105', 'Phòng 105', 'G1'),
+('', 'G2-101', 'Phòng 101', 'G2'),
+('', 'G2-102', 'Phòng 102', 'G2'),
+('', 'G2-103', 'Phòng 103', 'G2'),
+('', 'G2-104', 'Phòng 104', 'G2'),
+('', 'G2-105', 'Phòng 105', 'G2'),
+('', 'G3-101', 'Phòng 101', 'G3'),
+('', 'G3-102', 'Phòng 102', 'G3'),
+('', 'G3-103', 'Phòng 103', 'G3'),
+('', 'G3-104', 'Phòng 104', 'G3'),
+('', 'G3-105', 'Phòng 105', 'G3');
 
 INSERT INTO `khoa` (`khoa_id`, `tenkhoa`) VALUES
 ('CNTT', 'Công nghệ thông tin'),
@@ -49,37 +49,37 @@ INSERT INTO `bomon` (`bomon_id`, `tenbomon`, `khoa_id`) VALUES
 ('CTM', 'Chế tạo máy', 'CK'),
 ('CDT', 'Cơ điện tử', 'CK');
 
-INSERT INTO `monthi` (`monthi_id`, `tenmonthi`, `bomon_id`) VALUES
-('VLKT', 'Vật liệu kỹ thuật', 'CTM'),
-('KTTK', 'Kỹ thuật thủy khí', 'CTM'),
-('DLHCH', 'Động lực học cơ hệ', 'CTM'),
-('NLC', 'Nguyên lý cắt', 'CDT'),
-('CTHTK', 'Công thái học và thiết kế', 'CDT'),
-('SBVL', 'Sức bền vật liệu', 'CDT'),
+INSERT INTO `monhoc` (`id`, `monhoc_id`, `tenmonhoc`, `bomon_id`) VALUES
+('', 'VLKT', 'Vật liệu kỹ thuật', 'CTM'),
+('', 'KTTK', 'Kỹ thuật thủy khí', 'CTM'),
+('', 'DLHCH', 'Động lực học cơ hệ', 'CTM'),
+('', 'NLC', 'Nguyên lý cắt', 'CDT'),
+('', 'CTHTK', 'Công thái học và thiết kế', 'CDT'),
+('', 'SBVL', 'Sức bền vật liệu', 'CDT'),
 
-('CHLC', 'Cơ học lưu chất', 'CKT'),
-('DLHCT', 'Động lực học công trình', 'CKT'),
-('CHKC1', 'Cơ học kết cấu 1', 'CKT'),
-('VLXD', 'Vật liệu xây dựng', 'CSXD'),
-('DHKT', 'Đồ họa kỹ thuật', 'CSXD'),
-('MXD', 'Máy xây dựng', 'CSXD'),
-('CTN', 'Cấp thoát nước', 'CSXD'),
-('DCCT', 'Địa chất công trình', 'KTXD'),
-('TLTV', 'Thủy lực & Thủy văn', 'KTXD'),
-('TCTC', 'Tổ chức thi công', 'KTXD'),
+('', 'CHLC', 'Cơ học lưu chất', 'CKT'),
+('', 'DLHCT', 'Động lực học công trình', 'CKT'),
+('', 'CHKC1', 'Cơ học kết cấu 1', 'CKT'),
+('', 'VLXD', 'Vật liệu xây dựng', 'CSXD'),
+('', 'DHKT', 'Đồ họa kỹ thuật', 'CSXD'),
+('', 'MXD', 'Máy xây dựng', 'CSXD'),
+('', 'CTN', 'Cấp thoát nước', 'CSXD'),
+('', 'DCCT', 'Địa chất công trình', 'KTXD'),
+('', 'TLTV', 'Thủy lực & Thủy văn', 'KTXD'),
+('', 'TCTC', 'Tổ chức thi công', 'KTXD'),
 
-('HTTQL', 'Hệ thống tin quản lý', 'HTTQL'),
-('TKWKD', 'Thiết kế web kinh doanh', 'HTTQL'),
-('QTSX', 'Quản trị sản xuất', 'HTTQL'),
-('MMT', 'Mạng máy tính', 'MTT'),
-('TBMVCH', 'Thiết bị mạng và cấu hình', 'MTT'),
-('LTM', 'Lập trình mạng', 'MTT'),
-('PTUDW', 'Phát triển ứng dụng Web', 'KTPM'),
-('TKW', 'Thiết kế web', 'KTPM'),
-('LTHDT', 'Lập trình hướng đối tượng', 'KTPM'),
-('DSTT', 'Đại số tuyến tính', 'TOAN'),
-('GT', 'Giải tính', 'TOAN'),
-('XSTK', 'Lý thuyết xác suất và thống kê toán', 'TOAN');
+('', 'HTTQL', 'Hệ thống tin quản lý', 'HTTQL'),
+('', 'TKWKD', 'Thiết kế web kinh doanh', 'HTTQL'),
+('', 'QTSX', 'Quản trị sản xuất', 'HTTQL'),
+('', 'MMT', 'Mạng máy tính', 'MTT'),
+('', 'TBMVCH', 'Thiết bị mạng và cấu hình', 'MTT'),
+('', 'LTM', 'Lập trình mạng', 'MTT'),
+('', 'PTUDW', 'Phát triển ứng dụng Web', 'KTPM'),
+('', 'TKW', 'Thiết kế web', 'KTPM'),
+('', 'LTHDT', 'Lập trình hướng đối tượng', 'KTPM'),
+('', 'DSTT', 'Đại số tuyến tính', 'TOAN'),
+('', 'GT', 'Giải tính', 'TOAN'),
+('', 'XSTK', 'Lý thuyết xác suất và thống kê toán', 'TOAN');
 
 
 INSERT INTO `phongthi_ca` (`id`, `phongthi_id`, `cathi_id`, `ngaythi`, `monthi_id`) VALUES

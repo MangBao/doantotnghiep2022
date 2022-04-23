@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CaThi;
-use App\Models\MonThi;
+use App\Models\MonHoc;
 use App\Models\PhongThi;
 use App\Models\PhongThi_Ca;
 
@@ -12,16 +12,16 @@ class BuoiThiController extends Controller
 {
     private $cathi;
     private $pt_ca;
-    private $monthi;
+    private $monhoc;
     private $phongthi;
     private $htmlOptionCaThi;
     private $htmlOptionMonThi;
     private $htmlOptionPhongThi;
 
-    public function __construct(CaThi $cathi, PhongThi_Ca $pt_ca, MonThi $monthi, PhongThi $phongthi) {
+    public function __construct(CaThi $cathi, PhongThi_Ca $pt_ca, MonHoc $monhoc, PhongThi $phongthi) {
         $this->cathi = $cathi;
         $this->pt_ca = $pt_ca;
-        $this->monthi = $monthi;
+        $this->monhoc = $monhoc;
         $this->phongthi = $phongthi;
         $this->htmlOptionCaThi = '';
         $this->htmlOptionMonThi = '';
@@ -36,7 +36,7 @@ class BuoiThiController extends Controller
     {
         $bts = $this->pt_ca::latest()->paginate(10);
         $cts = $this->cathi::all();
-        $mts = $this->monthi::all();
+        $mhs = $this->monhoc::all();
         $i = 1;
 
         foreach($bts as $bt){
@@ -46,9 +46,9 @@ class BuoiThiController extends Controller
                     $bt->gioketthuc = $ct->gioketthuc;
                 }
             }
-            foreach($mts as $mt){
-                if($bt->monthi_id == $mt->monthi_id){
-                    $bt->tenmonthi = $mt->tenmonthi;
+            foreach($mhs as $mh){
+                if($bt->monthi_id == $mh->monhoc_id){
+                    $bt->tenmonthi = $mh->tenmonhoc;
                 }
             }
         }
@@ -69,7 +69,7 @@ class BuoiThiController extends Controller
     {
         $bts = $this->pt_ca::all();
         $cts = $this->cathi::all();
-        $mts = $this->monthi::all();
+        $mhs = $this->monhoc::all();
         $pts = $this->phongthi::all();
 
         // Option ca thi
@@ -77,10 +77,10 @@ class BuoiThiController extends Controller
             $this->htmlOptionCaThi .= '<option value="'.$ct->cathi_id.'">'.$ct->cathi_id.' : '.$ct->giobatdau.' - '.$ct->gioketthuc.'</option>';
         }
         // Option mon thi
-        foreach($mts as $mt){
+        foreach($mhs as $mh){
             foreach($bts as $bt){
-                if($bt->monthi_id != $mt->monthi_id){
-                    $this->htmlOptionMonThi .= '<option value="'.$mt->monthi_id.'">'.$mt->tenmonthi.'</option>';
+                if($bt->monthi_id != $mh->monhoc_id){
+                    $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'">'.$mh->tenmonhoc.'</option>';
                     break;
                 }
             }
@@ -150,7 +150,42 @@ class BuoiThiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bt = $this->pt_ca::find($id);
+        $cts = $this->cathi::all();
+        $mhs = $this->monhoc::all();
+        $pts = $this->phongthi::all();
+
+        // Option ca thi
+        foreach($cts as $ct){
+            if($bt->cathi_id == $ct->cathi_id){
+                $this->htmlOptionCaThi .= '<option value="'.$ct->cathi_id.'" selected>'.$ct->cathi_id.' : '.$ct->giobatdau.' - '.$ct->gioketthuc.'</option>';
+            } else {
+                $this->htmlOptionCaThi .= '<option value="'.$ct->cathi_id.'">'.$ct->cathi_id.' : '.$ct->giobatdau.' - '.$ct->gioketthuc.'</option>';
+            }
+        }
+        // Option mon thi
+        foreach($mhs as $mh){
+            if($bt->monthi_id == $mh->monhoc_id){
+                $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'" selected>'.$mh->tenmonhoc.'</option>';
+            } else {
+                $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'">'.$mh->tenmonhoc.'</option>';
+            }
+        }
+        // Option phong thi
+        foreach($pts as $pt){
+            if($bt->phongthi_id == $pt->phongthi_id){
+                $this->htmlOptionPhongThi .= '<option value="'.$pt->phongthi_id.'" selected>'.$pt->tenphongthi.' - '.$pt->giangduong_id.'</option>';
+            } else {
+                $this->htmlOptionPhongThi .= '<option value="'.$pt->phongthi_id.'">'.$pt->tenphongthi.' - '.$pt->giangduong_id.'</option>';
+            }
+        }
+
+        return view('buoithi.edit',[
+            'bt' => $bt,
+            'htmlOptionCaThi' => $this->htmlOptionCaThi,
+            'htmlOptionMonThi' => $this->htmlOptionMonThi,
+            'htmlOptionPhongThi' => $this->htmlOptionPhongThi,
+        ]);
     }
 
     /**
@@ -162,7 +197,14 @@ class BuoiThiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bt = $this->pt_ca::find($id)->update([
+            'cathi_id' => $request->cathi_id,
+            'monthi_id' => $request->monthi_id,
+            'phongthi_id' => $request->phongthi_id,
+            'ngaythi' => $request->ngaythi,
+        ]);
+
+        return redirect()->route('buoithi.index')->with('success', 'Sửa thành công !');
     }
 
     /**
