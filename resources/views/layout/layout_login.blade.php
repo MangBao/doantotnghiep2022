@@ -13,7 +13,7 @@
 </head>
 
 <body class="text-[rgb(30,41,59)] antialiased">
-    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-blue-300">
+    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-primary">
         <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                 <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
@@ -31,7 +31,7 @@
 
             @yield('body')
 
-            <footer class="absolute w-full bottom-0 bg-blueGray-800 pb-6 bg-blue-300">
+            <footer class="absolute w-full bottom-0 bg-blueGray-800 pb-6 bg-primary">
                 <div class="container mx-auto px-4">
                     <hr class="mb-6 border-b-1 border-blueGray-600" />
                     <div class="flex flex-wrap items-center md:justify-between justify-center">

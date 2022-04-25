@@ -198,7 +198,7 @@
             </nav>
             {{-- End nav desktop --}}
 
-            <div class="relative bg-blue-300 md:pt-32 pb-20 pt-12"></div>
+            <div class="relative bg-primary md:pt-32 pb-20 pt-12"></div>
 
             <div class="px-4 md:px-10 mx-auto w-full -m-12">
 
@@ -221,13 +221,13 @@
                             <div class="w-full md:w-8/12 px-4">
                                 <ul class="flex flex-wrap list-none md:justify-end justify-center">
                                     <li>
-                                        <a href="https://www.creative-tim.com?ref=njs-dashboard"
+                                        <a href="/"
                                             class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3">
                                             Mang Bảo
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.creative-tim.com/presentation?ref=njs-dashboard"
+                                        <a href="/"
                                             class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3">
                                             About Me
                                         </a>

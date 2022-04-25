@@ -7,4 +7,7 @@
 .bgModal {
     background-color: rgba(0,0,0,0.4);
 }
+.bg-primary {
+    @apply bg-blue-500;
+}
 @tailwind utilities;

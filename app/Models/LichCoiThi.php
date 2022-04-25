@@ -9,9 +9,27 @@ class LichCoiThi extends Model
 {
     public static function getLichThi()
     {
-        $lichthi = \DB::select('select * from monthi mt, cathi ct, phongthi_ca ptc where mt.idmonthi = ptc.idmonthi and ptc.idca = ct.idca ORDER BY ptc.ngaythi');
+        $lichthi = \DB::select('select * from phongthi_ca');
         if($lichthi)
             return $lichthi;
+        else
+            return null;
+    }
+
+    public static function getGiangVien()
+    {
+        $giangvien = \DB::select('select * from users');
+        if($giangvien)
+            return $giangvien;
+        else
+            return null;
+    }
+
+    public static function getMonHoc()
+    {
+        $monhoc = \DB::select('select * from monhoc');
+        if($monhoc)
+            return $monhoc;
         else
             return null;
     }
