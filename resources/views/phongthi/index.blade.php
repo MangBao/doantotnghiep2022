@@ -76,20 +76,19 @@
                                 </td>
 
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('phongthi.edit', [$pt->id]) }}"
+                                    <a href="{{ route('phongthi.edit', [$pt->phongthi_id]) }}"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                                    <a href="{{ route('phongthi.show', [$pt->id]) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a> |
+
                                     <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
 
                                         class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</span>
                                 </td>
                             </tr>
                             <div id="popup-modal" tabindex="-1"
-                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bg-slate-600">
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full  bgModal ">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                                 <!-- Modal content -->
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44">
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44 animate-fadeInDown">
                                     <!-- Modal header -->
                                     <div class="flex justify-end p-2">
                                         <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('hidden'); document.getElementById('popup-modal').classList.remove('block');"
@@ -112,7 +111,7 @@
                                         </svg>
                                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
                                             delete this product?</h3>
-                                        <a href="{{ route('phongthi.delete', [$pt->id]) }}"
+                                        <a href="{{ route('phongthi.delete', [$pt->phongthi_id]) }}"
                                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                             Yes, I'm sure
                                         </a>

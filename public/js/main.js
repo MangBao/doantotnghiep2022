@@ -22,11 +22,10 @@ function openDropdown(event, dropdownID) {
 
 /* Function for link active */
 function activeLink() {
-    $("#list-nav > .items-center > a").each(function (index, value) {
-        let elementUrlArray = this.href.split("/");
-        console.log(elementUrlArray);
-    });
+    let page = location.pathname.split('/').pop();
+    $('#list-nav > .items-center > a[href="' + page + '"]').addClass('active-link');
 }
+activeLink();
 
 /* Function for remove Vie */
 function removeVietnameseTones(str) {
@@ -83,3 +82,6 @@ function valTachMaGD() {
 $("#giangduong_id").on("change", valTachMaGD);
 $("#tenphongthi").on("keyup", valTachMaGD);
 $("#tenphongthi").on("keyup");
+
+
+

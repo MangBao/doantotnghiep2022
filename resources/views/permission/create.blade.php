@@ -1,10 +1,10 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Sửa phòng thi')
+@section('titleAdmin', 'Thêm môn học')
 @section('content-admin')
     @include('partials.breadcumb', [
-        'page' => 'Phòng thi',
-        'key' => 'Edit',
-        'link' => route('phongthi.index'),
+        'page' => 'Môn học',
+        'key' => 'Add',
+        'link' => route('monhoc.index'),
     ])
     <div class="h-12"></div>
     @if (session('error'))
@@ -29,54 +29,54 @@
 
                         <div class="text-center mb-3">
                             <h6 class="text-blueGray-500 text-sm font-bold">
-                                {{ __('THÊM PHÒNG THI MỚI') }}
+                                {{ __('THÊM MÔN HỌC MỚI') }}
                             </h6>
                         </div>
 
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        {{-- {{ route('phongthi.store') }} --}}
-                        <form method="POST" action="{{ route('phongthi.update', ['id' => $pts->phongthi_id]) }}" enctype="multipart/form-data">
+                        {{-- {{ route('monhoc.store') }} --}}
+                        <form method="POST" action="{{ route('monhoc.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="phongthi_id">
-                                    {{ __('Mã Phòng thi') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="monhoc_id">
+                                    {{ __('Mã môn học') }}
                                 </label>
-                                <input type="text" id="phongthi_id" name="phongthi_id"
+                                <input type="text" id="monhoc_id" name="monhoc_id"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $pts->phongthi_id }}" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
+                                    value="" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
                             </div>
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="tenphongthi">
-                                    {{ __('Tên Phòng thi') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="tenmonhoc">
+                                    {{ __('Tên môn học') }}
                                 </label>
-                                <input type="text" id="tenphongthi" name="tenphongthi"
+                                <input type="text" id="tenmonhoc" name="tenmonhoc"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $pts->tenphongthi }}" required autocomplete="tenphongthi" autofocus
-                                    placeholder="{{ __('Nhập tên Phòng thi') }}" />
+                                    value="" required autocomplete="tenmonhoc" autofocus
+                                    placeholder="{{ __('Nhập tên môn học') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="giangduong_id">
-                                    {{ __('Giảng đường') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="bomon_id">
+                                    {{ __('Bộ môn') }}
                                 </label>
                                 <select
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn giảng đường') }}" name="giangduong_id" id="giangduong_id">
-                                    <option selected>{{ __('Chọn giảng đường') }}</option>
-                                    {!! $htmlOptionGiangDuong !!}
+                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon_id">
+                                    <option selected>{{ __('Chọn bộ môn') }}</option>
+                                    {!! $htmlOptionBoMon !!}
                                 </select>
                             </div>
 
                             <div class="flex justify-around mt-6">
                                 <a class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white text-sm font-bold uppercase px-6 py-3.5 rounded shadow hover:shadow-lg outline-none focus:outline-none w-20"
-                                    href="{{ route('phongthi.index') }}">
+                                    href="{{ route('monhoc.index') }}">
                                     {{ __('Hủy') }}
                                 </a>
                                 <input
                                     class="cursor-pointer bg-blue-500 text-white hover:bg-white hover:text-blue-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none w-24"
-                                    type="submit" value="{{ __('Sửa') }}">
+                                    type="submit" value="{{ __('Thêm') }}">
 
                             </div>
                         </form>

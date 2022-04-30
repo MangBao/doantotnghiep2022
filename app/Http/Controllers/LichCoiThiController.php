@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PhongThi_Ca;
+use App\Models\BuoiThi;
 use App\Models\CaThi;
 use App\Models\MonHoc;
 use App\Models\BoMon;
@@ -12,6 +12,9 @@ use App\Models\LichCoiThi;
 
 class LichCoiThiController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +29,6 @@ class LichCoiThiController extends Controller
         // khoi tao bien bo mon id
         foreach ($lichthis as $lichthi) {
             $lichthi->bomon_id = '';
-            // $giangviens[$j]->flag = 0;
         }
 
         // khoi tao bien giang vien id
@@ -45,9 +47,7 @@ class LichCoiThiController extends Controller
                     break;
                 }
             }
-            // $lichthi->bomon_id = ;
         }
-        // $flag = 0;
         // khoi tao bien mang lich coi thi, ti le xep cho giang vien
         for ($j=0; $j < count($giangviens); $j++) {
             $giangviens[$j]->lichcoithi = [];
@@ -58,14 +58,10 @@ class LichCoiThiController extends Controller
             }
         }
 
-        // usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
-        // for ($j=0; $j < count($giangviens); $j++) {
-        //     echo $giangviens[$j]->name. ' ' .$giangviens[$j]->tilexep . ' - ' . count($giangviens[$j]->lichcoithi).'<br>';
-        // }
+        usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
+
         $countLichGV = 0;
         // Duyệt từng lịch thi giang vien coi thi 1
-        // dd($giangviens);
-
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
@@ -97,17 +93,10 @@ class LichCoiThiController extends Controller
                 }
             }
             $countLichGV++;
-
         } while ($this->checkLichThiGV1($lichthis));
 
         // Duyệt từng lịch thi giang vien coi thi 2
-
-        // for($g)
-        // usort($giangviens, [LichCoiThiController::class, "cmp"]);
-        // for ($j=0; $j < count($giangviens); $j++) {
-        //     echo $giangviens[$j]->name. ' ' .$giangviens[$j]->tilexep . ' - ' . count($giangviens[$j]->lichcoithi).'<br>';
-        // }
-        // dd($countLichGV);
+        usort($giangviens, [LichCoiThiController::class, "cmp"]);
 
         do {
             for ($i=0; $i < count($lichthis); $i++) {
@@ -134,21 +123,11 @@ class LichCoiThiController extends Controller
 
         } while ($this->checkLichThiGV2($lichthis));
 
-        // echo '<pre>';
-        // dd($lichthis[22]);
-        // echo '</pre>';
-
-        // for ($j=0; $j < count($giangviens); $j++) {
-        //     echo $giangviens[$j]->name. ' ' .$giangviens[$j]->tilexep . ' - ' . count($giangviens[$j]->lichcoithi).'<br>';
-        // }
-
         $i = 1;
         return view('lichcoithi.index', [
             'lichthis' => $lichthis,
             'giangvien' => $giangviens,
             'i' => $i
-            // 'test' => $a
-
         ]);
 
     }
@@ -180,7 +159,6 @@ class LichCoiThiController extends Controller
 
     protected function checkLichThiGV2($lichthi)
     {
-        // dd($lichthi);
         foreach ($lichthi as $lich) {
             if($lich->giangvien_id2 == '') {
                 return true;
@@ -191,7 +169,6 @@ class LichCoiThiController extends Controller
 
     public function checkLichThiGV1($lichthi)
     {
-        // dd($lichthi);
         foreach ($lichthi as $lich) {
             if($lich->giangvien_id1 == '') {
                 return true;

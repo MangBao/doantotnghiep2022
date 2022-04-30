@@ -27,20 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $quyens = Quyen_GiangVien::all();
-        // $dsquyen = DSQuyen::all();
-
-        // foreach($quyens as $q){
-        //     if($q->giangvien_id == Auth::user()->giangvien_id){
-        //         foreach($dsquyen as $d){
-        //             if($q->quyen_id == $d->quyen_id){
-        //                 Auth::user()->quyen = $d->quyen_id;
-        //                 Auth::user()->tenquyen = $d->tenquyen;
-        //             }
-        //         }
-        //     }
-        // }
-
         return view('admin');
     }
 }

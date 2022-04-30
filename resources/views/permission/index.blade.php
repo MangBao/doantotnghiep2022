@@ -1,13 +1,13 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Giảng viên')
+@section('titleAdmin', 'Phân quyền')
 @section('content-admin')
-    @include('partials.breadcumb', ['page' => 'Giảng viên', 'key' => 'Index', 'link' => route('giangvien.index')])
+    @include('partials.breadcumb', ['page' => 'Phân quyền', 'key' => 'Index', 'link' => route('permission.index')])
     <div class="h-12"></div>
 
     <div class="flex">
         <div class="mr-8 pt-3">
-            <a href="{{ route('giangvien.create') }}" class="btn-primary">
-                Thêm Giảng viên
+            <a href="{{ route('permission.create') }}" class="btn-primary">
+                Thêm Phân quyền
             </a>
         </div>
         @if (session('success'))
@@ -49,27 +49,16 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tên giảng viên
+                                Tên Phân quyền
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Email
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Ngày sinh
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Con nhỏ
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Số điện thoại
-                            </th>
+
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Chức năng</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($gvs as $gv)
+                        @foreach ($roles as $r)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
@@ -77,28 +66,11 @@
                                     {{ $i++ }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $gv->name }}
+                                    {{ $r->role_name }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ $gv->email }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{
-                                        date('d/m/Y', strtotime($gv->ngaysinh))
-                                    }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    @if ($gv->connho == 1)
-                                        {{ __('Có') }}
-                                    @else
-                                        {{ __('Không') }}
-                                    @endif
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $gv->sodienthoai }}
-                                </td>
+
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('giangvien.edit', [$gv->id]) }}"
+                                    <a href="{{ route('permission.edit', [$r->id]) }}"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
 
                                     <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
@@ -107,7 +79,7 @@
                                 </td>
                             </tr>
                             <div id="popup-modal" tabindex="-1"
-                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bgModal ">
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full  bgModal ">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44 animate-fadeInDown">
@@ -133,7 +105,7 @@
                                         </svg>
                                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
                                             delete this product?</h3>
-                                        <a href="{{ route('giangvien.delete', [$gv->id]) }}"
+                                        <a href="{{ route('permission.delete', [$r->id]) }}"
                                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                             Yes, I'm sure
                                         </a>
@@ -158,7 +130,7 @@
         <div class="h-6"></div>
         <div class="row">
             <div class="col w-full">
-                {{ $gvs->links('pagination::tailwind') }}
+                {{-- {{ $roles->links('pagination::tailwind') }} --}}
             </div>
         </div>
     </div>

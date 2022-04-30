@@ -14,10 +14,9 @@ class CreateCathi extends Migration
     public function up()
     {
         Schema::create('cathi', function (Blueprint $table) {
-            $table->string('cathi_id')->varChar(10)->primary();
+            $table->string('cathi_id', 10)->primary();
             $table->time('giobatdau');
             $table->time('gioketthuc');
-            $table->timestamps();
         });
     }
 

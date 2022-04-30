@@ -9,7 +9,7 @@ class LichCoiThi extends Model
 {
     public static function getLichThi()
     {
-        $lichthi = \DB::select('select * from phongthi_ca');
+        $lichthi = \DB::select('select * from buoithi');
         if($lichthi)
             return $lichthi;
         else

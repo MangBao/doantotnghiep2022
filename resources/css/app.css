@@ -10,4 +10,7 @@
 .bg-primary {
     @apply bg-blue-500;
 }
+.active-link {
+    @apply text-blue-500;
+}
 @tailwind utilities;

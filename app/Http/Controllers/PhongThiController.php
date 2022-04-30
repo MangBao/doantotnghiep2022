@@ -17,6 +17,7 @@ class PhongThiController extends Controller
         $this->phongthi = $phongthi;
         $this->giangduong = $giangduong;
         $this->htmlOptionGiangDuong = '';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +26,7 @@ class PhongThiController extends Controller
      */
     public function index()
     {
-        $phongthi = $this->phongthi->latest()->paginate(10);
+        $phongthi = $this->phongthi->orderBy('giangduong_id', 'asc')->paginate(8);
 
         return view('phongthi.index', [
             'pts' => $phongthi,
@@ -90,16 +91,14 @@ class PhongThiController extends Controller
      */
     public function edit($id)
     {
-        $phongthi = $this->phongthi->find($id);
+        $phongthi = $this->phongthi->where('phongthi_id', $id)->first();
+        // $phongthi = $this->phongthi->find($id);
         $giangduong = $this->giangduong->all();
-
         foreach ($giangduong as $gd) {
-            foreach ($phongthi->giangduong as $ptgd) {
-                if ($gd->id == $ptgd->id) {
-                    $this->htmlOptionGiangDuong .= '<option value="' . $gd->giangduong_id . '" selected>' . $gd->tengiangduong . '</option>';
-                } else {
-                    $this->htmlOptionGiangDuong .= '<option value="' . $gd->giangduong_id . '">' . $gd->tengiangduong . '</option>';
-                }
+            if ($gd->giangduong_id === $phongthi->giangduong_id) {
+                $this->htmlOptionGiangDuong .= '<option value="' . $gd->giangduong_id . '" selected>' . $gd->tengiangduong . '</option>';
+            } else {
+                $this->htmlOptionGiangDuong .= '<option value="' . $gd->giangduong_id . '">' . $gd->tengiangduong . '</option>';
             }
         }
 
@@ -118,11 +117,16 @@ class PhongThiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->phongthi->find($id)->update([
+        $this->phongthi->where('phongthi_id', $id)->update([
             'giangduong_id' => $request->giangduong_id,
             'phongthi_id' => $request->phongthi_id,
             'tenphongthi' => $request->tenphongthi,
         ]);
+        // $this->phongthi->find($id)->update([
+        //     'giangduong_id' => $request->giangduong_id,
+        //     'phongthi_id' => $request->phongthi_id,
+        //     'tenphongthi' => $request->tenphongthi,
+        // ]);
 
         return redirect()->route('phongthi.index')->with('success', 'Cập nhật phòng thi thành công');
     }
@@ -135,7 +139,8 @@ class PhongThiController extends Controller
      */
     public function delete($id)
     {
-        $this->phongthi->find($id)->delete();
+        // $this->phongthi->find($id)->delete();
+        $this->phongthi->where('phongthi_id', $id)->delete();
         return redirect()->route('phongthi.index')->with('success', 'Xóa thành công !');
     }
 }

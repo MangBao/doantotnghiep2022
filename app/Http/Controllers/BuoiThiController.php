@@ -6,26 +6,27 @@ use Illuminate\Http\Request;
 use App\Models\CaThi;
 use App\Models\MonHoc;
 use App\Models\PhongThi;
-use App\Models\PhongThi_Ca;
+use App\Models\BuoiThi;
 
 class BuoiThiController extends Controller
 {
     private $cathi;
-    private $pt_ca;
+    private $buoithi;
     private $monhoc;
     private $phongthi;
     private $htmlOptionCaThi;
     private $htmlOptionMonThi;
     private $htmlOptionPhongThi;
 
-    public function __construct(CaThi $cathi, PhongThi_Ca $pt_ca, MonHoc $monhoc, PhongThi $phongthi) {
+    public function __construct(CaThi $cathi, BuoiThi $buoithi, MonHoc $monhoc, PhongThi $phongthi) {
         $this->cathi = $cathi;
-        $this->pt_ca = $pt_ca;
+        $this->buoithi = $buoithi;
         $this->monhoc = $monhoc;
         $this->phongthi = $phongthi;
         $this->htmlOptionCaThi = '';
         $this->htmlOptionMonThi = '';
         $this->htmlOptionPhongThi = '';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class BuoiThiController extends Controller
      */
     public function index()
     {
-        $bts = $this->pt_ca::latest()->paginate(10);
+        $bts = $this->buoithi->orderBy('ngaythi', 'asc')->paginate(8);
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $i = 1;
@@ -67,7 +68,7 @@ class BuoiThiController extends Controller
      */
     public function create()
     {
-        $bts = $this->pt_ca::all();
+        $bts = $this->buoithi::all();
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $pts = $this->phongthi::all();
@@ -111,14 +112,14 @@ class BuoiThiController extends Controller
     {
         $cts = $this->cathi::all();
         $pts = $this->phongthi::all();
-        $pt_ca = $this->pt_ca::all();
+        $buoithi = $this->buoithi::all();
 
-        foreach($pt_ca as $ptc){
-            if ($request->phongthi_id == $ptc->phongthi_id && $request->ngaythi == $ptc->ngaythi && $request->cathi_id == $ptc->cathi_id){
+        foreach($buoithi as $bt){
+            if ($request->phongthi_id == $bt->phongthi_id && $request->ngaythi == $bt->ngaythi && $request->cathi_id == $bt->cathi_id){
                 return redirect()->route('buoithi.create')->with('error', 'Buổi thi bị trùng !');
                 break;
             } else {
-                $this->pt_ca::create([
+                $this->buoithi::create([
                     'cathi_id' => $request->cathi_id,
                     'monthi_id' => $request->monthi_id,
                     'phongthi_id' => $request->phongthi_id,
@@ -132,17 +133,6 @@ class BuoiThiController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -150,7 +140,7 @@ class BuoiThiController extends Controller
      */
     public function edit($id)
     {
-        $bt = $this->pt_ca::find($id);
+        $bt = $this->buoithi::find($id);
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $pts = $this->phongthi::all();
@@ -197,7 +187,7 @@ class BuoiThiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bt = $this->pt_ca::find($id)->update([
+        $bt = $this->buoithi::find($id)->update([
             'cathi_id' => $request->cathi_id,
             'monthi_id' => $request->monthi_id,
             'phongthi_id' => $request->phongthi_id,
@@ -215,8 +205,8 @@ class BuoiThiController extends Controller
      */
     public function delete($id)
     {
-        $pt_ca = $this->pt_ca::find($id);
-        $pt_ca->delete();
+        $buoithi = $this->buoithi::find($id);
+        $buoithi->delete();
 
         return redirect()->route('buoithi.index')->with('success', 'Xóa thành công !');
     }

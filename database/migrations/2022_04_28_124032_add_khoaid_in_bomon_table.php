@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBomon extends Migration
+class AddKhoaidInBomonTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBomon extends Migration
      */
     public function up()
     {
-        Schema::create('bomon', function (Blueprint $table) {
-            $table->string('bomon_id', 10)->primary();
-            $table->string('tenbomon', 50);
+        Schema::table('bomon', function (Blueprint $table) {
+            $table->string('khoa_id')->varChar(10);
+            $table->foreign('khoa_id')->references('khoa_id')->on('khoa')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateBomon extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bomon');
+        Schema::table('bomon', function (Blueprint $table) {
+            //
+        });
     }
 }

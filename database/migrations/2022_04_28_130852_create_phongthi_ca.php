@@ -13,13 +13,9 @@ class CreatePhongthiCa extends Migration
      */
     public function up()
     {
-        Schema::create('phongthi_ca', function (Blueprint $table) {
+        Schema::create('buoithi', function (Blueprint $table) {
             $table->id();
-            $table->string('phongthi_id')->varChar(10);
-            $table->string('cathi_id')->varChar(10);
             $table->date('ngaythi');
-            $table->string('monthi_id')->varChar(10);
-            $table->timestamps();
         });
     }
 

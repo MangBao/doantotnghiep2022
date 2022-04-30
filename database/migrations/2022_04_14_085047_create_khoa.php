@@ -14,9 +14,8 @@ class CreateKhoa extends Migration
     public function up()
     {
         Schema::create('khoa', function (Blueprint $table) {
-            $table->string('khoa_id')->varChar(10)->primary();
-            $table->string('tenkhoa')->varChar(50);
-            $table->timestamps();
+            $table->string('khoa_id', 10)->primary();
+            $table->string('tenkhoa', 50);
         });
     }
 

@@ -21,6 +21,8 @@ class GiangVienController extends Controller
         $this->dsquyen = $dsquyen;
         $this->quyen_giangvien = $quyen_giangvien;
         $this->bomon = $bomon;
+        $this->middleware('auth');
+        $this->middleware('permission');
     }
     /**
      * Display a listing of the resource.
@@ -29,7 +31,7 @@ class GiangVienController extends Controller
      */
     public function index()
     {
-        $gvs = $this->giangvien::latest()->paginate(10);
+        $gvs = $this->giangvien::latest()->paginate(8);
         $i = 1;
         return view('giangvien.index',[
             'gvs' => $gvs,

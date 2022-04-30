@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHoancanh extends Migration
+class AddMonthiidInBuoithiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateHoancanh extends Migration
      */
     public function up()
     {
-        Schema::create('hoancanh', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('buoithi', function (Blueprint $table) {
+            $table->string('monthi_id', 10);
+            $table->foreign('monthi_id')->references('monhoc_id')->on('monhoc')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateHoancanh extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hoancanh');
+        Schema::table('buoithi', function (Blueprint $table) {
+            //
+        });
     }
 }

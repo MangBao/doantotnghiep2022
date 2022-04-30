@@ -16,6 +16,7 @@ class MonHocController extends Controller
         $this->monhoc = $monhoc;
         $this->bomon = $bomon;
         $this->htmlOptionBoMon = '';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class MonHocController extends Controller
      */
     public function index()
     {
-        $mhs = $this->monhoc::latest()->paginate(10);
+        $mhs = $this->monhoc->orderBy('bomon_id', 'asc')->paginate(8);
         $bms = $this->bomon::all();
         $i = 1;
 
@@ -86,7 +87,8 @@ class MonHocController extends Controller
      */
     public function edit($id)
     {
-        $mh = $this->monhoc::find($id);
+        $mh = $this->monhoc->where('monhoc_id', $id)->first();
+        // $mh = $this->monhoc::find($id);
         $bms = $this->bomon::all();
 
         foreach($bms as $bm){
@@ -113,11 +115,16 @@ class MonHocController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->monhoc->find($id)->update([
+        $this->monhoc->where('monhoc_id', $id)->update([
             'monhoc_id' => $request->monhoc_id,
             'tenmonhoc' => $request->tenmonhoc,
             'bomon_id' => $request->bomon_id,
         ]);
+        // $this->monhoc->find($id)->update([
+        //     'monhoc_id' => $request->monhoc_id,
+        //     'tenmonhoc' => $request->tenmonhoc,
+        //     'bomon_id' => $request->bomon_id,
+        // ]);
         return redirect()->route('monhoc.index')->with('success', 'Cập nhật môn học thành công');
     }
 
@@ -129,7 +136,8 @@ class MonHocController extends Controller
      */
     public function delete($id)
     {
-        $this->monhoc->find($id)->delete();
+        $this->monhoc->where('monhoc_id', $id)->delete();
+        // $this->monhoc->find($id)->delete();
         return redirect()->route('monhoc.index')->with('success', 'Xóa môn học thành công');
     }
 }

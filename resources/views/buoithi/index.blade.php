@@ -106,8 +106,6 @@
                                 <td class="px-6 py-4 text-right">
                                     <a href="{{ route('buoithi.edit', [$bt->id]) }}"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                                    <a href="{{ route('buoithi.show', [$bt->id]) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Details</a> |
                                     <span
                                         onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
                                         class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</span>
