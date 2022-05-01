@@ -3,7 +3,7 @@
 @section('content-admin')
 @include('partials.breadcumb', ['page' => 'Home', 'key' => '', 'link' => route('home')])
 <div class="h-12"></div>
-<div class="container flex flex-wrap mt-4">
+<div class="container flex flex-wrap mt-4 min-h-126 down-md:mx-auto">
     <div class="w-full mb-12 xl:mb-0 px-4">
         @if (session('error'))
             <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
@@ -20,8 +20,8 @@
             </div>
         @endif
         <div class="relative flex bg-green-400 w-full mb-6 shadow-lg rounded justify-center py-6">
-            <p class="bold text-2xl text-white">
-                {{ __('Chào mừng') . ' '  . 'Administrator' . ' ' . Auth::user()->name . ' ' . __('trở lại !') }}
+            <p class="bold text-2xl text-white text-center px-3">
+                {{ 'Chào mừng' . ' '  . (Auth::user()->role_id == 1 ? ' Administrator' : (Auth::user()->role_id == 2 ? 'Thư ký khoa' : 'Giảng viên')) . ' ' . Auth::user()->name . ' ' . __('trở lại !') }}
             </p>
         </div>
     </div>

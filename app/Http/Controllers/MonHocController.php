@@ -2,21 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\BoMon;
 use App\Models\MonHoc;
+use App\Models\Khoa;
+use App\Models\User;
 
 class MonHocController extends Controller
 {
     private $bomon;
     private $monhoc;
+    private $khoa;
+    private $user;
     private $htmlOptionBoMon;
 
-    public function __construct(MonHoc $monhoc, BoMon $bomon) {
+    public function __construct(MonHoc $monhoc, BoMon $bomon, Khoa $khoa, User $user) {
         $this->monhoc = $monhoc;
         $this->bomon = $bomon;
+        $this->khoa = $khoa;
+        $this->user = $user;
         $this->htmlOptionBoMon = '';
         $this->middleware('auth');
+        $this->middleware('permission');
+        $this->middleware('khoa');
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +34,21 @@ class MonHocController extends Controller
      */
     public function index()
     {
-        $mhs = $this->monhoc->orderBy('bomon_id', 'asc')->paginate(8);
         $bms = $this->bomon::all();
+
+        $user = $this->user->join('bomon', 'users.bomon_id', '=', 'bomon.bomon_id')
+            ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+            ->select('users.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
+            ->where('users.giangvien_id', '=', Auth::user()->giangvien_id)
+            ->get();
+
+        $mhs = $this->monhoc->join('bomon', 'monhoc.bomon_id', '=', 'bomon.bomon_id')
+            ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+            ->select('monhoc.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
+            ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
+            ->orderBy('monhoc.monhoc_id', 'asc')
+            ->paginate(8);
+
         $i = 1;
 
         foreach($mhs as $mh){

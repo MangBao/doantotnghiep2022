@@ -18,6 +18,7 @@ class PhongThiController extends Controller
         $this->giangduong = $giangduong;
         $this->htmlOptionGiangDuong = '';
         $this->middleware('auth');
+        $this->middleware('permission');
     }
     /**
      * Display a listing of the resource.

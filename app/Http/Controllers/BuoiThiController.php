@@ -27,6 +27,8 @@ class BuoiThiController extends Controller
         $this->htmlOptionMonThi = '';
         $this->htmlOptionPhongThi = '';
         $this->middleware('auth');
+        $this->middleware('permission');
+
     }
     /**
      * Display a listing of the resource.

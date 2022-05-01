@@ -12,6 +12,7 @@ class PermissionController extends Controller
     public function __construct(Roles $roles) {
         $this->roles = $roles;
         $this->middleware('auth');
+        $this->middleware('permission');
     }
     /**
      * Display a listing of the resource.
