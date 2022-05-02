@@ -12,6 +12,7 @@ class GiangDuong extends Model
     protected $table = 'giangduong';
     protected $fillable = [
         'giangduong_id',
-        'tengiangduong'
+        'tengiangduong',
+        'created_at', 'updated_at'
     ];
 }

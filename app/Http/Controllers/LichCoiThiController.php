@@ -21,35 +21,63 @@ class LichCoiThiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(){
+        return view('lichcoithi.index');
+    }
+
+    public function lichcoithiauto()
     {
         $lichthis = LichCoiThi::getLichThi();
         $giangviens = LichCoiThi::getGiangVien();
         $monhocs = LichCoiThi::getMonHoc();
 
-        // khoi tao bien bo mon id
-        foreach ($lichthis as $lichthi) {
-            $lichthi->bomon_id = '';
-        }
+        // khoi tao bien bo mon id, gan bo mon id cho lich thi
+        $this->khoiTaoBomonID($lichthis, $monhocs);
 
         // khoi tao bien giang vien id
-        for ($i=0; $i < count($lichthis); $i++) {
-            $lichthis[$i]->giangvien_id1 = '';
-            $lichthis[$i]->tengiangvien1 = '';
-            $lichthis[$i]->giangvien_id2 = '';
-            $lichthis[$i]->tengiangvien2 = '';
-        }
+        $this->khoiTaoGV($lichthis);
 
-        // gan bo mon id cho lich thi
-        foreach ($lichthis as $lichthi) {
-            foreach ($monhocs as $monhoc) {
-                if ($lichthi->monthi_id == $monhoc->monhoc_id) {
-                    $lichthi->bomon_id = $monhoc->bomon_id;
-                    break;
-                }
-            }
-        }
         // khoi tao bien mang lich coi thi, ti le xep cho giang vien
+        $this->khoiTaoTiLeXep($giangviens);
+
+        usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
+
+        $countLichGV = 0;
+
+        // Duyệt từng lịch thi giang vien coi thi 1
+        $this->lichThiGV1($lichthis, $giangviens, $countLichGV);
+
+        // Duyệt từng lịch thi giang vien coi thi 2
+        usort($giangviens, [LichCoiThiController::class, "cmp"]);
+
+        $this->lichThiGV2($lichthis, $giangviens, $countLichGV);
+
+        $i = 1;
+        return view('lichcoithi.lichcoithiauto', [
+            'lichthis' => $lichthis,
+            'giangvien' => $giangviens,
+            'i' => $i
+        ]);
+
+    }
+
+    static function cmpTiLeXep($a, $b)
+    {
+        if ($a->tilexep == $b->tilexep) {
+            return 0;
+        }
+        return ($a->tilexep > $b->tilexep) ? -1 : 1;
+    }
+
+    static function cmp($a, $b)
+    {
+        if ($a->tilexep == $b->tilexep && count($a->lichcoithi) == count($b->lichcoithi)) {
+            return 0;
+        }
+        return (count($a->lichcoithi) > count($b->lichcoithi) || $a->tilexep > $b->tilexep) ? -1 : 1;
+    }
+
+    protected function khoiTaoTiLeXep($giangviens){
         for ($j=0; $j < count($giangviens); $j++) {
             $giangviens[$j]->lichcoithi = [];
             if ($giangviens[$j]->connho == 1) {
@@ -58,11 +86,38 @@ class LichCoiThiController extends Controller
                 $giangviens[$j]->tilexep = 100;
             }
         }
+        return $giangviens;
+    }
 
-        usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
+    protected function khoiTaoBomonID($lichthis, $monhocs) {
+        foreach ($lichthis as $lichthi) {
+            $lichthi->bomon_id = '';
+        }
 
-        $countLichGV = 0;
-        // Duyệt từng lịch thi giang vien coi thi 1
+        foreach ($lichthis as $lichthi) {
+            foreach ($monhocs as $monhoc) {
+                if ($lichthi->monthi_id == $monhoc->monhoc_id) {
+                    $lichthi->bomon_id = $monhoc->bomon_id;
+                    break;
+                }
+            }
+        }
+
+        return $lichthis;
+    }
+
+    protected function khoiTaoGV($lichthis) {
+        for ($i=0; $i < count($lichthis); $i++) {
+            $lichthis[$i]->giangvien_id1 = '';
+            $lichthis[$i]->tengiangvien1 = '';
+            $lichthis[$i]->giangvien_id2 = '';
+            $lichthis[$i]->tengiangvien2 = '';
+        }
+        return $lichthis;
+    }
+
+    protected function lichThiGV1($lichthis, $giangviens, $countLichGV = 0) {
+
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
@@ -96,9 +151,10 @@ class LichCoiThiController extends Controller
             $countLichGV++;
         } while ($this->checkLichThiGV1($lichthis));
 
-        // Duyệt từng lịch thi giang vien coi thi 2
-        usort($giangviens, [LichCoiThiController::class, "cmp"]);
+        return $lichthis;
+    }
 
+    protected function lichThiGV2($lichthis, $giangviens, $countLichGV = 0) {
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
@@ -124,29 +180,7 @@ class LichCoiThiController extends Controller
 
         } while ($this->checkLichThiGV2($lichthis));
 
-        $i = 1;
-        return view('lichcoithi.index', [
-            'lichthis' => $lichthis,
-            'giangvien' => $giangviens,
-            'i' => $i
-        ]);
-
-    }
-
-    static function cmpTiLeXep($a, $b)
-    {
-        if ($a->tilexep == $b->tilexep) {
-            return 0;
-        }
-        return ($a->tilexep > $b->tilexep) ? -1 : 1;
-    }
-
-    static function cmp($a, $b)
-    {
-        if ($a->tilexep == $b->tilexep && count($a->lichcoithi) == count($b->lichcoithi)) {
-            return 0;
-        }
-        return (count($a->lichcoithi) > count($b->lichcoithi) || $a->tilexep > $b->tilexep) ? -1 : 1;
+        return $lichthis;
     }
 
     protected function checkTrungLich($lichthis, $ngaythi, $cathi_id) {

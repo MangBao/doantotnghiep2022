@@ -17,6 +17,7 @@ class CreateRoutesTable extends Migration
             $table->id();
             $table->string('route_name', 200);
             $table->string('route_title', 200);
+            $table->timestamps();
         });
     }
 

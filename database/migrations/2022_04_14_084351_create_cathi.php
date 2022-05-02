@@ -17,6 +17,7 @@ class CreateCathi extends Migration
             $table->string('cathi_id', 10)->primary();
             $table->time('giobatdau');
             $table->time('gioketthuc');
+            $table->timestamps();
         });
     }
 

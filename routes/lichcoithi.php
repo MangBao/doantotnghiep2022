@@ -8,17 +8,13 @@ Route::prefix('lichcoithi')->group(function () {
         'as' => 'lichcoithi.index',
         'uses' => LichCoiThiController::class . '@index'
     ]);
-    Route::get('/create', [
-        'as' => 'lichcoithi.create',
-        'uses' => LichCoiThiController::class . '@create'
+    Route::get('/lichcoithiauto', [
+        'as' => 'lichcoithi.lichcoithiauto',
+        'uses' => LichCoiThiController::class . '@lichcoithiauto'
     ]);
     Route::post('/store', [
         'as' => 'lichcoithi.store',
         'uses' => LichCoiThiController::class . '@store'
-    ]);
-    Route::get('/show/{id}', [
-        'as' => 'lichcoithi.show',
-        'uses' => LichCoiThiController::class . '@show'
     ]);
     Route::get('/edit/{id}', [
         'as' => 'lichcoithi.edit',

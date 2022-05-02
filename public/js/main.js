@@ -23,7 +23,8 @@ function openDropdown(event, dropdownID) {
 /* Function for link active */
 function activeLink() {
     let page = location.pathname.split('/').pop();
-    $('#list-nav > .items-center > a[href="' + page + '"]').addClass('active-link');
+    // console.log(page);
+    $('#list-nav > .items-center > a[href="' + '/' + page + '"]').addClass('active-link');
 }
 activeLink();
 
@@ -60,17 +61,17 @@ function removeVietnameseTones(str) {
     return str;
 }
 
-/* Function for auto set value Ma mon hoc */
-function valMaMonHoc() {
-    let maMonHoc = $(this).val();
-    maMonHoc = maMonHoc.split(" ");
-    for (let i = 0; i < maMonHoc.length; i++) {
-        maMonHoc[i] = maMonHoc[i].charAt(0).toUpperCase();
+/* Function for auto set value Ma mon hoc, Ma khoa */
+function valMa() {
+    let ma = $(this).val();
+    ma = ma.split(" ");
+    for (let i = 0; i < ma.length; i++) {
+        ma[i] = ma[i].charAt(0).toUpperCase();
     }
-    $("#monhoc_id").val(removeVietnameseTones(maMonHoc.join("")));
+    $("#monhoc_id, #khoa_id").val(removeVietnameseTones(ma.join("")));
 }
-$("#tenmonhoc").on("keyup", valMaMonHoc);
-$("#tenmonhoc").on("keyup");
+$("#tenmonhoc, #tenkhoa").on("keyup", valMa);
+$("#tenmonhoc, #tenkhoa").on("keyup");
 
 /* Function for auto set value Ma phong thi */
 function valTachMaGD() {

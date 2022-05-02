@@ -10,6 +10,6 @@ class BuoiThi extends Model
     use HasFactory;
     protected $table = 'buoithi';
     protected $fillable = [
-        'id', 'phongthi_id', 'cathi_id', 'ngaythi', 'monthi_id',
+        'id', 'phongthi_id', 'cathi_id', 'ngaythi', 'monthi_id', 'created_at', 'updated_at'
     ];
 }

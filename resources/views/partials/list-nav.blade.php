@@ -1,7 +1,7 @@
 <ul id="list-nav" class="md:flex-col md:min-w-full flex flex-col list-none">
     @if (Auth::user()->role_id == '1')
     <li class="items-center">
-        <a href="khoa"
+        <a href="/khoa"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-boxes-stacked mr-2 text-sm opacity-75"></i>
             Khoa
@@ -9,7 +9,7 @@
     </li>
 
     <li class="items-center">
-        <a href="giangvien"
+        <a href="/giangvien"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-user-pen mr-2 text-sm opacity-75"></i>
             Giảng viên
@@ -17,7 +17,7 @@
     </li>
 
     <li class="items-center">
-        <a href="phongthi"
+        <a href="/phongthi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-door-open  mr-2 text-sm opacity-75"></i>
             Phòng thi
@@ -25,7 +25,7 @@
     </li>
 
     <li class="items-center">
-        <a href="monhoc"
+        <a href="/monhoc"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-book  mr-2 text-sm opacity-75"></i>
             Môn học
@@ -33,7 +33,7 @@
     </li>
 
     <li class="items-center">
-        <a href="buoithi"
+        <a href="/buoithi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fas fa-map-marked mr-2 text-sm text-blueGray-300"></i>
             Buổi thi
@@ -41,7 +41,7 @@
     </li>
 
     <li class="items-center">
-        <a href="lichcoithi"
+        <a href="/lichcoithi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-calendar-check  mr-2 text-sm opacity-75"></i>
             Lịch coi thi
@@ -49,7 +49,7 @@
     </li>
 
     <li class="items-center">
-        <a href="tinnhan"
+        <a href="/tinnhan"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-comment-sms mr-2 text-sm opacity-75"></i>
             Tin nhắn
@@ -57,7 +57,7 @@
     </li>
     @elseif (Auth::user()->role_id == '2')
     <li class="items-center">
-        <a href="monhoc"
+        <a href="/monhoc"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-book  mr-2 text-sm opacity-75"></i>
             Môn học
@@ -65,7 +65,7 @@
     </li>
 
     <li class="items-center">
-        <a href="buoithi"
+        <a href="/buoithi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fas fa-map-marked mr-2 text-sm text-blueGray-300"></i>
             Buổi thi
@@ -73,7 +73,7 @@
     </li>
 
     <li class="items-center">
-        <a href="lichcoithi"
+        <a href="/lichcoithi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-calendar-check  mr-2 text-sm opacity-75"></i>
             Lịch coi thi
@@ -81,7 +81,7 @@
     </li>
 
     <li class="items-center">
-        <a href="tinnhan"
+        <a href="/tinnhan"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-comment-sms mr-2 text-sm opacity-75"></i>
             Tin nhắn
@@ -89,7 +89,7 @@
     </li>
     @elseif (Auth::user()->role_id == '3')
     <li class="items-center">
-        <a href="lichcoithi"
+        <a href="/lichcoithi"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-calendar-check  mr-2 text-sm opacity-75"></i>
             Lịch coi thi
@@ -97,7 +97,7 @@
     </li>
 
     <li class="items-center">
-        <a href="tinnhan"
+        <a href="/tinnhan"
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-comment-sms mr-2 text-sm opacity-75"></i>
             Tin nhắn

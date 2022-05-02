@@ -16,6 +16,7 @@ class CreateGiangduong extends Migration
         Schema::create('giangduong', function (Blueprint $table) {
             $table->string('giangduong_id', 10)->primary();
             $table->string('tengiangduong', 50);
+            $table->timestamps();
         });
     }
 

@@ -16,6 +16,7 @@ class CreatePhongthiCa extends Migration
         Schema::create('buoithi', function (Blueprint $table) {
             $table->id();
             $table->date('ngaythi');
+            $table->timestamps();
         });
     }
 

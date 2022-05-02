@@ -23,6 +23,7 @@ class CreatePermissionTable extends Migration
             $table->primary(['role_id', 'route_id']);
 
             $table->integer('status');
+            $table->timestamps();
         });
     }
 

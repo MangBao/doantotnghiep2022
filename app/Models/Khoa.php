@@ -9,5 +9,5 @@ class Khoa extends Model
 {
     use HasFactory;
     protected $table = 'khoa';
-    protected $fillable = ['khoa_id', 'tenkhoa'];
+    protected $fillable = ['khoa_id', 'tenkhoa', 'created_at', 'updated_at'];
 }

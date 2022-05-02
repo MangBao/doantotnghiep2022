@@ -74,8 +74,15 @@ class MonHocController extends Controller
     {
         $bms = $this->bomon::all();
 
+        $user = $this->user->join('bomon', 'users.bomon_id', '=', 'bomon.bomon_id')
+            ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+            ->where('users.giangvien_id', Auth::user()->giangvien_id)
+            ->get();
+
         foreach($bms as $bm){
-            $this->htmlOptionBoMon .= '<option value="'.$bm->bomon_id.'">'.$bm->tenbomon.'</option>';
+            if($bm->khoa_id == $user[0]->khoa_id){
+                $this->htmlOptionBoMon .= '<option value="'.$bm->bomon_id.'">'.$bm->tenbomon.'</option>';
+            }
         }
 
         return view('monhoc.create',[

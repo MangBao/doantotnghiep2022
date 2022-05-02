@@ -10,6 +10,6 @@ class PhongThi extends Model
     use HasFactory;
     protected $table = 'phongthi';
     protected $fillable = [
-        'phongthi_id', 'tenphongthi', 'giangduong_id'
+        'phongthi_id', 'tenphongthi', 'giangduong_id', 'created_at', 'updated_at'
     ];
 }

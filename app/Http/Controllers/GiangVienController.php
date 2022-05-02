@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DSQuyen;
-use App\Models\Quyen_GiangVien;
 use App\Models\Bomon;
 use App\Models\GiangVien;
 
@@ -12,14 +10,10 @@ class GiangVienController extends Controller
 {
     private $htmlOptionQuyen;
     private $htmlOptionBoMon;
-    private $giangvien;
-    private $dsquyen;
 
-    public function __construct(GiangVien $giangvien, DSQuyen $dsquyen, Quyen_GiangVien $quyen_giangvien, Bomon $bomon) {
+    public function __construct(GiangVien $giangvien, Bomon $bomon) {
         $this->htmlOptionQuyen = '';
         $this->giangvien = $giangvien;
-        $this->dsquyen = $dsquyen;
-        $this->quyen_giangvien = $quyen_giangvien;
         $this->bomon = $bomon;
         $this->middleware('auth');
         $this->middleware('permission');

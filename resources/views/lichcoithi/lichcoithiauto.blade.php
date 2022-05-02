@@ -1,13 +1,13 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Lịch coi thi')
+@section('titleAdmin', 'Lịch coi thi tự động')
 @section('content-admin')
-@include('partials.breadcumb', ['page' => 'Lịch coi thi', 'key' => 'Index', 'link' => route('lichcoithi.index')])
+@include('partials.breadcumb', ['page' => 'Lịch coi thi tự động', 'key' => 'Lịch coi thi tự động', 'link' => route('lichcoithi.lichcoithiauto')])
 <div class="h-12"></div>
 
 <div class="flex">
     <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.lichcoithiauto') }}" class="btn-primary">
-            Lịch coi thi tự động
+        <a href="{{ route('lichcoithi.store') }}" class="btn-primary">
+            Lưu lịch coi thi
         </a>
     </div>
     @if (session('success'))
@@ -54,12 +54,12 @@
                         <th scope="col" class="px-6 py-3">
                             Ca thi
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        {{-- <th scope="col" class="px-6 py-3">
                             Giờ bắt đầu
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Giờ kết thúc
-                        </th>
+                        </th> --}}
                         <th scope="col" class="px-6 py-3">
                             Phòng thi
                         </th>
@@ -72,14 +72,11 @@
                         <th scope="col" class="px-6 py-3">
                             Cán bộ coi thi 2
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Chức năng</span>
-                        </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {{-- @foreach ($lichthis as $lt)
+                    @foreach ($lichthis as $lt)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                             <th scope="row"
@@ -92,15 +89,12 @@
                             <td class="px-6 py-4">
                                 {{ $lt->cathi_id }}
                             </td>
-                            <td class="px-6 py-4">
+                            {{-- <td class="px-6 py-4">
                                 {{ $lt->giobatdau }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $lt->gioketthuc }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $lt->bomon_id }}
-                            </td>
+                            </td> --}}
                             <td class="px-6 py-4">
                                 {{ $lt->phongthi_id }}
                             </td>
@@ -113,15 +107,7 @@
                             <td class="px-6 py-4">
                                 {{ $lt->tengiangvien2 }}
                             </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="{{ route('lichcoithi.edit', 1) }}"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Thông báo mail</a> |
-                                <a href="{{ route('lichcoithi.show', 1) }}"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Xin vắng</a> |
-                                <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
 
-                                    class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</span>
-                            </td>
                         </tr>
                         <div id="popup-modal" tabindex="-1"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bgModal ">
@@ -161,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
 

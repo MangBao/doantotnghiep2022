@@ -1,13 +1,13 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Môn học')
+@section('titleAdmin', 'Khoa')
 @section('content-admin')
-    @include('partials.breadcumb', ['page' => 'Môn học', 'key' => 'Index', 'link' => route('monhoc.index')])
+    @include('partials.breadcumb', ['page' => 'Khoa', 'key' => 'Index', 'link' => route('khoa.index')])
     <div class="h-12"></div>
 
     <div class="flex">
         <div class="mr-8 pt-3">
-            <a href="{{ route('monhoc.create') }}" class="btn-primary">
-                Thêm Môn học
+            <a href="{{ route('khoa.create') }}" class="btn-primary">
+                Thêm Khoa
             </a>
         </div>
         @if (session('success'))
@@ -49,13 +49,10 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Mã môn học
+                                Mã Khoa
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tên môn học
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Bộ môn
+                                Tên Khoa
                             </th>
 
                             <th scope="col" class="px-6 py-3">
@@ -64,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mhs as $mh)
+                        @foreach ($ks as $k)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
@@ -72,17 +69,14 @@
                                     {{ $i++ }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $mh->monhoc_id }}
+                                    {{ $k->khoa_id }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $mh->tenmonhoc }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $mh->tenbomon }}
+                                    {{ $k->tenkhoa }}
                                 </td>
 
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('monhoc.edit', [$mh->monhoc_id]) }}"
+                                    <a href="{{ route('khoa.edit', [$k->khoa_id]) }}"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
 
                                     <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
@@ -117,7 +111,7 @@
                                         </svg>
                                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
                                             delete this product?</h3>
-                                        <a href="{{ route('monhoc.delete', [$mh->monhoc_id]) }}"
+                                        <a href="{{ route('khoa.delete', [$k->khoa_id]) }}"
                                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                             Yes, I'm sure
                                         </a>
@@ -142,7 +136,7 @@
         <div class="h-6"></div>
         <div class="row">
             <div class="col w-full">
-                {{ $mhs->links('pagination::tailwind') }}
+                {{ $ks->links('pagination::tailwind') }}
             </div>
         </div>
     </div>

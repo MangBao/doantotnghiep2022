@@ -16,6 +16,7 @@ class CreateKhoa extends Migration
         Schema::create('khoa', function (Blueprint $table) {
             $table->string('khoa_id', 10)->primary();
             $table->string('tenkhoa', 50);
+            $table->timestamps();
         });
     }
 
