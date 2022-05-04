@@ -12,6 +12,10 @@ Route::prefix('lichcoithi')->group(function () {
         'as' => 'lichcoithi.lichcoithiauto',
         'uses' => LichCoiThiController::class . '@lichcoithiauto'
     ]);
+    Route::get('/cuatoi', [
+        'as' => 'lichcoithi.cuatoi',
+        'uses' => LichCoiThiController::class . '@cuatoi'
+    ]);
     Route::post('/store', [
         'as' => 'lichcoithi.store',
         'uses' => LichCoiThiController::class . '@store'

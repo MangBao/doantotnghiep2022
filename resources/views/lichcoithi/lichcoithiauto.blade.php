@@ -6,9 +6,27 @@
 
 <div class="flex">
     <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.store') }}" class="btn-primary">
-            Lưu lịch coi thi
-        </a>
+        <form action="{{ route('lichcoithi.store') }}" method="POST">
+            @csrf
+            {{-- {{dd($lichthis);}} --}}
+            @foreach ($lt_not_panigate as $lt)
+            <input type="hidden" name="id[]" value="{{ $lt->id }}">
+            <input type="hidden" name="tenmonthi[]" value="{{ $lt->tenmonhoc }}">
+            <input type="hidden" name="cathi_id[]" value="{{ $lt->cathi_id }}">
+            <input type="hidden" name="giobatdau[]" value="{{ $lt->giobatdau }}">
+            <input type="hidden" name="gioketthuc[]" value="{{ $lt->gioketthuc }}">
+            <input type="hidden" name="phongthi_id[]" value="{{ $lt->phongthi_id }}">
+            <input type="hidden" name="ngaythi[]" value="{{ $lt->ngaythi }}">
+            <input type="hidden" name="giangvien_id1[]" value="{{ $lt->giangvien_id1 }}">
+            <input type="hidden" name="tengiangvien1[]" value="{{ $lt->tengiangvien1 }}">
+            <input type="hidden" name="giangvien_id2[]" value="{{ $lt->giangvien_id2 }}">
+            <input type="hidden" name="tengiangvien2[]" value="{{ $lt->tengiangvien2 }}">
+
+            <input type="hidden" name="bomon_id[]" value="{{ $lt->bomon_id }}">
+            @endforeach
+
+            <input type="submit" value="Lưu lịch coi thi" class="btn-primary cursor-pointer">
+        </form>
     </div>
     @if (session('success'))
         <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
@@ -52,14 +70,11 @@
                             Môn thi
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Ca thi
-                        </th>
-                        {{-- <th scope="col" class="px-6 py-3">
                             Giờ bắt đầu
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Giờ kết thúc
-                        </th> --}}
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             Phòng thi
                         </th>
@@ -84,22 +99,19 @@
                                 {{ $i++ }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $lt->monthi_id }}
+                                {{ $lt->tenmonhoc }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $lt->cathi_id }}
-                            </td>
-                            {{-- <td class="px-6 py-4">
                                 {{ $lt->giobatdau }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $lt->gioketthuc }}
-                            </td> --}}
+                            </td>
                             <td class="px-6 py-4">
                                 {{ $lt->phongthi_id }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $lt->ngaythi }}
+                                {{ date('d/m/Y', strtotime($lt->ngaythi)) }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $lt->tengiangvien1 }}
@@ -161,7 +173,7 @@
     <div class="h-6"></div>
     <div class="row">
         <div class="col w-full">
-            {{-- {{ $lts->links('pagination::tailwind') }} --}}
+            {{ $lichthis->links('pagination::tailwind') }}
         </div>
     </div>
 </div>

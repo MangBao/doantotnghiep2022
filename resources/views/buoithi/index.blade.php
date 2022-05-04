@@ -77,6 +77,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @isset($notification)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td colspan="10" class="px-6 py-4 text-center">
+                                {{ $notification }}
+                            </td>
+                        </tr>
+                        @endisset
                         @foreach ($bts as $bt)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -107,11 +114,11 @@
                                     <a href="{{ route('buoithi.edit', [$bt->id]) }}"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
                                     <span
-                                        onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('block'); document.getElementById('popup-modal').classList.remove('hidden');"
+                                        onclick="event.preventDefault(); document.getElementById('popup-modal-{{ $bt->id }}').classList.add('block'); document.getElementById('popup-modal-{{ $bt->id }}').classList.remove('hidden');"
                                         class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</span>
                                 </td>
                             </tr>
-                            <div id="popup-modal" tabindex="-1"
+                            <div id="popup-modal-{{ $bt->id }}" tabindex="-1"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bgModal">
                                 <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                                     <!-- Modal content -->
@@ -119,9 +126,9 @@
                                         <!-- Modal header -->
                                         <div class="flex justify-end p-2">
                                             <span
-                                                onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('hidden'); document.getElementById('popup-modal').classList.remove('block');"
+                                                onclick="event.preventDefault(); document.getElementById('popup-modal-{{ $bt->id }}').classList.add('hidden'); document.getElementById('popup-modal-{{ $bt->id }}').classList.remove('block');"
                                                 class="cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                                data-modal-toggle="popup-modal">
+                                                data-modal-toggle="popup-modal-{{ $bt->id }}">
                                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd"
@@ -146,7 +153,7 @@
                                                 Yes, I'm sure
                                             </a>
                                             <span
-                                                onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('hidden'); document.getElementById('popup-modal').classList.remove('block');"
+                                                onclick="event.preventDefault(); document.getElementById('popup-modal-{{ $bt->id }}').classList.add('hidden'); document.getElementById('popup-modal-{{ $bt->id }}').classList.remove('block');"
                                                 class="cursor-pointer text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
                                                 cancel</span>
                                         </div>

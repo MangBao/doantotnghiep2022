@@ -10,7 +10,7 @@ function toggleNavbar(collapseID) {
 /* Function for dropdowns */
 function openDropdown(event, dropdownID) {
     let element = event.target;
-    while (element.nodeName !== "A") {
+    while (element.nodeName !== "SPAN") {
         element = element.parentNode;
     }
     Popper.createPopper(element, document.getElementById(dropdownID), {
@@ -83,6 +83,8 @@ function valTachMaGD() {
 $("#giangduong_id").on("change", valTachMaGD);
 $("#tenphongthi").on("keyup", valTachMaGD);
 $("#tenphongthi").on("keyup");
+
+
 
 
 

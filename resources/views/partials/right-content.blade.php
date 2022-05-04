@@ -3,7 +3,7 @@
         <div class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
             <p class="text-white text-sm uppercase hidden lg:inline-block font-semibold">Dashboard</p>
             <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
-                <a class="text-blueGray-500 block text-white" href="#`"
+                <span class="text-blueGray-500 block text-white cursor-pointer"
                     onclick="openDropdown(event,'user-dropdown')">
                     <div class="items-center flex">
                         <h4 class="px-4">{{ Auth::user()->name }}</h4>
@@ -12,7 +12,7 @@
                                 src="{{ @asset('images/logo-ntu.png') }}" />
                         </span>
                     </div>
-                </a>
+                </span>
                 <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                     id="user-dropdown">
                     <a href="/trangcanhan" class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">

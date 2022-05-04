@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCathiidInBuoithiTable extends Migration
+class CreateCathiBuoithi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class AddCathiidInBuoithiTable extends Migration
      */
     public function up()
     {
-        Schema::table('buoithi', function (Blueprint $table) {
+        Schema::create('cathi_buoithi', function (Blueprint $table) {
+
+            $table->unsignedBigInteger('buoithi_id');
+            $table->foreign('buoithi_id')->references('id')->on('buoithi')->onDelete('cascade')->onUpdate('cascade');
+
             $table->string('cathi_id', 10);
             $table->foreign('cathi_id')->references('cathi_id')->on('cathi')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->primary(['buoithi_id', 'cathi_id']);
+            $table->timestamps();
         });
     }
 
@@ -26,8 +33,6 @@ class AddCathiidInBuoithiTable extends Migration
      */
     public function down()
     {
-        Schema::table('buoithi', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('cathi_buoithi');
     }
 }

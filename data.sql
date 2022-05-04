@@ -82,37 +82,6 @@ INSERT INTO `monhoc` (`monhoc_id`, `tenmonhoc`, `bomon_id`, `created_at`, `updat
 ('XSTK', 'Lý thuyết xác suất và thống kê toán', 'TOAN', NULL, NULL);
 
 
-INSERT INTO `buoithi` (`id`, `phongthi_id`, `cathi_id`, `ngaythi`, `monthi_id`, `created_at`, `updated_at`) VALUES
-('','G1-101', 'CA02', '2022-04-04', 'VLKT', NULL, NULL),
-('','G2-101', 'CA02', '2022-04-04', 'LTM', NULL, NULL),
-('','G1-103', 'CA03', '2022-04-04', 'TLTV', NULL, NULL),
-('','G1-104', 'CA04', '2022-04-04', 'CTN', NULL, NULL),
-('','G1-105', 'CA05', '2022-04-04', 'TBMVCH', NULL, NULL),
-
-('','G3-101', 'CA04', '2022-04-05', 'XSTK', NULL, NULL),
-('','G3-101', 'CA02', '2022-04-05', 'GT', NULL, NULL),
-('','G2-101', 'CA03', '2022-04-05', 'KTTK', NULL, NULL),
-('','G1-101', 'CA04', '2022-04-05', 'CHLC', NULL, NULL),
-('','G3-101', 'CA05', '2022-04-05', 'MMT', NULL, NULL),
-
-('','G1-101', 'CA05', '2022-04-06', 'DSTT', NULL, NULL),
-('','G1-101', 'CA02', '2022-04-06', 'LTHDT', NULL, NULL),
-('','G3-101', 'CA03', '2022-04-06', 'TCTC', NULL, NULL),
-('','G1-101', 'CA04', '2022-04-06', 'MXD', NULL, NULL),
-('','G3-101', 'CA05', '2022-04-06', 'DLHCH', NULL, NULL),
-
-('','G3-101', 'CA03', '2022-04-07', 'TKW', NULL, NULL),
-('','G2-101', 'CA02', '2022-04-07', 'PTUDW', NULL, NULL),
-('','G1-101', 'CA03', '2022-04-07', 'VLXD', NULL, NULL),
-('','G2-101', 'CA04', '2022-04-07', 'NLC', NULL, NULL),
-('','G1-101', 'CA05', '2022-04-07', 'SBVL', NULL, NULL),
-
-('','G1-101', 'CA01', '2022-04-08', 'HTTQL', NULL, NULL),
-('','G3-101', 'CA02', '2022-04-08', 'TKWKD', NULL, NULL),
-('','G1-101', 'CA03', '2022-04-08', 'DHKT', NULL, NULL),
-('','G2-101', 'CA04', '2022-04-08', 'CTHTK', NULL, NULL),
-('','G1-101', 'CA05', '2022-04-08', 'DCCT', NULL, NULL);
-
 INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
 ('','admin', NULL, NULL),
 ('','thukykhoa', NULL, NULL),
@@ -144,8 +113,9 @@ INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_
 ('','buoithi.update', 'Cập nhật buổi thi', NULL, NULL),
 ('','buoithi.delete', 'Xóa buổi thi', NULL, NULL),
 ('','lichcoithi.index', 'View lịch coi thi', NULL, NULL),
-('','lichcoithi.create', 'Thêm lịch coi thi', NULL, NULL),
-('','lichcoithi.update', 'Cập nhật lịch coi thi', NULL, NULL),
+('','lichcoithi.lichcoithiauto', 'Lịch coi thi tự động', NULL, NULL),
+('','lichcoithi.store', 'Cập nhật lịch coi thi', NULL, NULL),
+('','lichcoithi.cuatoi', 'Lịch của tôi', NULL, NULL),
 ('','lichcoithi.delete', 'Xóa lịch coi thi', NULL, NULL);
 
 INSERT INTO `users` (`id`, `giangvien_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`) VALUES
@@ -213,6 +183,10 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('1','23', '1', NULL, NULL),
 ('1','24', '1', NULL, NULL),
 ('1','25', '1', NULL, NULL),
+('1','26', '1', NULL, NULL),
+('1','27', '1', NULL, NULL),
+('1','28', '1', NULL, NULL),
+('1','29', '1', NULL, NULL),
 
 ('2','5', '1', NULL, NULL),
 ('2','6', '1', NULL, NULL),
@@ -226,5 +200,131 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('2','22', '1', NULL, NULL),
 ('2','23', '1', NULL, NULL),
 ('2','24', '1', NULL, NULL),
+('2','25', '1', NULL, NULL),
+('2','26', '1', NULL, NULL),
 
-('3','25', '1', NULL, NULL);
+('3','26', '1', NULL, NULL);
+
+INSERT INTO `buoithi` (`id`, `ngaythi`, `created_at`, `updated_at`) VALUES
+('', '2022-04-04', NULL, NULL),
+('', '2022-04-04', NULL, NULL),
+('', '2022-04-04', NULL, NULL),
+('', '2022-04-04', NULL, NULL),
+('', '2022-04-04', NULL, NULL),
+
+('', '2022-04-05', NULL, NULL),
+('', '2022-04-05', NULL, NULL),
+('', '2022-04-05', NULL, NULL),
+('', '2022-04-05', NULL, NULL),
+('', '2022-04-05', NULL, NULL),
+
+('', '2022-04-06', NULL, NULL),
+('', '2022-04-06', NULL, NULL),
+('', '2022-04-06', NULL, NULL),
+('', '2022-04-06', NULL, NULL),
+('', '2022-04-06', NULL, NULL),
+
+('', '2022-04-07', NULL, NULL),
+('', '2022-04-07', NULL, NULL),
+('', '2022-04-07', NULL, NULL),
+('', '2022-04-07', NULL, NULL),
+('', '2022-04-07', NULL, NULL),
+
+('', '2022-04-08', NULL, NULL),
+('', '2022-04-08', NULL, NULL),
+('', '2022-04-08', NULL, NULL),
+('', '2022-04-08', NULL, NULL),
+('', '2022-04-08', NULL, NULL);
+
+INSERT INTO `monthi_buoithi` (`buoithi_id`, `monthi_id`, `created_at`, `updated_at`) VALUES
+(1, 'VLKT', NULL, NULL),
+(2, 'LTM', NULL, NULL),
+(3, 'TLTV', NULL, NULL),
+(4, 'CTN', NULL, NULL),
+(5, 'TBMVCH', NULL, NULL),
+
+(6, 'XSTK', NULL, NULL),
+(7, 'GT', NULL, NULL),
+(8, 'KTTK', NULL, NULL),
+(9, 'CHLC', NULL, NULL),
+(10, 'MMT', NULL, NULL),
+
+(11, 'DSTT', NULL, NULL),
+(12, 'LTHDT', NULL, NULL),
+(13, 'TCTC', NULL, NULL),
+(14, 'MXD', NULL, NULL),
+(15, 'DLHCH', NULL, NULL),
+
+(16, 'TKW', NULL, NULL),
+(17, 'PTUDW', NULL, NULL),
+(18, 'VLXD', NULL, NULL),
+(19, 'NLC', NULL, NULL),
+(20, 'SBVL', NULL, NULL),
+
+(21, 'HTTQL', NULL, NULL),
+(22, 'TKWKD', NULL, NULL),
+(23, 'DHKT', NULL, NULL),
+(24, 'CTHTK', NULL, NULL),
+(25, 'DCCT', NULL, NULL);
+
+INSERT INTO `phongthi_buoithi` (`buoithi_id`, `phongthi_id`, `created_at`, `updated_at`) VALUES
+(1,'G1-101', NULL, NULL),
+(2,'G2-101', NULL, NULL),
+(3,'G1-103', NULL, NULL),
+(4,'G1-104', NULL, NULL),
+(5,'G1-105', NULL, NULL),
+
+(6,'G3-101', NULL, NULL),
+(7,'G3-101', NULL, NULL),
+(8,'G2-101', NULL, NULL),
+(9,'G1-101', NULL, NULL),
+(10,'G3-101', NULL, NULL),
+
+(11,'G1-101', NULL, NULL),
+(12,'G1-101', NULL, NULL),
+(13,'G3-101', NULL, NULL),
+(14,'G1-101', NULL, NULL),
+(15,'G3-101', NULL, NULL),
+
+(16,'G3-101', NULL, NULL),
+(17,'G2-101', NULL, NULL),
+(18,'G1-101', NULL, NULL),
+(19,'G2-101', NULL, NULL),
+(20,'G1-101', NULL, NULL),
+
+(21,'G1-101', NULL, NULL),
+(22,'G3-101', NULL, NULL),
+(23,'G1-101', NULL, NULL),
+(24,'G2-101', NULL, NULL),
+(25,'G1-101', NULL, NULL);
+
+INSERT INTO `cathi_buoithi` (`buoithi_id`, `cathi_id`, `created_at`, `updated_at`) VALUES
+(1,'CA02',  NULL, NULL),
+(2,'CA02',  NULL, NULL),
+(3,'CA03',  NULL, NULL),
+(4,'CA04',  NULL, NULL),
+(5,'CA05',  NULL, NULL),
+
+(6, 'CA04',  NULL, NULL),
+(7, 'CA02',  NULL, NULL),
+(8,'CA03',  NULL, NULL),
+(9,'CA04',  NULL, NULL),
+(10, 'CA05', NULL, NULL),
+
+(11, 'CA05', NULL, NULL),
+(12, 'CA02', NULL, NULL),
+(13, 'CA03', NULL, NULL),
+(14, 'CA04', NULL, NULL),
+(15, 'CA05', NULL, NULL),
+
+(16, 'CA03', NULL, NULL),
+(17, 'CA02', NULL, NULL),
+(18, 'CA03', NULL, NULL),
+(19, 'CA04', NULL, NULL),
+(20, 'CA05', NULL, NULL),
+
+(21, 'CA01', NULL, NULL),
+(22, 'CA02', NULL, NULL),
+(23, 'CA03', NULL, NULL),
+(24, 'CA04', NULL, NULL),
+(25, 'CA05', NULL, NULL);

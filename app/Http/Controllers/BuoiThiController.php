@@ -37,7 +37,10 @@ class BuoiThiController extends Controller
      */
     public function index()
     {
-        $bts = $this->buoithi->orderBy('ngaythi', 'asc')->paginate(8);
+        $bts = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
+            ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
+            ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
+            ->orderBy('ngaythi', 'asc')->paginate(8);
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $i = 1;
@@ -57,9 +60,16 @@ class BuoiThiController extends Controller
         }
         // dd($bts);
 
+        if(count($bts) > 0){
+            return view('buoithi.index',[
+                'bts' => $bts,
+                'i' => $i,
+            ]);
+        }
+
         return view('buoithi.index',[
             'bts' => $bts,
-            'i' => $i,
+            'notification' => 'Không có dữ liệu',
         ]);
     }
 
@@ -207,8 +217,7 @@ class BuoiThiController extends Controller
      */
     public function delete($id)
     {
-        $buoithi = $this->buoithi::find($id);
-        $buoithi->delete();
+        $this->buoithi::find($id)->delete();
 
         return redirect()->route('buoithi.index')->with('success', 'Xóa thành công !');
     }

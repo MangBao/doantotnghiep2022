@@ -1,33 +1,16 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Lịch coi thi')
+@section('titleAdmin', 'Lịch của tôi')
 @section('content-admin')
-@include('partials.breadcumb', ['page' => 'Lịch coi thi', 'key' => 'Index', 'link' => route('lichcoithi.index')])
+@include('partials.breadcumb', ['page' => 'Lịch coi thi', 'key' => 'Lịch của tôi', 'link' => route('lichcoithi.index')])
 
 <div class="h-12"></div>
 
 <div class="flex">
-    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-    <div class="mr-8 pt-3">
+    {{-- <div class="mr-8 pt-3">
         <a href="{{ route('lichcoithi.lichcoithiauto') }}" class="btn-primary">
-            Lịch tự động
+            Lịch coi thi tự động
         </a>
-    </div>
-    @endif
-    <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.cuatoi') }}" class="btn-primary">
-            Lịch của tôi
-        </a>
-    </div>
-    <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.cuatoi') }}" class="btn-primary">
-            Nhận thông báo
-        </a>
-    </div>
-    <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.cuatoi') }}" class="btn-primary">
-            Xin phép vắng
-        </a>
-    </div>
+    </div> --}}
     @if (session('success'))
         <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
             role="alert">
@@ -97,13 +80,6 @@
                 </thead>
 
                 <tbody>
-                    @isset($notification)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td colspan="10" class="px-6 py-4 text-center">
-                            {{ $notification }}
-                        </td>
-                    </tr>
-                    @endisset
                     @foreach ($lichcoithi as $lt)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
@@ -142,26 +118,26 @@
                                 {{ $lt->tengiangvien2 }}
                             </td>
                             <td class="px-6 py-4 text-right flex" >
-                                <a href="{{ route('lichcoithi.edit', [$lt->id]) }}" title="Chỉnh sửa"
+                                <a href="{{ route('lichcoithi.edit', 1) }}" title="Thông báo qua mail"
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-1">
-                                    <i class="fa-solid fa-file-pen"></i>
+                                    <i class="fa-solid fa-bell"></i>
                                 </a> |
-                                <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$lt->id}}').classList.add('block'); document.getElementById('popup-modal-{{$lt->id}}').classList.remove('hidden');"
-                                        class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline px-1" title="Xóa">
-                                    <i class="fa-solid fa-trash"></i>
-                                </span>
+                                <a href="" title="Xin phép vắng"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-1">
+                                    <i class="fa-solid fa-file-circle-exclamation"></i>
+                                </a>
                             </td>
                         </tr>
-                        <div id="popup-modal-{{$lt->id}}" tabindex="-1"
+                        <div id="popup-modal" tabindex="-1"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bgModal ">
                         <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                             <!-- Modal content -->
                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44 animate-fadeInDown">
                                 <!-- Modal header -->
                                 <div class="flex justify-end p-2">
-                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$lt->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$lt->id}}').classList.remove('block');"
+                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('hidden'); document.getElementById('popup-modal').classList.remove('block');"
                                         class="cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                        data-modal-toggle="popup-modal-{{$lt->id}}">
+                                        data-modal-toggle="popup-modal">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
@@ -183,7 +159,7 @@
                                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                         Yes, I'm sure
                                     </a>
-                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$lt->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$lt->id}}').classList.remove('block');"
+                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal').classList.add('hidden'); document.getElementById('popup-modal').classList.remove('block');"
                                         class="cursor-pointer text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
                                         cancel</span>
                                 </div>

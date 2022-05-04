@@ -22,15 +22,12 @@ class CheckPermission
         $role_id = Auth::user()->role_id;
 		//Lay route name tu link
 		$routeName = Route::currentRouteName();
-		$route     = DB::table('routes')->where('route_name', $routeName)->get();
-		// echo $routeName;
+		$route = DB::table('routes')->where('route_name', $routeName)->get();
 		if ($route != null && count($route) > 0) {
 			$route_id = $route[0]->id;
-			// echo $route_id;
 
 			$permission = DB::table('permission')->where('route_id', $route_id)->where('role_id', $role_id)->get();
-			// echo $route_id.'-'.$role_id;
-			// var_dump($permission);
+
 			if ($permission != null && count($permission) > 0) {
 				if ($permission[0]->status == 0) {
 					return redirect()->route('home')->with('error', 'Bạn không có quyền truy cập vào chức năng này');

@@ -1042,6 +1042,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -1596,6 +1600,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:h-auto {
     height: auto;
+  }
+
+  .md\:min-h-158 {
+    min-height: 316px;
   }
 
   .md\:w-4\/12 {

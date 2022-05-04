@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Bomon;
 use App\Models\GiangVien;
+use App\Models\Roles;
 
 class GiangVienController extends Controller
 {
     private $htmlOptionQuyen;
+    private $giangvien;
+    private $bomon;
+    private $roles;
     private $htmlOptionBoMon;
 
-    public function __construct(GiangVien $giangvien, Bomon $bomon) {
+    public function __construct(GiangVien $giangvien, Bomon $bomon, Roles $roles) {
         $this->htmlOptionQuyen = '';
         $this->giangvien = $giangvien;
         $this->bomon = $bomon;
+        $this->roles = $roles;
         $this->middleware('auth');
         $this->middleware('permission');
     }
@@ -41,13 +48,13 @@ class GiangVienController extends Controller
     public function create()
     {
         $gvs = $this->giangvien::all();
-        $dsq = $this->dsquyen::all();
+        $dsq = $this->roles::all();
         $bm = $this->bomon::all();
         $giangvien_id = '2022' . rand(100, 999);
 
         // Option quyen
         foreach($dsq as $d){
-            $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
+            $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'.($d->role_name == 'admin' ? 'Administrator' : ($d->role_name == 'thukykhoa' ? 'Thư ký khoa' : 'Giảng viên')).'</option>';
         }
         // Option bo mon
         foreach($bm as $b){
@@ -75,6 +82,7 @@ class GiangVienController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->giangvien->create([
             'giangvien_id' => $request->giangvien_id,
             'name' => $request->tengiangvien,
@@ -83,28 +91,13 @@ class GiangVienController extends Controller
             'ngaysinh' => $request->ngaysinh,
             'diachi' => $request->diachi,
             'sodienthoai' => $request->sdt,
-            'avatar' => $request->avatar,
+            'avatar' => $avatar_name,
             'password' => bcrypt('12345678'),
-            'bomon_id' => $request->bomon
-        ]);
-
-        $this->quyen_giangvien->create([
-            'giangvien_id' => $request->giangvien_id,
-            'quyen_id' => $request->quyen
+            'bomon_id' => $request->bomon,
+            'role_id' => $request->quyen
         ]);
 
         return redirect()->route('giangvien.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -116,15 +109,15 @@ class GiangVienController extends Controller
     public function edit($id)
     {
         $gv = $this->giangvien::find($id);
-        $dsq = $this->dsquyen::all();
+        $dsq = $this->roles::all();
         $bm = $this->bomon::all();
-        $qgv = $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->first();
-
+        // $qgv = $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->first();
+        // dd($gv->role_id);
         foreach($dsq as $d){
-            if($d->quyen_id == $qgv->quyen_id){
-                $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'" selected>'.$d->tenquyen.'</option>';
+            if($d->id === $gv->role_id){
+                $this->htmlOptionQuyen .= '<option value="'.$d->id.'" selected>'.($d->role_name == 'admin' ? 'Administrator' : ($d->role_name == 'thukykhoa' ? 'Thư ký khoa' : 'Giảng viên')).'</option>';
             } else {
-                $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
+                $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'.$d->role_name.'</option>';
             }
             // $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
         }
@@ -156,6 +149,15 @@ class GiangVienController extends Controller
     {
         $gv = $this->giangvien::find($id);
 
+        if($request->avatar){
+            $avatar = $request->avatar;
+            $avatar_name = $avatar->getClientOriginalName();
+            Storage::disk('public')->putFileAs('images', $avatar, $avatar_name);
+        }
+        else{
+            $avatar_name = 'default.png';
+        }
+
         $this->giangvien::find($id)->update([
             'name' => $request->tengiangvien,
             'email' => $request->email,
@@ -163,12 +165,9 @@ class GiangVienController extends Controller
             'ngaysinh' => $request->ngaysinh,
             'diachi' => $request->diachi,
             'sodienthoai' => $request->sdt,
-            'avatar' => $request->avatar,
-            'bomon_id' => $request->bomon
-        ]);
-
-        $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->update([
-            'quyen_id' => $request->quyen
+            'avatar' => $avatar_name,
+            'bomon_id' => $request->bomon,
+            'role_id' => $request->quyen
         ]);
 
         return redirect()->route('giangvien.index');
@@ -182,10 +181,9 @@ class GiangVienController extends Controller
      */
     public function delete($id)
     {
-        $gv = $this->giangvien::find($id);
+        // $gv = $this->giangvien::find($id);
         $this->giangvien::find($id)->delete();
-        $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->delete();
 
-        return redirect()->route('giangvien.index');
+        return redirect()->route('giangvien.index')->with('success', 'Xóa thành công');
     }
 }

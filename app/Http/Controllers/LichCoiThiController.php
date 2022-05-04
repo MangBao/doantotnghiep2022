@@ -3,16 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\BuoiThi;
 use App\Models\CaThi;
 use App\Models\MonHoc;
 use App\Models\BoMon;
 use App\Models\GiangVien;
 use App\Models\LichCoiThi;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LichCoiThiController extends Controller
 {
-    public function __construct() {
+    private $lichcoithiDB;
+    private $buoithiDB;
+    private $user;
+    private $bomon;
+
+    public function __construct(LichCoiThi $lichcoithiDB, BuoiThi $buoithiDB, User $user, BoMon $bomon) {
+        $this->lichcoithiDB = $lichcoithiDB;
+        $this->buoithiDB = $buoithiDB;
+        $this->user = $user;
+        $this->bomon = $bomon;
         $this->middleware('auth');
         $this->middleware('permission');
     }
@@ -22,7 +36,15 @@ class LichCoiThiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('lichcoithi.index');
+        $lichcoithi = $this->lichcoithiDB->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+            ->orderBy('id', 'asc')
+            ->paginate(8);
+
+        $i = 1;
+        if(count($lichcoithi) > 0){
+            return view('lichcoithi.index', ['lichcoithi' => $lichcoithi, 'i' => $i]);
+        }
+        return view('lichcoithi.index', ['lichcoithi' => $lichcoithi, 'notification' => 'Không có dữ liệu']);
     }
 
     public function lichcoithiauto()
@@ -54,11 +76,18 @@ class LichCoiThiController extends Controller
 
         $i = 1;
         return view('lichcoithi.lichcoithiauto', [
-            'lichthis' => $lichthis,
-            'giangvien' => $giangviens,
+            'lichthis' => $this->paginate($lichthis),
+            'lt_not_panigate' => $lichthis,
             'i' => $i
         ]);
 
+    }
+
+    public function paginate($items, $perPage = 8, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     static function cmpTiLeXep($a, $b)
@@ -217,9 +246,19 @@ class LichCoiThiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function cuatoi()
     {
-        //
+        $lichcoithi = $this->lichcoithiDB
+            ->where('giangvien_id1', Auth::user()->giangvien_id)
+            ->orWhere('giangvien_id2', Auth::user()->giangvien_id)
+            ->orderBy('ngaythi', 'asc')->paginate(4);
+
+        $i = 1;
+
+        return view('lichcoithi.cuatoi', [
+            'lichcoithi' => $lichcoithi,
+            'i' => $i
+        ]);
     }
 
     /**
@@ -230,7 +269,28 @@ class LichCoiThiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        for($i=0; $i < count($data['id']); $i++) {
+            $lichthi = new LichCoiThi();
+            $lichthi->cathi_id = $data['cathi_id'][$i];
+            $lichthi->giobatdau = $data['giobatdau'][$i];
+            $lichthi->gioketthuc = $data['gioketthuc'][$i];
+            $lichthi->ngaythi = $data['ngaythi'][$i];
+            $lichthi->giangvien_id1 = $data['giangvien_id1'][$i];
+            $lichthi->tengiangvien1 = $data['tengiangvien1'][$i];
+            $lichthi->giangvien_id2 = $data['giangvien_id2'][$i];
+            $lichthi->tengiangvien2 = $data['tengiangvien2'][$i];
+            $lichthi->tenmonthi = $data['tenmonthi'][$i];
+            $lichthi->phongthi_id = $data['phongthi_id'][$i];
+            $lichthi->bomon_id = $data['bomon_id'][$i];
+
+            $lichthi->save();
+
+            $this->buoithiDB::find($data['id'][$i])->delete();
+        }
+
+        return redirect()->route('lichcoithi.index')->with('success', 'Thêm vào database thành công');
+
     }
 
     /**

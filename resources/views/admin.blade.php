@@ -3,7 +3,7 @@
 @section('content-admin')
     @include('partials.breadcumb', ['page' => 'Home', 'key' => '', 'link' => route('home')])
     <div class="h-12"></div>
-    <div class="container flex flex-wrap mt-4 min-h-126 down-md:mx-auto">
+    <div class="container flex flex-wrap mt-4 min-h-126 down-md:mx-auto md:min-h-158">
         <div class="w-full mb-12 xl:mb-0 px-4">
             @if (session('error'))
                 <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"

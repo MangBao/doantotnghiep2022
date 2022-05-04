@@ -86,8 +86,7 @@ class KhoaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $khoa = $this->khoa->where('khoa_id', $id)->first();
-        $khoa->update([
+        $this->khoa->where('khoa_id', $id)->update([
             'khoa_id' => $request->khoa_id,
             'tenkhoa' => $request->tenkhoa,
         ]);
@@ -103,8 +102,7 @@ class KhoaController extends Controller
      */
     public function delete($id)
     {
-        $khoa = $this->khoa->where('khoa_id', $id)->first();
-        $khoa->delete();
+        $this->khoa->where('khoa_id', $id)->delete();
         return redirect()->route('khoa.index')->with('success', 'Xóa thành công');
     }
 }
