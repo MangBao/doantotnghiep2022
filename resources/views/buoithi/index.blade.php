@@ -43,7 +43,7 @@
     </div>
 
     <div class="h-8"></div>
-    <div class="container mx-auto px-4 h-full">
+    <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

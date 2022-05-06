@@ -20,7 +20,7 @@
             </div>
         </div>
     @endif
-    <div class="container mx-auto px-4 h-full ">
+    <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-2/5 px-4 z-10 ">
                 <div class="flex flex-col w-full mb-6 shadow-lg rounded-lg border-0 bg-white">

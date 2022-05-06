@@ -1,4 +1,6 @@
 const zIndex = {};
+const inset = {};
+const spacing = {};
 const minHeight = {};
 const keyframes = {
     'fadeInDown': {
@@ -28,11 +30,16 @@ const screens = {
 for (let i = 0; i < 101; i++) {
     zIndex[i] = i + i
 }
-// Loop minHeight
+// Loop minHeight, Loop inset
 for (let i = 0; i < 500; i++) {
-    minHeight[i] = i * 2 + 'px'
     p = i + 'p'
+
+    minHeight[i] = i * 2 + 'px'
     minHeight[p] = i + '%'
+    inset[i] = i * 2 + 'px'
+    inset[p] = i + '%'
+    // spacing[i] = i * 2 + 'px'
+    // spacing[p] = i + '%'
 }
 module.exports = {
     content: [
@@ -45,6 +52,8 @@ module.exports = {
         screens,
         minHeight,
         extend: {
+            spacing,
+            inset,
             zIndex,
             keyframes,
             animation

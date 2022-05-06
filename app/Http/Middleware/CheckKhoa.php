@@ -26,9 +26,17 @@ class CheckKhoa
             ->get();
         $mhs = DB::select('select * from monhoc m, bomon b, khoa k where m.bomon_id = b.bomon_id and b.khoa_id = k.khoa_id and monhoc_id = ?', [$request->id]);
 
+        $bms = DB::select('select * from bomon where bomon_id = ?', [$request->id]);
+
         if($mhs != null || count($mhs) > 0) {
             if($user[0]->khoa_id != $mhs[0]->khoa_id){
                 return redirect()->route('monhoc.index')->with('error', 'Bạn không có quyền truy cập chức năng khoa khác');
+            }
+        }
+
+        if($bms != null || count($bms) > 0) {
+            if($user[0]->khoa_id != $bms[0]->khoa_id){
+                return redirect()->route('bomon.index')->with('error', 'Bạn không có quyền truy cập chức năng khoa khác');
             }
         }
 

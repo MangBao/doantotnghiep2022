@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Quyen_GiangVien;
-use App\Models\DSQuyen;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -17,6 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        \Session::put('countDonVang', count(\DB::select('select * from donxinvang where trangthai = 0')));
         $this->middleware('auth');
     }
 

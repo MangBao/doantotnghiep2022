@@ -22,6 +22,7 @@ class DonXinVangController extends Controller
         $this->khoa = $khoa;
         $this->bomon = $bomon;
         $this->middleware('auth');
+        $this->middleware('permission');
     }
 
     public function index()
@@ -49,9 +50,12 @@ class DonXinVangController extends Controller
     public function store(Request $request){
         $donxinvang = $this->donxinvang->where('giangvien_id', Auth::user()->id)->first();
 
-        if($donxinvang->cathi_id == $request->cathi_id && $donxinvang->ngayxinvang == $request->ngayxinvang){
-            return redirect()->back()->with('error', 'Bạn đã đăng ký xin vắng trong ngày này');
+        if(!is_null($donxinvang)) {
+            if($donxinvang->cathi_id == $request->cathi_id && $donxinvang->ngayxinvang == $request->ngayxinvang){
+                return redirect()->back()->with('error', 'Bạn đã đăng ký xin vắng trong ngày này');
+            }
         }
+
         $this->donxinvang->create([
             'lydo' => $request->lydo,
             'giangvien_id' => Auth::user()->id,

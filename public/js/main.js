@@ -70,10 +70,10 @@ function valMa() {
     for (let i = 0; i < ma.length; i++) {
         ma[i] = ma[i].charAt(0).toUpperCase();
     }
-    $("#monhoc_id, #khoa_id").val(removeVietnameseTones(ma.join("")));
+    $("#monhoc_id, #khoa_id, #bomon_id").val(removeVietnameseTones(ma.join("")));
 }
-$("#tenmonhoc, #tenkhoa").on("keyup", valMa);
-$("#tenmonhoc, #tenkhoa").on("keyup");
+$("#tenmonhoc, #tenkhoa, #tenbomon").on("keyup", valMa);
+$("#tenmonhoc, #tenkhoa, #tenbomon").on("keyup");
 
 /* Function for auto set value Ma phong thi */
 function valTachMaGD() {
