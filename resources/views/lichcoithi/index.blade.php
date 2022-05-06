@@ -18,16 +18,6 @@
             Lịch của tôi
         </a>
     </div>
-    <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.cuatoi') }}" class="btn-primary">
-            Nhận thông báo
-        </a>
-    </div>
-    <div class="mr-8 pt-3">
-        <a href="{{ route('lichcoithi.cuatoi') }}" class="btn-primary">
-            Xin phép vắng
-        </a>
-    </div>
     @if (session('success'))
         <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
             role="alert">

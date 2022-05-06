@@ -1062,11 +1062,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-6 {
   padding-bottom: 1.5rem;
 }
-.pb-4 {
-  padding-bottom: 1rem;
-}
 .pt-1 {
   padding-top: 0.25rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
 }
 .pb-20 {
   padding-bottom: 5rem;

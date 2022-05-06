@@ -22,9 +22,11 @@ function openDropdown(event, dropdownID) {
 
 /* Function for link active */
 function activeLink() {
-    let page = location.pathname.split('/').pop();
+    let page = location.pathname.split("/").pop();
     // console.log(page);
-    $('#list-nav > .items-center > a[href="' + '/' + page + '"]').addClass('active-link');
+    $('#list-nav > .items-center > a[href="' + "/" + page + '"]').addClass(
+        "active-link"
+    );
 }
 activeLink();
 
@@ -78,13 +80,25 @@ function valTachMaGD() {
     let maGiangDuong = $("#giangduong_id option:selected").val();
     let tachSoPhong = $(this).val().split(" ");
     let soPhong = tachSoPhong[tachSoPhong.length - 1];
-    $("#phongthi_id").val(maGiangDuong+'-'+soPhong);
+    $("#phongthi_id").val(maGiangDuong + "-" + soPhong);
 }
 $("#giangduong_id").on("change", valTachMaGD);
 $("#tenphongthi").on("keyup", valTachMaGD);
 $("#tenphongthi").on("keyup");
 
+// Function for auto set value tengiangvien in lichcoithi
+$("#giangvien_id1").change(function () {
+        var str = "";
+        $("#giangvien_id1 option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        $("#tengiangvien1").val(str);
+    }).change();
 
-
-
-
+$("#giangvien_id2").change(function () {
+        var str = "";
+        $("#giangvien_id2 option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        $("#tengiangvien2").val(str);
+    }).change();

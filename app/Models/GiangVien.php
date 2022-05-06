@@ -11,7 +11,13 @@ class GiangVien extends Model
 
     protected $table = 'users';
     protected $fillable = [
-        'giangvien_id', 'name', 'email', 'connho', 'password', 'bomon_id', 'ngaysinh', 'diachi', 'sodienthoai', 'avatar', 'created_at', 'updated_at'
+        'giangvien_id', 'name',
+        'email', 'connho',
+        'password', 'bomon_id',
+        'ngaysinh', 'diachi',
+        'sodienthoai', 'avatar',
+        'created_at', 'updated_at',
+        'thongbaomail', 'role_id'
     ];
     // Tìm thông tin giảng viên theo mã giảng viên
     // public static function findUserById($idgiangvien)

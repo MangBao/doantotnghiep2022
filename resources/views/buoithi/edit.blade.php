@@ -3,7 +3,7 @@
 @section('content-admin')
     @include('partials.breadcumb', [
         'page' => 'Buổi thi',
-        'key' => 'Add',
+        'key' => 'Edit',
         'link' => route('buoithi.index'),
     ])
     <div class="h-12"></div>

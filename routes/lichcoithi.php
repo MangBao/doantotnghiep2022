@@ -16,6 +16,10 @@ Route::prefix('lichcoithi')->group(function () {
         'as' => 'lichcoithi.cuatoi',
         'uses' => LichCoiThiController::class . '@cuatoi'
     ]);
+    Route::post('/updatethongbao', [
+        'as' => 'lichcoithi.updatethongbao',
+        'uses' => LichCoiThiController::class . '@updatethongbao'
+    ]);
     Route::post('/store', [
         'as' => 'lichcoithi.store',
         'uses' => LichCoiThiController::class . '@store'
@@ -23,6 +27,10 @@ Route::prefix('lichcoithi')->group(function () {
     Route::get('/edit/{id}', [
         'as' => 'lichcoithi.edit',
         'uses' => LichCoiThiController::class . '@edit'
+    ]);
+    Route::get('/xinvang/{id}', [
+        'as' => 'lichcoithi.xinvang',
+        'uses' => LichCoiThiController::class . '@xinvang'
     ]);
     Route::post('/update/{id}', [
         'as' => 'lichcoithi.update',

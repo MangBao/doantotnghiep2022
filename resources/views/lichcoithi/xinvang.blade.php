@@ -1,10 +1,10 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Edit lịch coi thi')
+@section('titleAdmin', 'Xin vắng')
 @section('content-admin')
     @include('partials.breadcumb', [
-        'page' => 'Lịch coi thi',
-        'key' => 'Edit',
-        'link' => route('lichcoithi.index'),
+        'page' => 'Xin vắng',
+        'key' => 'Add',
+        'link' => route('donxinvang.index'),
     ])
     <div class="h-12"></div>
     @if (session('error'))
@@ -29,63 +29,50 @@
 
                         <div class="text-center mb-3">
                             <h6 class="text-blueGray-500 text-sm font-bold">
-                                {{ __('EDIT LỊCH COI THI') }}
+                                {{ __('XIN VẮNG') }}
                             </h6>
                         </div>
 
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        {{-- {{ route('lichcoithi.store') }} --}}
-                        <form method="POST" action="{{ route('lichcoithi.update', ['id' => $lct->id]) }}"
-                            enctype="multipart/form-data">
+                        {{-- {{ route('donxinvang.store') }} --}}
+                        <form method="POST" action="{{ route('donxinvang.store') }}" enctype="multipart/form-data">
                             @csrf
-
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="ngaythi">
-                                    {{ __('Ngày thi') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="lydo">
+                                    {{ __('Lý do xin vắng') }}
                                 </label>
-                                <input type="text" name="ngaythi"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ date('d/m/Y', strtotime($lct->ngaythi)) }}" required disabled autocomplete="ngaythi" />
+                                <textarea required type="text" name="lydo" cols="20" rows="5" class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"></textarea>
                             </div>
-
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="giangvien_id1">
-                                    {{ __('Cán bộ 1') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="ca">
+                                    {{ __('Ca thi') }}
                                 </label>
-                                <select id="giangvien_id1"
+                                <input type="ca" name="ca"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn cán bộ 1') }}" name="giangvien_id1">
-                                    <option >{{ __('Chọn cán bộ 1') }}</option>
-                                    {!! $htmlOptionGiangVien1 !!}
-                                </select>
+                                    value="{{ $lich->cathi_id }}" required autocomplete="email" disabled />
                             </div>
-
-                            <input type="hidden" id="tengiangvien1" name="tengiangvien1" value="">
-
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="giangvien_id2">
-                                    {{ __('Cán bộ 2') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="ngayxin">
+                                    {{ __('Ngày xin') }}
                                 </label>
-                                <select id="giangvien_id2"
+                                <input type="ngayxin" name="ngayxin"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn cán bộ 2') }}" name="giangvien_id2">
-                                    <option selected>{{ __('Chọn cán bộ 2') }}</option>
-                                    {!! $htmlOptionGiangVien2 !!}
-                                </select>
+                                    value="{{ date('d/m/Y', strtotime($lich->ngaythi)) }}" required autocomplete="email" placeholder="{{ __('Nhập email') }}" disabled />
                             </div>
-
-                            <input type="hidden" id="tengiangvien2" name="tengiangvien2" value="">
+                            <input type="date" name="ngayxinvang" class="hidden" value="{{ $lich->ngaythi }}">
+                            <input type="hidden" name="cathi_id" class="" value="{{ $lich->cathi_id }}">
 
                             <div class="flex justify-around mt-6">
                                 <a class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white text-sm font-bold uppercase px-6 py-3.5 rounded shadow hover:shadow-lg outline-none focus:outline-none w-20"
-                                    href="{{ route('lichcoithi.index') }}">
+                                    href="{{ route('donxinvang.index') }}">
                                     {{ __('Hủy') }}
                                 </a>
                                 <input
                                     class="cursor-pointer bg-blue-500 text-white hover:bg-white hover:text-blue-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none w-24"
-                                    type="submit" value="{{ __('Sửa') }}">
+                                    type="submit" value="{{ __('Thêm') }}">
+
                             </div>
                         </form>
                     </div>

@@ -13,20 +13,23 @@ use App\Models\BoMon;
 use App\Models\GiangVien;
 use App\Models\LichCoiThi;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LichCoiThiController extends Controller
 {
     private $lichcoithiDB;
     private $buoithiDB;
-    private $user;
+    private $giangvien;
     private $bomon;
+    private $htmlOptionGiangVien1;
+    private $htmlOptionGiangVien2;
 
-    public function __construct(LichCoiThi $lichcoithiDB, BuoiThi $buoithiDB, User $user, BoMon $bomon) {
+    public function __construct(LichCoiThi $lichcoithiDB, BuoiThi $buoithiDB, GiangVien $giangvien, BoMon $bomon) {
         $this->lichcoithiDB = $lichcoithiDB;
         $this->buoithiDB = $buoithiDB;
-        $this->user = $user;
+        $this->giangvien = $giangvien;
         $this->bomon = $bomon;
+        $this->htmlOptionGiangVien1 = '';
+        $this->htmlOptionGiangVien2 = '';
         $this->middleware('auth');
         $this->middleware('permission');
     }
@@ -53,33 +56,43 @@ class LichCoiThiController extends Controller
         $giangviens = LichCoiThi::getGiangVien();
         $monhocs = LichCoiThi::getMonHoc();
 
-        // khoi tao bien bo mon id, gan bo mon id cho lich thi
-        $this->khoiTaoBomonID($lichthis, $monhocs);
+        // echo $lichthis;
+        if(!is_null($lichthis)){
+            // khoi tao bien bo mon id, gan bo mon id cho lich thi
+            $this->khoiTaoBomonID($lichthis, $monhocs);
 
-        // khoi tao bien giang vien id
-        $this->khoiTaoGV($lichthis);
+            // khoi tao bien giang vien id
+            $this->khoiTaoGV($lichthis);
 
-        // khoi tao bien mang lich coi thi, ti le xep cho giang vien
-        $this->khoiTaoTiLeXep($giangviens);
+            // khoi tao bien mang lich coi thi, ti le xep cho giang vien
+            $this->khoiTaoTiLeXep($giangviens);
 
-        usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
+            usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
 
-        $countLichGV = 0;
+            $countLichGV = 0;
 
-        // Duyệt từng lịch thi giang vien coi thi 1
-        $this->lichThiGV1($lichthis, $giangviens, $countLichGV);
+            // Duyệt từng lịch thi giang vien coi thi 1
+            $this->lichThiGV1($lichthis, $giangviens, $countLichGV);
 
-        // Duyệt từng lịch thi giang vien coi thi 2
-        usort($giangviens, [LichCoiThiController::class, "cmp"]);
+            // Duyệt từng lịch thi giang vien coi thi 2
+            usort($giangviens, [LichCoiThiController::class, "cmp"]);
 
-        $this->lichThiGV2($lichthis, $giangviens, $countLichGV);
+            $this->lichThiGV2($lichthis, $giangviens, $countLichGV);
 
-        $i = 1;
-        return view('lichcoithi.lichcoithiauto', [
-            'lichthis' => $this->paginate($lichthis),
-            'lt_not_panigate' => $lichthis,
-            'i' => $i
-        ]);
+            $i = 1;
+            return view('lichcoithi.lichcoithiauto', [
+                'lichthis' => $this->paginate($lichthis),
+                'lt_not_panigate' => $lichthis,
+                'i' => $i
+            ]);
+        }
+        else {
+            return view('lichcoithi.lichcoithiauto', [
+                'notification' => 'Không có dữ liệu',
+                'lt_not_panigate' => $lichthis,
+                'lichthis' => $this->paginate($lichthis),
+            ]);
+        }
 
     }
 
@@ -253,12 +266,32 @@ class LichCoiThiController extends Controller
             ->orWhere('giangvien_id2', Auth::user()->giangvien_id)
             ->orderBy('ngaythi', 'asc')->paginate(4);
 
+        $giangvien = $this->giangvien->find(Auth::user()->id);
         $i = 1;
 
         return view('lichcoithi.cuatoi', [
             'lichcoithi' => $lichcoithi,
+            'giangvien' => $giangvien,
             'i' => $i
         ]);
+    }
+
+    public function updatethongbao(Request $request)
+    {
+
+        if($request->thongbaomail == 0) {
+            $this->giangvien->find(Auth::user()->id)->update([
+                'thongbaomail' => $request->thongbaomail
+            ]);
+            return redirect()->route('lichcoithi.cuatoi')->with('success', 'Tắt thông báo thành công');
+            dd($this->user->find(Auth::id()));
+        }
+        else {
+            $this->giangvien->find(Auth::user()->id)->update([
+                'thongbaomail' => $request->thongbaomail
+            ]);
+            return redirect()->route('lichcoithi.cuatoi')->with('success', 'Bật thông báo thành công');
+        }
     }
 
     /**
@@ -294,17 +327,6 @@ class LichCoiThiController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -312,7 +334,32 @@ class LichCoiThiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lichthi = $this->lichcoithiDB->find($id);
+        $giangvien = $this->giangvien::all();
+
+        foreach ($giangvien as $gv) {
+            if($gv->giangvien_id == $lichthi->giangvien_id1) {
+                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->giangvien_id.'" selected>'.$gv->name.'</option>';
+            }
+            else{
+                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->giangvien_id.'" >'.$gv->name.'</option>';
+            }
+
+        }
+        foreach ($giangvien as $gv) {
+            if($gv->giangvien_id == $lichthi->giangvien_id2) {
+                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->giangvien_id.'" selected>'.$gv->name.'</option>';
+            }
+            else {
+                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->giangvien_id.'" >'.$gv->name.'</option>';
+            }
+        }
+
+        return view('lichcoithi.edit', [
+            'lct' => $lichthi,
+            'htmlOptionGiangVien1' => $this->htmlOptionGiangVien1,
+            'htmlOptionGiangVien2' => $this->htmlOptionGiangVien2
+        ]);
     }
 
     /**
@@ -324,17 +371,37 @@ class LichCoiThiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->lichcoithiDB->find($id)->update([
+            'giangvien_id1' => $request->giangvien_id1,
+            'tengiangvien1' => $request->tengiangvien1,
+            'giangvien_id2' => $request->giangvien_id2,
+            'tengiangvien2' => $request->tengiangvien2,
+        ]);
+
+        return redirect()->route('lichcoithi.index')->with('success', 'Cập nhật thành công');
     }
 
+    public function xinvang($id)
+    {
+        $lich = $this->lichcoithiDB->find($id);
+
+        // dd($lich);
+        return view('lichcoithi.xinvang', [
+            'lich' => $lich
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        if(!is_null($id)) {
+            $this->lichcoithiDB->find($id)->delete();
+            return redirect()->route('lichcoithi.index')->with('success', 'Xóa thành công');
+        }
+        return redirect()->route('lichcoithi.index')->with('error', 'ID / Lịch thi không tồn tại !');
     }
 }

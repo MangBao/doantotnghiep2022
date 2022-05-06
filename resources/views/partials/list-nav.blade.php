@@ -55,6 +55,13 @@
             Tin nhắn
         </a>
     </li>
+    <li class="items-center">
+        <a href="/donxinvang"
+            class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
+            <i class="fa-solid fa-file-circle-exclamation mr-2 text-sm opacity-75"></i>
+            Đơn xin vắng
+        </a>
+    </li>
     @elseif (Auth::user()->role_id == '2')
     <li class="items-center">
         <a href="/monhoc"
@@ -87,6 +94,15 @@
             Tin nhắn
         </a>
     </li>
+
+    <li class="items-center">
+        <a href="/donxinvang"
+            class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
+            <i class="fa-solid fa-file-circle-exclamation mr-2 text-sm opacity-75"></i>
+
+            Đơn xin vắng
+        </a>
+    </li>
     @elseif (Auth::user()->role_id == '3')
     <li class="items-center">
         <a href="/lichcoithi"
@@ -101,6 +117,14 @@
             class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
             <i class="fa-solid fa-comment-sms mr-2 text-sm opacity-75"></i>
             Tin nhắn
+        </a>
+    </li>
+    <li class="items-center">
+        <a href="/xinvang"
+            class="text-xs uppercase py-3 font-bold block hover:text-blue-500">
+            <i class="fa-solid fa-file-circle-exclamation mr-2 text-sm opacity-75"></i>
+
+            Xin vắng
         </a>
     </li>
     @endif

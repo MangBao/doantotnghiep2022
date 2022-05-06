@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\CaThi;
 use App\Models\MonHoc;
 use App\Models\PhongThi;
+use App\Models\CaThi_BuoiThi;
+use App\Models\PhongThi_BuoiThi;
+use App\Models\MonThi_BuoiThi;
 use App\Models\BuoiThi;
 
 class BuoiThiController extends Controller
@@ -14,15 +17,21 @@ class BuoiThiController extends Controller
     private $buoithi;
     private $monhoc;
     private $phongthi;
+    private $cathi_buoithi;
+    private $phongthi_buoithi;
+    private $monthi_buoithi;
     private $htmlOptionCaThi;
     private $htmlOptionMonThi;
     private $htmlOptionPhongThi;
 
-    public function __construct(CaThi $cathi, BuoiThi $buoithi, MonHoc $monhoc, PhongThi $phongthi) {
+    public function __construct(CaThi $cathi, BuoiThi $buoithi, MonHoc $monhoc, PhongThi $phongthi, CaThi_BuoiThi $cathi_buoithi, PhongThi_BuoiThi $phongthi_buoithi, MonThi_BuoiThi $monthi_buoithi) {
         $this->cathi = $cathi;
         $this->buoithi = $buoithi;
         $this->monhoc = $monhoc;
         $this->phongthi = $phongthi;
+        $this->cathi_buoithi = $cathi_buoithi;
+        $this->phongthi_buoithi = $phongthi_buoithi;
+        $this->monthi_buoithi = $monthi_buoithi;
         $this->htmlOptionCaThi = '';
         $this->htmlOptionMonThi = '';
         $this->htmlOptionPhongThi = '';
@@ -91,12 +100,15 @@ class BuoiThiController extends Controller
         }
         // Option mon thi
         foreach($mhs as $mh){
-            foreach($bts as $bt){
-                if($bt->monthi_id != $mh->monhoc_id){
-                    $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'">'.$mh->tenmonhoc.'</option>';
-                    break;
-                }
-            }
+            // if(!is_null($bts)){
+            //     foreach($bts as $bt){
+            //         if($bt->monthi_id != $mh->monhoc_id){
+            //             $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'">'.$mh->tenmonhoc.'</option>';
+            //             break;
+            //         }
+            //     }
+            // }
+            $this->htmlOptionMonThi .= '<option value="'.$mh->monhoc_id.'">'.$mh->tenmonhoc.'</option>';
         }
         // Option phong thi
         foreach($pts as $pt){
@@ -125,23 +137,41 @@ class BuoiThiController extends Controller
         $cts = $this->cathi::all();
         $pts = $this->phongthi::all();
         $buoithi = $this->buoithi::all();
+        $ct_bt = $this->cathi_buoithi::all();
+        $pt_bt = $this->phongthi_buoithi::all();
+        $mh_bt = $this->monthi_buoithi::all();
+        $buoithiDB = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
+                    ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
+                    ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
+                    ->select('buoithi.*','cb.cathi_id','pb.phongthi_id','mb.monthi_id')
+                    ->get();
 
-        foreach($buoithi as $bt){
-            if ($request->phongthi_id == $bt->phongthi_id && $request->ngaythi == $bt->ngaythi && $request->cathi_id == $bt->cathi_id){
-                return redirect()->route('buoithi.create')->with('error', 'Buổi thi bị trùng !');
-                break;
-            } else {
-                $this->buoithi::create([
-                    'cathi_id' => $request->cathi_id,
-                    'monthi_id' => $request->monthi_id,
-                    'phongthi_id' => $request->phongthi_id,
-                    'ngaythi' => $request->ngaythi,
-                ]);
-                return redirect()->route('buoithi.index')->with('success', 'Thêm thành công !');
+        if(!is_null($buoithiDB)){
+            foreach($buoithiDB as $bt){
+                if ($request->phongthi_id == $bt->phongthi_id && $request->ngaythi == $bt->ngaythi && $request->cathi_id == $bt->cathi_id){
+                    return redirect()->route('buoithi.create')->with('error', 'Buổi thi bị trùng !');
+                    break;
+                }
             }
         }
 
-        // return redirect()->route('buoithi.index');
+        $this->buoithi::create([
+            'ngaythi' => $request->ngaythi,
+        ]);
+        $this->cathi_buoithi::create([
+            'buoithi_id' => $this->buoithi::all()->last()->id,
+            'cathi_id' => $request->cathi_id,
+        ]);
+        $this->phongthi_buoithi::create([
+            'buoithi_id' => $this->buoithi::all()->last()->id,
+            'phongthi_id' => $request->phongthi_id,
+        ]);
+        $this->monthi_buoithi::create([
+            'buoithi_id' => $this->buoithi::all()->last()->id,
+            'monthi_id' => $request->monthi_id,
+        ]);
+
+        return redirect()->route('buoithi.index')->with('success', 'Thêm thành công !');
     }
 
     /**
@@ -152,7 +182,10 @@ class BuoiThiController extends Controller
      */
     public function edit($id)
     {
-        $bt = $this->buoithi::find($id);
+        $bt = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
+                ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
+                ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
+                ->where('buoithi.id', $id)->first();
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $pts = $this->phongthi::all();
@@ -199,11 +232,18 @@ class BuoiThiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bt = $this->buoithi::find($id)->update([
-            'cathi_id' => $request->cathi_id,
-            'monthi_id' => $request->monthi_id,
-            'phongthi_id' => $request->phongthi_id,
+
+        $this->buoithi::find($id)->update([
             'ngaythi' => $request->ngaythi,
+        ]);
+        $this->cathi_buoithi::where('buoithi_id', $id)->update([
+            'cathi_id' => $request->cathi_id,
+        ]);
+        $this->phongthi_buoithi::where('buoithi_id', $id)->update([
+            'phongthi_id' => $request->phongthi_id,
+        ]);
+        $this->monthi_buoithi::where('buoithi_id', $id)->update([
+            'monthi_id' => $request->monthi_id,
         ]);
 
         return redirect()->route('buoithi.index')->with('success', 'Sửa thành công !');

@@ -116,7 +116,12 @@ INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_
 ('','lichcoithi.lichcoithiauto', 'Lịch coi thi tự động', NULL, NULL),
 ('','lichcoithi.store', 'Cập nhật lịch coi thi', NULL, NULL),
 ('','lichcoithi.cuatoi', 'Lịch của tôi', NULL, NULL),
-('','lichcoithi.delete', 'Xóa lịch coi thi', NULL, NULL);
+('','lichcoithi.delete', 'Xóa lịch coi thi', NULL, NULL),
+('','lichcoithi.xinvang', 'Xin vắng', NULL, NULL),
+('','donxinvang.index', 'Xin vắng index', NULL, NULL),
+('','donxinvang.store', 'Save xin vắng', NULL, NULL),
+('','donxinvang.duyetdon', 'Duyệt đơn', NULL, NULL),
+('','donxinvang.delete', 'Xóa đơn', NULL, NULL);
 
 INSERT INTO `users` (`id`, `giangvien_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`) VALUES
 ('', '60130041', 'mangbao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Mang Bảo', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'user_avt.jqg', 'MTT', NULL, NULL, NULL, NULL, 1, 0),
@@ -187,6 +192,7 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('1','27', '1', NULL, NULL),
 ('1','28', '1', NULL, NULL),
 ('1','29', '1', NULL, NULL),
+('1','30', '1', NULL, NULL),
 
 ('2','5', '1', NULL, NULL),
 ('2','6', '1', NULL, NULL),
@@ -202,8 +208,10 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('2','24', '1', NULL, NULL),
 ('2','25', '1', NULL, NULL),
 ('2','26', '1', NULL, NULL),
+('2','30', '1', NULL, NULL),
 
-('3','26', '1', NULL, NULL);
+('3','26', '1', NULL, NULL),
+('3','30', '1', NULL, NULL);
 
 INSERT INTO `buoithi` (`id`, `ngaythi`, `created_at`, `updated_at`) VALUES
 ('', '2022-04-04', NULL, NULL),
