@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Bomon;
 use App\Models\GiangVien;
 use App\Models\Roles;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GiangVienController extends Controller
 {
@@ -185,5 +187,12 @@ class GiangVienController extends Controller
         $this->giangvien::find($id)->delete();
 
         return redirect()->route('giangvien.index')->with('success', 'Xóa thành công');
+    }
+
+    public function import()
+    {
+        Excel::import(new UsersImport,request()->file('file'));
+
+        return redirect()->route('giangvien.index')->with('success', 'Import thành công');
     }
 }

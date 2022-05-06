@@ -17,6 +17,10 @@ Route::prefix('giangvien')->group(function () {
         'as' => 'giangvien.store',
         'uses' => GiangVienController::class . '@store'
     ]);
+    Route::post('/import', [
+        'as' => 'giangvien.import',
+        'uses' => GiangVienController::class . '@import'
+    ]);
     Route::get('/show/{id}', [
         'as' => 'giangvien.show',
         'uses' => GiangVienController::class . '@show'

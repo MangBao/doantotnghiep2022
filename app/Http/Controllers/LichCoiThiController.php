@@ -13,6 +13,8 @@ use App\Models\BoMon;
 use App\Models\GiangVien;
 use App\Models\LichCoiThi;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\LichCoiThiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LichCoiThiController extends Controller
 {
@@ -403,5 +405,10 @@ class LichCoiThiController extends Controller
             return redirect()->route('lichcoithi.index')->with('success', 'Xóa thành công');
         }
         return redirect()->route('lichcoithi.index')->with('error', 'ID / Lịch thi không tồn tại !');
+    }
+
+    public function export()
+    {
+        return Excel::download(new LichCoiThiExport, 'lichcoithi.xlsx');
     }
 }

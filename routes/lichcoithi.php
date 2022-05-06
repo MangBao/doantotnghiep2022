@@ -16,6 +16,10 @@ Route::prefix('lichcoithi')->group(function () {
         'as' => 'lichcoithi.cuatoi',
         'uses' => LichCoiThiController::class . '@cuatoi'
     ]);
+    Route::get('/export', [
+        'as' => 'lichcoithi.export',
+        'uses' => LichCoiThiController::class . '@export'
+    ]);
     Route::post('/updatethongbao', [
         'as' => 'lichcoithi.updatethongbao',
         'uses' => LichCoiThiController::class . '@updatethongbao'
