@@ -17,6 +17,7 @@ class GiangVien extends Model
         'ngaysinh', 'diachi',
         'sodienthoai', 'avatar',
         'created_at', 'updated_at',
-        'thongbaomail', 'role_id'
+        'thongbaomail', 'role_id',
+        'trangthaihoatdong',
     ];
 }

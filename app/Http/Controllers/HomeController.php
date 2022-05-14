@@ -15,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        \Session::put('countDonVang', count(\DB::select('select * from donxinvang where trangthai = 0')));
         $this->middleware('auth');
     }
 

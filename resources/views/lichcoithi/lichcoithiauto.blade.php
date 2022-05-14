@@ -196,9 +196,9 @@
         <div class="h-6"></div>
         <div class="row">
             <div class="col w-full">
-                @if (!is_null($lichthis))
+                {{-- @if (!is_null($lichthis))
                     {{ $lichthis->links('pagination::tailwind') }}
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>

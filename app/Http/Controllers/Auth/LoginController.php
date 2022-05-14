@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\GiangVien;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function logout()
+    {
+        GiangVien::find(Auth::user()->id)->update([
+            'trangthaihoatdong' => 0,
+        ]);
+        $this->guard()->logout();
+        return redirect('/');
     }
 }

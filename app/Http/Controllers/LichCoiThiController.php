@@ -59,6 +59,9 @@ class LichCoiThiController extends Controller
         $monhocs = LichCoiThi::getMonHoc();
 
         // echo $lichthis;
+        if(count($giangviens) < 4) {
+            return redirect()->route('lichcoithi.index')->with('error', 'Cần có ít nhất 4 giảng viên để xếp lịch coi thi');
+        }
         if(!is_null($lichthis)){
             // khoi tao bien bo mon id, gan bo mon id cho lich thi
             $this->khoiTaoBomonID($lichthis, $monhocs);
@@ -83,7 +86,7 @@ class LichCoiThiController extends Controller
 
             $i = 1;
             return view('lichcoithi.lichcoithiauto', [
-                'lichthis' => $this->paginate($lichthis),
+                'lichthis' => $lichthis,
                 'lt_not_panigate' => $lichthis,
                 'i' => $i
             ]);
@@ -92,18 +95,18 @@ class LichCoiThiController extends Controller
             return view('lichcoithi.lichcoithiauto', [
                 'notification' => 'Không có dữ liệu',
                 'lt_not_panigate' => $lichthis,
-                'lichthis' => $this->paginate($lichthis),
+                'lichthis' => $lichthis,
             ]);
         }
 
     }
 
-    public function paginate($items, $perPage = 8, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    }
+    // public function paginate($items, $perPage = 8, $page = null, $options = [])
+    // {
+    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+    //     $items = $items instanceof Collection ? $items : Collection::make($items);
+    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    // }
 
     static function cmpTiLeXep($a, $b)
     {
@@ -198,7 +201,7 @@ class LichCoiThiController extends Controller
         return $lichthis;
     }
 
-    protected function lichThiGV2($lichthis, $giangviens, $countLichGV = 0) {
+    protected function lichThiGV2($lichthis, $giangviens, $countLichGV) {
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
