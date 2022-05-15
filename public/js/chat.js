@@ -30,9 +30,9 @@ sendBtn.onclick = () => {
         }
     };
     let formData = new FormData(form);
-    for (var value of formData.values()) {
-        console.log(value);
-     }
+    // for (var value of formData.values()) {
+    //     console.log(value);
+    //  }
     xhr.send(formData);
 };
 chatBox.onmouseenter = () => {

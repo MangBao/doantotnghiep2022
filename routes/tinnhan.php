@@ -34,4 +34,9 @@ Route::prefix('tinnhan')->group(function () {
         'uses' => TinNhanController::class . '@insertchat'
     ]);
 
+    Route::get('/search', [
+        'as' => 'tinnhan.search',
+        'uses' => TinNhanController::class . '@search'
+    ]);
+
 });

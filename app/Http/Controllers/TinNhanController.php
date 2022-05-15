@@ -33,11 +33,7 @@ class TinNhanController extends Controller
             $mess = \DB::select("SELECT * FROM messages WHERE (incoming_msg_id = {$getUser[$i]->giangvien_id}
                                 OR outgoing_msg_id = {$getUser[$i]->giangvien_id}) AND (outgoing_msg_id = {$outgoing_id}
                                 OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1");
-                    // echo '<pre>';
-                    // if(isset($mess[0])){
-                    //     print_r($mess[0]->msg);
-                    // }
-                    // echo '</pre>';
+
             (count($mess) > 0 && isset($mess[0])) ? $result = $mess[0]->msg : $result ="No message available";
             (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
 
@@ -49,7 +45,7 @@ class TinNhanController extends Controller
             ($getUser[$i]->trangthaihoatdong == 0) ? $offline = "offline" : $offline = "";
             ($outgoing_id == $getUser[$i]->giangvien_id) ? $hid_me = "hide" : $hid_me = "";
 
-            $this->output .= '<a href="'. route('tinnhan.viewchat', [$getUser[$i]->giangvien_id]) .'">
+            $this->output .= '<a class="js-user" href="'. route('tinnhan.viewchat', [$getUser[$i]->giangvien_id]) .'">
                         <div class="content">
                         <img src="/images/'. $getUser[$i]->avatar .'" alt="">
                         <div class="details">
@@ -133,20 +129,4 @@ class TinNhanController extends Controller
                         VALUES ({$outgoing_id}, {$incoming_id}, '{$mess}')") or die();
         }
     }
-
-    public function search(Request $request)
-    {
-        $outgoing_id = Auth::user()->giangvien_id;
-        $searchTerm = $request->searchTerm;
-
-        $outputsearch = \DB::select("SELECT * FROM users WHERE NOT giangvien_id = {$outgoing_id} AND (name LIKE '%{$searchTerm}%') ");
-        $sql = "";
-        $output = "";
-        if(mysqli_num_rows($query) > 0){
-            include_once "data.php";
-        }else{
-            $output .= 'No user found related to your search term';
-        }
-            echo $output;
-        }
 }
