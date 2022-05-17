@@ -92,14 +92,25 @@ class TinNhanController extends Controller
         $mess = \DB::select("SELECT * FROM messages LEFT JOIN users ON users.giangvien_id = messages.outgoing_msg_id
                             WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
                             OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id");
-
+        $trashicon = '<i class="fa-solid fa-trash-can"></i>';
+        $backicon = '<i class="fa-solid fa-rotate-left"></i>';
+        $icon = '';
         if(count($mess) > 0) {
             for($i = 0; $i < count($mess); $i++) {
                 if($mess[$i]->outgoing_msg_id == $outgoing_id){
+                    $icon = $mess[$i]->tus == 0 ? $trashicon : $backicon;
+                    $classmess = $mess[$i]->tus == 0 ? '' : 'back-mess';
+                    $classlink = $mess[$i]->tus == 0 ? 'js-trash' : 'js-back';
+                    $contentmess = $mess[$i]->tus == 0 ? $mess[$i]->msg : 'Bạn đã thu hồi 1 tin !';
+                    $title = $mess[$i]->tus == 0 ? 'Thu hồi tin nhắn' : 'Hoàn tác tin nhắn';
+                    $link = $mess[$i]->tus == 0 ? route('tinnhan.deletechat',[$mess[$i]->msg_id]) : route('tinnhan.takebackmess',[$mess[$i]->msg_id]);
                     $this->outputchat .= '<div class="chat outgoing">
-                                <div class="details">
-                                    <p>'. $mess[$i]->msg .'</p>
-                                </div>
+                                    <div class="details">
+                                        <a id="'.$mess[$i]->msg_id.'" href="'. $link .'" class="'.$classlink.'" title="'.$title.'">
+                                            '.$icon.'
+                                        </a>
+                                        <p class="'.$classmess.'">'. $contentmess .'</p>
+                                    </div>
                                 </div>';
                 }else{
                     $this->outputchat .= '<div class="chat incoming">
@@ -128,5 +139,21 @@ class TinNhanController extends Controller
             \DB::insert("INSERT INTO messages (outgoing_msg_id, incoming_msg_id, msg)
                         VALUES ({$outgoing_id}, {$incoming_id}, '{$mess}')") or die();
         }
+    }
+
+    public function deletechat($id)
+    {
+        $getmess = \DB::select("SELECT * FROM messages WHERE msg_id = {$id}");
+        $id = $id;
+        \DB::update("UPDATE messages SET tus = 1 WHERE msg_id = {$id}") or die();
+        return redirect()->route('tinnhan.viewchat', [$getmess[0]->incoming_msg_id]);
+    }
+
+    public function takebackmess($id)
+    {
+        $getmess = \DB::select("SELECT * FROM messages WHERE msg_id = {$id}");
+        $id = $id;
+        \DB::update("UPDATE messages SET tus = 0 WHERE msg_id = {$id}") or die();
+        return redirect()->route('tinnhan.viewchat', [$getmess[0]->incoming_msg_id]);
     }
 }

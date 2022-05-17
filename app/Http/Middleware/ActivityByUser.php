@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\GiangVien;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ActivityByUser
@@ -19,6 +20,13 @@ class ActivityByUser
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
+            $permission_user = \DB::select('SELECT * FROM users u, permission p, routes r WHERE u.role_id = p.role_id AND p.route_id = r.id AND p.status = 1 AND u.id = '.Auth::id());
+            $route_name = [];
+            foreach ($permission_user as $pu) {
+                array_push($route_name, $pu->route_name);
+            }
+            Auth::user()->route_name = $route_name;
+
             GiangVien::find(Auth::user()->id)->update([
                 'trangthaihoatdong' => 1,
             ]);

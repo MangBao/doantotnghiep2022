@@ -21,10 +21,6 @@ Route::prefix('giangvien')->group(function () {
         'as' => 'giangvien.import',
         'uses' => GiangVienController::class . '@import'
     ]);
-    Route::get('/show/{id}', [
-        'as' => 'giangvien.show',
-        'uses' => GiangVienController::class . '@show'
-    ]);
     Route::get('/edit/{id}', [
         'as' => 'giangvien.edit',
         'uses' => GiangVienController::class . '@edit'

@@ -58,10 +58,10 @@ class sendMailDaily extends Command
             if(floor($datediff / (60*60*24)) == 2) {
                 foreach($users as $user) {
                     if($user->email != null && $user->thongbaomail == 1 && $lct->giangvien_id1 == $user->giangvien_id) {
-                        Mail::to($user->email)->send(new ThongBaoNhacLich($user));
+                        Mail::to($user->email)->send(new ThongBaoNhacLich($user, $lct));
                     }
                     if($user->email != null && $user->thongbaomail == 1 && $lct->giangvien_id2 == $user->giangvien_id) {
-                        Mail::to($user->email)->send(new ThongBaoNhacLich($user));
+                        Mail::to($user->email)->send(new ThongBaoNhacLich($user, $lct));
                     }
                 }
             }

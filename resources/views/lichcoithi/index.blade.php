@@ -114,12 +114,12 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{
-                                    \Carbon\Carbon::createFromFormat('H:i:s',$lt->giobatdau)->format('h:i')
+                                    \Carbon\Carbon::createFromFormat('H:i:s',$lt->giobatdau)->format('H:i')
                                 }}
                             </td>
                             <td class="px-6 py-4">
                                 {{
-                                    \Carbon\Carbon::createFromFormat('H:i:s',$lt->gioketthuc)->format('h:i')
+                                    \Carbon\Carbon::createFromFormat('H:i:s',$lt->gioketthuc)->format('H:i')
                                 }}
                             </td>
                             <td class="px-6 py-4">

@@ -34,9 +34,14 @@ Route::prefix('tinnhan')->group(function () {
         'uses' => TinNhanController::class . '@insertchat'
     ]);
 
-    Route::get('/search', [
-        'as' => 'tinnhan.search',
-        'uses' => TinNhanController::class . '@search'
+    Route::get('/deletechat/{id}', [
+        'as' => 'tinnhan.deletechat',
+        'uses' => TinNhanController::class . '@deletechat'
+    ]);
+
+    Route::get('/takebackmess/{id}', [
+        'as' => 'tinnhan.takebackmess',
+        'uses' => TinNhanController::class . '@takebackmess'
     ]);
 
 });

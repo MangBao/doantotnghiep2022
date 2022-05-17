@@ -12,7 +12,7 @@ class Message extends Model
     use HasFactory;
     protected $table = 'tinnhan';
     protected $fillable = [
-        'msg_id', '	incoming_msg_id', 'outgoing_msg_id', 'msg', 'created_at', 'updated_at'
+        'msg_id', '	incoming_msg_id', 'outgoing_msg_id', 'msg', 'created_at', 'updated_at', 'tus'
     ];
 
     public function getListUser()

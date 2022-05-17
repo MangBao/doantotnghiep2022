@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->integer('incoming_msg_id');
             $table->integer('outgoing_msg_id');
             $table->string('msg');
+            $table->tinyInteger('tus')->default(0);
             $table->timestamps();
         });
     }
