@@ -56,7 +56,7 @@ class GiangVienController extends Controller
 
         // Option quyen
         foreach($dsq as $d){
-            $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'.($d->role_name == 'admin' ? 'Administrator' : ($d->role_name == 'thukykhoa' ? 'Thư ký khoa' : 'Giảng viên')).'</option>';
+            $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'. $d->role_name .'</option>';
         }
         // Option bo mon
         foreach($bm as $b){
@@ -117,7 +117,7 @@ class GiangVienController extends Controller
         // dd($gv->role_id);
         foreach($dsq as $d){
             if($d->id === $gv->role_id){
-                $this->htmlOptionQuyen .= '<option value="'.$d->id.'" selected>'.($d->role_name == 'admin' ? 'Administrator' : ($d->role_name == 'thukykhoa' ? 'Thư ký khoa' : 'Giảng viên')).'</option>';
+                $this->htmlOptionQuyen .= '<option value="'.$d->id.'" selected>'. $d->role_name .'</option>';
             } else {
                 $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'.$d->role_name.'</option>';
             }

@@ -1,10 +1,10 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Thêm môn học')
+@section('titleAdmin', 'Thêm quyền')
 @section('content-admin')
     @include('partials.breadcumb', [
-        'page' => 'Môn học',
+        'page' => 'Quyền',
         'key' => 'Add',
-        'link' => route('monhoc.index'),
+        'link' => route('phanquyen.index'),
     ])
     <div class="h-12"></div>
     @if (session('error'))
@@ -21,7 +21,7 @@
             </div>
         </div>
     @endif
-    <div class="container mx-auto px-4 h-full ">
+    <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-2/5 px-4 z-10 ">
                 <div class="flex flex-col w-full mb-6 shadow-lg rounded-lg border-0 bg-white">
@@ -29,49 +29,30 @@
 
                         <div class="text-center mb-3">
                             <h6 class="text-blueGray-500 text-sm font-bold">
-                                {{ __('THÊM MÔN HỌC MỚI') }}
+                                {{ __('THÊM QUYỀN') }}
                             </h6>
                         </div>
 
                         <hr class="mt-6 border-b-1 border-blueGray-300" />
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        {{-- {{ route('monhoc.store') }} --}}
-                        <form method="POST" action="{{ route('monhoc.update', ['id' => $mh->monhoc_id]) }}" enctype="multipart/form-data">
+                        {{-- {{ route('phanquyen.store') }} --}}
+                        <form method="POST" action="{{ route('phanquyen.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="monhoc_id">
-                                    {{ __('Mã môn học') }}
-                                </label>
-                                <input type="text" id="monhoc_id" name="monhoc_id"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $mh->monhoc_id }}" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
-                            </div>
-                            <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="tenmonhoc">
-                                    {{ __('Tên môn học') }}
-                                </label>
-                                <input type="text" id="tenmonhoc" name="tenmonhoc"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $mh->tenmonhoc }}" required autocomplete="tenmonhoc" autofocus
-                                    placeholder="{{ __('Nhập tên môn học') }}" />
-                            </div>
 
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="bomon_id">
-                                    {{ __('Bộ môn') }}
+                                <label class="block text-blueGray-600 font-bold mb-2" for="role_name">
+                                    {{ __('Tên quyền') }}
                                 </label>
-                                <select
+                                <input type="text" id="role_name" name="role_name"
                                     class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon_id">
-                                    <option selected>{{ __('Chọn bộ môn') }}</option>
-                                    {!! $htmlOptionBoMon !!}
-                                </select>
+                                    value="" required autocomplete="role_name" autofocus
+                                    placeholder="{{ __('Nhập tên quyền') }}" />
                             </div>
 
                             <div class="flex justify-around mt-6">
                                 <a class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white text-sm font-bold uppercase px-6 py-3.5 rounded shadow hover:shadow-lg outline-none focus:outline-none w-20"
-                                    href="{{ route('monhoc.index') }}">
+                                    href="{{ route('phanquyen.index') }}">
                                     {{ __('Hủy') }}
                                 </a>
                                 <input

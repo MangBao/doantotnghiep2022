@@ -83,9 +83,9 @@ INSERT INTO `monhoc` (`monhoc_id`, `tenmonhoc`, `bomon_id`, `created_at`, `updat
 
 
 INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
-('','admin', NULL, NULL),
-('','thukykhoa', NULL, NULL),
-('','giangvien', NULL, NULL);
+('','Adminitrastor', NULL, NULL),
+('','Thư ký khoa', NULL, NULL),
+('','Giảng viên', NULL, NULL);
 
 INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_at`) VALUES
 ('','giangvien.index', 'View giảng viên', NULL, NULL),

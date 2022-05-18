@@ -1,13 +1,13 @@
 @extends('layout.layout_admin')
-@section('titleAdmin', 'Phân quyền')
+@section('titleAdmin', 'Quyền')
 @section('content-admin')
-    @include('partials.breadcumb', ['page' => 'Phân quyền', 'key' => 'Index', 'link' => route('permission.index')])
+    @include('partials.breadcumb', ['page' => 'Quyền', 'key' => 'Index', 'link' => route('phanquyen.index')])
     <div class="h-12"></div>
 
     <div class="flex">
-        <div class="mr-8 pt-3">
-            <a href="{{ route('permission.create') }}" class="btn-primary">
-                Thêm Phân quyền
+        <div class="mr-8 q-3">
+            <a href="{{ route('phanquyen.create') }}" class="btn-primary">
+                Thêm quyền
             </a>
         </div>
         @if (session('success'))
@@ -39,7 +39,7 @@
         @endif
     </div>
     <div class="h-8"></div>
-    <div class="container mx-auto px-4 h-full">
+    <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -49,7 +49,7 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tên Phân quyền
+                                Tên Quyền
                             </th>
 
                             <th scope="col" class="px-6 py-3">
@@ -58,14 +58,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @isset($notification)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td colspan="10" class="px-6 py-4 text-center">
-                                {{ $notification }}
-                            </td>
-                        </tr>
-                        @endisset
-                        @foreach ($roles as $r)
+                        @foreach ($quyen as $q)
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <th scope="row"
@@ -73,28 +66,24 @@
                                     {{ $i++ }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $r->role_name }}
+                                    {{ $q->role_name }}
                                 </td>
 
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('permission.edit', [$r->id]) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-
-                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$r->id}}').classList.add('block'); document.getElementById('popup-modal-{{}}').classList.remove('hidden');"
-
+                                    <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$q->id}}').classList.add('block'); document.getElementById('popup-modal-{{$q->id}}').classList.remove('hidden');"
                                         class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</span>
                                 </td>
                             </tr>
-                            <div id="popup-modal-{{$r->id}}" tabindex="-1"
+                            <div id="popup-modal-{{$q->id}}" tabindex="-1"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full  bgModal ">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44 animate-fadeInDown">
                                     <!-- Modal header -->
                                     <div class="flex justify-end p-2">
-                                        <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$r->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$r->id}}').classList.remove('block');"
+                                        <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$q->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$q->id}}').classList.remove('block');"
                                             class="cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                            data-modal-toggle="popup-modal-{{$r->id}}">
+                                            data-modal-toggle="popup-modal-{{$q->id}}">
                                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
@@ -104,7 +93,7 @@
                                         </span>
                                     </div>
                                     <!-- Modal body -->
-                                    <div class="p-6 pt-0 text-center">
+                                    <div class="p-6 q-0 text-center">
                                         <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,11 +101,11 @@
                                         </svg>
                                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
                                             delete this product?</h3>
-                                        <a href="{{ route('permission.delete', [$r->id]) }}"
+                                        <a href="{{ route('phanquyen.delete', [$q->id]) }}"
                                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                             Yes, I'm sure
                                         </a>
-                                        <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$r->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$r->id}}').classList.remove('block');"
+                                        <span onclick="event.preventDefault(); document.getElementById('popup-modal-{{$q->id}}').classList.add('hidden'); document.getElementById('popup-modal-{{$q->id}}').classList.remove('block');"
                                             class="cursor-pointer text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
                                             cancel</span>
                                     </div>
@@ -137,7 +126,7 @@
         <div class="h-6"></div>
         <div class="row">
             <div class="col w-full">
-                {{-- {{ $roles->links('pagination::tailwind') }} --}}
+                {{ $quyen->links('pagination::tailwind') }}
             </div>
         </div>
     </div>
