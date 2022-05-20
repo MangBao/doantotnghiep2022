@@ -136,7 +136,20 @@ INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_
 ('','donxinvang.index', 'Xin vắng view', NULL, NULL),
 ('','donxinvang.store', 'Save xin vắng', NULL, NULL),
 ('','donxinvang.duyetdon', 'Duyệt đơn', NULL, NULL),
-('','donxinvang.delete', 'Xóa đơn', NULL, NULL);
+('','donxinvang.delete', 'Xóa đơn', NULL, NULL),
+
+('','quanlyroutes.index', 'Danh sách routes', NULL, NULL),
+('','quanlyroutes.store', 'Lưu route', NULL, NULL),
+('','quanlyroutes.create', 'Tạo route', NULL, NULL),
+('','quanlyroutes.blocking', 'Chặn route', NULL, NULL),
+('','quanlyroutes.delete', 'Xóa route', NULL, NULL),
+
+('','phanquyen.index', 'Danh sách quyền', NULL, NULL),
+('','phanquyen.store', 'Lưu quyền', NULL, NULL),
+('','phanquyen.create', 'Tạo quyền', NULL, NULL),
+('','phanquyen.delete', 'Xóa quyền', NULL, NULL),
+
+('','tinnhan.index', 'List tin nhắn', NULL, NULL);
 
 INSERT INTO `users` (`id`, `giangvien_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`, `trangthaihoatdong`) VALUES
 ('', '60130041', 'mangbao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Mang Bảo', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'baobao.jpg', 'MTT', NULL, NULL, NULL, NULL, 1, 0, 0),
@@ -219,7 +232,15 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('1','39', '1', NULL, NULL),
 ('1','40', '1', NULL, NULL),
 ('1','41', '1', NULL, NULL),
-('1','42', '1', NULL, NULL),
+('1','43', '1', NULL, NULL),
+('1','44', '1', NULL, NULL),
+('1','45', '1', NULL, NULL),
+('1','46', '1', NULL, NULL),
+('1','47', '1', NULL, NULL),
+('1','48', '1', NULL, NULL),
+('1','49', '1', NULL, NULL),
+('1','50', '1', NULL, NULL),
+('1','51', '1', NULL, NULL),
 
 ('2','17', '1', NULL, NULL),
 ('2','18', '1', NULL, NULL),

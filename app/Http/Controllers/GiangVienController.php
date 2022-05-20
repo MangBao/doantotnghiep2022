@@ -34,10 +34,13 @@ class GiangVienController extends Controller
      */
     public function index()
     {
-        $gvs = $this->giangvien::latest()->paginate(8);
+        $gvs = $this->giangvien->latest()->paginate(8);
+        $dsq = $this->roles::all();
+
         $i = 1;
         return view('giangvien.index',[
             'gvs' => $gvs,
+            'dsq' => $dsq,
             'i' => $i
         ]);
     }
@@ -85,6 +88,15 @@ class GiangVienController extends Controller
     public function store(Request $request)
     {
 
+        if($request->avatar){
+            $avatar = $request->avatar;
+            $avatar_name = $avatar->getClientOriginalName();
+            Storage::disk('public')->putFileAs('images', $avatar, $avatar_name);
+        }
+        else{
+            $avatar_name = 'default.png';
+        }
+
         $this->giangvien->create([
             'giangvien_id' => $request->giangvien_id,
             'name' => $request->tengiangvien,
@@ -113,15 +125,12 @@ class GiangVienController extends Controller
         $gv = $this->giangvien::find($id);
         $dsq = $this->roles::all();
         $bm = $this->bomon::all();
-        // $qgv = $this->quyen_giangvien::where('giangvien_id', $gv->giangvien_id)->first();
-        // dd($gv->role_id);
         foreach($dsq as $d){
             if($d->id === $gv->role_id){
                 $this->htmlOptionQuyen .= '<option value="'.$d->id.'" selected>'. $d->role_name .'</option>';
             } else {
                 $this->htmlOptionQuyen .= '<option value="'.$d->id.'">'.$d->role_name.'</option>';
             }
-            // $this->htmlOptionQuyen .= '<option value="'.$d->quyen_id.'">'.$d->tenquyen.'</option>';
         }
         // Option bo mon
         foreach($bm as $b){
@@ -130,7 +139,6 @@ class GiangVienController extends Controller
             } else {
                 $this->htmlOptionBoMon .= '<option value="'.$b->bomon_id.'">'.$b->tenbomon.'</option>';
             }
-            // $this->htmlOptionBoMon .= '<option value="'.$b->bomon_id.'">'.$b->tenbomon.'</option>';
         }
 
         return view('giangvien.edit', [

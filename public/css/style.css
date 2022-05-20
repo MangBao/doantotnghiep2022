@@ -98,8 +98,10 @@
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e6e6e6;
     justify-content: space-between;
+}
+.users-list a {
+    border-bottom: 1px solid #e6e6e6;
 }
 .content img {
     object-fit: cover;
@@ -201,7 +203,7 @@
     height: 40px;
     width: 40px;
 }
-.users-list a .details p {
+a .details p {
     color: #67676a;
 }
 .users-list a .status-dot {
@@ -277,7 +279,7 @@
 .outgoing .details p.back-mess {
     margin-left: 10px;
     background: rgba(207, 207, 207, 0.067);
-    color: rgb(137, 137, 137);
+    color: rgb(93, 93, 93);
     font-style: italic;
     border-radius: 18px 18px 0 18px;
 }

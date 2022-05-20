@@ -35,6 +35,7 @@ class TinNhanController extends Controller
                                 OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1");
 
             (count($mess) > 0 && isset($mess[0])) ? $result = $mess[0]->msg : $result ="No message available";
+            (isset($mess[0]) && $mess[0]->tus == 1) ? $result = 'Bạn đã gỡ 1 tin nhắn' : $result;
             (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
 
             if(isset($mess[0]->outgoing_msg_id)) {
@@ -45,12 +46,12 @@ class TinNhanController extends Controller
             ($getUser[$i]->trangthaihoatdong == 0) ? $offline = "offline" : $offline = "";
             ($outgoing_id == $getUser[$i]->giangvien_id) ? $hid_me = "hide" : $hid_me = "";
 
-            $this->output .= '<a class="js-user" href="'. route('tinnhan.viewchat', [$getUser[$i]->giangvien_id]) .'">
+            $this->output .= '<a class="js-user dark:border-gray-500" href="'. route('tinnhan.viewchat', [$getUser[$i]->giangvien_id]) .'">
                         <div class="content">
                         <img src="/images/'. $getUser[$i]->avatar .'" alt="">
                         <div class="details">
-                            <span>'. $getUser[$i]->name .'</span>
-                            <p>'. $you . $msg .'</p>
+                            <span class="dark:text-gray-400">'. $getUser[$i]->name .'</span>
+                            <p class="dark:text-gray-500">'. $you . $msg .'</p>
                         </div>
                         </div>
                         <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
@@ -103,13 +104,14 @@ class TinNhanController extends Controller
                     $classlink = $mess[$i]->tus == 0 ? 'js-trash' : 'js-back';
                     $contentmess = $mess[$i]->tus == 0 ? $mess[$i]->msg : 'Bạn đã thu hồi 1 tin !';
                     $title = $mess[$i]->tus == 0 ? 'Thu hồi tin nhắn' : 'Hoàn tác tin nhắn';
+                    $cssdarkmode = $mess[$i]->tus == 0 ? '' : 'dark:text-black';
                     $link = $mess[$i]->tus == 0 ? route('tinnhan.deletechat',[$mess[$i]->msg_id]) : route('tinnhan.takebackmess',[$mess[$i]->msg_id]);
                     $this->outputchat .= '<div class="chat outgoing">
                                     <div class="details">
                                         <a id="'.$mess[$i]->msg_id.'" href="'. $link .'" class="'.$classlink.'" title="'.$title.'">
                                             '.$icon.'
                                         </a>
-                                        <p class="'.$classmess.'">'. $contentmess .'</p>
+                                        <p class="'. $classmess .' '.' '.' '. $cssdarkmode .'">'. $contentmess .'</p>
                                     </div>
                                 </div>';
                 }else{
@@ -123,7 +125,7 @@ class TinNhanController extends Controller
             }
         }
         else {
-            $this->outputchat .= '<div class="text">No messages are available. Once you send message they will appear here.</div>';
+            $this->outputchat .= '<div class="text dark:text-gray-400">No messages are available. Once you send message they will appear here.</div>';
         }
 
         return $this->outputchat;

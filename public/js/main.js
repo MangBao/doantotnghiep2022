@@ -1,34 +1,12 @@
-/* Sidebar - Side navigation menu on mobile/responsive mode */
-function toggleNavbar(collapseID) {
-    document.getElementById(collapseID).classList.toggle("hidden");
-    document.getElementById(collapseID).classList.toggle("bg-white");
-    document.getElementById(collapseID).classList.toggle("m-2");
-    document.getElementById(collapseID).classList.toggle("py-3");
-    document.getElementById(collapseID).classList.toggle("px-6");
-}
-
-/* Function for dropdowns */
-function openDropdown(event, dropdownID) {
-    let element = event.target;
-    while (element.nodeName !== "SPAN") {
-        element = element.parentNode;
-    }
-    Popper.createPopper(element, document.getElementById(dropdownID), {
-        placement: "bottom-start",
-    });
-    document.getElementById(dropdownID).classList.toggle("hidden");
-    document.getElementById(dropdownID).classList.toggle("block");
-}
-
 /* Function for link active */
-function activeLink() {
-    let page = location.pathname.split("/").pop();
-    // console.log(page);
-    $('#list-nav > .items-center > a[href="' + "/" + page + '"]').addClass(
-        "active-link"
-    );
-}
-activeLink();
+// function activeLink() {
+//     let page = location.pathname.split("/").pop();
+//     // console.log(page);
+//     $('#list-nav > .items-center > a[href="' + "/" + page + '"]').addClass(
+//         "active-link"
+//     );
+// }
+// activeLink();
 
 /* Function for remove Vie */
 function removeVietnameseTones(str) {
@@ -70,7 +48,9 @@ function valMa() {
     for (let i = 0; i < ma.length; i++) {
         ma[i] = ma[i].charAt(0).toUpperCase();
     }
-    $("#monhoc_id, #khoa_id, #bomon_id").val(removeVietnameseTones(ma.join("")));
+    $("#monhoc_id, #khoa_id, #bomon_id").val(
+        removeVietnameseTones(ma.join(""))
+    );
 }
 $("#tenmonhoc, #tenkhoa, #tenbomon").on("keyup", valMa);
 $("#tenmonhoc, #tenkhoa, #tenbomon").on("keyup");
@@ -87,18 +67,55 @@ $("#tenphongthi").on("keyup", valTachMaGD);
 $("#tenphongthi").on("keyup");
 
 // Function for auto set value tengiangvien in lichcoithi
-$("#giangvien_id1").change(function () {
+// Edit lich thi page
+$("#giangvien_id1")
+    .change(function () {
         var str = "";
         $("#giangvien_id1 option:selected").each(function () {
             str += $(this).text() + " ";
         });
         $("#tengiangvien1").val(str);
-    }).change();
+    })
+    .change();
 
-$("#giangvien_id2").change(function () {
+$("#giangvien_id2")
+    .change(function () {
         var str = "";
         $("#giangvien_id2 option:selected").each(function () {
             str += $(this).text() + " ";
         });
         $("#tengiangvien2").val(str);
-    }).change();
+    })
+    .change();
+
+const city = document.querySelector("#city");
+const cityName = document.querySelector("#cityName");
+const Temp = document.querySelector("#temp");
+const main = document.querySelector("#main");
+const discription = document.querySelector("#discription");
+const image = document.querySelector("#image");
+weatherUpdate = (city) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+        "GET",
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cad7ec124945dcfff04e457e76760d90`
+    );
+    // in place of appid enter your open weather API Key
+    // You can create it for free
+    // https://home.openweathermap.org/users/sign_up
+
+    xhr.send();
+    xhr.onload = () => {
+        if (xhr.status === 404) {
+            alert("Place not found");
+        } else {
+            var data = JSON.parse(xhr.response);
+            cityName.innerHTML = data.name;
+            Temp.innerHTML = `${Math.round(data.main.temp - 273.15)}°C`;
+            main.innerHTML = data.weather[0].main;
+            discription.innerHTML = data.weather[0].description;
+            image.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        }
+    };
+};
+weatherUpdate("Nha Trang");

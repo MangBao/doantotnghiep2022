@@ -1,12 +1,7 @@
-@extends('layout.layout_admin')
+@extends('layouts.app')
 @section('titleAdmin', 'Thêm môn học')
-@section('content-admin')
-    @include('partials.breadcumb', [
-        'page' => 'Môn học',
-        'key' => 'Add',
-        'link' => route('monhoc.index'),
-    ])
-    <div class="h-12"></div>
+@section('content')
+    <div class="h-10"></div>
     @if (session('error'))
         <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
             role="alert">
@@ -24,11 +19,11 @@
     <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-2/5 px-4 z-10 ">
-                <div class="flex flex-col w-full mb-6 shadow-lg rounded-lg border-0 bg-white">
+                <div class="flex flex-col w-full mb-6 shadow-lg rounded-lg border-0 bg-white dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">
                     <div class="rounded-t mb-0 px-6 py-6">
 
                         <div class="text-center mb-3">
-                            <h6 class="text-blueGray-500 text-sm font-bold">
+                            <h6 class="text-gray-700 dark:text-gray-400 text-sm font-bold">
                                 {{ __('THÊM MÔN HỌC MỚI') }}
                             </h6>
                         </div>
@@ -40,29 +35,29 @@
                         <form method="POST" action="{{ route('monhoc.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="monhoc_id">
+                                <label class="text-gray-700 dark:text-gray-400" for="monhoc_id">
                                     {{ __('Mã môn học') }}
                                 </label>
                                 <input type="text" id="monhoc_id" name="monhoc_id"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
+                                    class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     value="" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
                             </div>
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="tenmonhoc">
+                                <label class="text-gray-700 dark:text-gray-400" for="tenmonhoc">
                                     {{ __('Tên môn học') }}
                                 </label>
                                 <input type="text" id="tenmonhoc" name="tenmonhoc"
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
+                                    class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     value="" required autocomplete="tenmonhoc" autofocus
                                     placeholder="{{ __('Nhập tên môn học') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
-                                <label class="block text-blueGray-600 font-bold mb-2" for="bomon_id">
+                                <label class="text-gray-700 dark:text-gray-400" for="bomon_id">
                                     {{ __('Bộ môn') }}
                                 </label>
                                 <select
-                                    class="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
+                                    class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn bộ môn') }}" name="bomon_id">
                                     <option selected>{{ __('Chọn bộ môn') }}</option>
                                     {!! $htmlOptionBoMon !!}

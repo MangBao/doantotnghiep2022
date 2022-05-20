@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/init-alpine.js": "/js/init-alpine.js",
+    "/js/focus-trap.js": "/js/focus-trap.js"
 }

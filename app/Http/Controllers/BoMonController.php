@@ -40,7 +40,7 @@ class BoMonController extends Controller
                 ->get();
 
         if (Auth::user()->role_id == 1) {
-            $bms = $this->bomon::orderBy('bomon_id', 'desc')->paginate(8);
+            $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')->orderBy('bomon_id', 'desc')->paginate(8);
         } else {
             $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
                 ->select('bomon.*', 'khoa.khoa_id', 'khoa.tenkhoa')
@@ -50,7 +50,7 @@ class BoMonController extends Controller
         }
 
         $i = 1;
-
+        // dd($user);
         return view('bomon.index',[
             'bms' => $bms,
             'i' => $i,

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\GiangVien;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,22 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Auth::routes();
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', [HomeController::class, 'index']);
-Route::middleware('password.confirm')->get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/logout', function () {
+    GiangVien::find(Auth::user()->id)->update([
+        'trangthaihoatdong' => 0,
+    ]);
+    Auth::logout();
+    return redirect('/');
+});
+
+Route::view('home', 'home')
+	->name('home')
+	->middleware(['auth']);
+
+Route::view('profile', 'profile.edit')
+	->name('profile.edit')
+	->middleware(['auth']);
