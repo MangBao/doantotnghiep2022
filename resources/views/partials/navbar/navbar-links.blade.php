@@ -1,9 +1,11 @@
 <ul class="flex items-center flex-shrink-0 space-x-6">
     <li class="flex">
-        <a class="rounded-md focus:outline-none focus:shadow-outline-purple" href="{{route('tinnhan.tinnhan')}}">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                </svg>
+        <a class="rounded-md focus:outline-none focus:shadow-outline-purple" href="{{ route('tinnhan.tinnhan') }}">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+            </svg>
         </a>
     </li>
     <!-- Theme toggler -->
@@ -75,11 +77,15 @@
     </li> --}}
     <!-- Profile menu -->
     <li class="relative">
-        <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+        <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none flex px-1"
             @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
             <img class="object-cover w-8 h-8 rounded-full"
                 src={{ 'https://ui-avatars.com/api/?name=' . auth()->user()->name ?? 'Windmill' . '&color=7F9CF5&background=EBF4FF' }}"
                 alt="{{ auth()->user()->name }}" aria-hidden="true" />
+            <p class="hidden ml-2 text-xs text-left sm:block">
+                <strong class="block font-medium">Hi, {{ auth()->user()->name }}</strong>
+                <span class="text-gray-500">{{ auth()->user()->email }}</span>
+            </p>
         </button>
         <template x-if="isProfileMenuOpen">
             <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
@@ -112,8 +118,7 @@
                     </a>
                 </li> --}}
                 <li class="flex">
-                    <a
-                        href="{{ route('logout') }}"
+                    <a href="{{ route('logout') }}"
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
                         <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
