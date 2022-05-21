@@ -586,6 +586,11 @@ video {
   height: auto;
 }
 
+* {
+  scrollbar-color: initial;
+  scrollbar-width: initial;
+}
+
 .container {
   width: 100%;
 }
@@ -51005,6 +51010,1506 @@ video {
 .animate-fadeInDown {
   -webkit-animation: fadeInDown 0.8s ease-out;
           animation: fadeInDown 0.8s ease-out;
+}
+
+.scrollbar {
+  --scrollbar-track: initial;
+  --scrollbar-thumb: initial;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  overflow: overlay;
+}
+
+.scrollbar.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.scrollbar.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+
+.scrollbar {
+  scrollbar-width: auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.scrollbar-thin {
+  --scrollbar-track: initial;
+  --scrollbar-thumb: initial;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  overflow: overlay;
+}
+
+.scrollbar-thin.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.scrollbar-thin.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-thumb-rounded-none::-webkit-scrollbar-thumb {
+  border-radius: 0;
+}
+
+.scrollbar-track-rounded-none::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+.scrollbar-thumb-rounded-sm::-webkit-scrollbar-thumb {
+  border-radius: 0.125rem;
+}
+
+.scrollbar-track-rounded-sm::-webkit-scrollbar-track {
+  border-radius: 0.125rem;
+}
+
+.scrollbar-thumb-rounded-default::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+}
+
+.scrollbar-track-rounded-default::-webkit-scrollbar-track {
+  border-radius: 0.25rem;
+}
+
+.scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
+  border-radius: 0.375rem;
+}
+
+.scrollbar-track-rounded-md::-webkit-scrollbar-track {
+  border-radius: 0.375rem;
+}
+
+.scrollbar-thumb-rounded-lg::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+}
+
+.scrollbar-track-rounded-lg::-webkit-scrollbar-track {
+  border-radius: 0.5rem;
+}
+
+.scrollbar-thumb-rounded-xl::-webkit-scrollbar-thumb {
+  border-radius: 0.75rem;
+}
+
+.scrollbar-track-rounded-xl::-webkit-scrollbar-track {
+  border-radius: 0.75rem;
+}
+
+.scrollbar-thumb-rounded-2xl::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+}
+
+.scrollbar-track-rounded-2xl::-webkit-scrollbar-track {
+  border-radius: 1rem;
+}
+
+.scrollbar-thumb-rounded-3xl::-webkit-scrollbar-thumb {
+  border-radius: 1.5rem;
+}
+
+.scrollbar-track-rounded-3xl::-webkit-scrollbar-track {
+  border-radius: 1.5rem;
+}
+
+.scrollbar-thumb-rounded-full::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+}
+
+.scrollbar-track-rounded-full::-webkit-scrollbar-track {
+  border-radius: 9999px;
+}
+
+.scrollbar-track-transparent {
+  --scrollbar-track: transparent !important;
+}
+
+.scrollbar-thumb-transparent {
+  --scrollbar-thumb: transparent !important;
+}
+
+.hover\:scrollbar-thumb-transparent::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: transparent !important;
+}
+
+.scrollbar-track-white {
+  --scrollbar-track: #ffffff !important;
+}
+
+.scrollbar-thumb-white {
+  --scrollbar-thumb: #ffffff !important;
+}
+
+.hover\:scrollbar-thumb-white::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #ffffff !important;
+}
+
+.scrollbar-track-black {
+  --scrollbar-track: #000000 !important;
+}
+
+.scrollbar-thumb-black {
+  --scrollbar-thumb: #000000 !important;
+}
+
+.hover\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #000000 !important;
+}
+
+.scrollbar-track-gray-50 {
+  --scrollbar-track: #f9fafb !important;
+}
+
+.scrollbar-thumb-gray-50 {
+  --scrollbar-thumb: #f9fafb !important;
+}
+
+.hover\:scrollbar-thumb-gray-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f9fafb !important;
+}
+
+.scrollbar-track-gray-100 {
+  --scrollbar-track: #f4f5f7 !important;
+}
+
+.scrollbar-thumb-gray-100 {
+  --scrollbar-thumb: #f4f5f7 !important;
+}
+
+.hover\:scrollbar-thumb-gray-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f4f5f7 !important;
+}
+
+.scrollbar-track-gray-200 {
+  --scrollbar-track: #e5e7eb !important;
+}
+
+.scrollbar-thumb-gray-200 {
+  --scrollbar-thumb: #e5e7eb !important;
+}
+
+.hover\:scrollbar-thumb-gray-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e5e7eb !important;
+}
+
+.scrollbar-track-gray-300 {
+  --scrollbar-track: #d2d6dc !important;
+}
+
+.scrollbar-thumb-gray-300 {
+  --scrollbar-thumb: #d2d6dc !important;
+}
+
+.hover\:scrollbar-thumb-gray-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #d2d6dc !important;
+}
+
+.scrollbar-track-gray-400 {
+  --scrollbar-track: #9fa6b2 !important;
+}
+
+.scrollbar-thumb-gray-400 {
+  --scrollbar-thumb: #9fa6b2 !important;
+}
+
+.hover\:scrollbar-thumb-gray-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #9fa6b2 !important;
+}
+
+.scrollbar-track-gray-500 {
+  --scrollbar-track: #6b7280 !important;
+}
+
+.scrollbar-thumb-gray-500 {
+  --scrollbar-thumb: #6b7280 !important;
+}
+
+.hover\:scrollbar-thumb-gray-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #6b7280 !important;
+}
+
+.scrollbar-track-gray-600 {
+  --scrollbar-track: #4b5563 !important;
+}
+
+.scrollbar-thumb-gray-600 {
+  --scrollbar-thumb: #4b5563 !important;
+}
+
+.hover\:scrollbar-thumb-gray-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #4b5563 !important;
+}
+
+.scrollbar-track-gray-700 {
+  --scrollbar-track: #374151 !important;
+}
+
+.scrollbar-thumb-gray-700 {
+  --scrollbar-thumb: #374151 !important;
+}
+
+.hover\:scrollbar-thumb-gray-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #374151 !important;
+}
+
+.scrollbar-track-gray-800 {
+  --scrollbar-track: #252f3f !important;
+}
+
+.scrollbar-thumb-gray-800 {
+  --scrollbar-thumb: #252f3f !important;
+}
+
+.hover\:scrollbar-thumb-gray-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #252f3f !important;
+}
+
+.scrollbar-track-gray-900 {
+  --scrollbar-track: #161e2e !important;
+}
+
+.scrollbar-thumb-gray-900 {
+  --scrollbar-thumb: #161e2e !important;
+}
+
+.hover\:scrollbar-thumb-gray-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #161e2e !important;
+}
+
+.scrollbar-track-cool-gray-50 {
+  --scrollbar-track: #fbfdfe !important;
+}
+
+.scrollbar-thumb-cool-gray-50 {
+  --scrollbar-thumb: #fbfdfe !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fbfdfe !important;
+}
+
+.scrollbar-track-cool-gray-100 {
+  --scrollbar-track: #f1f5f9 !important;
+}
+
+.scrollbar-thumb-cool-gray-100 {
+  --scrollbar-thumb: #f1f5f9 !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f1f5f9 !important;
+}
+
+.scrollbar-track-cool-gray-200 {
+  --scrollbar-track: #e2e8f0 !important;
+}
+
+.scrollbar-thumb-cool-gray-200 {
+  --scrollbar-thumb: #e2e8f0 !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e2e8f0 !important;
+}
+
+.scrollbar-track-cool-gray-300 {
+  --scrollbar-track: #cfd8e3 !important;
+}
+
+.scrollbar-thumb-cool-gray-300 {
+  --scrollbar-thumb: #cfd8e3 !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #cfd8e3 !important;
+}
+
+.scrollbar-track-cool-gray-400 {
+  --scrollbar-track: #97a6ba !important;
+}
+
+.scrollbar-thumb-cool-gray-400 {
+  --scrollbar-thumb: #97a6ba !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #97a6ba !important;
+}
+
+.scrollbar-track-cool-gray-500 {
+  --scrollbar-track: #64748b !important;
+}
+
+.scrollbar-thumb-cool-gray-500 {
+  --scrollbar-thumb: #64748b !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #64748b !important;
+}
+
+.scrollbar-track-cool-gray-600 {
+  --scrollbar-track: #475569 !important;
+}
+
+.scrollbar-thumb-cool-gray-600 {
+  --scrollbar-thumb: #475569 !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #475569 !important;
+}
+
+.scrollbar-track-cool-gray-700 {
+  --scrollbar-track: #364152 !important;
+}
+
+.scrollbar-thumb-cool-gray-700 {
+  --scrollbar-thumb: #364152 !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #364152 !important;
+}
+
+.scrollbar-track-cool-gray-800 {
+  --scrollbar-track: #27303f !important;
+}
+
+.scrollbar-thumb-cool-gray-800 {
+  --scrollbar-thumb: #27303f !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #27303f !important;
+}
+
+.scrollbar-track-cool-gray-900 {
+  --scrollbar-track: #1a202e !important;
+}
+
+.scrollbar-thumb-cool-gray-900 {
+  --scrollbar-thumb: #1a202e !important;
+}
+
+.hover\:scrollbar-thumb-cool-gray-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #1a202e !important;
+}
+
+.scrollbar-track-red-50 {
+  --scrollbar-track: #fdf2f2 !important;
+}
+
+.scrollbar-thumb-red-50 {
+  --scrollbar-thumb: #fdf2f2 !important;
+}
+
+.hover\:scrollbar-thumb-red-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fdf2f2 !important;
+}
+
+.scrollbar-track-red-100 {
+  --scrollbar-track: #fde8e8 !important;
+}
+
+.scrollbar-thumb-red-100 {
+  --scrollbar-thumb: #fde8e8 !important;
+}
+
+.hover\:scrollbar-thumb-red-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fde8e8 !important;
+}
+
+.scrollbar-track-red-200 {
+  --scrollbar-track: #fbd5d5 !important;
+}
+
+.scrollbar-thumb-red-200 {
+  --scrollbar-thumb: #fbd5d5 !important;
+}
+
+.hover\:scrollbar-thumb-red-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fbd5d5 !important;
+}
+
+.scrollbar-track-red-300 {
+  --scrollbar-track: #f8b4b4 !important;
+}
+
+.scrollbar-thumb-red-300 {
+  --scrollbar-thumb: #f8b4b4 !important;
+}
+
+.hover\:scrollbar-thumb-red-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f8b4b4 !important;
+}
+
+.scrollbar-track-red-400 {
+  --scrollbar-track: #f98080 !important;
+}
+
+.scrollbar-thumb-red-400 {
+  --scrollbar-thumb: #f98080 !important;
+}
+
+.hover\:scrollbar-thumb-red-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f98080 !important;
+}
+
+.scrollbar-track-red-500 {
+  --scrollbar-track: #f05252 !important;
+}
+
+.scrollbar-thumb-red-500 {
+  --scrollbar-thumb: #f05252 !important;
+}
+
+.hover\:scrollbar-thumb-red-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f05252 !important;
+}
+
+.scrollbar-track-red-600 {
+  --scrollbar-track: #e02424 !important;
+}
+
+.scrollbar-thumb-red-600 {
+  --scrollbar-thumb: #e02424 !important;
+}
+
+.hover\:scrollbar-thumb-red-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e02424 !important;
+}
+
+.scrollbar-track-red-700 {
+  --scrollbar-track: #c81e1e !important;
+}
+
+.scrollbar-thumb-red-700 {
+  --scrollbar-thumb: #c81e1e !important;
+}
+
+.hover\:scrollbar-thumb-red-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #c81e1e !important;
+}
+
+.scrollbar-track-red-800 {
+  --scrollbar-track: #9b1c1c !important;
+}
+
+.scrollbar-thumb-red-800 {
+  --scrollbar-thumb: #9b1c1c !important;
+}
+
+.hover\:scrollbar-thumb-red-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #9b1c1c !important;
+}
+
+.scrollbar-track-red-900 {
+  --scrollbar-track: #771d1d !important;
+}
+
+.scrollbar-thumb-red-900 {
+  --scrollbar-thumb: #771d1d !important;
+}
+
+.hover\:scrollbar-thumb-red-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #771d1d !important;
+}
+
+.scrollbar-track-orange-50 {
+  --scrollbar-track: #fff8f1 !important;
+}
+
+.scrollbar-thumb-orange-50 {
+  --scrollbar-thumb: #fff8f1 !important;
+}
+
+.hover\:scrollbar-thumb-orange-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fff8f1 !important;
+}
+
+.scrollbar-track-orange-100 {
+  --scrollbar-track: #feecdc !important;
+}
+
+.scrollbar-thumb-orange-100 {
+  --scrollbar-thumb: #feecdc !important;
+}
+
+.hover\:scrollbar-thumb-orange-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #feecdc !important;
+}
+
+.scrollbar-track-orange-200 {
+  --scrollbar-track: #fcd9bd !important;
+}
+
+.scrollbar-thumb-orange-200 {
+  --scrollbar-thumb: #fcd9bd !important;
+}
+
+.hover\:scrollbar-thumb-orange-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fcd9bd !important;
+}
+
+.scrollbar-track-orange-300 {
+  --scrollbar-track: #fdba8c !important;
+}
+
+.scrollbar-thumb-orange-300 {
+  --scrollbar-thumb: #fdba8c !important;
+}
+
+.hover\:scrollbar-thumb-orange-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fdba8c !important;
+}
+
+.scrollbar-track-orange-400 {
+  --scrollbar-track: #ff8a4c !important;
+}
+
+.scrollbar-thumb-orange-400 {
+  --scrollbar-thumb: #ff8a4c !important;
+}
+
+.hover\:scrollbar-thumb-orange-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #ff8a4c !important;
+}
+
+.scrollbar-track-orange-500 {
+  --scrollbar-track: #ff5a1f !important;
+}
+
+.scrollbar-thumb-orange-500 {
+  --scrollbar-thumb: #ff5a1f !important;
+}
+
+.hover\:scrollbar-thumb-orange-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #ff5a1f !important;
+}
+
+.scrollbar-track-orange-600 {
+  --scrollbar-track: #d03801 !important;
+}
+
+.scrollbar-thumb-orange-600 {
+  --scrollbar-thumb: #d03801 !important;
+}
+
+.hover\:scrollbar-thumb-orange-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #d03801 !important;
+}
+
+.scrollbar-track-orange-700 {
+  --scrollbar-track: #b43403 !important;
+}
+
+.scrollbar-thumb-orange-700 {
+  --scrollbar-thumb: #b43403 !important;
+}
+
+.hover\:scrollbar-thumb-orange-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #b43403 !important;
+}
+
+.scrollbar-track-orange-800 {
+  --scrollbar-track: #8a2c0d !important;
+}
+
+.scrollbar-thumb-orange-800 {
+  --scrollbar-thumb: #8a2c0d !important;
+}
+
+.hover\:scrollbar-thumb-orange-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #8a2c0d !important;
+}
+
+.scrollbar-track-orange-900 {
+  --scrollbar-track: #73230d !important;
+}
+
+.scrollbar-thumb-orange-900 {
+  --scrollbar-thumb: #73230d !important;
+}
+
+.hover\:scrollbar-thumb-orange-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #73230d !important;
+}
+
+.scrollbar-track-yellow-50 {
+  --scrollbar-track: #fdfdea !important;
+}
+
+.scrollbar-thumb-yellow-50 {
+  --scrollbar-thumb: #fdfdea !important;
+}
+
+.hover\:scrollbar-thumb-yellow-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fdfdea !important;
+}
+
+.scrollbar-track-yellow-100 {
+  --scrollbar-track: #fdf6b2 !important;
+}
+
+.scrollbar-thumb-yellow-100 {
+  --scrollbar-thumb: #fdf6b2 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fdf6b2 !important;
+}
+
+.scrollbar-track-yellow-200 {
+  --scrollbar-track: #fce96a !important;
+}
+
+.scrollbar-thumb-yellow-200 {
+  --scrollbar-thumb: #fce96a !important;
+}
+
+.hover\:scrollbar-thumb-yellow-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fce96a !important;
+}
+
+.scrollbar-track-yellow-300 {
+  --scrollbar-track: #faca15 !important;
+}
+
+.scrollbar-thumb-yellow-300 {
+  --scrollbar-thumb: #faca15 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #faca15 !important;
+}
+
+.scrollbar-track-yellow-400 {
+  --scrollbar-track: #e3a008 !important;
+}
+
+.scrollbar-thumb-yellow-400 {
+  --scrollbar-thumb: #e3a008 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e3a008 !important;
+}
+
+.scrollbar-track-yellow-500 {
+  --scrollbar-track: #c27803 !important;
+}
+
+.scrollbar-thumb-yellow-500 {
+  --scrollbar-thumb: #c27803 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #c27803 !important;
+}
+
+.scrollbar-track-yellow-600 {
+  --scrollbar-track: #9f580a !important;
+}
+
+.scrollbar-thumb-yellow-600 {
+  --scrollbar-thumb: #9f580a !important;
+}
+
+.hover\:scrollbar-thumb-yellow-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #9f580a !important;
+}
+
+.scrollbar-track-yellow-700 {
+  --scrollbar-track: #8e4b10 !important;
+}
+
+.scrollbar-thumb-yellow-700 {
+  --scrollbar-thumb: #8e4b10 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #8e4b10 !important;
+}
+
+.scrollbar-track-yellow-800 {
+  --scrollbar-track: #723b13 !important;
+}
+
+.scrollbar-thumb-yellow-800 {
+  --scrollbar-thumb: #723b13 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #723b13 !important;
+}
+
+.scrollbar-track-yellow-900 {
+  --scrollbar-track: #633112 !important;
+}
+
+.scrollbar-thumb-yellow-900 {
+  --scrollbar-thumb: #633112 !important;
+}
+
+.hover\:scrollbar-thumb-yellow-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #633112 !important;
+}
+
+.scrollbar-track-green-50 {
+  --scrollbar-track: #f3faf7 !important;
+}
+
+.scrollbar-thumb-green-50 {
+  --scrollbar-thumb: #f3faf7 !important;
+}
+
+.hover\:scrollbar-thumb-green-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f3faf7 !important;
+}
+
+.scrollbar-track-green-100 {
+  --scrollbar-track: #def7ec !important;
+}
+
+.scrollbar-thumb-green-100 {
+  --scrollbar-thumb: #def7ec !important;
+}
+
+.hover\:scrollbar-thumb-green-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #def7ec !important;
+}
+
+.scrollbar-track-green-200 {
+  --scrollbar-track: #bcf0da !important;
+}
+
+.scrollbar-thumb-green-200 {
+  --scrollbar-thumb: #bcf0da !important;
+}
+
+.hover\:scrollbar-thumb-green-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #bcf0da !important;
+}
+
+.scrollbar-track-green-300 {
+  --scrollbar-track: #84e1bc !important;
+}
+
+.scrollbar-thumb-green-300 {
+  --scrollbar-thumb: #84e1bc !important;
+}
+
+.hover\:scrollbar-thumb-green-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #84e1bc !important;
+}
+
+.scrollbar-track-green-400 {
+  --scrollbar-track: #31c48d !important;
+}
+
+.scrollbar-thumb-green-400 {
+  --scrollbar-thumb: #31c48d !important;
+}
+
+.hover\:scrollbar-thumb-green-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #31c48d !important;
+}
+
+.scrollbar-track-green-500 {
+  --scrollbar-track: #0e9f6e !important;
+}
+
+.scrollbar-thumb-green-500 {
+  --scrollbar-thumb: #0e9f6e !important;
+}
+
+.hover\:scrollbar-thumb-green-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #0e9f6e !important;
+}
+
+.scrollbar-track-green-600 {
+  --scrollbar-track: #057a55 !important;
+}
+
+.scrollbar-thumb-green-600 {
+  --scrollbar-thumb: #057a55 !important;
+}
+
+.hover\:scrollbar-thumb-green-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #057a55 !important;
+}
+
+.scrollbar-track-green-700 {
+  --scrollbar-track: #046c4e !important;
+}
+
+.scrollbar-thumb-green-700 {
+  --scrollbar-thumb: #046c4e !important;
+}
+
+.hover\:scrollbar-thumb-green-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #046c4e !important;
+}
+
+.scrollbar-track-green-800 {
+  --scrollbar-track: #03543f !important;
+}
+
+.scrollbar-thumb-green-800 {
+  --scrollbar-thumb: #03543f !important;
+}
+
+.hover\:scrollbar-thumb-green-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #03543f !important;
+}
+
+.scrollbar-track-green-900 {
+  --scrollbar-track: #014737 !important;
+}
+
+.scrollbar-thumb-green-900 {
+  --scrollbar-thumb: #014737 !important;
+}
+
+.hover\:scrollbar-thumb-green-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #014737 !important;
+}
+
+.scrollbar-track-teal-50 {
+  --scrollbar-track: #edfafa !important;
+}
+
+.scrollbar-thumb-teal-50 {
+  --scrollbar-thumb: #edfafa !important;
+}
+
+.hover\:scrollbar-thumb-teal-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #edfafa !important;
+}
+
+.scrollbar-track-teal-100 {
+  --scrollbar-track: #d5f5f6 !important;
+}
+
+.scrollbar-thumb-teal-100 {
+  --scrollbar-thumb: #d5f5f6 !important;
+}
+
+.hover\:scrollbar-thumb-teal-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #d5f5f6 !important;
+}
+
+.scrollbar-track-teal-200 {
+  --scrollbar-track: #afecef !important;
+}
+
+.scrollbar-thumb-teal-200 {
+  --scrollbar-thumb: #afecef !important;
+}
+
+.hover\:scrollbar-thumb-teal-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #afecef !important;
+}
+
+.scrollbar-track-teal-300 {
+  --scrollbar-track: #7edce2 !important;
+}
+
+.scrollbar-thumb-teal-300 {
+  --scrollbar-thumb: #7edce2 !important;
+}
+
+.hover\:scrollbar-thumb-teal-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #7edce2 !important;
+}
+
+.scrollbar-track-teal-400 {
+  --scrollbar-track: #16bdca !important;
+}
+
+.scrollbar-thumb-teal-400 {
+  --scrollbar-thumb: #16bdca !important;
+}
+
+.hover\:scrollbar-thumb-teal-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #16bdca !important;
+}
+
+.scrollbar-track-teal-500 {
+  --scrollbar-track: #0694a2 !important;
+}
+
+.scrollbar-thumb-teal-500 {
+  --scrollbar-thumb: #0694a2 !important;
+}
+
+.hover\:scrollbar-thumb-teal-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #0694a2 !important;
+}
+
+.scrollbar-track-teal-600 {
+  --scrollbar-track: #047481 !important;
+}
+
+.scrollbar-thumb-teal-600 {
+  --scrollbar-thumb: #047481 !important;
+}
+
+.hover\:scrollbar-thumb-teal-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #047481 !important;
+}
+
+.scrollbar-track-teal-700 {
+  --scrollbar-track: #036672 !important;
+}
+
+.scrollbar-thumb-teal-700 {
+  --scrollbar-thumb: #036672 !important;
+}
+
+.hover\:scrollbar-thumb-teal-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #036672 !important;
+}
+
+.scrollbar-track-teal-800 {
+  --scrollbar-track: #05505c !important;
+}
+
+.scrollbar-thumb-teal-800 {
+  --scrollbar-thumb: #05505c !important;
+}
+
+.hover\:scrollbar-thumb-teal-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #05505c !important;
+}
+
+.scrollbar-track-teal-900 {
+  --scrollbar-track: #014451 !important;
+}
+
+.scrollbar-thumb-teal-900 {
+  --scrollbar-thumb: #014451 !important;
+}
+
+.hover\:scrollbar-thumb-teal-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #014451 !important;
+}
+
+.scrollbar-track-blue-50 {
+  --scrollbar-track: #ebf5ff !important;
+}
+
+.scrollbar-thumb-blue-50 {
+  --scrollbar-thumb: #ebf5ff !important;
+}
+
+.hover\:scrollbar-thumb-blue-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #ebf5ff !important;
+}
+
+.scrollbar-track-blue-100 {
+  --scrollbar-track: #e1effe !important;
+}
+
+.scrollbar-thumb-blue-100 {
+  --scrollbar-thumb: #e1effe !important;
+}
+
+.hover\:scrollbar-thumb-blue-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e1effe !important;
+}
+
+.scrollbar-track-blue-200 {
+  --scrollbar-track: #c3ddfd !important;
+}
+
+.scrollbar-thumb-blue-200 {
+  --scrollbar-thumb: #c3ddfd !important;
+}
+
+.hover\:scrollbar-thumb-blue-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #c3ddfd !important;
+}
+
+.scrollbar-track-blue-300 {
+  --scrollbar-track: #a4cafe !important;
+}
+
+.scrollbar-thumb-blue-300 {
+  --scrollbar-thumb: #a4cafe !important;
+}
+
+.hover\:scrollbar-thumb-blue-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #a4cafe !important;
+}
+
+.scrollbar-track-blue-400 {
+  --scrollbar-track: #76a9fa !important;
+}
+
+.scrollbar-thumb-blue-400 {
+  --scrollbar-thumb: #76a9fa !important;
+}
+
+.hover\:scrollbar-thumb-blue-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #76a9fa !important;
+}
+
+.scrollbar-track-blue-500 {
+  --scrollbar-track: #3f83f8 !important;
+}
+
+.scrollbar-thumb-blue-500 {
+  --scrollbar-thumb: #3f83f8 !important;
+}
+
+.hover\:scrollbar-thumb-blue-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #3f83f8 !important;
+}
+
+.scrollbar-track-blue-600 {
+  --scrollbar-track: #1c64f2 !important;
+}
+
+.scrollbar-thumb-blue-600 {
+  --scrollbar-thumb: #1c64f2 !important;
+}
+
+.hover\:scrollbar-thumb-blue-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #1c64f2 !important;
+}
+
+.scrollbar-track-blue-700 {
+  --scrollbar-track: #1a56db !important;
+}
+
+.scrollbar-thumb-blue-700 {
+  --scrollbar-thumb: #1a56db !important;
+}
+
+.hover\:scrollbar-thumb-blue-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #1a56db !important;
+}
+
+.scrollbar-track-blue-800 {
+  --scrollbar-track: #1e429f !important;
+}
+
+.scrollbar-thumb-blue-800 {
+  --scrollbar-thumb: #1e429f !important;
+}
+
+.hover\:scrollbar-thumb-blue-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #1e429f !important;
+}
+
+.scrollbar-track-blue-900 {
+  --scrollbar-track: #233876 !important;
+}
+
+.scrollbar-thumb-blue-900 {
+  --scrollbar-thumb: #233876 !important;
+}
+
+.hover\:scrollbar-thumb-blue-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #233876 !important;
+}
+
+.scrollbar-track-indigo-50 {
+  --scrollbar-track: #f0f5ff !important;
+}
+
+.scrollbar-thumb-indigo-50 {
+  --scrollbar-thumb: #f0f5ff !important;
+}
+
+.hover\:scrollbar-thumb-indigo-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f0f5ff !important;
+}
+
+.scrollbar-track-indigo-100 {
+  --scrollbar-track: #e5edff !important;
+}
+
+.scrollbar-thumb-indigo-100 {
+  --scrollbar-thumb: #e5edff !important;
+}
+
+.hover\:scrollbar-thumb-indigo-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e5edff !important;
+}
+
+.scrollbar-track-indigo-200 {
+  --scrollbar-track: #cddbfe !important;
+}
+
+.scrollbar-thumb-indigo-200 {
+  --scrollbar-thumb: #cddbfe !important;
+}
+
+.hover\:scrollbar-thumb-indigo-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #cddbfe !important;
+}
+
+.scrollbar-track-indigo-300 {
+  --scrollbar-track: #b4c6fc !important;
+}
+
+.scrollbar-thumb-indigo-300 {
+  --scrollbar-thumb: #b4c6fc !important;
+}
+
+.hover\:scrollbar-thumb-indigo-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #b4c6fc !important;
+}
+
+.scrollbar-track-indigo-400 {
+  --scrollbar-track: #8da2fb !important;
+}
+
+.scrollbar-thumb-indigo-400 {
+  --scrollbar-thumb: #8da2fb !important;
+}
+
+.hover\:scrollbar-thumb-indigo-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #8da2fb !important;
+}
+
+.scrollbar-track-indigo-500 {
+  --scrollbar-track: #6875f5 !important;
+}
+
+.scrollbar-thumb-indigo-500 {
+  --scrollbar-thumb: #6875f5 !important;
+}
+
+.hover\:scrollbar-thumb-indigo-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #6875f5 !important;
+}
+
+.scrollbar-track-indigo-600 {
+  --scrollbar-track: #5850ec !important;
+}
+
+.scrollbar-thumb-indigo-600 {
+  --scrollbar-thumb: #5850ec !important;
+}
+
+.hover\:scrollbar-thumb-indigo-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #5850ec !important;
+}
+
+.scrollbar-track-indigo-700 {
+  --scrollbar-track: #5145cd !important;
+}
+
+.scrollbar-thumb-indigo-700 {
+  --scrollbar-thumb: #5145cd !important;
+}
+
+.hover\:scrollbar-thumb-indigo-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #5145cd !important;
+}
+
+.scrollbar-track-indigo-800 {
+  --scrollbar-track: #42389d !important;
+}
+
+.scrollbar-thumb-indigo-800 {
+  --scrollbar-thumb: #42389d !important;
+}
+
+.hover\:scrollbar-thumb-indigo-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #42389d !important;
+}
+
+.scrollbar-track-indigo-900 {
+  --scrollbar-track: #362f78 !important;
+}
+
+.scrollbar-thumb-indigo-900 {
+  --scrollbar-thumb: #362f78 !important;
+}
+
+.hover\:scrollbar-thumb-indigo-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #362f78 !important;
+}
+
+.scrollbar-track-purple-50 {
+  --scrollbar-track: #f6f5ff !important;
+}
+
+.scrollbar-thumb-purple-50 {
+  --scrollbar-thumb: #f6f5ff !important;
+}
+
+.hover\:scrollbar-thumb-purple-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f6f5ff !important;
+}
+
+.scrollbar-track-purple-100 {
+  --scrollbar-track: #edebfe !important;
+}
+
+.scrollbar-thumb-purple-100 {
+  --scrollbar-thumb: #edebfe !important;
+}
+
+.hover\:scrollbar-thumb-purple-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #edebfe !important;
+}
+
+.scrollbar-track-purple-200 {
+  --scrollbar-track: #dcd7fe !important;
+}
+
+.scrollbar-thumb-purple-200 {
+  --scrollbar-thumb: #dcd7fe !important;
+}
+
+.hover\:scrollbar-thumb-purple-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #dcd7fe !important;
+}
+
+.scrollbar-track-purple-300 {
+  --scrollbar-track: #cabffd !important;
+}
+
+.scrollbar-thumb-purple-300 {
+  --scrollbar-thumb: #cabffd !important;
+}
+
+.hover\:scrollbar-thumb-purple-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #cabffd !important;
+}
+
+.scrollbar-track-purple-400 {
+  --scrollbar-track: #ac94fa !important;
+}
+
+.scrollbar-thumb-purple-400 {
+  --scrollbar-thumb: #ac94fa !important;
+}
+
+.hover\:scrollbar-thumb-purple-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #ac94fa !important;
+}
+
+.scrollbar-track-purple-500 {
+  --scrollbar-track: #9061f9 !important;
+}
+
+.scrollbar-thumb-purple-500 {
+  --scrollbar-thumb: #9061f9 !important;
+}
+
+.hover\:scrollbar-thumb-purple-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #9061f9 !important;
+}
+
+.scrollbar-track-purple-600 {
+  --scrollbar-track: #7e3af2 !important;
+}
+
+.scrollbar-thumb-purple-600 {
+  --scrollbar-thumb: #7e3af2 !important;
+}
+
+.hover\:scrollbar-thumb-purple-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #7e3af2 !important;
+}
+
+.scrollbar-track-purple-700 {
+  --scrollbar-track: #6c2bd9 !important;
+}
+
+.scrollbar-thumb-purple-700 {
+  --scrollbar-thumb: #6c2bd9 !important;
+}
+
+.hover\:scrollbar-thumb-purple-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #6c2bd9 !important;
+}
+
+.scrollbar-track-purple-800 {
+  --scrollbar-track: #5521b5 !important;
+}
+
+.scrollbar-thumb-purple-800 {
+  --scrollbar-thumb: #5521b5 !important;
+}
+
+.hover\:scrollbar-thumb-purple-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #5521b5 !important;
+}
+
+.scrollbar-track-purple-900 {
+  --scrollbar-track: #4a1d96 !important;
+}
+
+.scrollbar-thumb-purple-900 {
+  --scrollbar-thumb: #4a1d96 !important;
+}
+
+.hover\:scrollbar-thumb-purple-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #4a1d96 !important;
+}
+
+.scrollbar-track-pink-50 {
+  --scrollbar-track: #fdf2f8 !important;
+}
+
+.scrollbar-thumb-pink-50 {
+  --scrollbar-thumb: #fdf2f8 !important;
+}
+
+.hover\:scrollbar-thumb-pink-50::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fdf2f8 !important;
+}
+
+.scrollbar-track-pink-100 {
+  --scrollbar-track: #fce8f3 !important;
+}
+
+.scrollbar-thumb-pink-100 {
+  --scrollbar-thumb: #fce8f3 !important;
+}
+
+.hover\:scrollbar-thumb-pink-100::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fce8f3 !important;
+}
+
+.scrollbar-track-pink-200 {
+  --scrollbar-track: #fad1e8 !important;
+}
+
+.scrollbar-thumb-pink-200 {
+  --scrollbar-thumb: #fad1e8 !important;
+}
+
+.hover\:scrollbar-thumb-pink-200::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #fad1e8 !important;
+}
+
+.scrollbar-track-pink-300 {
+  --scrollbar-track: #f8b4d9 !important;
+}
+
+.scrollbar-thumb-pink-300 {
+  --scrollbar-thumb: #f8b4d9 !important;
+}
+
+.hover\:scrollbar-thumb-pink-300::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f8b4d9 !important;
+}
+
+.scrollbar-track-pink-400 {
+  --scrollbar-track: #f17eb8 !important;
+}
+
+.scrollbar-thumb-pink-400 {
+  --scrollbar-thumb: #f17eb8 !important;
+}
+
+.hover\:scrollbar-thumb-pink-400::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #f17eb8 !important;
+}
+
+.scrollbar-track-pink-500 {
+  --scrollbar-track: #e74694 !important;
+}
+
+.scrollbar-thumb-pink-500 {
+  --scrollbar-thumb: #e74694 !important;
+}
+
+.hover\:scrollbar-thumb-pink-500::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #e74694 !important;
+}
+
+.scrollbar-track-pink-600 {
+  --scrollbar-track: #d61f69 !important;
+}
+
+.scrollbar-thumb-pink-600 {
+  --scrollbar-thumb: #d61f69 !important;
+}
+
+.hover\:scrollbar-thumb-pink-600::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #d61f69 !important;
+}
+
+.scrollbar-track-pink-700 {
+  --scrollbar-track: #bf125d !important;
+}
+
+.scrollbar-thumb-pink-700 {
+  --scrollbar-thumb: #bf125d !important;
+}
+
+.hover\:scrollbar-thumb-pink-700::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #bf125d !important;
+}
+
+.scrollbar-track-pink-800 {
+  --scrollbar-track: #99154b !important;
+}
+
+.scrollbar-thumb-pink-800 {
+  --scrollbar-thumb: #99154b !important;
+}
+
+.hover\:scrollbar-thumb-pink-800::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #99154b !important;
+}
+
+.scrollbar-track-pink-900 {
+  --scrollbar-track: #751a3d !important;
+}
+
+.scrollbar-thumb-pink-900 {
+  --scrollbar-thumb: #751a3d !important;
+}
+
+.hover\:scrollbar-thumb-pink-900::-webkit-scrollbar-thumb:hover {
+  --scrollbar-thumb: #751a3d !important;
 }
 
 .shadow-outline-white {

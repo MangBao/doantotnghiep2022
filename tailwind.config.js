@@ -47,6 +47,7 @@ module.exports = {
     },
 
     variants: {
+        scrollbar: ['rounded'],
         opacity: ["responsive", "hover", "focus", "disabled"],
         backgroundColor: [
             "hover",
@@ -76,6 +77,7 @@ module.exports = {
     },
 
     plugins: [
+        require('tailwind-scrollbar'),
         require("@tailwindcss/ui"),
         require("tailwindcss-multi-theme"),
         require("@tailwindcss/custom-forms"),

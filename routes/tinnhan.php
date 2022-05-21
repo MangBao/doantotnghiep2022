@@ -5,7 +5,7 @@ use App\Http\Controllers\TinNhanController;
 
 Route::prefix('tinnhan')->group(function () {
     Route::get('/', [
-        'as' => 'tinnhan.index',
+        'as' => 'tinnhan.tinnhan',
         'uses' => TinNhanController::class . '@index'
     ]);
 

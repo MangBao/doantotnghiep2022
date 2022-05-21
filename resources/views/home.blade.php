@@ -21,7 +21,8 @@
                 {{ date('H') > 17 ? 'tối vui vẻ 🌜' : (date('H') > 12 ? 'chiều mát mẻ ⛅️' : 'sáng tốt lành 🍀') }}</span>
         </div>
     </a>
-    <span class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
+    <span
+        class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple pl-5">
         <div class="flex items-center">
             {{-- <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -38,5 +39,37 @@
             </div>
         </div>
     </span>
+    <script>
+        const city = document.querySelector("#city");
+        const cityName = document.querySelector("#cityName");
+        const Temp = document.querySelector("#temp");
+        const main = document.querySelector("#main");
+        const discription = document.querySelector("#discription");
+        const image = document.querySelector("#image");
+        weatherUpdate = (city) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open(
+                "GET",
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cad7ec124945dcfff04e457e76760d90`
+            );
+            // in place of appid enter your open weather API Key
+            // You can create it for free
+            // https://home.openweathermap.org/users/sign_up
 
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 404) {
+                    alert("Place not found");
+                } else {
+                    var data = JSON.parse(xhr.response);
+                    cityName.innerHTML = data.name;
+                    Temp.innerHTML = `${Math.round(data.main.temp - 273.15)}°C`;
+                    main.innerHTML = data.weather[0].main;
+                    discription.innerHTML = data.weather[0].description;
+                    image.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+                }
+            };
+        };
+        weatherUpdate("Nha Trang");
+    </script>
 @endsection

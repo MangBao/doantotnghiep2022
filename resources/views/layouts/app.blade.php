@@ -38,7 +38,7 @@
 
             @include('partials.navbar.main-navbar')
 
-            <main class="h-full overflow-y-auto">
+            <main class="h-full scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
                 <div class="container px-6 mx-auto grid mb-19">
 
                     @yield('content')
