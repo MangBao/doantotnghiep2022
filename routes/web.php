@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GiangVien;
+use App\Http\Controllers\LichThiSVController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +17,10 @@ use App\Models\GiangVien;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'homepage',
+    'uses' => LichThiSVController::class . '@homepage'
+]);
 
 Route::get('/logout', function () {
     GiangVien::find(Auth::user()->id)->update([

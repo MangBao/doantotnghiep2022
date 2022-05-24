@@ -107,7 +107,7 @@
                             </td>
                         </tr>
                         <div id="popup-modal-{{ $pt->phongthi_id }}" tabindex="-1"
-                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bgModal ">
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-full bg-black bg-opacity-50 ">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto mx-auto">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-44 animate-fadeInDown">

@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    {{ __('Login') }}
+    {{ __('Cán bộ đăng nhập') }}
 @endsection
 
 @section('images')
@@ -12,7 +12,7 @@
 @endsection
 
 @section('form-title')
-    {{ __('Login') }}
+    {{ __('Cán bộ đăng nhập') }}
 @endsection
 
 @section('message')
@@ -71,13 +71,13 @@
                 </a>
             </p>
         @endif
-        @if (Route::has('register'))
+        {{-- @if (Route::has('register'))
             <p class="mt-1 text-sm dark:text-gray-200">
                 {{ __("Don't have an account?") }}
                 <a class="font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{{ route('register') }}">
                     {{ __('Register') }}
                 </a>
             </p>
-        @endif
+        @endif --}}
     </form>
 @endsection
