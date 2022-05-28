@@ -44,7 +44,7 @@
             <p>
                 <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                     href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('Quên mật khẩu?') }}
                 </a>
             </p>
         @endif

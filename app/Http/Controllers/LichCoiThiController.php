@@ -34,6 +34,7 @@ class LichCoiThiController extends Controller
         $this->htmlOptionGiangVien2 = '';
         $this->middleware('auth');
         $this->middleware('permission');
+        $this->middleware('sinhvien');
     }
     /**
      * Display a listing of the resource.
@@ -155,9 +156,9 @@ class LichCoiThiController extends Controller
 
     protected function khoiTaoGV($lichthis) {
         for ($i=0; $i < count($lichthis); $i++) {
-            $lichthis[$i]->giangvien_id1 = '';
+            $lichthis[$i]->user_id1 = '';
             $lichthis[$i]->tengiangvien1 = '';
-            $lichthis[$i]->giangvien_id2 = '';
+            $lichthis[$i]->user_id2 = '';
             $lichthis[$i]->tengiangvien2 = '';
         }
         return $lichthis;
@@ -168,9 +169,9 @@ class LichCoiThiController extends Controller
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
-                    if($lichthis[$i]->giangvien_id1 == '') {
+                    if($lichthis[$i]->user_id1 == '') {
                         if($lichthis[$i]->bomon_id == $giangviens[$j]->bomon_id && count($giangviens[$j]->lichcoithi) == 0 ) {
-                            $lichthis[$i]->giangvien_id1 = $giangviens[$j]->giangvien_id;
+                            $lichthis[$i]->user_id1 = $giangviens[$j]->user_id;
                             $lichthis[$i]->tengiangvien1 = $giangviens[$j]->name;
                             array_push($giangviens[$j]->lichcoithi, (object)[
                                 'ngaythi' => $lichthis[$i]->ngaythi,
@@ -182,7 +183,7 @@ class LichCoiThiController extends Controller
                             if(count($giangviens[$j]->lichcoithi) <= $countLichGV ) {
                                 $checkTrungLich = $this->checkTrungLich($giangviens[$j]->lichcoithi, $lichthis[$i]->ngaythi, $lichthis[$i]->cathi_id);
                                 if(!$checkTrungLich) {
-                                    $lichthis[$i]->giangvien_id1 = $giangviens[$j]->giangvien_id;
+                                    $lichthis[$i]->user_id1 = $giangviens[$j]->user_id;
                                     $lichthis[$i]->tengiangvien1 = $giangviens[$j]->name;
                                     array_push($giangviens[$j]->lichcoithi, (object)[
                                         'ngaythi' => $lichthis[$i]->ngaythi,
@@ -205,12 +206,12 @@ class LichCoiThiController extends Controller
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
-                    if($lichthis[$i]->giangvien_id2 == '') {
+                    if($lichthis[$i]->user_id2 == '') {
 
                         if(count($giangviens[$j]->lichcoithi) <= ($countLichGV - 1) ) {
                             $checkTrungLich = $this->checkTrungLich($giangviens[$j]->lichcoithi, $lichthis[$i]->ngaythi, $lichthis[$i]->cathi_id);
                             if(!$checkTrungLich) {
-                                $lichthis[$i]->giangvien_id2 = $giangviens[$j]->giangvien_id;
+                                $lichthis[$i]->user_id2 = $giangviens[$j]->user_id;
                                 $lichthis[$i]->tengiangvien2 = $giangviens[$j]->name;
                                 array_push($giangviens[$j]->lichcoithi, (object)[
                                     'ngaythi' => $lichthis[$i]->ngaythi,
@@ -242,7 +243,7 @@ class LichCoiThiController extends Controller
     protected function checkLichThiGV2($lichthi)
     {
         foreach ($lichthi as $lich) {
-            if($lich->giangvien_id2 == '') {
+            if($lich->user_id2 == '') {
                 return true;
             }
         }
@@ -252,7 +253,7 @@ class LichCoiThiController extends Controller
     public function checkLichThiGV1($lichthi)
     {
         foreach ($lichthi as $lich) {
-            if($lich->giangvien_id1 == '') {
+            if($lich->user_id1 == '') {
                 return true;
             }
         }
@@ -267,8 +268,8 @@ class LichCoiThiController extends Controller
     public function cuatoi()
     {
         $lichcoithi = $this->lichcoithiDB
-            ->where('giangvien_id1', Auth::user()->giangvien_id)
-            ->orWhere('giangvien_id2', Auth::user()->giangvien_id)
+            ->where('user_id1', Auth::user()->user_id)
+            ->orWhere('user_id2', Auth::user()->user_id)
             ->orderBy('ngaythi', 'asc')->paginate(4);
 
         $giangvien = $this->giangvien->find(Auth::user()->id);
@@ -314,9 +315,9 @@ class LichCoiThiController extends Controller
             $lichthi->giobatdau = $data['giobatdau'][$i];
             $lichthi->gioketthuc = $data['gioketthuc'][$i];
             $lichthi->ngaythi = $data['ngaythi'][$i];
-            $lichthi->giangvien_id1 = $data['giangvien_id1'][$i];
+            $lichthi->user_id1 = $data['user_id1'][$i];
             $lichthi->tengiangvien1 = $data['tengiangvien1'][$i];
-            $lichthi->giangvien_id2 = $data['giangvien_id2'][$i];
+            $lichthi->user_id2 = $data['user_id2'][$i];
             $lichthi->tengiangvien2 = $data['tengiangvien2'][$i];
             $lichthi->tenmonthi = $data['tenmonthi'][$i];
             $lichthi->phongthi_id = $data['phongthi_id'][$i];
@@ -343,20 +344,20 @@ class LichCoiThiController extends Controller
         $giangvien = $this->giangvien::all();
 
         foreach ($giangvien as $gv) {
-            if($gv->giangvien_id == $lichthi->giangvien_id1) {
-                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->giangvien_id.'" selected>'.$gv->name.'</option>';
+            if($gv->user_id == $lichthi->user_id1) {
+                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->user_id.'" selected>'.$gv->name.'</option>';
             }
             else{
-                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->giangvien_id.'" >'.$gv->name.'</option>';
+                $this->htmlOptionGiangVien1 .= '<option value="'.$gv->user_id.'" >'.$gv->name.'</option>';
             }
 
         }
         foreach ($giangvien as $gv) {
-            if($gv->giangvien_id == $lichthi->giangvien_id2) {
-                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->giangvien_id.'" selected>'.$gv->name.'</option>';
+            if($gv->user_id == $lichthi->user_id2) {
+                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->user_id.'" selected>'.$gv->name.'</option>';
             }
             else {
-                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->giangvien_id.'" >'.$gv->name.'</option>';
+                $this->htmlOptionGiangVien2 .= '<option value="'.$gv->user_id.'" >'.$gv->name.'</option>';
             }
         }
 
@@ -377,9 +378,9 @@ class LichCoiThiController extends Controller
     public function update(Request $request, $id)
     {
         $this->lichcoithiDB->find($id)->update([
-            'giangvien_id1' => $request->giangvien_id1,
+            'user_id1' => $request->user_id1,
             'tengiangvien1' => $request->tengiangvien1,
-            'giangvien_id2' => $request->giangvien_id2,
+            'user_id2' => $request->user_id2,
             'tengiangvien2' => $request->tengiangvien2,
         ]);
 

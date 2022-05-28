@@ -17,7 +17,7 @@ class Message extends Model
 
     public function getListUser()
     {
-        $getUser = \DB::table('users')->whereNotIn('giangvien_id', [Auth::user()->giangvien_id])->get();
+        $getUser = \DB::table('users')->whereNotIn('user_id', [Auth::user()->user_id])->where('role_id', '!=', 4)->get();
         if ($getUser) {
             return $getUser;
         }

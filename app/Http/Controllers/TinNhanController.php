@@ -17,6 +17,7 @@ class TinNhanController extends Controller
         $this->output = '';
         $this->outputchat = '';
         $this->middleware('auth');
+        $this->middleware('sinhvien');
     }
 
     public function index()
@@ -27,11 +28,11 @@ class TinNhanController extends Controller
     public function getlistuser()
     {
         $getUser = Message::getListUser()->toArray();
-        $outgoing_id = Auth::user()->giangvien_id;
+        $outgoing_id = Auth::user()->user_id;
 
         for($i = 0; $i < count($getUser); $i++) {
-            $mess = \DB::select("SELECT * FROM messages WHERE (incoming_msg_id = {$getUser[$i]->giangvien_id}
-                                OR outgoing_msg_id = {$getUser[$i]->giangvien_id}) AND (outgoing_msg_id = {$outgoing_id}
+            $mess = \DB::select("SELECT * FROM messages WHERE (incoming_msg_id = {$getUser[$i]->user_id}
+                                OR outgoing_msg_id = {$getUser[$i]->user_id}) AND (outgoing_msg_id = {$outgoing_id}
                                 OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1");
 
             (count($mess) > 0 && isset($mess[0])) ? $result = $mess[0]->msg : $result ="No message available";
@@ -44,9 +45,9 @@ class TinNhanController extends Controller
                 $you = "";
             }
             ($getUser[$i]->trangthaihoatdong == 0) ? $offline = "offline" : $offline = "";
-            ($outgoing_id == $getUser[$i]->giangvien_id) ? $hid_me = "hide" : $hid_me = "";
+            ($outgoing_id == $getUser[$i]->user_id) ? $hid_me = "hide" : $hid_me = "";
 
-            $this->output .= '<a class="js-user dark:border-gray-500" href="'. route('tinnhan.viewchat', [$getUser[$i]->giangvien_id]) .'">
+            $this->output .= '<a class="js-user dark:border-gray-500" href="'. route('tinnhan.viewchat', [$getUser[$i]->user_id]) .'">
                         <div class="content">
                         <img src="/images/'. $getUser[$i]->avatar .'" alt="">
                         <div class="details">
@@ -64,9 +65,9 @@ class TinNhanController extends Controller
     public function viewchat($id)
     {
         $incoming_id = $id;
-        $outgoing_id = Auth::user()->giangvien_id;
+        $outgoing_id = Auth::user()->user_id;
 
-        $user = \DB::select("SELECT * FROM users WHERE giangvien_id = {$incoming_id}");
+        $user = \DB::select("SELECT * FROM users WHERE user_id = {$incoming_id}");
 
         return view('tinnhan.chat', [
             'user' => $user[0]
@@ -75,7 +76,7 @@ class TinNhanController extends Controller
 
     public function getstatususer($id)
     {
-        $user = \DB::select("SELECT * FROM users WHERE giangvien_id = {$id}");
+        $user = \DB::select("SELECT * FROM users WHERE user_id = {$id}");
         if($user[0]->trangthaihoatdong == 0) {
             return "Offline now";
         }else{
@@ -86,11 +87,11 @@ class TinNhanController extends Controller
     public function getchat($id)
     {
         $incoming_id = $id;
-        $outgoing_id = Auth::user()->giangvien_id;
+        $outgoing_id = Auth::user()->user_id;
 
-        $user = \DB::select("SELECT * FROM users WHERE giangvien_id = {$incoming_id}");
+        $user = \DB::select("SELECT * FROM users WHERE user_id = {$incoming_id}");
         // dd($user);
-        $mess = \DB::select("SELECT * FROM messages LEFT JOIN users ON users.giangvien_id = messages.outgoing_msg_id
+        $mess = \DB::select("SELECT * FROM messages LEFT JOIN users ON users.user_id = messages.outgoing_msg_id
                             WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
                             OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id");
         $trashicon = '<i class="fa-solid fa-trash-can"></i>';
@@ -134,7 +135,7 @@ class TinNhanController extends Controller
     public function insertchat(Request $request)
     {
         $incoming_id = $request->input('incoming_id');
-        $outgoing_id = Auth::user()->giangvien_id;
+        $outgoing_id = Auth::user()->user_id;
         $mess = $request->input('message');
 
         if(!empty($mess)) {

@@ -21,9 +21,9 @@ class CreateLichcoithi extends Migration
             $table->time('gioketthuc');
             $table->string('phongthi_id', 10);
             $table->date('ngaythi');
-            $table->string('giangvien_id1', 10);
+            $table->string('user_id1', 10);
             $table->string('tengiangvien1', 100);
-            $table->string('giangvien_id2', 10);
+            $table->string('user_id2', 10);
             $table->string('tengiangvien2', 100);
             $table->string('bomon_id', 10);
             $table->timestamps();

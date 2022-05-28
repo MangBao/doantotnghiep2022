@@ -12,6 +12,7 @@ class PhanQuyenController extends Controller
     public function __construct(Roles $roles) {
         $this->role = $roles;
         $this->middleware('auth');
+        $this->middleware('sinhvien');
     }
 
     public function index()

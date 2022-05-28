@@ -36,12 +36,12 @@
                         <form method="POST" action="{{ route('giangvien.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-full mb-3">
-                                <label class="text-gray-700 dark:text-gray-400" for="giangvien_id">
+                                <label class="text-gray-700 dark:text-gray-400" for="user_id">
                                     {{ __('Mã giảng viên') }}
                                 </label>
-                                <input type="text" name="giangvien_id"
+                                <input type="text" name="user_id"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $giangvien_id }}" required readonly autocomplete="giangvien_id" />
+                                    value="{{ $user_id }}" required readonly autocomplete="user_id" />
                             </div>
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tengiangvien">

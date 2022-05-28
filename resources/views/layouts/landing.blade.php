@@ -30,7 +30,7 @@
                 x-transition:leave-end="opacity-0">
                 <div class="flex">
                     <div>
-                        <p class="font-bold">{{ __('Alert') }}</p>
+                        <p class="font-bold">{{ __('Thông báo') }}</p>
                         <p class="text-sm">
                             {{ session('success') ? session('success') : session('error') }}
                         </p>

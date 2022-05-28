@@ -23,7 +23,7 @@
                     </div>
                     <form action="#" class="typing-area">
                         @csrf
-                        <input type="text" class="incoming_id" name="incoming_id" value="{{ $user->giangvien_id }}" hidden>
+                        <input type="text" class="incoming_id" name="incoming_id" value="{{ $user->user_id }}" hidden>
                         <input type="text" name="message" class="input-field" placeholder="Type a message here..."
                             autocomplete="off">
                         <button><i class="fab fa-telegram-plane"></i></button>

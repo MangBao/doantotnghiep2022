@@ -26,6 +26,7 @@ class MonHocController extends Controller
         $this->middleware('auth');
         $this->middleware('permission');
         $this->middleware('khoa');
+        $this->middleware('sinhvien');
     }
     /**
      * Display a listing of the resource.
@@ -39,7 +40,7 @@ class MonHocController extends Controller
         $user = $this->user->join('bomon', 'users.bomon_id', '=', 'bomon.bomon_id')
             ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
             ->select('users.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
-            ->where('users.giangvien_id', '=', Auth::user()->giangvien_id)
+            ->where('users.user_id', '=', Auth::user()->user_id)
             ->get();
 
         $mhs = $this->monhoc->join('bomon', 'monhoc.bomon_id', '=', 'bomon.bomon_id')
@@ -76,7 +77,7 @@ class MonHocController extends Controller
 
         $user = $this->user->join('bomon', 'users.bomon_id', '=', 'bomon.bomon_id')
             ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
-            ->where('users.giangvien_id', Auth::user()->giangvien_id)
+            ->where('users.user_id', Auth::user()->user_id)
             ->get();
 
         foreach($bms as $bm){

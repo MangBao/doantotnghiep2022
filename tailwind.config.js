@@ -38,6 +38,10 @@ module.exports = {
                 0: "0",
                 xl: "36rem",
             },
+            minHeight: {
+                0: "0",
+                400: "400px",
+            },
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },

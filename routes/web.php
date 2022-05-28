@@ -21,7 +21,10 @@ Route::get('/', [
     'as' => 'homepage',
     'uses' => LichThiSVController::class . '@homepage'
 ]);
-
+Route::get('/homepage', [
+    'as' => 'homepage',
+    'uses' => LichThiSVController::class . '@homepage'
+]);
 Route::get('/logout', function () {
     GiangVien::find(Auth::user()->id)->update([
         'trangthaihoatdong' => 0,
@@ -32,8 +35,8 @@ Route::get('/logout', function () {
 
 Route::view('home', 'home')
 	->name('home')
-	->middleware(['auth']);
+	->middleware(['auth', 'sinhvien']);
 
 Route::view('profile', 'profile.edit')
 	->name('profile.edit')
-	->middleware(['auth']);
+	->middleware(['auth', 'sinhvien']);

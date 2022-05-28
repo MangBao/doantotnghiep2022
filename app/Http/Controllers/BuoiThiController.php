@@ -37,6 +37,7 @@ class BuoiThiController extends Controller
         $this->htmlOptionPhongThi = '';
         $this->middleware('auth');
         $this->middleware('permission');
+        $this->middleware('sinhvien');
 
     }
     /**

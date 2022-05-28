@@ -23,11 +23,12 @@ class DonXinVangController extends Controller
         $this->bomon = $bomon;
         $this->middleware('auth');
         $this->middleware('permission');
+        $this->middleware('sinhvien');
     }
 
     public function index()
     {
-        $donxinvangs = $this->donxinvang->join('users', 'users.id', '=', 'donxinvang.giangvien_id')
+        $donxinvangs = $this->donxinvang->join('users', 'users.id', '=', 'donxinvang.user_id')
                         ->join('bomon', 'bomon.bomon_id', '=', 'users.bomon_id')
                         ->join('khoa', 'khoa.khoa_id', '=', 'bomon.khoa_id')
                         ->select('donxinvang.*', 'users.name', 'khoa.khoa_id', 'bomon.bomon_id')
@@ -48,7 +49,7 @@ class DonXinVangController extends Controller
     }
 
     public function store(Request $request){
-        $donxinvang = $this->donxinvang->where('giangvien_id', Auth::user()->id)->first();
+        $donxinvang = $this->donxinvang->where('user_id', Auth::user()->id)->first();
 
         if(!is_null($donxinvang)) {
             if($donxinvang->cathi_id == $request->cathi_id && $donxinvang->ngayxinvang == $request->ngayxinvang){
@@ -58,7 +59,7 @@ class DonXinVangController extends Controller
 
         $this->donxinvang->create([
             'lydo' => $request->lydo,
-            'giangvien_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'cathi_id' => $request->cathi_id,
             'ngayxinvang' => $request->ngayxinvang,
         ]);

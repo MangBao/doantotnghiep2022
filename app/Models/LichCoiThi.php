@@ -14,8 +14,8 @@ class LichCoiThi extends Model
         'id', 'tenmonthi',
         'cathi_id', 'giobatdau',
         'gioketthuc', 'phongthi_id',
-        'ngaythi', 'giangvien_id1',
-        'tengiangvien1', 'giangvien_id2',
+        'ngaythi', 'user_id1',
+        'tengiangvien1', 'user_id2',
         'tengiangvien2','bomon_id',
         'created_at', 'updated_at'
     ];
@@ -31,7 +31,7 @@ class LichCoiThi extends Model
 
     public static function getGiangVien()
     {
-        $giangvien = \DB::select('select * from users');
+        $giangvien = \DB::select('select * from users where not role_id = 4');
         if($giangvien)
             return $giangvien;
         else

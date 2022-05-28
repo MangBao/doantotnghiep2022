@@ -23,6 +23,7 @@ class QuanLyRoutesController extends Controller
         $this->htmlOptionRole = '';
         $this->htmlOptionRoute = '';
         $this->middleware('auth');
+        $this->middleware('sinhvien');
     }
     /**
      * Display a listing of the resource.

@@ -85,7 +85,8 @@ INSERT INTO `monhoc` (`monhoc_id`, `tenmonhoc`, `bomon_id`, `created_at`, `updat
 INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
 ('','Adminitrastor', NULL, NULL),
 ('','Thư ký khoa', NULL, NULL),
-('','Giảng viên', NULL, NULL);
+('','Giảng viên', NULL, NULL),
+('','Sinh viên', NULL, NULL);
 
 INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_at`) VALUES
 ('','giangvien.index', 'View giảng viên', NULL, NULL),
@@ -151,7 +152,7 @@ INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_
 
 ('','tinnhan.index', 'List tin nhắn', NULL, NULL);
 
-INSERT INTO `users` (`id`, `giangvien_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`, `trangthaihoatdong`) VALUES
+INSERT INTO `users` (`id`, `user_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`, `trangthaihoatdong`) VALUES
 ('', '60130041', 'mangbao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Mang Bảo', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'baobao.jpg', 'MTT', NULL, NULL, NULL, NULL, 1, 0, 0),
 ('', '2004017', 'nguyenkhaccuong@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Khắc Cường', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'user_avt.png', 'MTT', NULL, NULL, NULL, NULL, 2, 0, 0),
 ('', '2019025', 'nguyenhuynhhuy@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Nguyễn Huỳnh Huy', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'user_avt.png', 'MTT', NULL, NULL, NULL, NULL, 3, 0, 0),

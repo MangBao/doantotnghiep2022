@@ -1,25 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountSVController;
+// use App\Http\Controllers\AccountSVController;
 use App\Http\Controllers\LichThiSVController;
+use App\Http\Controllers\SinhVienController;
 
 
-
-Route::get('/logup_process', [AccountSVController::class, 'LogupProcess']);
-Route::get('/login_process', [AccountSVController::class, 'LoginProcess']);
-Route::get('/logoutsv', [AccountSVController::class, 'LogoutProcess']);
+Route::get('/profilesv', [SinhVienController::class, 'profilesv'])->middleware('auth');
 
 Route::prefix('lichthisv')->group(function () {
     Route::get('/', [
         'as' => 'lichthisv.index',
         'uses' => LichThiSVController::class . '@index'
     ]);
+    Route::get('/lichcuatoi', [
+        'as' => 'lichthisv.lichcuatoi',
+        'uses' => LichThiSVController::class . '@lichcuatoi'
+    ]);
     Route::post('/updatethongbao', [
         'as' => 'lichthisv.updatethongbao',
-        'uses' => LichCoiThiController::class . '@updatethongbao'
+        'uses' => LichThiSVController::class . '@updatethongbao'
     ]);
-    Route::post('/store', [
+    Route::get('/store/{id}', [
         'as' => 'lichthisv.store',
         'uses' => LichThiSVController::class . '@store'
     ]);

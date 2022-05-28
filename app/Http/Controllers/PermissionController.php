@@ -13,6 +13,7 @@ class PermissionController extends Controller
         $this->roles = $roles;
         $this->middleware('auth');
         $this->middleware('permission');
+        $this->middleware('sinhvien');
     }
     /**
      * Display a listing of the resource.

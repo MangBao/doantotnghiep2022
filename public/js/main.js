@@ -68,20 +68,20 @@ $("#tenphongthi").on("keyup");
 
 // Function for auto set value tengiangvien in lichcoithi
 // Edit lich thi page
-$("#giangvien_id1")
+$("#user_id1")
     .change(function () {
         var str = "";
-        $("#giangvien_id1 option:selected").each(function () {
+        $("#user_id1 option:selected").each(function () {
             str += $(this).text() + " ";
         });
         $("#tengiangvien1").val(str);
     })
     .change();
 
-$("#giangvien_id2")
+$("#user_id2")
     .change(function () {
         var str = "";
-        $("#giangvien_id2 option:selected").each(function () {
+        $("#user_id2 option:selected").each(function () {
             str += $(this).text() + " ";
         });
         $("#tengiangvien2").val(str);

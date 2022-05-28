@@ -26,6 +26,7 @@ class GiangVienController extends Controller
         $this->roles = $roles;
         $this->middleware('auth');
         $this->middleware('permission');
+        $this->middleware('sinhvien');
     }
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class GiangVienController extends Controller
      */
     public function index()
     {
-        $gvs = $this->giangvien->latest()->paginate(8);
+        $gvs = $this->giangvien->where('role_id', '!=', 4)->orderBy('id', 'asc')->paginate(8);
         $dsq = $this->roles::all();
 
         $i = 1;
@@ -52,10 +53,10 @@ class GiangVienController extends Controller
      */
     public function create()
     {
-        $gvs = $this->giangvien::all();
+        $gvs = $this->giangvien::where('role_id', '!=', 4)->get();
         $dsq = $this->roles::all();
         $bm = $this->bomon::all();
-        $giangvien_id = '2022' . rand(100, 999);
+        $user_id = '2022' . rand(100, 999);
 
         // Option quyen
         foreach($dsq as $d){
@@ -67,14 +68,14 @@ class GiangVienController extends Controller
         }
         // Kiểm tra mã giảng viên trùng
         foreach($gvs as $gv) {
-            if($gv->giangvien_id == $giangvien_id){
-                $giangvien_id = '2022' . rand(100, 999);
+            if($gv->user_id == $user_id){
+                $user_id = '2022' . rand(100, 999);
             }
         }
 
         return view('giangvien.create', [
             'htmlOptionQuyen' => $this->htmlOptionQuyen,
-            'giangvien_id' => $giangvien_id,
+            'user_id' => $user_id,
             'htmlOptionBoMon' => $this->htmlOptionBoMon
         ]);
     }
@@ -88,6 +89,14 @@ class GiangVienController extends Controller
     public function store(Request $request)
     {
 
+        $gvs = $this->giangvien::where('role_id', '!=', 4)->get();
+
+        foreach($gvs as $gv) {
+            if($gv->user_id == $request->user_id){
+                return redirect()->back()->with('error', 'Mã giảng viên đã tồn tại');
+            }
+        }
+
         if($request->avatar){
             $avatar = $request->avatar;
             $avatar_name = $avatar->getClientOriginalName();
@@ -98,7 +107,7 @@ class GiangVienController extends Controller
         }
 
         $this->giangvien->create([
-            'giangvien_id' => $request->giangvien_id,
+            'user_id' => $request->user_id,
             'name' => $request->tengiangvien,
             'email' => $request->email,
             'connho' => $request->connho,
@@ -111,7 +120,7 @@ class GiangVienController extends Controller
             'role_id' => $request->quyen
         ]);
 
-        return redirect()->route('giangvien.index');
+        return redirect()->route('giangvien.index')->with('success', 'Thêm giảng viên thành công');
     }
 
     /**
@@ -180,7 +189,7 @@ class GiangVienController extends Controller
             'role_id' => $request->quyen
         ]);
 
-        return redirect()->route('giangvien.index');
+        return redirect()->route('giangvien.index')->with('success', 'Cập nhật thành công');
     }
 
     /**

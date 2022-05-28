@@ -22,7 +22,7 @@ class CheckKhoa
         $user = DB::table('users')
             ->join('bomon', 'users.bomon_id', '=', 'bomon.bomon_id')
             ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
-            ->where('users.giangvien_id', Auth::user()->giangvien_id)
+            ->where('users.user_id', Auth::user()->user_id)
             ->get();
         $mhs = DB::select('select * from monhoc m, bomon b, khoa k where m.bomon_id = b.bomon_id and b.khoa_id = k.khoa_id and monhoc_id = ?', [$request->id]);
 

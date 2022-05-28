@@ -18,7 +18,7 @@ class CreateLichthisinhvienTable extends Migration
             $table->foreign('lichthi_id')->references('id')->on('lichcoithi')->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger('sinhvien_id');
-            $table->foreign('sinhvien_id')->references('id')->on('sinhvien')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('sinhvien_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->primary(['lichthi_id', 'sinhvien_id']);
             $table->timestamps();

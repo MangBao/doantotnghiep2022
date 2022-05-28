@@ -11,7 +11,7 @@ class GiangVien extends Model
 
     protected $table = 'users';
     protected $fillable = [
-        'giangvien_id', 'name',
+        'user_id', 'name',
         'email', 'connho',
         'password', 'bomon_id',
         'ngaysinh', 'diachi',

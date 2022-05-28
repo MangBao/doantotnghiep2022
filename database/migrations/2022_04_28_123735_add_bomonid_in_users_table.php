@@ -14,7 +14,7 @@ class AddBomonidInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('bomon_id')->varChar(10);
+            $table->string('bomon_id')->varChar(10)->nullable();
             $table->foreign('bomon_id')->references('bomon_id')->on('bomon')->onDelete('cascade')->onUpdate('cascade');
         });
     }

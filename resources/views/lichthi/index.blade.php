@@ -2,48 +2,22 @@
 @section('contentHome')
     <div class="h-10"></div>
 
-    <div class="flex">
-        @if (session('sinhvien'))
+    <div class="container mx-auto grid">
+        @if (Auth::check() && Auth::user()->role_id == 4)
             <div class="mr-8 pt-3">
                 <a href="{{ route('lichthisv.lichcuatoi') }}"
                     class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Lịch của tôi
                 </a>
             </div>
-            <div class="mr-8 pt-3">
+            {{-- <div class="mr-8 pt-3">
                 <a href="{{ route('lichthisv.export') }}"
                     class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Export Lịch thi
                 </a>
-            </div>
+            </div> --}}
         @endif
-        @if (session('success'))
-            <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                role="alert">
-                <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <div>
-                    <span class="font-medium">{{ session('success') }}</span>
-                </div>
-            </div>
-        @elseif (session('error'))
-            <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                role="alert">
-                <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <div>
-                    <span class="font-medium">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
+
     </div>
     <div class="h-8 dark:bg-gray-700"></div>
     <div class="w-full overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19">
@@ -74,9 +48,11 @@
                         <th class="px-4 py-3 text-sm">
                             Cán bộ coi thi 2
                         </th>
-                        <th class="px-4 py-3 text-sm">
-                            Actions
-                        </th>
+                        @if (Auth::check() && Auth::user()->role_id == 4)
+                            <th class="px-4 py-3 text-sm">
+                                Actions
+                            </th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -113,21 +89,23 @@
                                 {{ $lt->tengiangvien2 }}
                             </td>
 
-                            <td class="px-4 py-3 text-sm">
-                                <div class="flex items-center space-x-4 text-sm">
-                                    <a href=""
-                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                        aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20">
-                                            <path
-                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                </div>
+                            @if (Auth::check() && Auth::user()->role_id == 4)
+                                <td class="px-4 py-3 text-sm">
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <a href="{{ route('lichthisv.store', [$lt->id]) }}"
+                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                            aria-label="Thêm">
+                                            <svg class="w-5 h-5" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                            </svg>
+                                        </a>
+                                    </div>
 
-                            </td>
+                                </td>
+                            @endif
+
                         </tr>
                     @endforeach
 

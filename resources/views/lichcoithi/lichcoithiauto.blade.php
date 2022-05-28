@@ -1,14 +1,15 @@
 @extends('layouts.app')
 @section('titleAdmin', 'Lịch coi thi tự động')
 @section('content')
-    <div class="h-10"></div>
+    @if (!is_null($lt_not_panigate))
+        <div class="h-10"></div>
 
-    <div class="flex">
-        <div class="mr-8 pt-3">
-            <form action="{{ route('lichcoithi.store') }}" method="POST">
-                @csrf
-                {{-- {{dd($lichthis);}} --}}
-                @if (!is_null($lt_not_panigate))
+        <div class="flex">
+            <div class="mr-8 pt-3">
+                <form action="{{ route('lichcoithi.store') }}" method="POST">
+                    @csrf
+                    {{-- {{dd($lichthis);}} --}}
+
                     @foreach ($lt_not_panigate as $lt)
                         <input type="hidden" name="id[]" value="{{ $lt->id }}">
                         <input type="hidden" name="tenmonthi[]" value="{{ $lt->tenmonhoc }}">
@@ -17,48 +18,24 @@
                         <input type="hidden" name="gioketthuc[]" value="{{ $lt->gioketthuc }}">
                         <input type="hidden" name="phongthi_id[]" value="{{ $lt->phongthi_id }}">
                         <input type="hidden" name="ngaythi[]" value="{{ $lt->ngaythi }}">
-                        <input type="hidden" name="giangvien_id1[]" value="{{ $lt->giangvien_id1 }}">
+                        <input type="hidden" name="user_id1[]" value="{{ $lt->user_id1 }}">
                         <input type="hidden" name="tengiangvien1[]" value="{{ $lt->tengiangvien1 }}">
-                        <input type="hidden" name="giangvien_id2[]" value="{{ $lt->giangvien_id2 }}">
+                        <input type="hidden" name="user_id2[]" value="{{ $lt->user_id2 }}">
                         <input type="hidden" name="tengiangvien2[]" value="{{ $lt->tengiangvien2 }}">
 
                         <input type="hidden" name="bomon_id[]" value="{{ $lt->bomon_id }}">
                     @endforeach
                     <input type="submit" value="Lưu lịch coi thi"
                         class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple cursor-pointer">
-                @endif
 
-            </form>
+                </form>
+            </div>
+            <div class="h-2"></div>
         </div>
-        @if (session('success'))
-            <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                role="alert">
-                <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <div>
-                    <span class="font-medium">{{ session('success') }}</span>
-                </div>
-            </div>
-        @elseif (session('error'))
-            <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                role="alert">
-                <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <div>
-                    <span class="font-medium">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
-    </div>
+
+    @endif
     <div class="h-8"></div>
+
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">

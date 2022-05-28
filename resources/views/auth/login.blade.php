@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    {{ __('Cán bộ đăng nhập') }}
+    {{ __('Đăng nhập hệ thống') }}
 @endsection
 
 @section('images')
@@ -12,7 +12,7 @@
 @endsection
 
 @section('form-title')
-    {{ __('Cán bộ đăng nhập') }}
+    {{ __('Đăng nhập hệ thống') }}
 @endsection
 
 @section('message')
@@ -29,7 +29,7 @@
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <label class="block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">{{ __('E-Mail Address') }}</span>
+            <span class="text-gray-700 dark:text-gray-400">{{ __('Địa chỉ email') }}</span>
             <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 @error('email') border-red-500 @enderror focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="{{ __('Email') }}" />
@@ -40,25 +40,20 @@
         </p>
         @enderror
         <label class="block mt-4 text-sm">
-            <span class="text-gray-700 dark:text-gray-400">{{ __('Password') }}</span>
+            <span class="text-gray-700 dark:text-gray-400">{{ __('Mật khẩu') }}</span>
             <input type="password" name="password" required autocomplete="current-password"
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 @error('password') border-red-500 @enderror focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="{{ __('Password') }}" />
+                placeholder="{{ __('Mật khẩu') }}" />
         </label>
         @error('password')
         <p class="text-red-500 text-xs italic mt-2">
             {{ $message }}
         </p>
         @enderror
-        <label class="mt-4 inline-flex items-center text-sm text-gray-700 dark:text-gray-200" for="remember">
-            <input type="checkbox" name="remember" id="remember" class="form-checkbox"
-                {{ old('remember') ? 'checked' : '' }}>
-            <span class="ml-2">{{ __('Remember Me') }}</span>
-        </label>
 
         <button type="submit"
             class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-            {{ __('Login') }}
+            {{ __('Đăng nhập') }}
         </button>
 
         <hr class="my-6" />
@@ -67,17 +62,17 @@
             <p>
                 <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                     href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('Quên mật khẩu?') }}
                 </a>
             </p>
         @endif
-        {{-- @if (Route::has('register'))
+        @if (Route::has('register'))
             <p class="mt-1 text-sm dark:text-gray-200">
-                {{ __("Don't have an account?") }}
+                {{ __("Bạn chưa có tài khoản?") }}
                 <a class="font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{{ route('register') }}">
-                    {{ __('Register') }}
+                    {{ __('đăng ký') }}
                 </a>
             </p>
-        @endif --}}
+        @endif
     </form>
 @endsection
