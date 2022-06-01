@@ -2,7 +2,7 @@
 @section('contentHome')
     <div class="h-10"></div>
 
-    <div class="container mx-auto grid">
+    <div class="container mx-auto flex">
         @if (Auth::check() && Auth::user()->role_id == 4)
             <form action="{{ route('lichthisv.updatethongbao') }}" method="POST">
                 @csrf
@@ -25,12 +25,12 @@
                     </button>
                 @endif
             </form>
-            {{-- <div class="mr-8 pt-3">
+            <div class="ml-8 pt-3">
                 <a href="{{ route('lichthisv.export') }}"
                     class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Export Lịch thi
                 </a>
-            </div> --}}
+            </div>
         @endif
 
     </div>

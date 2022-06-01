@@ -20,7 +20,8 @@ class ActivityByUser
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            $permission_user = \DB::select('SELECT * FROM users u, permission p, routes r WHERE u.role_id = p.role_id AND p.route_id = r.id AND p.status = 1 AND u.id = '.Auth::id());
+            $permission_user = \DB::select('SELECT * FROM users u, permission p, routes r WHERE u.role_id = p.role_id AND p.route_id = r.id AND p.status = 1 AND u.id = '.Auth::id().' AND NOT r.route_name = "tinnhan.index"');
+            // dd($permission_user);
             $route_name = [];
             foreach ($permission_user as $pu) {
                 $routeindex = explode(".", $pu->route_name);

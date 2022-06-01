@@ -10,6 +10,6 @@ class TinTuc extends Model
     use HasFactory;
     protected $table = 'tintuc';
     protected $fillable = [
-        'id', 'title', 'content1', 'image1', 'content2', 'image2', 'content3', 'image3', 'created_at', 'updated_at'
+        'id', 'user_id', 'title', 'heading1', 'content1', 'image1', 'heading2', 'content2', 'image2', 'heading3', 'content3', 'image3', 'created_at', 'updated_at'
     ];
 }

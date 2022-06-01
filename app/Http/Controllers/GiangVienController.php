@@ -174,7 +174,7 @@ class GiangVienController extends Controller
             Storage::disk('public')->putFileAs('images', $avatar, $avatar_name);
         }
         else{
-            $avatar_name = 'default.png';
+            $avatar_name = $gv->avatar;
         }
 
         $this->giangvien::find($id)->update([

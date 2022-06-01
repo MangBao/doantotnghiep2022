@@ -48,7 +48,7 @@
         @enderror
         <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{ __('Mật khẩu') }}</span>
-            <input type="password" name="password" required autocomplete="new-password"
+            <input type="password" name="password" required autocomplete="new-password" id="password"
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 @error('password') border-red-500 @enderror focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="{{ __('Mật khẩu') }}" />
         </label>
@@ -59,12 +59,13 @@
         @enderror
         <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{ __('Xác nhận mật khẩu') }}</span>
-            <input type="password" name="password_confirmation" required autocomplete="new-password"
+            <span id="message"></span>
+            <input type="password" name="password_confirmation" required autocomplete="new-password" id="confirm_password"
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="{{ __('Xác nhận mật khẩu') }}" />
         </label>
 
-        <button type="submit"
+        <button type="submit" id="submit"
             class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
             {{ __('Đăng ký') }}
         </button>
@@ -78,4 +79,15 @@
             </a>
         </p>
     </form>
+    <script>
+        $('#password, #confirm_password').on('keyup', function() {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#message').html('Mật khẩu khớp').css('color', 'green');
+                $('#submit').removeAttr('disabled');
+
+            } else
+                $('#message').html('Mật khẩu không khớp').css('color', 'red');
+                $('#submit').addAttr('disabled');
+        });
+    </script>
 @endsection

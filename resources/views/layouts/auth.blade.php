@@ -9,7 +9,7 @@
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Windmill Dashboard') }} | @yield('title', 'Windmill')</title>
+    <title>{{ config('app.name', 'Nha Trang University Dashboard') }} | @yield('title', 'NTU')</title>
 
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -22,6 +22,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="{{ asset('js/init-alpine.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }} "></script>
+
 </head>
 
 <body>

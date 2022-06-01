@@ -150,7 +150,12 @@ INSERT INTO `routes` (`id`, `route_name`, `route_title`, `created_at`, `updated_
 ('','phanquyen.create', 'Tạo quyền', NULL, NULL),
 ('','phanquyen.delete', 'Xóa quyền', NULL, NULL),
 
-('','tinnhan.index', 'List tin nhắn', NULL, NULL);
+('','tinnhan.index', 'List tin nhắn', NULL, NULL),
+
+('','tintuc.index', 'Danh sách tin tức', NULL, NULL),
+('','tintuc.store', 'Lưu tin tức', NULL, NULL),
+('','tintuc.create', 'Tạo tin tức', NULL, NULL),
+('','tintuc.delete', 'Xóa tin tức', NULL, NULL);
 
 INSERT INTO `users` (`id`, `user_id`, `email`, `password`, `name`, `connho`, `ngaysinh`, `diachi`, `sodienthoai`, `avatar`, `bomon_id`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`, `thongbaomail`, `trangthaihoatdong`) VALUES
 ('', '60130041', 'mangbao@gmail.com', '$2y$10$t6XbG4dcDi.DdOR6GLE7peezGjXdNou2ssYA55RKYiCKEOFGGBYF6', 'Mang Bảo', 0, '2000-01-13', 'Cam Ranh - Khánh Hòa', '0372978074', 'baobao.jpg', 'MTT', NULL, NULL, NULL, NULL, 1, 0, 0),
@@ -242,6 +247,11 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('1','49', '1', NULL, NULL),
 ('1','50', '1', NULL, NULL),
 ('1','51', '1', NULL, NULL),
+('1','52', '1', NULL, NULL),
+('1','53', '1', NULL, NULL),
+('1','54', '1', NULL, NULL),
+('1','55', '1', NULL, NULL),
+('1','56', '1', NULL, NULL),
 
 ('2','17', '1', NULL, NULL),
 ('2','18', '1', NULL, NULL),
@@ -269,12 +279,22 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('2','40', '1', NULL, NULL),
 ('2','41', '1', NULL, NULL),
 ('2','42', '1', NULL, NULL),
+('2','52', '1', NULL, NULL),
+('2','53', '1', NULL, NULL),
+('2','54', '1', NULL, NULL),
+('2','55', '1', NULL, NULL),
+('2','56', '1', NULL, NULL),
 
 ('3','32', '1', NULL, NULL),
 ('3','37', '1', NULL, NULL),
 ('3','38', '1', NULL, NULL),
 ('3','40', '1', NULL, NULL),
-('3','35', '1', NULL, NULL);
+('3','35', '1', NULL, NULL),
+('3','52', '1', NULL, NULL),
+('3','53', '1', NULL, NULL),
+('3','54', '1', NULL, NULL),
+('3','55', '1', NULL, NULL),
+('3','56', '1', NULL, NULL);
 
 INSERT INTO `buoithi` (`id`, `ngaythi`, `created_at`, `updated_at`) VALUES
 ('', '2022-04-04', NULL, NULL),
@@ -399,3 +419,11 @@ INSERT INTO `cathi_buoithi` (`buoithi_id`, `cathi_id`, `created_at`, `updated_at
 (23, 'CA03', NULL, NULL),
 (24, 'CA04', NULL, NULL),
 (25, 'CA05', NULL, NULL);
+
+INSERT INTO `tintuc` (`id`, `user_id`, `title`, `heading1`, `content1`, `image1`, `heading2`, `content2`, `image2`, `heading3`, `content3`, `image3`, `created_at`, `updated_at`) VALUES
+('', '1', 'Tuyển sinh các ngành', 'Tuyển sinh các ngành', 'Tuyển sinh các ngành', 'ntu-cac-nganh-tuyen-sinh-2020.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50'),
+('', '1', 'Chỉ tiêu tuyển sinh', 'Chỉ tiêu tuyển sinh', 'Chỉ tiêu tuyển sinh', 'ntu-chi-tieu-tuyen-sinh-2022.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50'),
+('', '1', 'Phương thức xét tuyển', 'Phương thức xét tuyển', 'Phương thức xét tuyển', 'phuong-thuc-xet-tuyen-2022_optimized.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50'),
+('', '1', 'The 6 technology conference', 'The 6 technology conference', 'The 6 technology conference', 'the-6-technology-conference.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50'),
+('', '1', 'Viettesol international convention 2022', 'Viettesol international convention 2022', 'Viettesol international convention 2022', 'viettesol-international-convention-2022-1.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50'),
+('', '1', 'Xét tuyển thẳng đại học chính quy', 'Xét tuyển thẳng đại học chính quy', 'Xét tuyển thẳng đại học chính quy', 'xet-tuyen-thang-dh-chinh-quy-2022.jpg', '', '', '', '', '', '', '2022-05-30 15:28:50', '2022-05-30 15:28:50');

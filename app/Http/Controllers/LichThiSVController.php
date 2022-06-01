@@ -10,6 +10,8 @@ use App\Models\LichCoiThi;
 use App\Models\BoMon;
 use App\Models\TinTuc;
 use App\Models\User;
+use App\Exports\LichThiSVExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LichThiSVController extends Controller
 {
@@ -30,10 +32,14 @@ class LichThiSVController extends Controller
     public function homepage()
     {
         $lichcoithi = $this->lichcoithi->orderBy('ngaythi', 'desc')->paginate(8);
+        $tintucSlide = $this->tintuc->orderBy('created_at', 'desc')->paginate(6);
+        $tintuc = $this->tintuc->orderBy('id', 'asc')->paginate(8);
         $i = 1;
         if(count($lichcoithi) > 0) {
             return view('welcome', [
                 'lichcoithi' => $lichcoithi,
+                'tts' => $tintucSlide,
+                'ttn' => $tintuc,
                 'i' => $i
             ]);
         }
@@ -46,6 +52,7 @@ class LichThiSVController extends Controller
     public function index()
     {
         $lichthisv = $this->lichthi->orderBy('sinhvien_id', 'desc')->get();
+
         if(count($lichthisv) > 0) {
             $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
             ->whereNotIn('lichcoithi.id',
@@ -54,9 +61,11 @@ class LichThiSVController extends Controller
             ->orderBy('lichcoithi.id', 'asc')
             ->paginate(8);
         }
-        $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+        else {
+            $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
             ->orderBy('lichcoithi.id', 'asc')
             ->paginate(8);
+        }
 
         $i = 1;
 
@@ -132,5 +141,10 @@ class LichThiSVController extends Controller
     {
         $this->lichthi->where('sinhvien_id', auth()->user()->id)->where('lichthi_id', $id)->delete();
         return redirect()->route('lichthisv.lichcuatoi')->with('success', 'Xóa lịch thi thành công');
+    }
+
+    public function export()
+    {
+        return Excel::download(new LichThiSVExport, 'lichthisv.xlsx');
     }
 }

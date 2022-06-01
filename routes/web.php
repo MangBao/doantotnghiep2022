@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GiangVien;
 use App\Http\Controllers\LichThiSVController;
+use App\Http\Controllers\SendMailController;
 
 
 /*
@@ -32,6 +33,13 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect('/');
 });
+
+Route::get('/send', [
+    'as' => 'send',
+    'uses' => SendMailController::class . '@send'
+]);
+
+Route::view('lienhe', 'lienhe')->name('lienhe');
 
 Route::view('home', 'home')
 	->name('home')

@@ -1,35 +1,20 @@
 @extends('layouts.landing')
-{{-- @section('titleAdmin', 'Phòng thi') --}}
+@section('titleHomepage', 'Home page')
 @section('contentHome')
     {{-- Slider --}}
     <div id="indicators-carousel" class="relative dark:bg-gray-800" data-carousel="static">
         <!-- Carousel wrapper -->
-        <div class="overflow-hidden relative h-48 sm:h-64 xl:h-80 2xl:h-96">
+        <div class="overflow-hidden relative h-28 sm:h-56 xl:h-96 ">
             <!-- Item 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                <img src="https://xuconcept.com/wp-content/uploads/2021/11/tai-hinh-nen-mien-phi.jpg"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://cdn.tgdd.vn/Files/2020/06/08/1261696/moi-tai-bo-hinh-nen-asus-rog-2020-moi-nhat_800x450.jpg"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://cdn.trangcongnghe.vn/uploads/posts/2017-01/moi-tai-ve-200-tam-anh-nen-doc-la-danh-cho-may-tinh-phan-4_1.jpeg"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-nen-4k-tuyet-dep-cho-may-tinh.jpg"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
-            <!-- Item 5 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="https://st.quantrimang.com/photos/image/2018/10/08/hinh-nen-may-tinh-1.jpg"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
-            </div>
+            @foreach ($tts as $tt)
+                <a href="{{ route('tintuc.show', [$tt->id]) }}">
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="/images/tintuc/{{ $tt->image1 }}" alt="{{ $tt->title }}"
+                            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2">
+                    </div>
+                </a>
+            @endforeach
+
         </div>
         <!-- Slider indicators -->
         <div class="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
@@ -78,156 +63,34 @@
         </div>
         <div class="h-4"></div>
         <div class="flex flex-wrap antialiased px-10" style="100vh">
-            <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
-                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee"
-                    class="w-full object-cover object-center rounded-lg shadow-md">
+            @foreach ($ttn as $tt)
+                <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
+                    <a href="{{route('tintuc.show', [$tt->id])}}">
+                        <img src="/images/tintuc/{{ $tt->image1 }}" alt=" random imgee"
+                        class="w-full object-cover object-center rounded-lg shadow-md h-72">
+                    </a>
+                    <div class="relative px-4 -mt-20">
+                        <a href="{{route('tintuc.show', [$tt->id])}}">
+                            <div class="bg-white p-6 rounded-lg shadow-lg">
+                                <div class="flex items-baseline">
+                                    <span
+                                        class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+                                        New
+                                    </span>
+                                </div>
 
-                <div class="relative px-4 -mt-24  ">
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <div class="flex items-baseline">
-                            <span
-                                class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                            </span>
-                            <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths &bull; 3 rooms
+                                <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{ $tt->title }}</h4>
+
+                                <div class="mt-1">
+                                    {{ date('l, M d, Y', strtotime($tt->created_at)) }}
+                                </div>
                             </div>
-                        </div>
-
-                        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
-
-                        <div class="mt-1">
-                            $1800
-                            <span class="text-gray-600 text-sm"> /wk</span>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-                            <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-                        </div>
+                        </a>
                     </div>
+
                 </div>
+            @endforeach
 
-            </div>
-            <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
-                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee"
-                    class="w-full object-cover object-center rounded-lg shadow-md">
-
-                <div class="relative px-4 -mt-24  ">
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <div class="flex items-baseline">
-                            <span
-                                class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                            </span>
-                            <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths &bull; 3 rooms
-                            </div>
-                        </div>
-
-                        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
-
-                        <div class="mt-1">
-                            $1800
-                            <span class="text-gray-600 text-sm"> /wk</span>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-                            <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
-                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee"
-                    class="w-full object-cover object-center rounded-lg shadow-md">
-
-                <div class="relative px-4 -mt-24  ">
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <div class="flex items-baseline">
-                            <span
-                                class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                            </span>
-                            <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths &bull; 3 rooms
-                            </div>
-                        </div>
-
-                        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
-
-                        <div class="mt-1">
-                            $1800
-                            <span class="text-gray-600 text-sm"> /wk</span>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-                            <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
-                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee"
-                    class="w-full object-cover object-center rounded-lg shadow-md">
-
-                <div class="relative px-4 -mt-24  ">
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <div class="flex items-baseline">
-                            <span
-                                class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                            </span>
-                            <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths &bull; 3 rooms
-                            </div>
-                        </div>
-
-                        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
-
-                        <div class="mt-1">
-                            $1800
-                            <span class="text-gray-600 text-sm"> /wk</span>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-                            <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="pb-6 px-5 flex flex-col w-full md:w-1/3 xl:w-1/4">
-                <img src="https://source.unsplash.com/random/350x350" alt=" random imgee"
-                    class="w-full object-cover object-center rounded-lg shadow-md">
-
-                <div class="relative px-4 -mt-24  ">
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <div class="flex items-baseline">
-                            <span
-                                class="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                            </span>
-                            <div class="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths &bull; 3 rooms
-                            </div>
-                        </div>
-
-                        <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">A random Title</h4>
-
-                        <div class="mt-1">
-                            $1800
-                            <span class="text-gray-600 text-sm"> /wk</span>
-                        </div>
-                        <div class="mt-4">
-                            <span class="text-teal-600 text-md font-semibold">4/5 ratings </span>
-                            <span class="text-sm text-gray-600">(based on 234 ratings)</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
     <div class="h-10"></div>
@@ -235,6 +98,8 @@
     <div class="sc-lichthi">
         <div class="title px-14">
             <h2 class="font-bold text-xl dark:text-gray-400">Lịch thi NTU</h2>
+            <div class="h-4"></div>
+
             <div class="w-full overflow-hidden rounded-lg shadow-xs mb-16">
                 <div class="w-full overflow-x-auto">
                     <table class="w-full whitespace-no-wrap">

@@ -10,12 +10,6 @@
                     Lịch của tôi
                 </a>
             </div>
-            {{-- <div class="mr-8 pt-3">
-                <a href="{{ route('lichthisv.export') }}"
-                    class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Export Lịch thi
-                </a>
-            </div> --}}
         @endif
 
     </div>

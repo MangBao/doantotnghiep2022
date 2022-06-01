@@ -90,7 +90,7 @@
                                 </label>
                                 <input type="file" name="avatar"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="{{ $gv->avatar }}" required autocomplete="avatar" />
+                                    value="" autocomplete="avatar" />
                             </div>
 
                             <div class="relative w-full mb-3 ">

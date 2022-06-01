@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-700">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="https://flowbite.com" class="flex items-center">
+        <a href="/" class="flex items-center">
             <img src="/images/logo-ntu.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden lg:block">Nha
                 Trang University</span>
@@ -32,23 +32,17 @@
                             <a href="/profilesv"
                                 class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                         </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                        </li>
+
                         <li>
                             <a href="{{ route('logout') }}"
-                                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a>
+                                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                {{ __('Đăng xuất') }}
+                            </a>
                         </li>
                     </ul>
                 </div>
             @else
-                <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                <ul class="hidden mt-4 md:flex md:space-x-8 md:mt-0 md:text-sm md:font-medium ">
                     <li>
                         <a href="/login"
                             class="px-5 py-1 text-white text-xs transition-colors duration-150 bg-purple-300 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
@@ -99,6 +93,16 @@
                     <a href="/home"
                         class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                         Cán bộ
+                    </a>
+                </li>
+                <li class="md:hidden flex justify-around">
+                    <a href="/login"
+                        class="px-5 py-1 text-white text-xs transition-colors duration-150 bg-purple-300 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Đăng nhập
+                    </a>
+                    <a href="/register"
+                        class="px-5 py-1 text-white text-xs transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-300 focus:outline-none focus:shadow-outline-purple">
+                        Đăng ký
                     </a>
                 </li>
                 <li>

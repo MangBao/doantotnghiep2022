@@ -9,10 +9,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Home page') }}</title>
+    <title>@yield('titleHomepage')</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.6/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     {{-- Scripts --}}
@@ -20,7 +22,7 @@
     <script src="{{ asset('js/init-alpine.js') }}"></script>
 </head>
 
-<body class="dark:bg-gray-700">
+<body class="dark:bg-gray-700 scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
     @if (session('success') || session('error'))
         <div x-data="{alert: true}" x-show="alert" class="fixed z-30 top-5 left-5">
             <div x-show="alert" @click.away="alert = false"
@@ -197,18 +199,6 @@
 
     <script src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }} "></script>
-
-    <script>
-        $('#password, #confirm_password').on('keyup', function() {
-            if ($('#password').val() == $('#confirm_password').val()) {
-                $('#message').html('Mật khẩu khớp').css('color', 'green');
-                $('#submit').removeAttr('disabled');
-
-            } else
-                $('#message').html('Mật khẩu không khớp').css('color', 'red');
-                $('#submit').addAttr('disabled');
-        });
-    </script>
 </body>
 
 </html>
