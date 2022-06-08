@@ -19,6 +19,8 @@ class UpdateUserPassword implements UpdatesUserPasswords
      */
     public function update($user, array $input)
     {
+        unset($user->route_name);
+        unset($user->route_active);
         Validator::make($input, [
             'current_password' => ['required', 'string'],
             'password' => $this->passwordRules(),
@@ -31,5 +33,13 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+
+        if($user->forceFill([
+            'password' => Hash::make($input['password']),
+        ])->save()){
+            session()->flash('success', 'Cập nhật thành công');
+        } else {
+            session()->flash('error', 'Cập nhật thất bại');
+        }
     }
 }

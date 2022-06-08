@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-700 fixed top-0 left-0 right-0 z-50 shadow-xl">
+<nav class="bg-white border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-700 fixed top-0 left-0 right-0 z-30 shadow-xl">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" class="flex items-center">
             <img src="/images/logo-ntu.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />

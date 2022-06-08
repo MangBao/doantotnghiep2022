@@ -30,7 +30,7 @@
 
 <body>
     @if (session('success') || session('error'))
-        <div x-data="{alert: true}" x-show="alert" class="fixed z-30 top-5 left-5">
+        <div x-data="{alert: true}" x-show="alert" class="fixed top-5 left-5 z-50">
             <div x-show="alert" @click.away="alert = false"
                 class="{{ session('success') ? 'border-green-600 bg-green-200 border-t-4 text-green-600' : 'border-red-600 bg-red-200 border-t-4 text-red-600' }} rounded px-4 py-3 shadow-md"
                 role="alert" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"

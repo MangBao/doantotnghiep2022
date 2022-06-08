@@ -47,6 +47,43 @@
                             </p>
                             @enderror
                         </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">{{ __('Ngày sinh') }}</span>
+                                <input type="date" name="ngaysinh" value="{{ old('ngaysinh') ?? auth()->user()->ngaysinh }}"
+                                    required autocomplete="ngaysinh"
+                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 @error('ngaysinh') border-red-500 @enderror focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    placeholder="{{ __('Ngày sinh') }}" />
+                            </label>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">{{ __('Địa chỉ') }}</span>
+                                <input type="text" name="diachi" value="{{ old('diachi') ?? auth()->user()->diachi }}"
+                                    required autocomplete="diachi"
+                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 @error('diachi') border-red-500 @enderror focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    placeholder="{{ __('Địa chỉ') }}" />
+                            </label>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">{{ __('Số điện thoại') }}</span>
+                                <input type="text" name="sodienthoai" value="{{ old('sodienthoai') ?? auth()->user()->sodienthoai }}"
+                                    required autocomplete="sodienthoai"
+                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 @error('sodienthoai') border-red-500 @enderror focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    placeholder="{{ __('Số điện thoại') }}" />
+                            </label>
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <label class="block mt-4 text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">{{ __('Ảnh đại diện') }}</span>
+                                <input type="file" name="avatar" value=""
+                                    autocomplete="avatar"
+                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 @error('avatar') border-red-500 @enderror focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                    placeholder="{{ __('Ảnh đại diện') }}" />
+                                <span>{{ old('avatar') ?? auth()->user()->avatar }}</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
