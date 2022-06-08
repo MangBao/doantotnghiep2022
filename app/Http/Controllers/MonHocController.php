@@ -33,7 +33,7 @@ class MonHocController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bms = $this->bomon::all();
 
@@ -43,12 +43,29 @@ class MonHocController extends Controller
             ->where('users.user_id', '=', Auth::user()->user_id)
             ->get();
 
-        $mhs = $this->monhoc->join('bomon', 'monhoc.bomon_id', '=', 'bomon.bomon_id')
-            ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
-            ->select('monhoc.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
-            ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
-            ->orderBy('monhoc.monhoc_id', 'asc')
-            ->paginate(8);
+        if($request->param){
+            $mhs = $this->monhoc->join('bomon', 'monhoc.bomon_id', '=', 'bomon.bomon_id')
+                        ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+                        ->select('monhoc.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
+                        ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
+                        ->where(function($query) use ($request){
+                            $query->where('tenmonhoc', 'like', '%'.$request->param.'%')
+                                ->orWhere('monhoc_id', 'like', '%'.$request->param.'%')
+                                ->orWhere('tenbomon', 'like', '%'.$request->param.'%');
+                        })
+                        ->orderBy('monhoc.monhoc_id', 'asc')
+                        ->paginate(250);
+        }
+        else {
+            $mhs = $this->monhoc->join('bomon', 'monhoc.bomon_id', '=', 'bomon.bomon_id')
+                        ->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+                        ->select('monhoc.*', 'bomon.tenbomon', 'khoa.khoa_id', 'khoa.tenkhoa')
+                        ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
+                        ->orderBy('monhoc.monhoc_id', 'asc')
+                        ->paginate(8);
+        }
+
+
 
         $i = 1;
 
@@ -100,6 +117,16 @@ class MonHocController extends Controller
      */
     public function store(Request $request)
     {
+        $monhoc = $this->monhoc->where('monhoc_id', $request->monhoc_id)->first();
+
+        if($monhoc){
+            \Session::put('monhoc', [
+                'monhoc_id' => $request->monhoc_id,
+                'tenmonhoc' => $request->tenmonhoc,
+            ]);
+            return redirect()->back()->with('error', 'Mã môn học đã tồn tại');
+        }
+
         $this->monhoc->create([
             'monhoc_id' => $request->monhoc_id,
             'tenmonhoc' => $request->tenmonhoc,

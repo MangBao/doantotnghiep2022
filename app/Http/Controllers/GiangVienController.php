@@ -33,10 +33,17 @@ class GiangVienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $gvs = $this->giangvien->where('role_id', '!=', 4)->orderBy('id', 'asc')->paginate(8);
+        if($request->param){
+            $gvs = $this->giangvien->where('role_id', '!=', 4)
+                        ->where('name', 'like', '%' . $request->param . '%')->orderBy('id', 'asc')->paginate(250);
+        } else {
+            $gvs = $this->giangvien->where('role_id', '!=', 4)->orderBy('id', 'asc')->paginate(8);
+        }
         $dsq = $this->roles::all();
+
+        // dd($gvs);
 
         $i = 1;
         return view('giangvien.index',[
@@ -93,7 +100,50 @@ class GiangVienController extends Controller
 
         foreach($gvs as $gv) {
             if($gv->user_id == $request->user_id){
+
+                if($request->avatar){
+                    $avatar = $request->avatar;
+                    $avatar_name = $avatar->getClientOriginalName();
+                }
+                else{
+                    $avatar_name = 'user_avt.png';
+                }
+                \Session::put('gv', [
+                    'name' => $request->tengiangvien,
+                    'email' => $request->email,
+                    'avatar' => $avatar_name,
+                    'connho' => $request->connho,
+                    'ngaysinh' => $request->ngaysinh,
+                    'diachi' => $request->diachi,
+                    'sodienthoai' => $request->sdt,
+                ]);
+
+                // dd(session()->get('gv')['name']);
+
                 return redirect()->back()->with('error', 'Mã giảng viên đã tồn tại');
+            }
+            if($gv->email == $request->email){
+
+                if($request->avatar){
+                    $avatar = $request->avatar;
+                    $avatar_name = $avatar->getClientOriginalName();
+                }
+                else{
+                    $avatar_name = 'user_avt.png';
+                }
+                \Session::put('gv', [
+                    'name' => $request->tengiangvien,
+                    'email' => $request->email,
+                    'avatar' => $avatar_name,
+                    'connho' => $request->connho,
+                    'ngaysinh' => $request->ngaysinh,
+                    'diachi' => $request->diachi,
+                    'sodienthoai' => $request->sdt,
+                ]);
+
+                // dd(session()->get('gv')['name']);
+
+                return redirect()->back()->with('error', 'Email đã tồn tại');
             }
         }
 
@@ -103,7 +153,7 @@ class GiangVienController extends Controller
             Storage::disk('public')->putFileAs('images', $avatar, $avatar_name);
         }
         else{
-            $avatar_name = 'default.png';
+            $avatar_name = 'user_avt.png';
         }
 
         $this->giangvien->create([
@@ -212,4 +262,9 @@ class GiangVienController extends Controller
 
         return redirect()->route('giangvien.index')->with('success', 'Import thành công');
     }
+
+    // public function search(Request $request)
+    // {
+    //     dd($request->all());
+    // }
 }

@@ -296,36 +296,36 @@ INSERT INTO `permission` (`role_id`, `route_id`, `status`, `created_at`, `update
 ('3','55', '1', NULL, NULL),
 ('3','56', '1', NULL, NULL);
 
-INSERT INTO `buoithi` (`id`, `ngaythi`, `created_at`, `updated_at`) VALUES
-('', '2022-04-04', NULL, NULL),
-('', '2022-04-04', NULL, NULL),
-('', '2022-04-04', NULL, NULL),
-('', '2022-04-04', NULL, NULL),
-('', '2022-04-04', NULL, NULL),
+INSERT INTO `buoithi` (`id`, `ngaythi`, `canbogiangday`, `hinhthucthi`, `created_at`, `updated_at`) VALUES
+('', '2022-04-04', '1','Vấn đáp',NULL, NULL),
+('', '2022-04-04', '3','Trắc nghiệm',NULL, NULL),
+('', '2022-04-04', '5','Thực hành',NULL, NULL),
+('', '2022-04-04', '7','Tự luận',NULL, NULL),
+('', '2022-04-04', '9','Vấn đáp',NULL, NULL),
 
-('', '2022-04-05', NULL, NULL),
-('', '2022-04-05', NULL, NULL),
-('', '2022-04-05', NULL, NULL),
-('', '2022-04-05', NULL, NULL),
-('', '2022-04-05', NULL, NULL),
+('', '2022-04-05', '11','Tự luận',NULL, NULL),
+('', '2022-04-05', '13','Trắc nghiệm',NULL, NULL),
+('', '2022-04-05', '15','Thực hành',NULL, NULL),
+('', '2022-04-05', '17','Vấn đáp',NULL, NULL),
+('', '2022-04-05', '19','Tự luận',NULL, NULL),
 
-('', '2022-04-06', NULL, NULL),
-('', '2022-04-06', NULL, NULL),
-('', '2022-04-06', NULL, NULL),
-('', '2022-04-06', NULL, NULL),
-('', '2022-04-06', NULL, NULL),
+('', '2022-04-06', '21','Thực hành',NULL, NULL),
+('', '2022-04-06', '23','Tự luận',NULL, NULL),
+('', '2022-04-06', '25','Trắc nghiệm',NULL, NULL),
+('', '2022-04-06', '27','Vấn đáp',NULL, NULL),
+('', '2022-04-06', '29','Trắc nghiệm',NULL, NULL),
 
-('', '2022-04-07', NULL, NULL),
-('', '2022-04-07', NULL, NULL),
-('', '2022-04-07', NULL, NULL),
-('', '2022-04-07', NULL, NULL),
-('', '2022-04-07', NULL, NULL),
+('', '2022-04-07', '31','Trắc nghiệm',NULL, NULL),
+('', '2022-04-07', '33','Trắc nghiệm',NULL, NULL),
+('', '2022-04-07', '35','Thực hành',NULL, NULL),
+('', '2022-04-07', '37','Vấn đáp',NULL, NULL),
+('', '2022-04-07', '2','Trắc nghiệm',NULL, NULL),
 
-('', '2022-04-08', NULL, NULL),
-('', '2022-04-08', NULL, NULL),
-('', '2022-04-08', NULL, NULL),
-('', '2022-04-08', NULL, NULL),
-('', '2022-04-08', NULL, NULL);
+('', '2022-04-08', '4','Trắc nghiệm',NULL, NULL),
+('', '2022-04-08', '6','Trắc nghiệm',NULL, NULL),
+('', '2022-04-08', '8','Tự luận',NULL, NULL),
+('', '2022-04-08', '10','Vấn đáp',NULL, NULL),
+('', '2022-04-08', '12','Thực hành',NULL, NULL);
 
 INSERT INTO `monthi_buoithi` (`buoithi_id`, `monthi_id`, `created_at`, `updated_at`) VALUES
 (1, 'VLKT', NULL, NULL),

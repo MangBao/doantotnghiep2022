@@ -30,7 +30,7 @@ class BoMonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $khoa = $this->khoa::all();
 
@@ -40,15 +40,42 @@ class BoMonController extends Controller
                 ->where('users.user_id', '=', Auth::user()->user_id)
                 ->get();
 
-        if (Auth::user()->role_id == 1) {
-            $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')->orderBy('bomon_id', 'desc')->paginate(8);
-        } else {
-            $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
-                ->select('bomon.*', 'khoa.khoa_id', 'khoa.tenkhoa')
-                ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
-                ->orderBy('bomon.bomon_id', 'asc')
-                ->paginate(8);
+        if($request->param)
+        {
+            if (Auth::user()->role_id == 1) {
+                $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+                            ->where('tenbomon', 'like', '%'.$request->param.'%')
+                            ->orWhere('bomon_id', 'like', '%'.$request->param.'%')
+                            ->orWhere('khoa.tenkhoa', 'like', '%'.$request->param.'%')
+                            ->orderBy('bomon_id', 'desc')->paginate(250);
+            } else {
+                $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+                            ->select('bomon.*', 'khoa.khoa_id', 'khoa.tenkhoa')
+                            ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
+                            ->where(function($query) use ($request){
+                                $query->where('tenbomon', 'like', '%'.$request->param.'%')
+                                    ->orWhere('bomon_id', 'like', '%'.$request->param.'%')
+                                    ->orWhere('khoa.tenkhoa', 'like', '%'.$request->param.'%');
+                            })
+                            ->orderBy('bomon.bomon_id', 'asc')
+                            ->paginate(250);
+            }
         }
+        else
+        {
+            if (Auth::user()->role_id == 1) {
+                $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')->orderBy('bomon_id', 'desc')->paginate(8);
+            } else {
+                $bms = $this->bomon->join('khoa', 'bomon.khoa_id', '=', 'khoa.khoa_id')
+                    ->select('bomon.*', 'khoa.khoa_id', 'khoa.tenkhoa')
+                    ->where('khoa.khoa_id', '=', $user[0]->khoa_id)
+                    ->orderBy('bomon.bomon_id', 'asc')
+                    ->paginate(8);
+            }
+        }
+
+
+
 
         $i = 1;
         // dd($user);
@@ -97,13 +124,25 @@ class BoMonController extends Controller
      */
     public function store(Request $request)
     {
-        $this->bomon->create([
-            'tenbomon' => $request->tenbomon,
-            'khoa_id' => $request->khoa_id,
-            'bomon_id' => $request->bomon_id,
-        ]);
+        $bomon = $this->bomon->where('bomon_id', $request->bomon_id)->first();
 
-        return redirect()->route('bomon.index')->with('success', 'Thêm bộ môn thành công');
+        if ($bomon) {
+            \Session::put('bomon', [
+                'bomon_id' => $request->bomon_id,
+                'tenbomon' => $request->tenbomon,
+            ]);
+            return redirect()->back()->with('error', 'Mã bộ môn đã tồn tại');
+        } else {
+            $this->bomon->create([
+                'tenbomon' => $request->tenbomon,
+                'khoa_id' => $request->khoa_id,
+                'bomon_id' => $request->bomon_id,
+            ]);
+
+            return redirect()->route('bomon.index')->with('success', 'Thêm bộ môn thành công');
+        }
+
+
     }
 
     /**

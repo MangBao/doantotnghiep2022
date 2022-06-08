@@ -26,7 +26,7 @@
                                 </label>
                                 <input type="text" id="monhoc_id" name="monhoc_id"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
+                                    value="@if (session('monhoc')){{ session()->get('monhoc')['monhoc_id'] }}@endif" required placeholder="Mã thêm tự động khi nhập tên môn" />
                             </div>
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tenmonhoc">
@@ -34,7 +34,7 @@
                                 </label>
                                 <input type="text" id="tenmonhoc" name="tenmonhoc"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="tenmonhoc" autofocus
+                                    value="@if (session('monhoc')){{ session()->get('monhoc')['tenmonhoc'] }}@endif" required autocomplete="tenmonhoc" autofocus
                                     placeholder="{{ __('Nhập tên môn học') }}" />
                             </div>
 
@@ -44,8 +44,8 @@
                                 </label>
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon_id">
-                                    <option selected>{{ __('Chọn bộ môn') }}</option>
+                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon_id" required>
+                                    <option value="">{{ __('Chọn bộ môn') }}</option>
                                     {!! $htmlOptionBoMon !!}
                                 </select>
                             </div>
@@ -66,5 +66,7 @@
             </div>
         </div>
     </div>
-
+{{
+    session()->forget('monhoc')
+}}
 @endsection

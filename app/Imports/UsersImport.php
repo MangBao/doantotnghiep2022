@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class UsersImport implements ToModel, WithHeadingRow
 {
+
     /**
     * @param array $row
     *
@@ -15,18 +16,23 @@ class UsersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new GiangVien([
-            'user_id' => $row['user_id'],
-            'name'     => $row['name'],
-            'email'    => $row['email'],
-            'password' => \Hash::make($row['password']),
-            'connho'  => $row['connho'] == 'Có' ? 1 : 0,
-            'ngaysinh' => date('Y-m-d', strtotime($row['ngaysinh'])),
-            'diachi'   => $row['diachi'],
-            'sodienthoai' => $row['sodienthoai'],
-            'avatar'   => $row['avatar'],
-            'bomon_id' => $row['bomon_id'],
-            'role_id'  => $row['role_id'] == 'admin' ? 1 : ($row['role_id'] == 'thukykhoa' ? 2 : 3)
-        ]);
+        $gv = Giangvien::where('user_id', $row['user_id'])->orWhere('email', $row['email'])->first();
+
+        if (!$gv) {
+            return new GiangVien([
+                'user_id' => $row['user_id'],
+                'name'     => $row['name'],
+                'email'    => $row['email'],
+                'password' => \Hash::make($row['password']),
+                'connho'  => $row['connho'] == 'Có' ? 1 : 0,
+                'ngaysinh' => date('Y-m-d', strtotime($row['ngaysinh'])),
+                'diachi'   => $row['diachi'],
+                'sodienthoai' => $row['sodienthoai'],
+                'avatar'   => $row['avatar'],
+                'bomon_id' => $row['bomon_id'],
+                'role_id'  => $row['role_id'] == 'admin' ? 1 : ($row['role_id'] == 'thukykhoa' ? 2 : ($row['role_id'] == 'giangvien' ? 3 : 4)),
+            ]);
+        }
+
     }
 }

@@ -9,8 +9,7 @@
         {{ __('Dashboard') }}
     </h2>
     <!-- CTA -->
-    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-        href="https://github.com/estevanmaito/windmill-dashboard">
+    <span class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
         <div class="flex items-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -20,7 +19,7 @@
             <span>Chào, {{ Auth::user()->name }} trở lại ! Chúc bạn một buổi
                 {{ date('H') > 17 ? 'tối vui vẻ 🌜' : (date('H') > 12 ? 'chiều mát mẻ ⛅️' : 'sáng tốt lành 🍀') }}</span>
         </div>
-    </a>
+    </span>
     <span
         class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple pl-5">
         <div class="flex items-center">

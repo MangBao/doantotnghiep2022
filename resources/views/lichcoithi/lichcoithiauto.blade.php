@@ -18,6 +18,8 @@
                         <input type="hidden" name="gioketthuc[]" value="{{ $lt->gioketthuc }}">
                         <input type="hidden" name="phongthi_id[]" value="{{ $lt->phongthi_id }}">
                         <input type="hidden" name="ngaythi[]" value="{{ $lt->ngaythi }}">
+                        <input type="hidden" name="canbogiangday[]" value="{{ $lt->canbogiangday }}">
+                        <input type="hidden" name="hinhthucthi[]" value="{{ $lt->hinhthucthi }}">
                         <input type="hidden" name="user_id1[]" value="{{ $lt->user_id1 }}">
                         <input type="hidden" name="tengiangvien1[]" value="{{ $lt->tengiangvien1 }}">
                         <input type="hidden" name="user_id2[]" value="{{ $lt->user_id2 }}">
@@ -36,7 +38,7 @@
     @endif
     <div class="h-8"></div>
 
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -59,6 +61,9 @@
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Ngày thi
+                        </th>
+                        <th class="px-4 py-3 text-sm">
+                            Cán bộ giảng dạy
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Cán bộ coi thi 1
@@ -97,6 +102,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                     {{ date('d/m/Y', strtotime($lt->ngaythi)) }}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    {{ $lt->ten_canbogd }}
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                     {{ $lt->tengiangvien1 }}

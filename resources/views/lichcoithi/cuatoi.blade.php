@@ -4,7 +4,7 @@
 
     <div class="h-10"></div>
 
-    <div class="flex">
+    <div class="flex items-baseline">
         {{-- <div class="mr-8 pt-3">
         <a href="{{ route('lichcoithi.lichcoithiauto') }}" class="btn-primary">
             Lịch coi thi tự động
@@ -33,11 +33,19 @@
                     </button>
                 @endif
             </form>
+
+
+        </div>
+        <div class="">
+            <a href="{{ route('lichcoithi.exportcanhan') }}"
+                class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                Export Lịch của tôi
+            </a>
         </div>
 <div class="h-2"></div>
     </div>
     <div class="h-8"></div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -76,14 +84,6 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @isset($notification)
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td colspan="10" class="px-6 py-4 text-center">
-                                {{ $notification }}
-                            </td>
-                        </tr>
-                    @endisset
                     @foreach ($lichcoithi as $lt)
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3 text-sm">

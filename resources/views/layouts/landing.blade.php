@@ -22,7 +22,7 @@
     <script src="{{ asset('js/init-alpine.js') }}"></script>
 </head>
 
-<body class="dark:bg-gray-700 scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+<body class="relative bg-gray-50 dark:bg-gray-900 scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
     @if (session('success') || session('error'))
         <div x-data="{alert: true}" x-show="alert" class="fixed z-30 top-5 left-5">
             <div x-show="alert" @click.away="alert = false"

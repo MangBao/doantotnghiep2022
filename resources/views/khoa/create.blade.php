@@ -26,7 +26,7 @@
                                 </label>
                                 <input type="text" id="khoa_id" name="khoa_id"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required readonly placeholder="Mã thêm tự động khi nhập tên môn" />
+                                    value="@if (session('khoa')){{ session()->get('khoa')['khoa_id'] }}@endif" required placeholder="Mã thêm tự động khi nhập tên môn" />
                             </div>
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tenkhoa">
@@ -34,7 +34,7 @@
                                 </label>
                                 <input type="text" id="tenkhoa" name="tenkhoa"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="tenkhoa" autofocus
+                                    value="@if (session('khoa')){{ session()->get('khoa')['tenkhoa'] }}@endif" required autocomplete="tenkhoa" autofocus
                                     placeholder="{{ __('Nhập tên Khoa') }}" />
                             </div>
 
@@ -54,5 +54,7 @@
             </div>
         </div>
     </div>
-
+    {{
+        session()->forget('khoa')
+    }}
 @endsection

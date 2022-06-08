@@ -14,6 +14,7 @@ use App\Models\GiangVien;
 use App\Models\LichCoiThi;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\LichCoiThiExport;
+use App\Exports\LichCoiThiExportCaNhan;
 use Maatwebsite\Excel\Facades\Excel;
 
 class LichCoiThiController extends Controller
@@ -41,10 +42,23 @@ class LichCoiThiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $lichcoithi = $this->lichcoithiDB->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
-            ->orderBy('id', 'asc')
-            ->paginate(8);
+    public function index(Request $request){
+        if($request->param) {
+            $lichcoithi = $this->lichcoithiDB->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                                ->where('tenmonthi', 'like', '%' . $request->param . '%')
+                                ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
+                                ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
+                                ->orWhere('users.name', 'like', '%' . $request->param . '%')
+                                ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
+                                ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
+                                ->orderBy('lichcoithi.id', 'asc')
+                                ->paginate(250);
+        } else {
+            $lichcoithi = $this->lichcoithiDB->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+                                ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                                ->orderBy('lichcoithi.id', 'asc')
+                                ->paginate(8);
+        }
 
         $i = 1;
         if(count($lichcoithi) > 0){
@@ -67,12 +81,16 @@ class LichCoiThiController extends Controller
             // khoi tao bien bo mon id, gan bo mon id cho lich thi
             $this->khoiTaoBomonID($lichthis, $monhocs);
 
+            // khoi tao bien can bo giang day
+            $this->khoiTaoCBGD($lichthis, $giangviens);
+
             // khoi tao bien giang vien id
             $this->khoiTaoGV($lichthis);
 
             // khoi tao bien mang lich coi thi, ti le xep cho giang vien
             $this->khoiTaoTiLeXep($giangviens);
 
+            // xắp sếp theo tỷ lệ xếp
             usort($giangviens, [LichCoiThiController::class, "cmpTiLeXep"]);
 
             $countLichGV = 0;
@@ -80,7 +98,7 @@ class LichCoiThiController extends Controller
             // Duyệt từng lịch thi giang vien coi thi 1
             $this->lichThiGV1($lichthis, $giangviens, $countLichGV);
 
-            // Duyệt từng lịch thi giang vien coi thi 2
+            // xắp sếp giang viên từ trên xuống dưới
             usort($giangviens, [LichCoiThiController::class, "cmp"]);
 
             $this->lichThiGV2($lichthis, $giangviens, $countLichGV);
@@ -101,13 +119,6 @@ class LichCoiThiController extends Controller
         }
 
     }
-
-    // public function paginate($items, $perPage = 8, $page = null, $options = [])
-    // {
-    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-    //     $items = $items instanceof Collection ? $items : Collection::make($items);
-    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    // }
 
     static function cmpTiLeXep($a, $b)
     {
@@ -164,13 +175,26 @@ class LichCoiThiController extends Controller
         return $lichthis;
     }
 
+    protected function khoiTaoCBGD($lichthis, $giangviens) {
+        for ($i=0; $i < count($lichthis); $i++) {
+            $lichthis[$i]->ten_canbogd = '';
+            for ($j=0; $j < count($giangviens); $j++) {
+                if ($lichthis[$i]->canbogiangday == $giangviens[$j]->id) {
+                    $lichthis[$i]->ten_canbogd = $giangviens[$j]->name;
+                    break;
+                }
+            }
+        }
+        return $lichthis;
+    }
+
     protected function lichThiGV1($lichthis, $giangviens, $countLichGV = 0) {
 
         do {
             for ($i=0; $i < count($lichthis); $i++) {
                 for ($j=0; $j < count($giangviens); $j++) {
                     if($lichthis[$i]->user_id1 == '') {
-                        if($lichthis[$i]->bomon_id == $giangviens[$j]->bomon_id && count($giangviens[$j]->lichcoithi) == 0 ) {
+                        if($lichthis[$i]->canbogiangday == $giangviens[$j]->id && count($giangviens[$j]->lichcoithi) == 0 ) {
                             $lichthis[$i]->user_id1 = $giangviens[$j]->user_id;
                             $lichthis[$i]->tengiangvien1 = $giangviens[$j]->name;
                             array_push($giangviens[$j]->lichcoithi, (object)[
@@ -315,6 +339,8 @@ class LichCoiThiController extends Controller
             $lichthi->giobatdau = $data['giobatdau'][$i];
             $lichthi->gioketthuc = $data['gioketthuc'][$i];
             $lichthi->ngaythi = $data['ngaythi'][$i];
+            $lichthi->canbogiangday = $data['canbogiangday'][$i];
+            $lichthi->hinhthucthi = $data['hinhthucthi'][$i];
             $lichthi->user_id1 = $data['user_id1'][$i];
             $lichthi->tengiangvien1 = $data['tengiangvien1'][$i];
             $lichthi->user_id2 = $data['user_id2'][$i];
@@ -409,6 +435,11 @@ class LichCoiThiController extends Controller
             return redirect()->route('lichcoithi.index')->with('success', 'Xóa thành công');
         }
         return redirect()->route('lichcoithi.index')->with('error', 'ID / Lịch thi không tồn tại !');
+    }
+
+    public function exportcanhan()
+    {
+        return Excel::download(new LichCoiThiExportCaNhan, 'lichcoithi_cuatoi.xlsx');
     }
 
     public function export()

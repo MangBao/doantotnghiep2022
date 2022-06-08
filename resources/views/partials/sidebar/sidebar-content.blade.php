@@ -33,7 +33,7 @@
         </li>
         @foreach (Auth::user()->route_name as $r)
             <li class="relative px-6 py-3">
-                @if (request()->routeIs($r))
+                @if (request()->routeIs($r) || (explode('.', Route::currentRouteName())[0] == explode('.', $r)[0]))
                     <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true">
                     </span>

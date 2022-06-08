@@ -20,6 +20,8 @@ class CreateLichcoithi extends Migration
             $table->time('giobatdau');
             $table->time('gioketthuc');
             $table->string('phongthi_id', 10);
+            $table->string('hinhthucthi');
+            $table->unsignedBigInteger('canbogiangday');
             $table->date('ngaythi');
             $table->string('user_id1', 10);
             $table->string('tengiangvien1', 100);

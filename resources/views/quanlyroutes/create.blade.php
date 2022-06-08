@@ -27,7 +27,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn role') }}" id="role_id" name="role_id" required>
-                                    <option selected>{{ __('Chọn role') }}</option>
+                                    <option value="">{{ __('Chọn role') }}</option>
                                     {!! $htmlOptionRole !!}
                                 </select>
                             </div>
@@ -38,7 +38,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn route') }}" id="route_id" name="route_id" required>
-                                    <option selected>{{ __('Chọn route') }}</option>
+                                    <option value="">{{ __('Chọn route') }}</option>
                                     {!! $htmlOptionRoute !!}
                                 </select>
                             </div>

@@ -8,6 +8,10 @@ Route::prefix('bomon')->group(function () {
         'as' => 'bomon.index',
         'uses' => BoMonController::class . '@index'
     ]);
+    Route::get('/search', [
+        'as' => 'bomon.search',
+        'uses' => BoMonController::class . '@search'
+    ]);
     Route::get('/create', [
         'as' => 'bomon.create',
         'uses' => BoMonController::class . '@create'

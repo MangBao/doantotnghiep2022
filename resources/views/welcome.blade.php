@@ -4,7 +4,7 @@
     {{-- Slider --}}
     <div id="indicators-carousel" class="relative dark:bg-gray-800" data-carousel="static">
         <!-- Carousel wrapper -->
-        <div class="overflow-hidden relative h-28 sm:h-56 xl:h-96 ">
+        <div class="overflow-hidden relative h-28 sm:h-56 xl:h-100 ">
             <!-- Item 1 -->
             @foreach ($tts as $tt)
                 <a href="{{ route('tintuc.show', [$tt->id]) }}">
@@ -59,7 +59,11 @@
     {{-- News --}}
     <div class="sc-news">
         <div class="title px-14">
-            <h2 class="font-bold text-xl dark:text-gray-400">Tin tức & sự kiện</h2>
+            <div class="max-w-168">
+                <a href="{{route('lichthisv.tintuc')}}" class="hover:underline hover:decoration-color-blue">
+                    <h2 class="font-bold text-xl dark:text-gray-400 hover:text-blue-500">Tin tức & sự kiện</h2>
+                </a>
+            </div>
         </div>
         <div class="h-4"></div>
         <div class="flex flex-wrap antialiased px-10" style="100vh">
@@ -97,10 +101,14 @@
     {{-- Lich thi --}}
     <div class="sc-lichthi">
         <div class="title px-14">
-            <h2 class="font-bold text-xl dark:text-gray-400">Lịch thi NTU</h2>
+            <div class="max-w-136">
+                <a href="{{route('lichthisv.index')}}" class="hover:underline hover:decoration-color-blue">
+                    <h2 class="font-bold text-xl dark:text-gray-400 hover:text-blue-500">Lịch thi NTU</h2>
+                </a>
+            </div>
             <div class="h-4"></div>
 
-            <div class="w-full overflow-hidden rounded-lg shadow-xs mb-16">
+            <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs mb-16">
                 <div class="w-full overflow-x-auto">
                     <table class="w-full whitespace-no-wrap">
                         <thead>

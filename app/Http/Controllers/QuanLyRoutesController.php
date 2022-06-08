@@ -30,11 +30,20 @@ class QuanLyRoutesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $routes = $this->routes->join('permission', 'permission.route_id', '=', 'routes.id')
+        if($request->param) {
+            $routes = $this->routes->join('permission', 'permission.route_id', '=', 'routes.id')
+                                ->join('roles', 'roles.id', '=', 'permission.role_id')
+                                ->where('routes.route_title', 'like', '%' . $request->param . '%')
+                                ->orWhere('roles.role_name', 'like', '%' . $request->param . '%')
+                                ->orderBy('roles.id', 'asc')->paginate(250);
+        }
+        else {
+            $routes = $this->routes->join('permission', 'permission.route_id', '=', 'routes.id')
                                 ->join('roles', 'roles.id', '=', 'permission.role_id')
                                 ->orderBy('roles.id', 'asc')->paginate(10);
+        }
         // dd($routes);
         // $routes = \DB::select('select * from roles r, permission p, routes rt where r.id = p.role_id and p.route_id = rt.id order by r.id');
         return view('quanlyroutes.index', ['route' => $routes]);

@@ -10,9 +10,11 @@ use App\Models\CaThi_BuoiThi;
 use App\Models\PhongThi_BuoiThi;
 use App\Models\MonThi_BuoiThi;
 use App\Models\BuoiThi;
+use App\Models\GiangVien;
 
 class BuoiThiController extends Controller
 {
+    private $giangvien;
     private $cathi;
     private $buoithi;
     private $monhoc;
@@ -23,8 +25,9 @@ class BuoiThiController extends Controller
     private $htmlOptionCaThi;
     private $htmlOptionMonThi;
     private $htmlOptionPhongThi;
+    private $htmlOptionCanBoGiangDay;
 
-    public function __construct(CaThi $cathi, BuoiThi $buoithi, MonHoc $monhoc, PhongThi $phongthi, CaThi_BuoiThi $cathi_buoithi, PhongThi_BuoiThi $phongthi_buoithi, MonThi_BuoiThi $monthi_buoithi) {
+    public function __construct(CaThi $cathi, BuoiThi $buoithi, MonHoc $monhoc, PhongThi $phongthi, CaThi_BuoiThi $cathi_buoithi, PhongThi_BuoiThi $phongthi_buoithi, MonThi_BuoiThi $monthi_buoithi, GiangVien $giangvien) {
         $this->cathi = $cathi;
         $this->buoithi = $buoithi;
         $this->monhoc = $monhoc;
@@ -32,9 +35,11 @@ class BuoiThiController extends Controller
         $this->cathi_buoithi = $cathi_buoithi;
         $this->phongthi_buoithi = $phongthi_buoithi;
         $this->monthi_buoithi = $monthi_buoithi;
+        $this->giangvien = $giangvien;
         $this->htmlOptionCaThi = '';
         $this->htmlOptionMonThi = '';
         $this->htmlOptionPhongThi = '';
+        $this->htmlOptionCanBoGiangDay = '';
         $this->middleware('auth');
         $this->middleware('permission');
         $this->middleware('sinhvien');
@@ -45,12 +50,31 @@ class BuoiThiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bts = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
-            ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
-            ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
-            ->orderBy('ngaythi', 'asc')->paginate(8);
+        if($request->param){
+            $bts = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
+                ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
+                ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
+                ->join('cathi as c', 'cb.cathi_id', '=', 'c.cathi_id')
+                ->join('phongthi as p', 'pb.phongthi_id', '=', 'p.phongthi_id')
+                ->join('monhoc as m', 'mb.monthi_id', '=', 'm.monhoc_id')
+                ->join('users as u', 'buoithi.canbogiangday', '=', 'u.id')
+                ->where('p.tenphongthi', 'like', '%' . $request->param . '%')
+                ->orWhere('m.tenmonhoc', 'like', '%' . $request->param . '%')
+                ->orWhere('c.cathi_id', 'like', '%' . $request->param . '%')
+                ->orWhere('u.name', 'like', '%' . $request->param . '%')
+                ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
+                ->orderBy('ngaythi', 'asc')->paginate(250);
+        }
+        else {
+            $bts = $this->buoithi->join('cathi_buoithi as cb', 'buoithi.id', '=', 'cb.buoithi_id')
+                ->join('phongthi_buoithi as pb', 'buoithi.id', '=', 'pb.buoithi_id')
+                ->join('monthi_buoithi as mb', 'buoithi.id', '=', 'mb.buoithi_id')
+                ->join('users as u', 'buoithi.canbogiangday', '=', 'u.id')
+                ->orderBy('ngaythi', 'asc')->paginate(8);
+        }
+
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $i = 1;
@@ -94,6 +118,12 @@ class BuoiThiController extends Controller
         $cts = $this->cathi::all();
         $mhs = $this->monhoc::all();
         $pts = $this->phongthi::all();
+        $cbs = $this->giangvien::where('role_id', '!=', 4)->get();
+
+        // Option Can Bo Giang Day
+        foreach($cbs as $cb){
+            $this->htmlOptionCanBoGiangDay .= '<option value="'. $cb->id .'">'. $cb->name .'</option>';
+        }
 
         // Option ca thi
         foreach($cts as $ct){
@@ -123,6 +153,7 @@ class BuoiThiController extends Controller
             'htmlOptionCaThi' => $this->htmlOptionCaThi,
             'htmlOptionMonThi' => $this->htmlOptionMonThi,
             'htmlOptionPhongThi' => $this->htmlOptionPhongThi,
+            'htmlOptionCanBoGiangDay' => $this->htmlOptionCanBoGiangDay,
         ]);
 
     }
@@ -158,6 +189,8 @@ class BuoiThiController extends Controller
 
         $this->buoithi::create([
             'ngaythi' => $request->ngaythi,
+            'hinhthucthi' => $request->hinhthucthi,
+            'canbogiangday' => $request->canbogiangday,
         ]);
         $this->cathi_buoithi::create([
             'buoithi_id' => $this->buoithi::all()->last()->id,

@@ -31,7 +31,8 @@ class LichThiSVController extends Controller
 
     public function homepage()
     {
-        $lichcoithi = $this->lichcoithi->orderBy('ngaythi', 'desc')->paginate(8);
+        $lichcoithi = $this->lichcoithi->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                            ->orderBy('ngaythi', 'desc')->paginate(8);
         $tintucSlide = $this->tintuc->orderBy('created_at', 'desc')->paginate(6);
         $tintuc = $this->tintuc->orderBy('id', 'asc')->paginate(8);
         $i = 1;
@@ -45,26 +46,62 @@ class LichThiSVController extends Controller
         }
         return view('welcome', [
             'lichcoithi' => $lichcoithi,
+            'tts' => $tintucSlide,
+            'ttn' => $tintuc,
+            'i' => $i,
             'notification' => 'Không có lịch thi nào'
         ]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $lichthisv = $this->lichthi->orderBy('sinhvien_id', 'desc')->get();
 
-        if(count($lichthisv) > 0) {
-            $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
-            ->whereNotIn('lichcoithi.id',
-                \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
-            )
-            ->orderBy('lichcoithi.id', 'asc')
-            ->paginate(8);
+        if($request->param) {
+            if(count($lichthisv) > 0) {
+                $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+                                ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                                ->where('tenmonthi', 'like', '%' . $request->param . '%')
+                                ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
+                                ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
+                                ->orWhere('users.name', 'like', '%' . $request->param . '%')
+                                ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
+                                ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
+                                ->whereNotIn('lichcoithi.id',
+                                    \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
+                                )
+                                ->orderBy('lichcoithi.id', 'asc')
+                                ->paginate(250);
+            }
+            else {
+                $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+                ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->where('tenmonthi', 'like', '%' . $request->param . '%')
+                ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
+                ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
+                ->orWhere('users.name', 'like', '%' . $request->param . '%')
+                ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
+                ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
+                ->orderBy('lichcoithi.id', 'asc')
+                ->paginate(250);
+            }
         }
         else {
-            $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
-            ->orderBy('lichcoithi.id', 'asc')
-            ->paginate(8);
+            if(count($lichthisv) > 0) {
+                $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+                ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->whereNotIn('lichcoithi.id',
+                    \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
+                )
+                ->orderBy('lichcoithi.id', 'asc')
+                ->paginate(8);
+            }
+            else {
+                $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+                ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->orderBy('lichcoithi.id', 'asc')
+                ->paginate(8);
+            }
         }
 
         $i = 1;
@@ -117,6 +154,29 @@ class LichThiSVController extends Controller
             'sinhvien_id' => auth()->user()->id,
         ]);
         return redirect()->route('lichthisv.index')->with('success', 'Thêm lịch thi thành công');
+    }
+
+    public function tintuc(Request $request)
+    {
+
+        if($request->param){
+            $tintuc = $this->tintuc->where('title', 'like', '%' . $request->param . '%')
+                ->orWhere('heading1', 'like', '%' . $request->param . '%')
+                ->orWhere('content1', 'like', '%' . $request->param . '%')
+                ->orWhere('heading2', 'like', '%' . $request->param . '%')
+                ->orWhere('content2', 'like', '%' . $request->param . '%')
+                ->orWhere('heading3', 'like', '%' . $request->param . '%')
+                ->orWhere('content3', 'like', '%' . $request->param . '%')
+                ->orderBy('id', 'desc')
+                ->paginate(250);
+        }
+        else {
+            $tintuc = $this->tintuc->orderBy('id', 'asc')->paginate(6);
+        }
+
+        return view('lichthi.tintuc', [
+            'ttn' => $tintuc,
+        ]);
     }
 
     public function updatethongbao(Request $request)

@@ -13,6 +13,10 @@ Route::prefix('lichthisv')->group(function () {
         'as' => 'lichthisv.index',
         'uses' => LichThiSVController::class . '@index'
     ]);
+    Route::get('/tintuc', [
+        'as' => 'lichthisv.tintuc',
+        'uses' => LichThiSVController::class . '@tintuc'
+    ]);
     Route::get('/lichcuatoi', [
         'as' => 'lichthisv.lichcuatoi',
         'uses' => LichThiSVController::class . '@lichcuatoi'

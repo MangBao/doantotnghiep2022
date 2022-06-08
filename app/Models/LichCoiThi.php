@@ -14,6 +14,7 @@ class LichCoiThi extends Model
         'id', 'tenmonthi',
         'cathi_id', 'giobatdau',
         'gioketthuc', 'phongthi_id',
+        'canbogiangday', 'hinhthucthi',
         'ngaythi', 'user_id1',
         'tengiangvien1', 'user_id2',
         'tengiangvien2','bomon_id',

@@ -3,17 +3,26 @@
 @section('content')
     <div class="h-10"></div>
 
-    <div class="flex">
-        <div class="mr-8 pt-3">
+    <div class="flex justify-between">
+        <div class="mr-8 pt-3 min-w-176">
             <a href="{{ route('tintuc.create') }}"
                 class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 Thêm Tin tức
             </a>
         </div>
-        <div class="h-2"></div>
+        <div class="pt-3">
+            <form action="{{ route('tintuc.index') }}" method="get">
+                {{-- @csrf --}}
+                <input class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                    type="text" placeholder="Nhập từ khóa" name="param" aria-label="Search" />
+            </form>
+
+        </div>
     </div>
+    <div class="h-2"></div>
+
     <div class="h-8"></div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>

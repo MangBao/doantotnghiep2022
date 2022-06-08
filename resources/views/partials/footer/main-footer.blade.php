@@ -1,7 +1,7 @@
 <footer class="p-4 bg-white sm:p-6 dark:bg-gray-800 mt-7">
     <div class="md:flex md:justify-between">
         <div class="mb-6 md:mb-0">
-            <a href="https://ntu.edu.com" class="flex items-center">
+            <a href="https://ntu.edu.vn" class="flex items-center">
                 <img src="/images/logo-ntu.png" class="mr-3 h-14" alt="NTU Logo">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Nha Trang
                     University</span>
@@ -10,12 +10,23 @@
 
         <div>
             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Thông tin liên lạc và địa chỉ</h2>
-            <ul class="text-gray-600 dark:text-gray-400">
-                <li class="mb-4">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
+            <ul id="contact-infor " class="text-gray-500 hover:text-gray-900 dark:text-white">
+                <li>
+                    <i class="fa fa-map-marker"></i>
+                    02 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
                 </li>
                 <li>
-                    <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                    <i class="fa fa-phone"></i>
+                    <a href="tel:02583 831 149"> 02583 831 149</a>
+                    <i style="margin-left:20px" class="fa fa-fax"></i>
+                    <a> 02583 831 147</a>
+                </li>
+                <li>
+                    <i class="fa fa-envelope-o"></i> <a href="mailto:dhnt@ntu.edu.vn"> dhnt@ntu.edu.vn</a>
+                    <i style="margin-left:20px" class="fa fa-globe"></i>
+                    <a href="https://ntu.edu.vn" target="blank">
+                        www.ntu.edu.vn
+                    </a>
                 </li>
             </ul>
         </div>

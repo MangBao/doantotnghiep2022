@@ -9,7 +9,7 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark:border-gray-500 dark:bg-gray-600">
                 <section class="chat-area">
                     <header>
-                        <a href="{{ route('tinnhan.tinnhan') }}" class="back-icon "><i class="fas fa-arrow-left dark:text-gray-400"></i></a>
+                        <a href="{{ route('tinnhan.index') }}" class="back-icon "><i class="fas fa-arrow-left dark:text-gray-400"></i></a>
                         <img src="/images/{{ $user->avatar }}" alt="" class="rounded-full">
                         <div class="details">
                             <span class="dark:text-gray-400">{{ $user->name }}</span>

@@ -22,12 +22,12 @@
                             @csrf
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="giangduong_id">
-                                    {{ __('Giảng thi') }}
+                                    {{ __('Giảng đường') }}
                                 </label>
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn giảng đường') }}" id="giangduong_id" name="giangduong_id">
-                                    <option selected>{{ __('Chọn giảng đường') }}</option>
+                                    aria-label="{{ __('Chọn giảng đường') }}" id="giangduong_id" name="giangduong_id" required>
+                                    <option value="">{{ __('Chọn giảng đường') }}</option>
                                     {!! $htmlOptionGiangDuong !!}
                                 </select>
                             </div>
@@ -37,7 +37,7 @@
                                 </label>
                                 <input type="text" id="phongthi_id" name="phongthi_id"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required placeholder="Mã giảng đường + số phòng | Ví dụ: G1-101" />
+                                    value="@if (session('phongthi')){{ session()->get('phongthi')['phongthi_id'] }}@endif" required placeholder="Mã giảng đường + số phòng | Ví dụ: G1-101" />
                             </div>
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tenphongthi">
@@ -45,7 +45,7 @@
                                 </label>
                                 <input type="text" id="tenphongthi" name="tenphongthi"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="tenphongthi" autofocus
+                                    value="@if (session('phongthi')){{ session()->get('phongthi')['tenphongthi'] }}@endif" required autocomplete="tenphongthi" autofocus
                                     placeholder="{{ __('Nhập tên phòng thi') }}" />
                             </div>
 
@@ -65,5 +65,7 @@
             </div>
         </div>
     </div>
-
+{{
+    session()->forget('phongthi')
+}}
 @endsection

@@ -11,7 +11,7 @@
 
                         <div class="text-center mb-3">
                             <h6 class="text-gray-700 dark:text-gray-400 text-sm font-bold">
-                                {{ __('THÊM Bộ môn MỚI') }}
+                                {{ __('THÊM BỘ MÔN MỚI') }}
                             </h6>
                         </div>
 
@@ -27,7 +27,7 @@
                                 </label>
                                 <input type="text" id="bomon_id" name="bomon_id"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required readonly placeholder="Mã thêm tự động khi nhập tên bộ môn" />
+                                    value="@if (session('bomon')){{ session()->get('bomon')['bomon_id'] }}@endif" required placeholder="Mã thêm tự động khi nhập tên bộ môn" />
                             </div>
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tenbomon">
@@ -35,7 +35,7 @@
                                 </label>
                                 <input type="text" id="tenbomon" name="tenbomon"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="tenbomon" autofocus
+                                    value="@if (session('bomon')){{ session()->get('bomon')['tenbomon'] }}@endif" required autocomplete="tenbomon" autofocus
                                     placeholder="{{ __('Nhập tên Bộ môn') }}" />
                             </div>
 
@@ -45,8 +45,8 @@
                                 </label>
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn khoa') }}" name="khoa_id">
-                                    <option selected>{{ __('Chọn khoa') }}</option>
+                                    aria-label="{{ __('Chọn khoa') }}" name="khoa_id" required>
+                                    <option value="">{{ __('Chọn khoa') }}</option>
                                     {!! $htmlOptionKhoa !!}
                                 </select>
                             </div>
@@ -67,5 +67,7 @@
             </div>
         </div>
     </div>
-
+{{
+    session()->forget('bomon')
+}}
 @endsection

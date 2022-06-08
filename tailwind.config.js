@@ -32,11 +32,22 @@ module.exports = {
                 },
             },
         }),
+
         ...colors,
         extend: {
             maxHeight: {
                 0: "0",
                 xl: "36rem",
+            },
+            minWidth: {
+                '136': '136px',
+                '168': '168px',
+                '176': '176px',
+                '230': '230px',
+            },
+            maxWidth: {
+                '136': '136px',
+                '168': '168px',
             },
             minHeight: {
                 0: "0",
@@ -45,12 +56,19 @@ module.exports = {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },
+            spacing: {
+                '100': '25.75rem',
+            },
+            width: {
+                '462': '462px',
+            },
             keyframes,
             animation,
         },
     },
 
     variants: {
+        width: ["responsive", "hover", "focus", "active", "group-hover"],
         scrollbar: ['rounded'],
         opacity: ["responsive", "hover", "focus", "disabled"],
         backgroundColor: [
@@ -64,7 +82,7 @@ module.exports = {
             "dark:active",
             "dark:odd",
         ],
-        display: ["responsive", "dark"],
+        display: ["responsive", "dark", "group-hover",],
         textColor: [
             "focus-within",
             "hover",
@@ -73,11 +91,14 @@ module.exports = {
             "dark:focus-within",
             "dark:hover",
             "dark:active",
+            "group-hover",
         ],
         placeholderColor: ["focus", "dark", "dark:focus"],
         borderColor: ["focus", "hover", "dark", "dark:focus", "dark:hover"],
         divideColor: ["dark"],
         boxShadow: ["focus", "dark:focus"],
+        transition: ["responsive", "hover", "focus", "group-hover"],
+        textDecoration: ["hover", "focus", "active", "dark", "dark:hover", "dark:focus", "dark:active"],
     },
 
     plugins: [
@@ -87,6 +108,8 @@ module.exports = {
         require("@tailwindcss/custom-forms"),
         plugin(({ addUtilities, e, theme, variants }) => {
             const newUtilities = {};
+            const decorationVariants = {};
+
             Object.entries(theme("colors")).map(([name, value]) => {
                 if (name === "transparent" || name === "current") return;
                 const color = value[300] ? value[300] : value;
@@ -95,9 +118,14 @@ module.exports = {
                 newUtilities[`.shadow-outline-${name}`] = {
                     "box-shadow": `0 0 0 3px ${hsla}`,
                 };
+
+                decorationVariants[`.decoration-color-${e(name)}`] = {
+                    "text-decoration-color": `${color}`
+                }
             });
 
             addUtilities(newUtilities, variants("boxShadow"));
+            addUtilities(decorationVariants, variants("textDecoration"))
         }),
     ],
 };

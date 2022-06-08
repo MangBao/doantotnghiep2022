@@ -7,7 +7,7 @@
 <div class="h-2"></div>
     </div>
     <div class="h-8"></div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>

@@ -245,6 +245,14 @@ a .details p {
     box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
         inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
 }
+@media (min-width: 1200px) {
+    .chat-box {
+        min-width: 680px;
+    }
+    .users {
+        width: 720px;
+    }
+}
 .chat-box .text {
     position: absolute;
     top: 45%;
@@ -398,5 +406,14 @@ a .details p {
     }
     .chat-area form button {
         width: 45px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    /* For portrait layouts only */
+    .fix-respon{
+        width: 462px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }

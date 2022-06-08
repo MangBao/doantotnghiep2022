@@ -1,22 +1,7 @@
 @extends('layouts.app')
 @section('titleAdmin', 'Thêm giảng viên')
 @section('content')
-
     <div class="h-2"></div>
-    @if (session('error'))
-        <div class="animate-fadeInDown flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-            role="alert">
-            <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                    clip-rule="evenodd"></path>
-            </svg>
-            <div>
-                <span class="font-medium">{{ session('error') }}</span>
-            </div>
-        </div>
-    @endif
     <div class="container mx-auto px-4 h-full down-md:mx-auto md:min-h-141">
         <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-2/5 px-4 z-10 ">
@@ -43,13 +28,14 @@
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     value="{{ $user_id }}" required readonly autocomplete="user_id" />
                             </div>
+                            {{-- @if (session('nv')){{ session('gv')->name }}@endif --}}
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="tengiangvien">
                                     {{ __('Tên giảng viên') }}
                                 </label>
                                 <input type="text" name="tengiangvien"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="name" autofocus placeholder="{{ __('Nhập tên') }}" />
+                                    value="@if (session('gv')){{ session()->get('gv')['name'] }}@endif" required autocomplete="name" autofocus placeholder="{{ __('Nhập tên') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -58,7 +44,7 @@
                                 </label>
                                 <input type="email" name="email"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="email" placeholder="{{ __('Nhập email') }}" />
+                                    value="@if (session('gv')){{ session()->get('gv')['email'] }}@endif" required autocomplete="email" placeholder="{{ __('Nhập email') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -67,7 +53,7 @@
                                 </label>
                                 <input type="tel" name="sdt"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="sdt" placeholder="{{ __('Nhập số điện thoại') }}" />
+                                    value="@if (session('gv')){{ session()->get('gv')['sodienthoai'] }}@endif" required autocomplete="sdt" placeholder="{{ __('Nhập số điện thoại') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -76,7 +62,7 @@
                                 </label>
                                 <input type="text" name="diachi"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="diachi" placeholder="{{ __('Nhập địa chỉ') }}" />
+                                    value="@if (session('gv')){{ session()->get('gv')['diachi'] }}@endif" required autocomplete="diachi" placeholder="{{ __('Nhập địa chỉ') }}" />
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -85,7 +71,7 @@
                                 </label>
                                 <input type="date" name="ngaysinh"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="ngaysinh" />
+                                    value="@if (session('gv')){{ session()->get('gv')['ngaysinh'] }}@endif" required autocomplete="ngaysinh" />
                             </div>
 
                             <div class="relative w-full mb-3">
@@ -94,8 +80,8 @@
                                 </label>
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon">
-                                    <option selected>{{ __('Chọn bộ môn') }}</option>
+                                    aria-label="{{ __('Chọn bộ môn') }}" name="bomon" required>
+                                    <option value="">{{ __('Chọn bộ môn') }}</option>
                                     {!! $htmlOptionBoMon !!}
                                 </select>
                             </div>
@@ -106,7 +92,8 @@
                                 </label>
                                 <input type="file" name="avatar"
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    value="" required autocomplete="avatar" />
+                                    value="@if (session('gv')){{ session()->get('gv')['avatar'] }}@endif" required autocomplete="avatar" />
+                                <span>@if (session('gv')){{ session()->get('gv')['avatar'] }}@endif</span>
                             </div>
 
                             <div class="relative w-full mb-3 ">
@@ -134,8 +121,8 @@
                             <div class="relative w-full mb-3">
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
-                                    aria-label="{{ __('Chọn quyền giảng viên') }}" name="quyen">
-                                    <option selected>{{ __('Chọn quyền') }}</option>
+                                    aria-label="{{ __('Chọn quyền giảng viên') }}" name="quyen" required>
+                                    <option value="">{{ __('Chọn quyền') }}</option>
                                     {!! $htmlOptionQuyen !!}
                                 </select>
                             </div>
@@ -156,5 +143,7 @@
             </div>
         </div>
     </div>
-
+{{
+    session()->forget('gv');
+}}
 @endsection

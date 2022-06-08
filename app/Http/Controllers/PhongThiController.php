@@ -26,9 +26,19 @@ class PhongThiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $phongthi = $this->phongthi->orderBy('giangduong_id', 'asc')->paginate(8);
+        if($request->param){
+            $phongthi = $this->phongthi
+                        ->where('phongthi_id', 'like', '%'.$request->param.'%')
+                        ->orWhere('tenphongthi', 'like', '%'.$request->param.'%')
+                        ->orWhere('giangduong_id', 'like', '%'.$request->param.'%')
+                        ->orderBy('giangduong_id', 'asc')
+                        ->paginate(250);
+        }
+        else {
+            $phongthi = $this->phongthi->orderBy('giangduong_id', 'asc')->paginate(8);
+        }
 
         return view('phongthi.index', [
             'pts' => $phongthi,
@@ -63,26 +73,28 @@ class PhongThiController extends Controller
      */
     public function store(Request $request)
     {
-        $phongthi = $this->phongthi::all();
-        $giangduong = $this->giangduong->all();
+        // $phongthi = $this->phongthi::all();
+        // $giangduong = $this->giangduong->all();
+        $phongthi = $this->phongthi->where([
+            ['giangduong_id', $request->giangduong_id],
+            ['phongthi_id', $request->phongthi_id],
+        ])->first();
 
-        foreach($giangduong as $gd) {
-            if($gd->giangduong_id == $request->giangduong_id) {
-                foreach($phongthi as $pt) {
-                    if($pt->phongthi_id == $request->phongthi_id) {
-                        return redirect()->route('phongthi.create')->with('error', 'Phòng thi đã tồn tại');
-                    }
-                }
-            }
+        if($phongthi) {
+            \Session::put('phongthi', [
+                'phongthi_id' => $request->phongthi_id,
+                'tenphongthi' => $request->tenphongthi,
+            ]);
+            return redirect()->route('phongthi.create')->with('error', 'Phòng thi đã tồn tại');
+        } else {
+            $this->phongthi->create([
+                'giangduong_id' => $request->giangduong_id,
+                'phongthi_id' => $request->phongthi_id,
+                'tenphongthi' => $request->tenphongthi,
+            ]);
+
+            return redirect()->route('phongthi.index')->with('success', 'Thêm phòng thi thành công');
         }
-
-        $this->phongthi->create([
-            'giangduong_id' => $request->giangduong_id,
-            'phongthi_id' => $request->phongthi_id,
-            'tenphongthi' => $request->tenphongthi,
-        ]);
-
-        return redirect()->route('phongthi.index')->with('success', 'Thêm phòng thi thành công');
     }
 
     /**

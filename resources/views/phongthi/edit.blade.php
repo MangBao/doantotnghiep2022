@@ -45,7 +45,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn giảng đường') }}" name="giangduong_id" id="giangduong_id">
-                                    <option selected>{{ __('Chọn giảng đường') }}</option>
+                                    <option value="">{{ __('Chọn giảng đường') }}</option>
                                     {!! $htmlOptionGiangDuong !!}
                                 </select>
                             </div>

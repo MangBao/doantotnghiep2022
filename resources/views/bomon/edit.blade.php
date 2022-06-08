@@ -46,7 +46,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn khoa') }}" name="khoa_id">
-                                    <option selected>{{ __('Chọn khoa') }}</option>
+                                    <option value="">{{ __('Chọn khoa') }}</option>
                                     {!! $htmlOptionKhoa !!}
                                 </select>
                             </div>

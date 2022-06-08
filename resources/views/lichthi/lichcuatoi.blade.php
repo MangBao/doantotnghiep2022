@@ -35,7 +35,7 @@
 
     </div>
     <div class="h-8 dark:bg-gray-700"></div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19 px-3 lg:px-0">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -56,6 +56,9 @@
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Ngày thi
+                        </th>
+                        <th class="px-4 py-3 text-sm">
+                            Cán bộ giảng dạy
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Cán bộ coi thi 1
@@ -96,6 +99,9 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ date('d/m/Y', strtotime($lt->ngaythi)) }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $lt->name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $lt->tengiangvien1 }}

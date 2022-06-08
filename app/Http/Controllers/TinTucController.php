@@ -18,9 +18,21 @@ class TinTucController extends Controller
         $this->middleware('sinhvien');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $tintuc = $this->tintuc->orderBy('created_at', 'desc')->paginate(8);
+        if($request->param) {
+            $tintuc = $this->tintuc->where('title', 'like', '%' . $request->param . '%')
+                            ->orWhere('heading1', 'like', '%' . $request->param . '%')
+                            ->orWhere('content1', 'like', '%' . $request->param . '%')
+                            ->orWhere('heading2', 'like', '%' . $request->param . '%')
+                            ->orWhere('content2', 'like', '%' . $request->param . '%')
+                            ->orWhere('heading3', 'like', '%' . $request->param . '%')
+                            ->orWhere('content3', 'like', '%' . $request->param . '%')
+                            ->orderBy('created_at', 'desc')->paginate(8);
+        } else {
+            $tintuc = $this->tintuc->orderBy('created_at', 'desc')->paginate(8);
+        }
+
         $i = 1;
 
         if(count($tintuc) > 0) {

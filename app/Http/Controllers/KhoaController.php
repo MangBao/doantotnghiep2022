@@ -50,17 +50,21 @@ class KhoaController extends Controller
      */
     public function store(Request $request)
     {
-        $khoa = $this->khoa::all();
-        foreach($khoa as $k){
-            if($k->khoa_id == $request->khoa_id){
-                return redirect()->route('khoa.create')->with('error', 'Khoa đã tồn tại');
-            }
+        $khoa = $this->khoa::where('khoa_id', $request->khoa_id)->first();
+
+        if($khoa) {
+            \Session::put('khoa', [
+                'khoa_id' => $request->khoa_id,
+                'tenkhoa' => $request->tenkhoa,
+            ]);
+            return redirect()->route('khoa.create')->with('error', 'Mã khoa đã tồn tại');
+        } else {
+            $this->khoa->create([
+                'khoa_id' => $request->khoa_id,
+                'tenkhoa' => $request->tenkhoa,
+            ]);
+            return redirect()->route('khoa.index')->with('success', 'Thêm khoa thành công');
         }
-        $this->khoa->create([
-            'khoa_id' => $request->khoa_id,
-            'tenkhoa' => $request->tenkhoa,
-        ]);
-        return redirect()->route('khoa.index')->with('success', 'Thêm khoa thành công');
     }
 
     /**

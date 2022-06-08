@@ -79,7 +79,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn bộ môn') }}" name="bomon">
-                                    <option selected>{{ __('Chọn bộ môn') }}</option>
+                                    <option value="">{{ __('Chọn bộ môn') }}</option>
                                     {!! $htmlOptionBoMon !!}
                                 </select>
                             </div>
@@ -125,7 +125,7 @@
                                 <select
                                     class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
                                     aria-label="{{ __('Chọn quyền giảng viên') }}" name="quyen">
-                                    <option selected>{{ __('Chọn quyền') }}</option>
+                                    <option value="">{{ __('Chọn quyền') }}</option>
                                     {!! $htmlOptionQuyen !!}
                                 </select>
                             </div>

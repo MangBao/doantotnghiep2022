@@ -2,7 +2,7 @@
 @section('contentHome')
     <div class="h-10"></div>
 
-    <div class="container mx-auto grid">
+    <div class="container mx-auto grid px-3 lg:px-0">
         @if (Auth::check() && Auth::user()->role_id == 4)
             <div class="mr-8 pt-3">
                 <a href="{{ route('lichthisv.lichcuatoi') }}"
@@ -11,10 +11,18 @@
                 </a>
             </div>
         @endif
+        <div class="mr-8 pt-3 w-1/3 ">
+            <form action="{{ route('lichthisv.index') }}" method="get">
+                {{-- @csrf --}}
+                <input
+                    class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                    type="text" placeholder="Nhập từ khóa" name="param" aria-label="Search" />
+            </form>
 
+        </div>
     </div>
     <div class="h-8 dark:bg-gray-700"></div>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19">
+    <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19 px-3 lg:px-0">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -29,12 +37,17 @@
                         <th class="px-4 py-3 text-sm">
                             Ca thi
                         </th>
-
+                        <th class="px-4 py-3 text-sm">
+                            Hình thức
+                        </th>
                         <th class="px-4 py-3 text-sm">
                             Phòng thi
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Ngày thi
+                        </th>
+                        <th class="px-4 py-3 text-sm">
+                            Cán bộ giảng dạy
                         </th>
                         <th class="px-4 py-3 text-sm">
                             Cán bộ coi thi 1
@@ -44,7 +57,7 @@
                         </th>
                         @if (Auth::check() && Auth::user()->role_id == 4)
                             <th class="px-4 py-3 text-sm">
-                                Actions
+                                Chức năng
                             </th>
                         @endif
                     </tr>
@@ -69,12 +82,17 @@
                             <td class="px-4 py-3 text-sm">
                                 {{ $lt->cathi_id }}
                             </td>
-
+                            <td class="px-4 py-3 text-sm">
+                                {{ $lt->hinhthucthi }}
+                            </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $lt->phongthi_id }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ date('d/m/Y', strtotime($lt->ngaythi)) }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ $lt->name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $lt->tengiangvien1 }}
