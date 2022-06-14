@@ -11,7 +11,7 @@
                 </a>
             </div>
         @endif
-        <div class="mr-8 pt-3 w-1/3 ">
+        <div class="mr-8 pt-3 w-1/3 mt-3">
             <form action="{{ route('lichthisv.index') }}" method="get">
                 {{-- @csrf --}}
                 <input

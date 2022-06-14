@@ -61,7 +61,8 @@ class TinTucController extends Controller
             'heading1' => 'required',
             'image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'image3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'files.*' => 'mimes:csv,txt,xlx,xls,pdf,doc,docx,ppt,pptx,zip,rar,7z|max:2048'
         ]);
 
         if($request->image1){
@@ -79,7 +80,7 @@ class TinTucController extends Controller
             Storage::disk('public')->putFileAs('images/tintuc', $image2, $image2_name);
         }
         else{
-            $image2_name = 'default.png';
+            $image2_name = '';
         }
 
         if($request->image3){
@@ -88,8 +89,23 @@ class TinTucController extends Controller
             Storage::disk('public')->putFileAs('images/tintuc', $image3, $image3_name);
         }
         else{
-            $image3_name = 'default.png';
+            $image3_name = '';
         }
+
+        $file_name = array();
+        if($request->filesupload){
+            foreach($request->filesupload as $file){
+                array_push($file_name, $file->getClientOriginalName());
+                Storage::disk('public')->putFileAs('files', $file, $file->getClientOriginalName());
+            }
+        }
+        else{
+            $file_name = '';
+        }
+
+        // json_encode($file_name)
+
+        // dd();
 
         $this->tintuc->create([
             'title' => $request->title,
@@ -102,6 +118,7 @@ class TinTucController extends Controller
             'image1' => $image1_name,
             'image2' => $image2_name,
             'image3' => $image3_name,
+            'files' => json_encode($file_name),
             'user_id' => Auth::user()->id
         ]);
 

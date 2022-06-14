@@ -20,7 +20,7 @@
                                 </dl>
                                 <div>
                                     <h1
-                                        class="text-3xl leading-9 font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+                                        class="text-3xl leading-9 font-extrabold text-gray-900 dark:text-gray-300 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
                                         {{ $tts->title }}</h1>
                                     {{-- GraphQL Schema Stitching --}}
                                 </div>
@@ -71,7 +71,7 @@
                                             </div>
                                             <dl class="flex-1 text-sm font-medium leading-5">
                                                 <dt class="sr-only">Name</dt>
-                                                <dd class="text-gray-900">{{ $tts->name }}</dd>
+                                                <dd class="text-gray-900 dark:text-gray-300">{{ $tts->name }}</dd>
                                                 <dt class="sr-only">Role</dt>
                                                 <dd class="text-gray-500">{{ $tts->role_name }}</dd>
                                             </dl>
@@ -267,6 +267,19 @@
                                     </div>
                                 @endif
 
+                                @if($tts->files != null)
+                                    <div class="prose max-w-none pt-10 pb-8">
+                                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-300">
+                                            Download file:
+                                        </h3>
+                                        <br>
+                                        @for ($i = 0; $i < count(json_decode($tts->files)); $i++)
+                                            <a href="/files/{{ json_decode($tts->files)[$i] }}" target="_blank" class="text-gray-600 dark:text-gray-400">
+                                                {{ json_decode($tts->files)[$i] }}
+                                            </a><br>
+                                        @endfor
+                                    </div>
+                                @endif
                             </div>
                             <footer
                                 class="text-sm font-medium leading-5 divide-y divide-gray-200 lg:col-start-1 lg:row-start-2">

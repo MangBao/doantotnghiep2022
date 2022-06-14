@@ -55,7 +55,7 @@ class sendMailDaily extends Command
             $second_date = strtotime($lct->ngaythi);
             $datediff = abs($first_date - $second_date);
 
-            if(floor($datediff / (60*60*24)) == 2) {
+            if(floor($datediff / (60*60*24)) == 1) {
                 foreach($users as $user) {
                     if($user->email != null && $user->thongbaomail == 1 && $lct->user_id1 == $user->user_id) {
                         Mail::to($user->email)->send(new ThongBaoNhacLich($user, $lct));

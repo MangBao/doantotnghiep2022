@@ -42,8 +42,12 @@
                     </tr>
                     @endisset
                     @foreach ($donxinvangs as $d)
-                            <tr title="Lý do: {{ $d->lydo }}"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr data-tooltip-target="tooltip-animation"
+                                class="relative bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-500 dark:text-gray-400">
+                                <div id="tooltip-animation" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                    {{ $d->lydo }}"
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                                 <th scope="row"
                                     class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                     {{ $i++ }}
@@ -182,7 +186,7 @@
         </div>
     </div>
 
-
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
 
 
 

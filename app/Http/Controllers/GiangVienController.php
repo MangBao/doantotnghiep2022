@@ -250,10 +250,16 @@ class GiangVienController extends Controller
      */
     public function delete($id)
     {
-        // $gv = $this->giangvien::find($id);
-        $this->giangvien::find($id)->delete();
+        $gv = $this->giangvien::find($id)->toArray();
 
-        return redirect()->route('giangvien.index')->with('success', 'Xóa thành công');
+        // $gv = $this->giangvien::find($id);
+        if($gv['role_id'] == 1){
+            return redirect()->route('giangvien.index')->with('error', 'Không thể xóa quản trị viên');
+        } else {
+            $this->giangvien::find($id)->delete();
+            return redirect()->route('giangvien.index')->with('success', 'Xóa thành công');
+        }
+
     }
 
     public function import()

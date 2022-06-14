@@ -65,6 +65,7 @@ class LichThiSVController extends Controller
                                 ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
                                 ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
                                 ->orWhere('users.name', 'like', '%' . $request->param . '%')
+                                ->orWhere('ngaythi', 'like', '%' . $request->param . '%')
                                 ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
                                 ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
                                 ->whereNotIn('lichcoithi.id',
@@ -80,6 +81,7 @@ class LichThiSVController extends Controller
                 ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
                 ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
                 ->orWhere('users.name', 'like', '%' . $request->param . '%')
+                ->orWhere('ngaythi', 'like', '%' . $request->param . '%')
                 ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
                 ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
                 ->orderBy('lichcoithi.id', 'asc')
@@ -87,7 +89,7 @@ class LichThiSVController extends Controller
             }
         }
         else {
-            if(count($lichthisv) > 0) {
+            if(count($lichthisv) > 0 && Auth::check()) {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
                 ->whereNotIn('lichcoithi.id',

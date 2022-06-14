@@ -310,6 +310,13 @@ a .details p {
     color: #333;
     border-radius: 18px 18px 18px 0;
 }
+.incoming .details p.back-mess {
+    margin-left: 10px;
+    background: rgba(207, 207, 207, 0.067);
+    color: rgb(93, 93, 93);
+    font-style: italic;
+    border-radius: 18px 18px 0 18px;
+}
 .typing-area {
     padding: 18px 30px;
     display: flex;

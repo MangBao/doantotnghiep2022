@@ -25,6 +25,7 @@
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     <div class="users-list">
+
                     </div>
                 </section>
                 <script src="{{ asset('js/users.js') }} "></script>

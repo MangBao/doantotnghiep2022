@@ -32,6 +32,7 @@ sendBtn.onclick = () => {
     let formData = new FormData(form);
     xhr.send(formData);
 };
+
 chatBox.onmouseenter = () => {
     chatBox.classList.add("active");
 };

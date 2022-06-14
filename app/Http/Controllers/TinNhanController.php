@@ -36,7 +36,7 @@ class TinNhanController extends Controller
                                 OR incoming_msg_id = {$outgoing_id}) ORDER BY msg_id DESC LIMIT 1");
 
             (count($mess) > 0 && isset($mess[0])) ? $result = $mess[0]->msg : $result ="No message available";
-            (isset($mess[0]) && $mess[0]->tus == 1) ? $result = 'Bạn đã gỡ 1 tin nhắn' : $result;
+            (isset($mess[0]) && $mess[0]->tus == 1) ? $result = 'Đã gỡ 1 tin nhắn' : $result;
             (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
 
             if(isset($mess[0]->outgoing_msg_id)) {
@@ -88,15 +88,14 @@ class TinNhanController extends Controller
     {
         $incoming_id = $id;
         $outgoing_id = Auth::user()->user_id;
-
         $user = \DB::select("SELECT * FROM users WHERE user_id = {$incoming_id}");
-        // dd($user);
         $mess = \DB::select("SELECT * FROM messages LEFT JOIN users ON users.user_id = messages.outgoing_msg_id
                             WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
                             OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id");
         $trashicon = '<i class="fa-solid fa-trash-can"></i>';
         $backicon = '<i class="fa-solid fa-rotate-left"></i>';
         $icon = '';
+
         if(count($mess) > 0) {
             for($i = 0; $i < count($mess); $i++) {
                 if($mess[$i]->outgoing_msg_id == $outgoing_id){
@@ -107,6 +106,7 @@ class TinNhanController extends Controller
                     $title = $mess[$i]->tus == 0 ? 'Thu hồi tin nhắn' : 'Hoàn tác tin nhắn';
                     $cssdarkmode = $mess[$i]->tus == 0 ? '' : 'dark:text-black';
                     $link = $mess[$i]->tus == 0 ? route('tinnhan.deletechat',[$mess[$i]->msg_id]) : route('tinnhan.takebackmess',[$mess[$i]->msg_id]);
+
                     $this->outputchat .= '<div class="chat outgoing">
                                     <div class="details">
                                         <a id="'.$mess[$i]->msg_id.'" href="'. $link .'" class="'.$classlink.'" title="'.$title.'">
@@ -116,10 +116,15 @@ class TinNhanController extends Controller
                                     </div>
                                 </div>';
                 }else{
+                    $contentmess = $mess[$i]->tus == 0 ? $mess[$i]->msg : 'Tin nhắn đã bị thu hồi !';
+                    $title = $mess[$i]->tus == 0 ? 'Thu hồi tin nhắn' : 'Hoàn tác tin nhắn';
+                    $cssdarkmode = $mess[$i]->tus == 0 ? '' : 'dark:text-black';
+                    $classmess = $mess[$i]->tus == 0 ? '' : 'back-mess';
+
                     $this->outputchat .= '<div class="chat incoming">
                                 <img src="/images/'.$user[0]->avatar.'" alt="">
                                 <div class="details">
-                                    <p>'. $mess[$i]->msg .'</p>
+                                    <p class="'. $classmess .' '.' '.' '. $cssdarkmode .'">'. $contentmess .'</p>
                                 </div>
                                 </div>';
                 }

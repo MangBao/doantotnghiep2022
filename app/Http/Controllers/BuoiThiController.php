@@ -65,6 +65,7 @@ class BuoiThiController extends Controller
                 ->orWhere('c.cathi_id', 'like', '%' . $request->param . '%')
                 ->orWhere('u.name', 'like', '%' . $request->param . '%')
                 ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
+                ->orWhere('ngaythi', 'like', '%' . $request->param . '%')
                 ->orderBy('ngaythi', 'asc')->paginate(250);
         }
         else {

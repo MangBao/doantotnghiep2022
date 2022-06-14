@@ -50,6 +50,7 @@ class LichCoiThiController extends Controller
                                 ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
                                 ->orWhere('users.name', 'like', '%' . $request->param . '%')
                                 ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
+                                ->orWhere('ngaythi', 'like', '%' . $request->param . '%')
                                 ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
                                 ->orderBy('lichcoithi.id', 'asc')
                                 ->paginate(250);

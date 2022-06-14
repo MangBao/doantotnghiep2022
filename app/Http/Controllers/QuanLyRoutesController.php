@@ -111,10 +111,12 @@ class QuanLyRoutesController extends Controller
         // dd($permission);
         if($permission[0]->status == 1) {
             $this->permission->where('role_id', $role_id)->where('route_id', $route_id)->update(['status' => 0]);
+            return redirect()->route('quanlyroutes.index')->with('success', 'Đã chặn quyền truy cập');
+
         } else {
             $this->permission->where('role_id', $role_id)->where('route_id', $route_id)->update(['status' => 1]);
+            return redirect()->route('quanlyroutes.index')->with('success', 'Đã mở quyền truy cập');
         }
-        return redirect()->route('quanlyroutes.index');
     }
 
     /**
