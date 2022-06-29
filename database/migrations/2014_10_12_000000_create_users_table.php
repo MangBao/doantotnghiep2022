@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->tinyInteger('thongbaomail')->default(0);
             $table->tinyInteger('trangthaihoatdong')->default(0);
+            $table->unsignedBigInteger('role_id');
+            $table->string('bomon_id')->varChar(10)->nullable();
         });
     }
 

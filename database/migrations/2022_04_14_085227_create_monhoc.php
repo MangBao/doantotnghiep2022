@@ -16,6 +16,7 @@ class CreateMonhoc extends Migration
         Schema::create('monhoc', function (Blueprint $table) {
             $table->string('monhoc_id', 10)->primary();
             $table->string('tenmonhoc', 50);
+            $table->string('bomon_id')->varChar(10);
             $table->timestamps();
         });
     }

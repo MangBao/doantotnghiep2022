@@ -16,6 +16,7 @@ class CreatePhongthi extends Migration
         Schema::create('phongthi', function (Blueprint $table) {
             $table->string('phongthi_id', 10)->primary();
             $table->string('tenphongthi', 50);
+            $table->string('giangduong_id')->varChar(10);
             $table->timestamps();
         });
     }

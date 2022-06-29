@@ -16,10 +16,10 @@ class CreateCathiBuoithi extends Migration
         Schema::create('cathi_buoithi', function (Blueprint $table) {
 
             $table->unsignedBigInteger('buoithi_id');
-            $table->foreign('buoithi_id')->references('id')->on('buoithi')->onDelete('cascade')->onUpdate('cascade');
+
 
             $table->string('cathi_id', 10);
-            $table->foreign('cathi_id')->references('cathi_id')->on('cathi')->onDelete('cascade')->onUpdate('cascade');
+
 
             $table->primary(['buoithi_id', 'cathi_id']);
             $table->timestamps();

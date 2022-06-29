@@ -16,6 +16,7 @@ class CreateBomon extends Migration
         Schema::create('bomon', function (Blueprint $table) {
             $table->string('bomon_id', 10)->primary();
             $table->string('tenbomon', 50);
+            $table->string('khoa_id')->varChar(10);
             $table->timestamps();
         });
     }

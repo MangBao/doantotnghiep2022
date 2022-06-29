@@ -19,6 +19,7 @@ class CreateDonxinvangTable extends Migration
             $table->string('cathi_id');
             $table->tinyInteger('trangthai')->default(0);
             $table->date('ngayxinvang');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

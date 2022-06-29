@@ -16,10 +16,8 @@ class CreatePhongthiBuoithi extends Migration
         Schema::create('phongthi_buoithi', function (Blueprint $table) {
 
                 $table->unsignedBigInteger('buoithi_id');
-                $table->foreign('buoithi_id')->references('id')->on('buoithi')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->string('phongthi_id', 10);
-                $table->foreign('phongthi_id')->references('phongthi_id')->on('phongthi')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->primary(['buoithi_id', 'phongthi_id']);
                 $table->timestamps();

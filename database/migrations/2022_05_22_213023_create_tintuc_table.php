@@ -26,7 +26,7 @@ class CreateTintucTable extends Migration
             $table->string('content3')->nullable();
             $table->string('image3')->nullable();
             $table->string('files')->nullable();
-
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

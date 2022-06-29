@@ -15,10 +15,8 @@ class CreateLichthisinhvienTable extends Migration
     {
         Schema::create('lichthisinhvien', function (Blueprint $table) {
             $table->unsignedBigInteger('lichthi_id');
-            $table->foreign('lichthi_id')->references('id')->on('lichcoithi')->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger('sinhvien_id');
-            $table->foreign('sinhvien_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->primary(['lichthi_id', 'sinhvien_id']);
             $table->timestamps();
