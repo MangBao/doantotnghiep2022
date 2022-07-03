@@ -18,7 +18,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('lichcoithi.store') }} --}}
-                        <form method="POST" action="{{ route('lichcoithi.update', ['id' => $lct->id]) }}"
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('lichcoithi.update', ['id' => $lct->id]) }}
+                        @else
+                            {{ secure_url('lichcoithi.update', ['id' => $lct->id]) }}
+                        @endif
+                        "
                             enctype="multipart/form-data">
                             @csrf
 

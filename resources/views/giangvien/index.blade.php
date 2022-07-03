@@ -21,7 +21,13 @@
             </div>
         </div>
         <div class="mr-8 pt-3">
-            <form action="{{ route('giangvien.index') }}" method="get">
+            <form action="
+            @if (config('app.env') === 'local')
+                {{ route('giangvien.index') }}
+            @else
+                {{ secure_url('giangvien.index') }}
+            @endif
+            " method="get">
                 {{-- @csrf --}}
                 <input class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                     type="text" placeholder="Nhập từ khóa" name="param" aria-label="Search" />
@@ -200,7 +206,13 @@
                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Chọn tệp để import</h3>
-                    <form action="{{ route('giangvien.import') }}" method="POST" enctype="multipart/form-data">
+                    <form action="
+                    @if (config('app.env') === 'local')
+                        {{ route('giangvien.import') }}
+                    @else
+                        {{ secure_url('giangvien.import') }}
+                    @endif
+                    " method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" required class="form-control mb-10">
                         <br>

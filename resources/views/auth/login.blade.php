@@ -26,7 +26,13 @@
 @endsection
 
 @section('form')
-    <form action="{{ route('login') }}" method="POST">
+    <form action="
+    @if (config('app.env') === 'local')
+        {{ route('login') }}
+    @else
+        {{ secure_url('login') }}
+    @endif
+    " method="POST">
         @csrf
         <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{ __('Địa chỉ email') }}</span>

@@ -16,7 +16,13 @@
 @endsection
 
 @section('form')
-    <form action="{{ route('register') }}" method="POST">
+    <form action="
+    @if (config('app.env') === 'local')
+        {{ route('register') }}
+    @else
+        {{ secure_url('register') }}
+    @endif
+    " method="POST">
         @csrf
         <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{ __('Mã sinh viên') }}</span>

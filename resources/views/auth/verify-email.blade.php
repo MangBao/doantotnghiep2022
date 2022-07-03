@@ -39,7 +39,13 @@
                 onclick="event.preventDefault(); document.getElementById('resend-verification-form').submit();">{{ __('click here to request another') }}</a>.
         </p>
 
-        <form id="resend-verification-form" method="POST" action="{{ route('verification.send') }}" class="hidden">
+        <form id="resend-verification-form" method="POST" action="
+        @if (config('app.env') === 'local')
+            {{ route('verification.send') }}
+        @else
+            {{ secure_url('verification.send') }}
+        @endif
+        " class="hidden">
             @csrf
         </form>
     </div>

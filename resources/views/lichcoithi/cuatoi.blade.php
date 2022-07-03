@@ -12,7 +12,13 @@
     </div> --}}
         <div class="mr-8 pt-1">
             {{-- {{ route('lichcoithi.updatethongbao') }} --}}
-            <form action="{{ route('lichcoithi.updatethongbao') }}" method="POST">
+            <form action="
+            @if (config('app.env') === 'local')
+                {{ route('lichcoithi.updatethongbao') }}
+            @else
+                {{ secure_url('lichcoithi.updatethongbao') }}
+            @endif
+            " method="POST">
                 @csrf
                 {{-- {{dd($lichthis);}} --}}
                 @if ($giangvien->thongbaomail == 1)

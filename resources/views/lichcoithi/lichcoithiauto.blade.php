@@ -6,7 +6,13 @@
 
         <div class="flex">
             <div class="mr-8 pt-3">
-                <form action="{{ route('lichcoithi.store') }}" method="POST">
+                <form action="
+                @if (config('app.env') === 'local')
+                    {{ route('lichcoithi.store') }}
+                @else
+                    {{ secure_url('lichcoithi.store') }}
+                @endif
+                " method="POST">
                     @csrf
                     {{-- {{dd($lichthis);}} --}}
 

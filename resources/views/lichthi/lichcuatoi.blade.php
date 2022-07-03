@@ -4,7 +4,13 @@
 
     <div class="container mx-auto flex">
         @if (Auth::check() && Auth::user()->role_id == 4)
-            <form action="{{ route('lichthisv.updatethongbao') }}" method="POST">
+            <form action="
+            @if (config('app.env') === 'local')
+                {{ route('lichthisv.updatethongbao') }}
+            @else
+                {{ secure_url('lichthisv.updatethongbao') }}
+            @endif
+            " method="POST">
                 @csrf
                 {{-- {{dd($lichthis);}} --}}
                 @if (Auth::user()->thongbaomail == 1)

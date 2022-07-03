@@ -509,7 +509,11 @@
                 </svg>
             </div>
         </div>
-        <form action="{{route('send')}}" method="get">
+        <form action="@if (config('app.env') === 'local')
+            {{ route('send') }}
+        @else
+            {{ secure_url('send') }}
+        @endif" method="get">
             <div>
                 <select class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300"
                     name="maillist" id="MailList" required="required">

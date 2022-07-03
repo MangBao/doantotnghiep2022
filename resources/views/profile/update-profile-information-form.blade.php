@@ -10,7 +10,13 @@
     </div>
 
     <div class="mt-5">
-        <form action="{{ route('user-profile-information.update') }}" method="POST">
+        <form action="
+        @if (config('app.env') === 'local')
+            {{ route('user-profile-information.update') }}
+        @else
+            {{ secure_url('user-profile-information.update') }}
+        @endif
+        " method="POST">
             @csrf
             @method('PUT')
             <div class="shadow overflow-hidden sm:rounded-md">

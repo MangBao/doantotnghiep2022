@@ -19,7 +19,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('giangvien.store') }} --}}
-                        <form method="POST" action="{{ route('giangvien.update', ['id' => $gv->id]) }}"
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('giangvien.update', ['id' => $gv->id]) }}
+                        @else
+                            {{ secure_url('giangvien.update', ['id' => $gv->id]) }}
+                        @endif
+                        "
                             enctype="multipart/form-data">
                             @csrf
 

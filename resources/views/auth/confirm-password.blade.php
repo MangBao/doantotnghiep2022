@@ -19,7 +19,13 @@
     <p class="mb-2 leading-normal text-sm text-gray-600 dark:text-gray-300">
         {{ __('Please confirm your password before continuing.') }}
     </p>
-    <form action="{{ route('password.confirm') }}" method="POST">
+    <form action="
+    @if (config('app.env') === 'local')
+        {{ route('password.confirm') }}
+    @else
+        {{ secure_url('password.confirm') }}
+    @endif
+    " method="POST">
 
         @csrf
         <label class="block text-sm">

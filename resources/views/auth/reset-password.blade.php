@@ -16,7 +16,13 @@
 @endsection
 
 @section('form')
-    <form action="{{ route('password.update') }}" method="POST">
+    <form action="
+    @if (config('app.env') === 'local')
+        {{ route('password.update') }}
+    @else
+        {{ secure_url('password.update') }}
+    @endif
+    " method="POST">
         @csrf
         <input type="hidden" name="token" value="{{ request()->route('token') }}">
         <label class="block text-sm">

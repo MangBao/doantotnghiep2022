@@ -18,7 +18,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('phanquyen.store') }} --}}
-                        <form method="POST" action="{{ route('phanquyen.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('phanquyen.store') }}
+                        @else
+                            {{ secure_url('phanquyen.store') }}
+                        @endif
+                        " enctype="multipart/form-data">
                             @csrf
 
                             <div class="relative w-full mb-3">

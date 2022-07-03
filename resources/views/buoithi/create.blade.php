@@ -19,7 +19,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('giangvien.store') }} --}}
-                        <form method="POST" action="{{ route('buoithi.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('buoithi.store') }}
+                        @else
+                            {{ secure_url('buoithi.store') }}
+                        @endif
+                        " enctype="multipart/form-data">
                             @csrf
 
                             <div class="relative w-full mb-3">

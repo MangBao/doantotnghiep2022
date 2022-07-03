@@ -18,7 +18,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('donxinvang.store') }} --}}
-                        <form method="POST" action="{{ route('donxinvang.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('donxinvang.store') }}
+                        @else
+                            {{ secure_url('donxinvang.store') }}
+                        @endif
+                        " enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="lydo">

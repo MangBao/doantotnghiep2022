@@ -18,7 +18,13 @@
                     </div>
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
                         {{-- {{ route('phongthi.store') }} --}}
-                        <form method="POST" action="{{ route('phongthi.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="
+                        @if (config('app.env') === 'local')
+                            {{ route('phongthi.store') }}
+                        @else
+                            {{ secure_url('phongthi.store') }}
+                        @endif
+                        " enctype="multipart/form-data">
                             @csrf
                             <div class="relative w-full mb-3">
                                 <label class="text-gray-700 dark:text-gray-400" for="giangduong_id">

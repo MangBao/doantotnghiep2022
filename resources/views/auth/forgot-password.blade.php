@@ -17,7 +17,7 @@
 
 @section('message')
     @if (session('status'))
-        <div class="text-sm border-t-8 rounded-t text-gray-700 text-gray-100 border-purple-600 bg-purple-100 px-3 py-4"
+        <div class="text-sm border-t-8 rounded-t text-gray-700 border-purple-600 bg-purple-100 px-3 py-4"
             role="alert">
             {{ session('status') }}
         </div>
@@ -25,7 +25,13 @@
 @endsection
 
 @section('form')
-    <form action="{{ route('password.email') }}" method="POST">
+    <form action="
+    @if (config('app.env') === 'local')
+        {{ route('password.email') }}
+    @else
+        {{ secure_url('password.email') }}
+    @endif
+    " method="POST">
         @csrf
         <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">{{ __('E-Mail Address') }}</span>
