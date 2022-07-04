@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Bomon;
+use App\Models\BoMon;
 use App\Models\GiangVien;
 use App\Models\Roles;
 use App\Imports\UsersImport;
