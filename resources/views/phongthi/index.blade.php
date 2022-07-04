@@ -12,9 +12,9 @@
         <div class="pt-3">
             <form action="
             @if (config('app.env') === 'local')
-                {{ route('phongthi/index') }}
+                {{ route('phongthi.index') }}
             @else
-                {{ secure_url('phongthi.index') }}
+                {{ secure_url('phongthi') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

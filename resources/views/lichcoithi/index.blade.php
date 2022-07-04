@@ -34,7 +34,7 @@
             @if (config('app.env') === 'local')
                 {{ route('lichcoithi.index') }}
             @else
-                {{ secure_url('lichcoithi/index') }}
+                {{ secure_url('lichcoithi') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

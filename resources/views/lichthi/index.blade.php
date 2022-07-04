@@ -16,7 +16,7 @@
             @if (config('app.env') === 'local')
                 {{ route('lichthisv.index') }}
             @else
-                {{ secure_url('lichthisv.index') }}
+                {{ secure_url('lichthisv') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

@@ -15,7 +15,7 @@
             @if (config('app.env') === 'local')
                 {{ route('bomon.index') }}
             @else
-                {{ secure_url('bomon/index') }}
+                {{ secure_url('bomon') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

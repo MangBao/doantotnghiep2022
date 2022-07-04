@@ -14,7 +14,7 @@
             @if (config('app.env') === 'local')
                 {{ route('monhoc.index') }}
             @else
-                {{ secure_url('monhoc/index') }}
+                {{ secure_url('monhoc') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

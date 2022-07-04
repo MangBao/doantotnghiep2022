@@ -25,7 +25,7 @@
             @if (config('app.env') === 'local')
                 {{ route('giangvien.index') }}
             @else
-                {{ secure_url('giangvien/index') }}
+                {{ secure_url('giangvien') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

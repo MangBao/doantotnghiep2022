@@ -15,7 +15,7 @@
             @if (config('app.env') === 'local')
                 {{ route('tintuc.index') }}
             @else
-                {{ secure_url('tintuc/index') }}
+                {{ secure_url('tintuc') }}
             @endif
             " method="get">
                 {{-- @csrf --}}
@@ -152,5 +152,4 @@
             </div>
         </div>
     </div>
-
 @endsection
