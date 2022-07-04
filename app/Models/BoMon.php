@@ -9,5 +9,5 @@ class BoMon extends Model
 {
     use HasFactory;
     protected $table = 'bomon';
-    protected $fillable = ['bomon_id', 'tenbomon', 'created_at', 'updated_at', 'khoa_id'];
+    protected $fillable = ['bomon_id', 'tenbomon', 'khoa_id', 'created_at', 'updated_at', 'khoa_id'];
 }
