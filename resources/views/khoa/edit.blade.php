@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('khoa.update', ['id' => $k->khoa_id]) }}
                         @else
-                            {{ secure_url('khoa.update', ['id' => $k->khoa_id]) }}
+                            {{ secure_url('khoa/update', ['id' => $k->khoa_id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

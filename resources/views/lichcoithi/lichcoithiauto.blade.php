@@ -10,7 +10,7 @@
                 @if (config('app.env') === 'local')
                     {{ route('lichcoithi.store') }}
                 @else
-                    {{ secure_url('lichcoithi.store') }}
+                    {{ secure_url('lichcoithi/store') }}
                 @endif
                 " method="POST">
                     @csrf

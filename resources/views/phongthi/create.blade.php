@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('phongthi.store') }}
                         @else
-                            {{ secure_url('phongthi.store') }}
+                            {{ secure_url('phongthi/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

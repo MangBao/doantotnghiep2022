@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('tintuc.update', [$tts->id]) }}
                         @else
-                            {{ secure_url('tintuc.update', [$tts->id]) }}
+                            {{ secure_url('tintuc/update', [$tts->id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

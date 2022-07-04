@@ -25,7 +25,7 @@
             @if (config('app.env') === 'local')
                 {{ route('giangvien.index') }}
             @else
-                {{ secure_url('giangvien.index') }}
+                {{ secure_url('giangvien/index') }}
             @endif
             " method="get">
                 {{-- @csrf --}}
@@ -210,7 +210,7 @@
                     @if (config('app.env') === 'local')
                         {{ route('giangvien.import') }}
                     @else
-                        {{ secure_url('giangvien.import') }}
+                        {{ secure_url('giangvien/import') }}
                     @endif
                     " method="POST" enctype="multipart/form-data">
                         @csrf

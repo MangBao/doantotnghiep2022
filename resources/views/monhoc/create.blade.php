@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('monhoc.store') }}
                         @else
-                            {{ secure_url('monhoc.store') }}
+                            {{ secure_url('monhoc/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

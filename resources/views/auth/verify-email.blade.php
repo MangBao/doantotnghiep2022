@@ -43,7 +43,7 @@
         @if (config('app.env') === 'local')
             {{ route('verification.send') }}
         @else
-            {{ secure_url('verification.send') }}
+            {{ secure_url('verification/send') }}
         @endif
         " class="hidden">
             @csrf

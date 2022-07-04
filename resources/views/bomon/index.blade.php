@@ -13,9 +13,9 @@
         <div class="pt-3">
             <form action="
             @if (config('app.env') === 'local')
-                {{ route('bomon.search') }}
+                {{ route('bomon.index') }}
             @else
-                {{ secure_url('bomon.search') }}
+                {{ secure_url('bomon/index') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

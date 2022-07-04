@@ -14,7 +14,7 @@
             @if (config('app.env') === 'local')
                 {{ route('quanlyroutes.index') }}
             @else
-                {{ secure_url('quanlyroutes.index') }}
+                {{ secure_url('quanlyroutes/index') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

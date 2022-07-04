@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('bomon.update', ['id' => $bm->bomon_id]) }}
                         @else
-                            {{ secure_url('bomon.update', ['id' => $bm->bomon_id]) }}
+                            {{ secure_url('bomon/update', ['id' => $bm->bomon_id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

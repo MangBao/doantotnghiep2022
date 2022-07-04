@@ -12,7 +12,7 @@
         @if (config('app.env') === 'local')
             {{ route('user-password.update') }}
         @else
-            {{ secure_url('user-password.update') }}
+            {{ secure_url('user-password/update') }}
         @endif
         " method="POST">
             @csrf

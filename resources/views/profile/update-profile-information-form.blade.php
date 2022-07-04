@@ -14,7 +14,7 @@
         @if (config('app.env') === 'local')
             {{ route('user-profile-information.update') }}
         @else
-            {{ secure_url('user-profile-information.update') }}
+            {{ secure_url('user-profile-information/update') }}
         @endif
         " method="POST">
             @csrf

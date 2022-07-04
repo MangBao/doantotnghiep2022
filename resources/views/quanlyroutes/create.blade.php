@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('quanlyroutes.store') }}
                         @else
-                            {{ secure_url('quanlyroutes.store') }}
+                            {{ secure_url('quanlyroutes/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

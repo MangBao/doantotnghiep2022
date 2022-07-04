@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('tintuc.store') }}
                         @else
-                            {{ secure_url('tintuc.store') }}
+                            {{ secure_url('tintuc/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

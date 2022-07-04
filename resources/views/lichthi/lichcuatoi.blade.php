@@ -8,7 +8,7 @@
             @if (config('app.env') === 'local')
                 {{ route('lichthisv.updatethongbao') }}
             @else
-                {{ secure_url('lichthisv.updatethongbao') }}
+                {{ secure_url('lichthisv/updatethongbao') }}
             @endif
             " method="POST">
                 @csrf

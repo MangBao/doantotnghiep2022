@@ -29,7 +29,7 @@
     @if (config('app.env') === 'local')
         {{ route('password.email') }}
     @else
-        {{ secure_url('password.email') }}
+        {{ secure_url('password/email') }}
     @endif
     " method="POST">
         @csrf

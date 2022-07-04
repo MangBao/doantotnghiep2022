@@ -27,6 +27,7 @@
 
         </div>
     </div>
+    {{-- {{dd(app()->environment())}} --}}
     <div class="h-8 dark:bg-gray-700"></div>
     <div class="w-full fix-respon overflow-hidden rounded-lg shadow-xs mb-16 container mx-auto grid mb-19 px-3 lg:px-0">
         <div class="w-full overflow-x-auto">

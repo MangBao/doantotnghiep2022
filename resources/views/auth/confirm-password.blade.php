@@ -23,7 +23,7 @@
     @if (config('app.env') === 'local')
         {{ route('password.confirm') }}
     @else
-        {{ secure_url('password.confirm') }}
+        {{ secure_url('password/confirm') }}
     @endif
     " method="POST">
 

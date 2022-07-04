@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('phanquyen.store') }}
                         @else
-                            {{ secure_url('phanquyen.store') }}
+                            {{ secure_url('phanquyen/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

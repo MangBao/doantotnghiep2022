@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('khoa.store') }}
                         @else
-                            {{ secure_url('khoa.store') }}
+                            {{ secure_url('khoa/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

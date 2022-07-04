@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('phongthi.update', ['id' => $pts->phongthi_id]) }}
                         @else
-                            {{ secure_url('phongthi.update', ['id' => $pts->phongthi_id]) }}
+                            {{ secure_url('phongthi/update', ['id' => $pts->phongthi_id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

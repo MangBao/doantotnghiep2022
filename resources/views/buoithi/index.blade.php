@@ -13,7 +13,7 @@
             @if (config('app.env') === 'local')
                 {{ route('buoithi.index') }}
             @else
-                {{ secure_url('buoithi.index') }}
+                {{ secure_url('buoithi/index') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

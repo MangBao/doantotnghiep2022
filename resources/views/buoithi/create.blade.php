@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('buoithi.store') }}
                         @else
-                            {{ secure_url('buoithi.store') }}
+                            {{ secure_url('buoithi/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

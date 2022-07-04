@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('donxinvang.store') }}
                         @else
-                            {{ secure_url('donxinvang.store') }}
+                            {{ secure_url('donxinvang/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

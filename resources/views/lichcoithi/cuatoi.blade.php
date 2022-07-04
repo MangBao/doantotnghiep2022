@@ -16,7 +16,7 @@
             @if (config('app.env') === 'local')
                 {{ route('lichcoithi.updatethongbao') }}
             @else
-                {{ secure_url('lichcoithi.updatethongbao') }}
+                {{ secure_url('lichcoithi/updatethongbao') }}
             @endif
             " method="POST">
                 @csrf

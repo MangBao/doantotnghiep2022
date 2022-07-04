@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('buoithi.update', ['id' => $bt->id]) }}
                         @else
-                            {{ secure_url('buoithi.update', ['id' => $bt->id]) }}
+                            {{ secure_url('buoithi/update', ['id' => $bt->id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

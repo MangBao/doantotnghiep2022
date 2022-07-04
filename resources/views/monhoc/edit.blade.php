@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('monhoc.update', ['id' => $mh->monhoc_id]) }}
                         @else
-                            {{ secure_url('monhoc.update', ['id' => $mh->monhoc_id]) }}
+                            {{ secure_url('monhoc/update', ['id' => $mh->monhoc_id]) }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf

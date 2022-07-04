@@ -22,7 +22,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('lichcoithi.update', ['id' => $lct->id]) }}
                         @else
-                            {{ secure_url('lichcoithi.update', ['id' => $lct->id]) }}
+                            {{ secure_url('lichcoithi/update', ['id' => $lct->id]) }}
                         @endif
                         "
                             enctype="multipart/form-data">

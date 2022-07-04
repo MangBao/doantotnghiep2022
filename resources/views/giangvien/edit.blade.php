@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('giangvien.update', ['id' => $gv->id]) }}
                         @else
-                            {{ secure_url('giangvien.update', ['id' => $gv->id]) }}
+                            {{ secure_url('giangvien/update', ['id' => $gv->id]) }}
                         @endif
                         "
                             enctype="multipart/form-data">

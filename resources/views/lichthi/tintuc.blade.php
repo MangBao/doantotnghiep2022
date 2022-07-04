@@ -8,7 +8,7 @@
             @if (config('app.env') === 'local')
                 {{ route('lichthisv.tintuc') }}
             @else
-                {{ secure_url('lichthisv.tintuc') }}
+                {{ secure_url('lichthisv/tintuc') }}
             @endif
             " method="get">
                 {{-- @csrf --}}

@@ -23,7 +23,7 @@
                         @if (config('app.env') === 'local')
                             {{ route('bomon.store') }}
                         @else
-                            {{ secure_url('bomon.store') }}
+                            {{ secure_url('bomon/store') }}
                         @endif
                         " enctype="multipart/form-data">
                             @csrf
