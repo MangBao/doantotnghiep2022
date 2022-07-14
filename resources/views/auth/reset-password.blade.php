@@ -20,7 +20,7 @@
     @if (config('app.env') === 'local')
         {{ route('password.update') }}
     @else
-        {{ secure_url('password/update') }}
+        {{ secure_url('reset-password') }}
     @endif
     " method="POST">
         @csrf
@@ -59,4 +59,5 @@
             {{ __('Reset Password') }}
         </button>
     </form>
+    {{-- {{dd(route('password.update'))}} --}}
 @endsection

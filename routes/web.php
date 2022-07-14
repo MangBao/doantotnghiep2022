@@ -27,11 +27,16 @@ Route::get('/homepage', [
     'uses' => LichThiSVController::class . '@homepage'
 ]);
 Route::get('/logout', function () {
-    GiangVien::find(Auth::user()->id)->update([
-        'trangthaihoatdong' => 0,
-    ]);
+    if(isset(Auth::user()->id)){
+        unset(Auth::user()->route_name);
+        unset(Auth::user()->route_active);
+        GiangVien::find(Auth::user()->id)->update([
+            'trangthaihoatdong' => 0,
+        ]);
+    }
+
     Auth::logout();
-    return redirect('/');
+    return redirect('/homepage');
 });
 
 Route::get('/send', [

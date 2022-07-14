@@ -71,7 +71,7 @@ class LichThiSVController extends Controller
                                 ->whereNotIn('lichcoithi.id',
                                     \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
                                 )
-                                ->orderBy('lichcoithi.id', 'asc')
+                                ->orderBy('ngaythi', 'desc')
                                 ->paginate(250);
             }
             else {
@@ -84,7 +84,7 @@ class LichThiSVController extends Controller
                 ->orWhere('ngaythi', 'like', '%' . $request->param . '%')
                 ->orWhere('phongthi_id', 'like', '%' . $request->param . '%')
                 ->orWhere('hinhthucthi', 'like', '%' . $request->param . '%')
-                ->orderBy('lichcoithi.id', 'asc')
+                ->orderBy('ngaythi', 'desc')
                 ->paginate(250);
             }
         }
@@ -95,13 +95,13 @@ class LichThiSVController extends Controller
                 ->whereNotIn('lichcoithi.id',
                     \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
                 )
-                ->orderBy('lichcoithi.id', 'asc')
+                ->orderBy('ngaythi', 'desc')
                 ->paginate(8);
             }
             else {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
-                ->orderBy('lichcoithi.id', 'asc')
+                ->orderBy('ngaythi', 'desc')
                 ->paginate(8);
             }
         }
@@ -124,6 +124,7 @@ class LichThiSVController extends Controller
     {
         $lichthi = LichThiSinhVien::join('lichcoithi', 'lichthisinhvien.lichthi_id', '=', 'lichcoithi.id')
             ->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
+            ->join('users', 'lichcoithi.canbogiangday', '=', 'users.id')
             ->where('sinhvien_id', auth()->user()->id)
             ->orderBy('sinhvien_id', 'asc')
             ->paginate(5);

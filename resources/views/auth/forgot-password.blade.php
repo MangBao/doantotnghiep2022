@@ -29,7 +29,7 @@
     @if (config('app.env') === 'local')
         {{ route('password.email') }}
     @else
-        {{ secure_url('password/email') }}
+        {{ secure_url('forgot-password') }}
     @endif
     " method="POST">
         @csrf
@@ -57,4 +57,5 @@
             </a>
         </p>
     </form>
+    {{-- {{dd(route('password.email'))}} --}}
 @endsection

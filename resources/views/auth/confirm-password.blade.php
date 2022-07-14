@@ -55,4 +55,5 @@
             </p>
         @endif
     </form>
+    {{-- {{dd(route('password.confirm'))}} --}}
 @endsection
