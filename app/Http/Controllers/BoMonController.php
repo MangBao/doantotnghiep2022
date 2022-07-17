@@ -5,20 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\BoMon;
+use App\Models\MonHoc;
 use App\Models\Khoa;
 use App\Models\User;
+use App\Models\BuoiThi;
+use App\Models\PhongThi_BuoiThi;
+use App\Models\MonThi_BuoiThi;
+use App\Models\CaThi_BuoiThi;
 
 class BoMonController extends Controller
 {
     private $bomon;
+    private $monhoc;
     private $khoa;
     private $user;
+    private $buoithi;
+    private $phongthi_buoithi;
+    private $monthi_buoithi;
+    private $cathi_buoithi;
     private $htmlOptionKhoa;
 
-    public function __construct(BoMon $bomon, Khoa $khoa, User $user) {
+    public function __construct(BoMon $bomon, Khoa $khoa, User $user, MonHoc $monhoc, BuoiThi $buoithi, PhongThi_BuoiThi $phongthi_buoithi, MonThi_BuoiThi $monthi_buoithi, CaThi_BuoiThi $cathi_buoithi) {
         $this->bomon = $bomon;
+        $this->monhoc = $monhoc;
         $this->khoa = $khoa;
         $this->user = $user;
+        $this->buoithi = $buoithi;
+        $this->phongthi_buoithi = $phongthi_buoithi;
+        $this->monthi_buoithi = $monthi_buoithi;
+        $this->cathi_buoithi = $cathi_buoithi;
         $this->htmlOptionKhoa = '';
         $this->middleware('auth');
         $this->middleware('permission');
@@ -210,7 +225,28 @@ class BoMonController extends Controller
      */
     public function delete($id)
     {
-        $this->bomon->where('bomon_id', $id)->delete();
-        return redirect()->route('bomon.index')->with('success', 'Xóa bộ môn thành công');
+        $check = $this->user->where('bomon_id', $id)->where('role_id', 1)->count();
+        // dd($check);
+        if($check == 1){
+            return redirect()->back()->with('error', 'Bộ môn này đang dùng cho Admin, không thể xóa');
+        }
+        else{
+            $this->phongthi_buoithi->join('buoithi', 'buoithi.id', '=', 'phongthi_buoithi.buoithi_id')
+                                ->join('monthi_buoithi', 'monthi_buoithi.monthi_id', '=', 'buoithi.id')->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                                ->join('bomon', 'bomon.bomon_id', '=', 'monhoc.bomon_id')->where('bomon.bomon_id', $id)
+                                ->delete();
+            $this->cathi_buoithi->join('buoithi', 'buoithi.id', '=', 'cathi_buoithi.buoithi_id')
+                                ->join('monthi_buoithi', 'monthi_buoithi.monthi_id', '=', 'buoithi.id')->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                                ->join('bomon', 'bomon.bomon_id', '=', 'monhoc.bomon_id')->where('bomon.bomon_id', $id)
+                                ->delete();
+            $this->monthi_buoithi->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                                ->join('bomon', 'bomon.bomon_id', '=', 'monhoc.bomon_id')->where('bomon.bomon_id', $id)
+                                ->delete();
+            $this->user->where('bomon_id', $id)->delete();
+            $this->bomon->where('bomon_id', $id)->delete();
+            $this->monhoc->where('bomon_id', $id)->delete();
+            return redirect()->route('bomon.index')->with('success', 'Xóa bộ môn thành công');
+        }
+
     }
 }

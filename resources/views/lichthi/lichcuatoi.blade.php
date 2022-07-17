@@ -92,7 +92,7 @@
                         <tr class="text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3 text-sm">
                                 {{ $i++ }}
-                                </th>
+                            </th>
                             <td class="px-4 py-3 text-sm">
                                 {{ $lt->tenmonthi }}
                             </td>
@@ -119,7 +119,7 @@
                             @if (Auth::check() && Auth::user()->role_id == 4)
                                 <td class="px-4 py-3 text-sm">
                                     <div class="flex items-center space-x-4 text-sm">
-                                        <a href="{{ route('lichthisv.delete', [$lt->id]) }}"
+                                        <a href="{{ route('lichthisv.delete', [$lt->lichthi_id]) }}"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Thêm">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
@@ -132,7 +132,7 @@
 
                                 </td>
                             @endif
-
+                            {{-- {{dd($lt)}} --}}
                         </tr>
                     @endforeach
 

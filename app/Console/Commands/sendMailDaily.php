@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ThongBaoNhacLich;
 use App\Models\User;
 use App\Models\LichCoiThi;
+use App\Models\LichThiSinhVien;
 
 class sendMailDaily extends Command
 {
@@ -19,6 +20,7 @@ class sendMailDaily extends Command
     protected $signature = 'daily:mail_send';
     private $user;
     private $lichcoithi;
+    private $lichthisv;
 
     /**
      * The console command description.
@@ -32,11 +34,12 @@ class sendMailDaily extends Command
      *
      * @return void
      */
-    public function __construct(User $user, LichCoiThi $lichcoithi)
+    public function __construct(User $user, LichCoiThi $lichcoithi, LichThiSinhVien $lichthisv)
     {
         parent::__construct();
         $this->user = $user;
         $this->lichcoithi = $lichcoithi;
+        $this->lichthisv = $lichthisv;
     }
 
     /**
@@ -48,6 +51,7 @@ class sendMailDaily extends Command
     {
         $lichcoithi = $this->lichcoithi->all();
         $users = $this->user->all();
+        $lichthisv = $this->lichthisv->all();
 
         $first_date = strtotime(date('Y-m-d'));
 
@@ -62,6 +66,11 @@ class sendMailDaily extends Command
                     }
                     if($user->email != null && $user->thongbaomail == 1 && $lct->user_id2 == $user->user_id) {
                         Mail::to($user->email)->send(new ThongBaoNhacLich($user, $lct));
+                    }
+                    foreach($lichthisv as $ltsv) {
+                        if($user->id == $ltsv->sinhvien_id) {
+                            Mail::to($user->email)->send(new ThongBaoNhacLich($user, $lct));
+                        }
                     }
                 }
             }

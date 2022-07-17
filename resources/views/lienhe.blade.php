@@ -532,16 +532,16 @@
             <div class="mt-8">
                 <span class="uppercase text-sm text-gray-600 font-bold dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300">Họ và tên</span>
                 <input class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300"
-                    type="text" placeholder="" name="hoten">
+                    type="text" placeholder="" name="hoten" value="{{old('hoten')}}" required>
             </div>
             <div class="mt-8">
                 <span class="uppercase text-sm text-gray-600 font-bold dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300">Email</span>
                 <input class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300"
-                    name="email" type="text">
+                    name="email" type="email" value="{{old('email')}}" required>
             </div>
             <div class="mt-8">
                 <span class="uppercase text-sm text-gray-600 font-bold dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300">Phản hồi</span>
-                <textarea name="content"
+                <textarea required name="content"
                     class="w-full h-32 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300"></textarea>
             </div>
             <div class="mt-8">

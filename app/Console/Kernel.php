@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('daily:mail_send')->dailyAt('22:44');
+        $schedule->command('daily:mail_send')->dailyAt('19:00');
         $schedule->command('daily:delete_mess')->everyFiveMinutes();
     }
 

@@ -34,6 +34,7 @@ class TinTucController extends Controller
         }
 
         $i = 1;
+        // dd($tintuc);
 
         if(count($tintuc) > 0) {
             return view('tintuc.index', [
@@ -100,7 +101,7 @@ class TinTucController extends Controller
             }
         }
         else{
-            $file_name = '';
+            $file_name = NULL;
         }
 
         // json_encode($file_name)
@@ -134,7 +135,7 @@ class TinTucController extends Controller
 
     public function edit($id)
     {
-        $tintuc = $this->tintuc->find($id)->first();
+        $tintuc = $this->tintuc->find($id);
 
         return view('tintuc.edit', [
             'tts' => $tintuc

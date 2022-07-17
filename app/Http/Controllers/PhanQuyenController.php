@@ -50,6 +50,6 @@ class PhanQuyenController extends Controller
             return redirect()->route('phanquyen.index')->with('error', 'Không thể xóa quyền admin');
         }
         $this->role->find($id)->delete();
-        return redirect()->route('phanquyen.index');
+        return redirect()->route('phanquyen.index')->with('success', 'Không thể xóa quyền admin');
     }
 }

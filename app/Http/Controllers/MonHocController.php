@@ -8,6 +8,10 @@ use App\Models\BoMon;
 use App\Models\MonHoc;
 use App\Models\Khoa;
 use App\Models\User;
+use App\Models\BuoiThi;
+use App\Models\PhongThi_BuoiThi;
+use App\Models\MonThi_BuoiThi;
+use App\Models\CaThi_BuoiThi;
 
 class MonHocController extends Controller
 {
@@ -15,13 +19,21 @@ class MonHocController extends Controller
     private $monhoc;
     private $khoa;
     private $user;
+    private $buoithi;
+    private $phongthi_buoithi;
+    private $monthi_buoithi;
+    private $cathi_buoithi;
     private $htmlOptionBoMon;
 
-    public function __construct(MonHoc $monhoc, BoMon $bomon, Khoa $khoa, User $user) {
+    public function __construct(MonHoc $monhoc, BoMon $bomon, Khoa $khoa, User $user, BuoiThi $buoithi, PhongThi_BuoiThi $phongthi_buoithi, MonThi_BuoiThi $monthi_buoithi, CaThi_BuoiThi $cathi_buoithi) {
         $this->monhoc = $monhoc;
         $this->bomon = $bomon;
         $this->khoa = $khoa;
         $this->user = $user;
+        $this->buoithi = $buoithi;
+        $this->phongthi_buoithi = $phongthi_buoithi;
+        $this->monthi_buoithi = $monthi_buoithi;
+        $this->cathi_buoithi = $cathi_buoithi;
         $this->htmlOptionBoMon = '';
         $this->middleware('auth');
         $this->middleware('permission');
@@ -76,6 +88,8 @@ class MonHocController extends Controller
                 }
             }
         }
+
+        // dd($mhs);
 
         return view('monhoc.index',[
             'mhs' => $mhs,
@@ -193,6 +207,19 @@ class MonHocController extends Controller
      */
     public function delete($id)
     {
+        $this->phongthi_buoithi->join('buoithi', 'buoithi.id', '=', 'phongthi_buoithi.buoithi_id')
+                            ->join('monthi_buoithi', 'monthi_buoithi.monthi_id', '=', 'buoithi.id')
+                            ->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                            ->where('monhoc.monhoc_id', $id)
+                            ->delete();
+        $this->cathi_buoithi->join('buoithi', 'buoithi.id', '=', 'cathi_buoithi.buoithi_id')
+                            ->join('monthi_buoithi', 'monthi_buoithi.monthi_id', '=', 'buoithi.id')
+                            ->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                            ->where('monhoc.monhoc_id', $id)
+                            ->delete();
+        $this->monthi_buoithi->join('monhoc', 'monhoc.monhoc_id', '=', 'monthi_buoithi.monthi_id')
+                            ->where('monhoc.monhoc_id', $id)
+                            ->delete();
         $this->monhoc->where('monhoc_id', $id)->delete();
         // $this->monhoc->find($id)->delete();
         return redirect()->route('monhoc.index')->with('success', 'Xóa môn học thành công');

@@ -61,6 +61,7 @@ class LichThiSVController extends Controller
             if(count($lichthisv) > 0) {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                                ->select('lichcoithi.*', 'bomon.*', 'users.name')
                                 ->where('tenmonthi', 'like', '%' . $request->param . '%')
                                 ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
                                 ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
@@ -77,6 +78,7 @@ class LichThiSVController extends Controller
             else {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->select('lichcoithi.*', 'bomon.*', 'users.name')
                 ->where('tenmonthi', 'like', '%' . $request->param . '%')
                 ->orWhere('tengiangvien1', 'like', '%' . $request->param . '%')
                 ->orWhere('tengiangvien2', 'like', '%' . $request->param . '%')
@@ -92,6 +94,7 @@ class LichThiSVController extends Controller
             if(count($lichthisv) > 0 && Auth::check()) {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->select('lichcoithi.*', 'bomon.*', 'users.name')
                 ->whereNotIn('lichcoithi.id',
                     \DB::table('lichthisinhvien')->select('lichthi_id')->where('sinhvien_id', Auth::user()->id)
                 )
@@ -101,6 +104,7 @@ class LichThiSVController extends Controller
             else {
                 $lichthi = $this->lichcoithi->join('bomon', 'lichcoithi.bomon_id', '=', 'bomon.bomon_id')
                 ->join('users', 'users.id', '=', 'lichcoithi.canbogiangday')
+                ->select('lichcoithi.*', 'bomon.*', 'users.name')
                 ->orderBy('ngaythi', 'desc')
                 ->paginate(8);
             }

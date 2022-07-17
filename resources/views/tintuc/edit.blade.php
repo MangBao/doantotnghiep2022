@@ -137,6 +137,16 @@
                                         </textarea>
                                     </div>
                                 </div>
+
+                                <div class="relative w-full mb-3">
+                                    <label class="text-gray-700 dark:text-gray-400" for="title">
+                                        {{ __('Files') }}
+                                    </label>
+                                    <input type="file" id="file" name="filesupload[]"
+                                        class="dark:border-gray-100 dark:bg-gray-700 dark:text-gray-300 border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all"
+                                        value="" autofocus multiple
+                                        placeholder="{{ __('Chọn các file') }}" />
+                                </div>
                             </div>
 
                             <div class="flex justify-around mt-6">

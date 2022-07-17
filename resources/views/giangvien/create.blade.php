@@ -118,7 +118,7 @@
                                     <label class="inline-flex items-center text-gray-600 dark:text-gray-400" for="flexRadioDefault2">
                                         <input
                                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                            type="radio" name="connho" id="connho2" value="0" >
+                                            type="radio" name="connho" id="connho2" value="0" checked>
                                         {{ __('Không có con nhỏ') }}
                                     </label>
                                 </div>

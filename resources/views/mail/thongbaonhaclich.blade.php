@@ -367,8 +367,20 @@
                                         <td>
                                             <p>Chào {{ $users->name }},</p>
                                             <p>
-                                                Bạn có 1 lịch coi thi vào ngày {{ date('d/m/Y', strtotime($lct->ngaythi)) }}, ca từ {{ \Carbon\Carbon::createFromFormat('H:i:s',$lct->giobatdau)->format('h:i') }} đến {{ \Carbon\Carbon::createFromFormat('H:i:s',$lct->gioketthuc)->format('h:i') }}. Mong bạn sắp xếp
-                                                để đến coi thi đúng lịch để không ảnh hưởng tới công việc.
+                                                Bạn có 1 lịch
+                                                @if ($users->role_id == 4)
+                                                    {{ __(' thi ') }}
+                                                @else
+                                                    {{ __(' coi thi ') }}
+                                                @endif
+                                                vào ngày {{ date('d/m/Y', strtotime($lct->ngaythi)) }}, ca từ {{ \Carbon\Carbon::createFromFormat('H:i:s',$lct->giobatdau)->format('h:i') }} đến {{ \Carbon\Carbon::createFromFormat('H:i:s',$lct->gioketthuc)->format('h:i') }}. Mong bạn sắp xếp
+                                                để đến
+                                                @if ($users->role_id == 4)
+                                                    {{ __(' thi ') }}
+                                                @else
+                                                    {{ __(' coi thi ') }}
+                                                @endif
+                                                đúng lịch để không ảnh hưởng tới công việc.
                                             </p>
 
                                             <p>Đây là mail gửi từ hệ thống, vui lòng không trả lời về địa chỉ mail này.
